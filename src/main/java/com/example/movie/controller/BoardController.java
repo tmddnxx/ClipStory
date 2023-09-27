@@ -34,7 +34,9 @@ public class BoardController extends HttpServlet {
                 }
                 req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req, resp);
                 break;
-
+            case "add" :
+                req.getRequestDispatcher("/WEB-INF/board/boardAdd.jsp").forward(req, resp);
+                break;
             case "modify" :
                 try{
                     boardService.getBoard(req);

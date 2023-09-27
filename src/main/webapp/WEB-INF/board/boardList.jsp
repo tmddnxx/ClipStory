@@ -58,7 +58,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     </c:if>
-    <button class="btn btn-outline-info mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#addForm" aria-expanded="false" aria-controls="addForm">글 쓰기</button>
+    <button class="btn btn-outline-info mb-3" type="button" onclick="location.href='add.board?action=add'">글 쓰기</button>
     <div class="collapse" id="addForm">
         <div class="card card-body">
             <form method="post" action="./add.board?action=add">
