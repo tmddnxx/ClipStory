@@ -16,4 +16,5 @@ public class CommentDTO {
     private String addDate;
     private String memberId;
     private int contentNo;
+    private boolean isLogin;
 }

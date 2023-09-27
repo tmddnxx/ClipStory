@@ -29,6 +29,9 @@
         </div>
     </div>
     <hr>
+    <form name ="frmCommentView" method="post">
+        <input type="hidden" name="contentNo" value="<%=boardDTO.getContentNo()%>">
+    </form>
     <div>
         <form name="frmView" method="post">
             <input type="hidden" name="pageNum" value="<%=pageNum%>">
@@ -37,6 +40,53 @@
         <a href="javascript:history.back()" class="btn btn-primary"><< Back</a>
         <a href="modify.board?action=modify&contentNo=${boardDTO.contentNo}" class="btn btn-primary" style="text-align: right">Modify</a>
     </div>
+    <c:if test="${loginInfo != null}">
+        <form name="frmComment" method="post">
+            <input type="hidden" name="contentNo" value="${boardDTO.contentNo}">
+            <div class="form-group row">
+                    <input type="text" name="nickName" value="${loginInfo.nickName}" class="form-control" readonly>
+            </div>
+            <div class="form-group row">
+                <textarea name="comment" class="form-control" cols="50" rows="3"></textarea>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <span class="btn btn-primary" id="goCommentSubmit">등록</span>
+                </div>
+            </div>
+        </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const xhr = new XMLHttpRequest();
+                const btnCommentSubmit = document.querySelector('#goCommentSubmit');
+                const frmComment = document.querySelector('form[name=frmComment]');
+
+                btnCommentSubmit.addEventListener('click', function() {
+                    const contentNo = frmComment.contentNo.value;
+                    const nickName = frmComment.nickName.value;
+                    const comment = frmComment.comment.value;
+                    xhr.open('POST', '/comment/add?contentNo=' + contentNo + '&nickName=' + nickName + '&comment=' + comment);
+                    xhr.send();
+                    xhr.onreadystatechange = () => {
+                        if(xhr.readyState !== XMLHttpRequest.DONE)
+                            return;
+
+                        if(xhr.status === 200){
+                            console.log(xhr.response);
+                            const json = JSON.parse(xhr.response);
+                            if (json.result === 'true'){
+                                frmComment.comment.value = '';
+                            } else {
+                                alert('등록에 실패했습니다.');
+                            }
+                        } else {
+                            console.error(xhr.status, xhr.statusText);
+                        }
+                    }
+                })
+            });
+        </script>
+    </c:if>
 </div>
 </body>
 </html>
