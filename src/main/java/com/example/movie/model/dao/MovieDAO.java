@@ -149,6 +149,40 @@ public class MovieDAO {
         }
     }
 
+    public boolean selectMovieLike(int movieNo, String memberId) throws SQLException {
+        String sql = "select * FROM `zzim` WHERE `memberId` = ? and `movieNo` = ?";
+
+
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        preparedStatement.setInt(2,movieNo);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+
+        if(resultSet.next())
+            return true;
+        return false;
+    }
+    public boolean insertMovieLike(int movieNo, String memberId) throws SQLException {
+        String sql = "INSERT INTO `zzim` VALUES (?, ?) ";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        preparedStatement.setInt(2,movieNo);
+
+        return preparedStatement.executeUpdate() == 1;
+    }
+
+    public boolean removeMovieLike(int movieNo, String memberId) throws  SQLException {
+        String sql = "DELETE from `zzim` where memberId = ? and movieNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        preparedStatement.setInt(2,movieNo);
+
+        return preparedStatement.executeUpdate() == 1;
+    }
 
     public void insert(MovieDTO movieDTO) throws Exception {
         String sql = "INSERT INTO movie (movieName, director, actor, releaseDate,"
