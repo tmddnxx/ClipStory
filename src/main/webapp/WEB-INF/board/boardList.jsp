@@ -124,7 +124,7 @@
                 <tr>
                     <td width="100%" align="left">
                         <select name="items" class="txt">
-                            <option value="title" <% if(items.equals("t itle")){%>selected<%}%>>제목</option>
+                            <option value="title" <% if(items.equals("title")){%>selected<%}%>>제목</option>
                             <option value="content" <% if(items.equals("content")){%>selected<%}%>>내용</option>
                             <option value="nickName" <% if(items.equals("nickName")){%>selected<%}%>>닉네임</option>
                         </select> <input name="text" type="text" value="<%=text%>"/>

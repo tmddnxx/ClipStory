@@ -3,6 +3,7 @@ package com.example.movie.model.dao;
 import com.example.movie.model.dto.BoardDTO;
 import com.example.movie.model.dto.CommentDTO;
 import com.example.movie.model.dto.MemberDTO;
+
 import lombok.Cleanup;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public class MyPageDAO {
     private MemberDAO MemberDTO;
     private CommentDAO commentDTO;
     private List<com.example.movie.model.dto.BoardDTO> BoardDTO;
+
 
     public MemberDAO viewProfile(HttpServletRequest req, String memberId) throws Exception {
         String sql = "select * FROM `member` WHERE `memberId` = ?";
@@ -34,7 +36,7 @@ public class MyPageDAO {
                     .name(resultSet.getString("name"))
                     .nickName(resultSet.getString("nickName"))
                     .zzim(resultSet.getString("zzim"))
-                    .joinDate(resultSet.getString("joinDate"))
+                    .joinDate(String.valueOf(resultSet.getTimestamp("joinDate")))
                     .build();
         }
         return MemberDTO;

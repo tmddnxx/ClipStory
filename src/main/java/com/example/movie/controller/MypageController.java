@@ -29,21 +29,13 @@ public class MypageController extends HttpServlet {
         log.info(action);
         switch (action) {
             case "list": // mypage 메인
-
+                try {
+                    myPageService.getMyBoard(req);
+                    myPageService.getMyComments(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 req.getRequestDispatcher("/WEB-INF/mypage/myPage.jsp").forward(req,resp);
-                break;
-            case "content": // 내가 쓴 글
-                req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req,resp);
-                List<BoardDTO> userPosts = myPageService.getUserPosts(req);
-                break;
-            case "comment": // 내가 쓴 댓글
-                req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req,resp);
-                break;
-            case "modify": // 회원 수정
-                req.getRequestDispatcher("/WEB-INF/member/modify.jsp").forward(req,resp);
-                break;
-            case "remove": // 회원 삭제
-                req.getRequestDispatcher("/WEB-INF/member/remove.jsp").forward(req,resp);
                 break;
         }
 

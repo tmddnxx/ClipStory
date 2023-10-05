@@ -67,10 +67,34 @@
     <a class="nav-link" href="/modify.member?action=modify&memberId=${loginInfo.memberId}">회원 수정</a>
   </button>
   <h3 class="display-5">내가 쓴 글</h3>
-
+  <ul class="list-group">
+    <c:forEach var="boardDTO" items="${boardDTOList}" varStatus="status">
+      <%-- 현재시간 , 작성시간 구하기 --%>
+      <fmt:parseNumber value="${currentTime.time / (1000*60*60)}" integerOnly="true" var="currentFmtTime" scope="request"/>
+      <fmt:parseNumber value="${boardDTO.addDate.time / (1000*60*60)}" integerOnly="true" var="addFmtTime" scope="request"/>
+      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="text-decoration-none">
+            ${boardDTO.title}
+            ${boardDTO.addDate}
+            ${boardDTO.nickName}
+            ${boardDTO.hit}
+        </a>
+      </li>
+    </c:forEach>
+  </ul>
   <h3 class="display-5">내가 쓴 댓글</h3>
-
+  <ul class="list-group">
+    <c:forEach var="commentDTO" items="${commentDTOList}" varStatus="status">
+      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <a href="get.board?action=get&contentNo=${commentDTO.contentNo}" class="text-decoration-none">
+            ${commentDTO.commentNo}
+            ${commentDTO.addDate}
+            ${commentDTO.nickName}
+          </a>
+      </li>
+    </c:forEach>
+  </ul>
 </div>
-
 </body>
+
 </html>
