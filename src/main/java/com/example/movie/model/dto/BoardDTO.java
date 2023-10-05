@@ -19,4 +19,5 @@ public class BoardDTO { // 게시판
     private Timestamp addDate; // 작성일
     private int hit; // 조회수
     private String memberId; // 회원 아이디
+    private int cnt; // 댓글 수
 }

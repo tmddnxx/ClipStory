@@ -1,4 +1,7 @@
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.movie.model.dao.BoardDAO" %>
+<%@ page import="com.example.movie.model.dao.CommentDAO" %>
+<%@ page import="com.example.movie.model.dto.BoardDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -22,6 +25,7 @@
     int firstPage = ((thisBlock -1) * pagePerBlock) + 1; // 블럭의 첫 페이지
     int lastPage = thisBlock * pagePerBlock; // 블럭의 마지막 페이지
     lastPage = (lastPage > totalPage) ? totalPage : lastPage;
+
 %>
 <!DOCTYPE html>
 <html>
@@ -51,7 +55,7 @@
                         </c:if>
                     </c:if>
                 <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="text-decoration-none">
-                    [<%=(totalRecord--)-(pageNum-1)*limit%>] ${boardDTO.title}
+                    [<%=(totalRecord--)-(pageNum-1)*limit%>] ${boardDTO.title} (${boardDTO.cnt})<%--( 댓글수 )--%>
                 </a>
                 <p>${boardDTO.addDate}</p>
                 <p style="text-align: right">${boardDTO.nickName}</p>
@@ -124,7 +128,7 @@
                 <tr>
                     <td width="100%" align="left">
                         <select name="items" class="txt">
-                            <option value="title" <% if(items.equals("t itle")){%>selected<%}%>>제목</option>
+                            <option value="title" <% if(items.equals("title")){%>selected<%}%>>제목</option>
                             <option value="content" <% if(items.equals("content")){%>selected<%}%>>내용</option>
                             <option value="nickName" <% if(items.equals("nickName")){%>selected<%}%>>닉네임</option>
                         </select> <input name="text" type="text" value="<%=text%>"/>

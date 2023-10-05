@@ -27,6 +27,7 @@
                 </c:choose>
                 <li class="nav-item"><a class="nav-link" href="/list.movie?action=list">영화</a></li>
                 <li class="nav-item"><a class="nav-link" href="/list.board?action=list">게시판</a></li>
+                <li class="nav-item"><a class="nav-link" href="/search.search">검색</a></li>
 
 <%--                <li class="nav-item"><a class="nav-link" href="../boardController/boardList.do">게시판</a></li>--%>
 
