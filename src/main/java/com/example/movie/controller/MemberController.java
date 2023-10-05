@@ -49,7 +49,7 @@ public class MemberController extends HttpServlet {
                     log.info("삭제 get컨트롤러 이상 : " + e.getMessage());
 
                 }
-                resp.sendRedirect("/login");
+                resp.sendRedirect("/logout");
                 break;
         }
 

@@ -40,13 +40,28 @@ public class CommentController extends HttpServlet {
                 try {
                     JSONObject jsonObject = new JSONObject();
                     if (commentService.addComment(req)){
+                        commentService.updateParentNo();
                         jsonObject.put("result", "true");
                     }
                     else{
                         jsonObject.put("result", "false");
                     }
                     resp.getWriter().println(jsonObject.toJSONString());
-            } catch (Exception e) {
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "/comment/addre":
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    if (commentService.addCommentRe(req)){
+                        jsonObject.put("result", "true");
+                    }
+                    else{
+                        jsonObject.put("result", "false");
+                    }
+                    resp.getWriter().println(jsonObject.toJSONString());
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 break;
@@ -58,6 +73,7 @@ public class CommentController extends HttpServlet {
                     for(CommentDTO commentDTO : commentDTOS){
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("commentNo", commentDTO.getCommentNo());
+                        jsonObject.put("parentNo", commentDTO.getParentNo());
                         jsonObject.put("nickName",commentDTO.getNickName());
                         jsonObject.put("comment",commentDTO.getComment());
                         jsonObject.put("addDate",commentDTO.getAddDate());
@@ -68,6 +84,19 @@ public class CommentController extends HttpServlet {
 
                 } catch (SQLException | ClassNotFoundException e){
                     throw  new RuntimeException(e);
+                }
+                break;
+            case "/comment/remove":
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    if (commentService.removeComment(req)){
+                        jsonObject.put("result", "true");
+                    } else {
+                        jsonObject.put("result", "false");
+                    }
+                    resp.getWriter().println(jsonObject.toJSONString());
+                } catch (SQLException | ClassNotFoundException e){
+                    throw new RuntimeException(e);
                 }
                 break;
         }

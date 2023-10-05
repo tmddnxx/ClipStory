@@ -22,4 +22,5 @@ public class MovieDTO {
    private String runningtime;
    private String outline;
    private String poster;
+   private String m_or_o;
 }

@@ -26,7 +26,7 @@ public class CommentDAOTest {
                     .nickName("hi")
                     .comment("댓글" + i)
                     .memberId("test")
-                    .contentNo(75)
+                    .contentNo(79)
                     .build();
             commentDAO.insertComment(commentDTO);
         }
@@ -34,9 +34,30 @@ public class CommentDAOTest {
 
     @Test
     public void testSelectComments() throws SQLException, ClassNotFoundException{
-        List<CommentDTO> commentDTOList = commentDAO.selectComments(75);
+        List<CommentDTO> commentDTOList = commentDAO.selectComments(79);
         log.info(commentDTOList);
 
         Assertions.assertEquals(5, commentDTOList.size());
+    }
+
+    @Test
+    public void testDeleteComment() throws SQLException, ClassNotFoundException {
+        int commentNo = 1;
+        commentDAO.deleteComment(commentNo);
+    }
+
+    @Test
+    public void testInsertCommentRe() throws Exception {
+
+        for(int i = 0; i < 10; i++) {
+            CommentDTO commentDTO = CommentDTO.builder()
+                    .nickName("hi")
+                    .comment("대댓글" + i)
+                    .memberId("test")
+                    .contentNo(79)
+                    .parentNo(25)
+                    .build();
+            commentDAO.insertCommentRe(commentDTO);
+        }
     }
 }

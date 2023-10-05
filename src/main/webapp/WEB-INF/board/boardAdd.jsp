@@ -1,8 +1,20 @@
+<%@ page import="com.example.movie.model.dto.MemberDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ko">
 <head>
     <title>Title</title>
 </head>
+<%
+  MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
+  if(memberDTO == null){
+%>
+<script>
+  alert('로그인이 필요한 서비스입니다');
+  location.href="/login";
+</script>
+<%
+  }
+%>
 <body>
 <jsp:include page="../header.jsp"/>
   <div class="card card-body">

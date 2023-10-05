@@ -45,7 +45,6 @@ public class MovieDAO {
                     .director(resultSet.getString("director"))
                     .actor(resultSet.getString("actor"))
                     .releaseDate(resultSet.getString("releaseDate"))
-                    .score(resultSet.getInt("score"))
                     .region(resultSet.getString("region"))
                     .genre(resultSet.getString("genre"))
                     .audience(resultSet.getInt("audience"))
@@ -53,6 +52,7 @@ public class MovieDAO {
                     .runningtime(resultSet.getString("runningtime"))
                     .outline(resultSet.getString("outline"))
                     .poster(resultSet.getString("poster"))
+                    .m_or_o(resultSet.getString("m_or_o"))
                     .build();
             movieList.add(movieDTO);
         }
@@ -78,7 +78,6 @@ public class MovieDAO {
                     .director(resultSet.getString("director"))
                     .actor(resultSet.getString("actor"))
                     .releaseDate(resultSet.getString("releaseDate"))
-                    .score(resultSet.getInt("score"))
                     .region(resultSet.getString("region"))
                     .genre(resultSet.getString("genre"))
                     .audience(resultSet.getInt("audience"))
@@ -86,6 +85,7 @@ public class MovieDAO {
                     .runningtime(resultSet.getString("runningtime"))
                     .outline(resultSet.getString("outline"))
                     .poster(resultSet.getString("poster"))
+                    .m_or_o(resultSet.getString("m_or_o"))
                     .build();
         }
         return movieDTO;
@@ -105,8 +105,8 @@ public class MovieDAO {
 
 
     public void insert(MovieDTO movieDTO) throws Exception {
-        String sql = "INSERT INTO movie (movieName, director, actor, releaseDate, score,"
-                + " region, genre, audience, ranking, runningtime, outline, poster)"
+        String sql = "INSERT INTO movie (movieName, director, actor, releaseDate,"
+                + " region, genre, audience, ranking, runningtime, outline, poster, m_or_o)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -114,14 +114,14 @@ public class MovieDAO {
         preparedStatement.setString(2, movieDTO.getDirector());
         preparedStatement.setString(3, movieDTO.getActor());
         preparedStatement.setString(4, movieDTO.getReleaseDate());
-        preparedStatement.setInt(5, movieDTO.getScore());
-        preparedStatement.setString(6, movieDTO.getRegion());
-        preparedStatement.setString(7, movieDTO.getGenre());
-        preparedStatement.setInt(8, movieDTO.getAudience());
-        preparedStatement.setInt(9, movieDTO.getRanking());
-        preparedStatement.setString(10, movieDTO.getRunningtime());
-        preparedStatement.setString(11, movieDTO.getOutline());
-        preparedStatement.setString(12, movieDTO.getPoster());
+        preparedStatement.setString(5, movieDTO.getRegion());
+        preparedStatement.setString(6, movieDTO.getGenre());
+        preparedStatement.setInt(7, movieDTO.getAudience());
+        preparedStatement.setInt(8, movieDTO.getRanking());
+        preparedStatement.setString(9, movieDTO.getRunningtime());
+        preparedStatement.setString(10, movieDTO.getOutline());
+        preparedStatement.setString(11, movieDTO.getPoster());
+        preparedStatement.setString(12, movieDTO.getM_or_o());
         preparedStatement.executeUpdate();
     }
 //

@@ -14,23 +14,27 @@
 <jsp:include page="../header.jsp"/>
 <div class="container" style="max-width: 1700px;">
     <nav class="nav" style="padding-top: 26px; text-align: center; justify-content: center; font-size: 26px;">
-<%--        <a class="nav-link active" aria-current="page" href="#" style="font-weight: 600; color: black;">홈</a>--%>
+        <%--        <a class="nav-link active" aria-current="page" href="#" style="font-weight: 600; color: black;">홈</a>--%>
         <a class="nav-link" href="#" style="font-weight: 600; color: black;">랭킹</a>
         <a class="nav-link" href="#" style="font-weight: 600; color: black;">상영/예정작</a>
-<%--        <a class="nav-link " aria-disabled="true" style="font-weight: 600; color: black;">게시판</a>--%>
+        <%--        <a class="nav-link " aria-disabled="true" style="font-weight: 600; color: black;">게시판</a>--%>
     </nav>
     <h2>영화 목록</h2>
+    <hr>
+    <form class="search-model-form">
+        <input type="text" name="searchbtn" id="search-input">
+    </form>
     <hr>
     <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 1700px;">
         <c:forEach var="movie" items="${movieList}" varStatus="status">
             <div class="mh-100" style="width: 200px; height: 200px;">
+                <h2><strong>${status.count}</strong></h2>
                 <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
-                    [${status.count}]
+                    <span class="badge bg-secondary" style="margin-top: 100px;margin-left: 28px;">
+                            ${movie.movieName}, ${movie.releaseDate}
+                    </span>
                 </a>
-                <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
-                    <span class="badge bg-secondary">${movie.movieName}, ${movie.releaseDate}</span>
-                </a>
-                <a href="./remove.movie?action=remove&movieNo=${movie.movieNo}">
+                <a href="./remove.movie?action=remove&movieNo=${movie.movieNo}" hidden="hidden">
                     <span class="badge bg-secondary">&times;</span>
                 </a>
             </div>

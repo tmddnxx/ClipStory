@@ -17,4 +17,5 @@ public class CommentDTO {
     private String memberId;
     private int contentNo;
     private boolean isLogin;
+    private int parentNo;
 }

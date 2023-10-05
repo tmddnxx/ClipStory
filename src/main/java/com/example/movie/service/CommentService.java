@@ -31,6 +31,20 @@ public enum CommentService {
         return commentDAO.insertComment(commentDTO);
     }
 
+    public boolean addCommentRe(HttpServletRequest req) throws Exception {
+        log.info("addCommentRe()..");
+
+        MemberDTO memberDTO= (MemberDTO) req.getSession().getAttribute("loginInfo");
+        CommentDTO commentDTO = CommentDTO.builder()
+                .nickName(req.getParameter("nickName"))
+                .comment(req.getParameter("comment"))
+                .memberId(memberDTO.getMemberId())
+                .contentNo(Integer.parseInt(req.getParameter("contentNo")))
+                .parentNo(Integer.parseInt(req.getParameter("parentNo")))
+                .build();
+        return commentDAO.insertCommentRe(commentDTO);
+    }
+
     public List<CommentDTO> getComments(HttpServletRequest req) throws SQLException, ClassNotFoundException {
         log.info("getComments()...");
 
@@ -40,13 +54,26 @@ public enum CommentService {
 
         for(CommentDTO commentDTO : commentDTOS) {
             log.info(commentDTO.getMemberId());
-            log.info(memberDTO.getMemberId());
 
-            if(commentDTO.getMemberId().equals(memberDTO.getMemberId())){
-                commentDTO.setLogin(true);
+            if(memberDTO != null) {
+                if (commentDTO.getMemberId().equals(memberDTO.getMemberId())) {
+                    commentDTO.setLogin(true);
+                }
             }
         }
         return commentDTOS;
     }
 
+    public boolean removeComment(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+        log.info("removeComment()...");
+
+        int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+        return commentDAO.deleteComment(commentNo);
+    }
+
+    public void updateParentNo() throws SQLException, ClassNotFoundException {
+        log.info("service updateParentNo()");
+
+        commentDAO.updateParentNo();
+    }
 }

@@ -12,6 +12,5 @@ public class MemberDTO {
     private String passwd;
     private String name;
     private String nickName;
-    private String zzim;
     private String joinDate;
 }

@@ -45,6 +45,11 @@ public class BoardController extends HttpServlet {
                     log.error(e.getMessage());
                     throw new ServletException("read error");
                 }
+                break;
+            case "remove" :
+                boardService.removeBoard(req);
+                resp.sendRedirect("list.board?action=list");
+                break;
             case "get" :
                 boardService.getBoard(req);
                 boardService.increaseHit(req);
@@ -82,10 +87,6 @@ public class BoardController extends HttpServlet {
                 resp.sendRedirect("list.board?action=list");
                 break;
 
-            case "remove" :
-                boardService.removeBoard(req);
-                resp.sendRedirect("list.board?action=list");
-                break;
 
             case "modify" :
                 boardService.modifyBoard(req);

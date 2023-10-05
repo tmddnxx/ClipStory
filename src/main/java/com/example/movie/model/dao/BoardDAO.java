@@ -72,7 +72,7 @@ public class BoardDAO {
             boardDTO.setTitle(resultSet.getString("title"));
             boardDTO.setContent(resultSet.getString("content"));
             boardDTO.setNickName(resultSet.getString("nickName"));
-            boardDTO.setAddDate(resultSet.getString("addDate"));
+            boardDTO.setAddDate(resultSet.getTimestamp("addDate"));
             boardDTO.setHit(resultSet.getInt("hit"));
             boardDTO.setMemberId(resultSet.getString("memberId"));
             boardList.add(boardDTO);
@@ -95,7 +95,7 @@ public class BoardDAO {
             boardDTO.setTitle(resultSet.getString("title"));
             boardDTO.setContent(resultSet.getString("content"));
             boardDTO.setNickName(resultSet.getString("nickName"));
-            boardDTO.setAddDate(resultSet.getString("addDate"));
+            boardDTO.setAddDate(resultSet.getTimestamp("addDate"));
             boardDTO.setHit(resultSet.getInt("hit"));
             boardDTO.setMemberId(resultSet.getString("memberId"));
         }

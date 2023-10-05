@@ -56,12 +56,17 @@ public class BoardService {
             Math.floor(totalPage);
             totalPage = totalPage + 1;
         }
+
+        // 페이지 시작 번호 작업.
+        int startNum = totalRecord - (pageNum -1 ) * limit;
        try {
            request.setAttribute("pageNum", pageNum);
            request.setAttribute("totalPage", totalPage);
            request.setAttribute("totalRecord", totalRecord);
            request.setAttribute("limit", limit);
            request.setAttribute("boardDTOList", boardDTOList);
+           request.setAttribute("startNum", startNum);
+
        }catch (Exception e){
            log.error(e.getMessage());
            log.info("게시글 목록 생성과정에서 에러");

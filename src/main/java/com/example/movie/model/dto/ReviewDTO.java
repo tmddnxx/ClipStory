@@ -9,11 +9,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReviewDTO {
-    private int reviewNo;
-    private String nickName;
-    private String addDate;
-    private String review;
-    private int score;
-    private String movieName;
-    private String memberId;
+    private Integer reviewNo; // rippleId
+    private Integer movieNo; // movieNo
+    private String memberId; // memberId
+    private String nickName; // name
+    private String review; // content
+    private String addDate; // insertDate
+    private String score; // ip??
+    private boolean isLogin; // isLogin
 }

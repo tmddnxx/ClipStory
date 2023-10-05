@@ -35,7 +35,6 @@ public class MemberDAO {
                     .passwd(resultSet.getString("passwd"))
                     .name(resultSet.getString("name"))
                     .nickName(resultSet.getString("nickName"))
-                    .zzim(resultSet.getString("zzim"))
                     .joinDate(resultSet.getString("joinDate"))
                     .build();
         }
@@ -58,7 +57,6 @@ public class MemberDAO {
                     .passwd(resultSet.getString("passwd"))
                     .name(resultSet.getString("name"))
                     .nickName(resultSet.getString("nickName"))
-                    .zzim(resultSet.getString("zzim"))
                     .joinDate(resultSet.getString("joinDate"))
                     .build();
         }

@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
           <label for="passwd" class="sr-only">Password</label>
-          <input type="password" name="passwd" id="passwd" class="form-control" placeholder="Password" required>
+          <input type="password" name="passwd" id="passwd" class="form-control" placeholder="Password" autoComplete="off" required>
         </div>
         <button class="btn btn btn-lg btn-success btn-block" type="submit">로그인</button>
         <button class="btn btn btn-lg btn-success btn-block"><a href="/register.member?action=register" style="text-decoration-line: none; color: white">회원가입</a></button>

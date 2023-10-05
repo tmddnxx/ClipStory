@@ -14,9 +14,9 @@ public enum ConnectionUtil {
     ConnectionUtil() {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("org.mariadb.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mariadb://localhost:3308/movieDB");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3306/movie");
         config.setUsername("root");
-        config.setPassword("7061");
+        config.setPassword("8762");
         config.addDataSourceProperty("cachePrepStmts","true");
         config.addDataSourceProperty("prepStmtCacheSize","250");
         config.addDataSourceProperty("preStmtCacheSqlLimit","2048");
