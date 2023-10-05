@@ -40,12 +40,15 @@ public class ReviewController extends HttpServlet {
                     JSONObject jsonObject = new JSONObject(); // json 정보를 담기 위해 객체 생성
                     // 성공, 실패의 결과를 json에 저장
                     if (reviewService.addReview(req)) {
+                        //
                         jsonObject.put("result", "true");
                     } else {
                         jsonObject.put("result", "false");
                     }
                     resp.getWriter().println(jsonObject.toJSONString());
                 } catch (SQLException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 break;
@@ -79,6 +82,8 @@ public class ReviewController extends HttpServlet {
                     }
                     resp.getWriter().println(jsonObject.toJSONString());
                 } catch (SQLException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 break;

@@ -1,5 +1,6 @@
 package com.example.movie.service;
 
+import com.example.movie.model.dao.MovieDAO;
 import com.example.movie.model.dao.ReviewDAO;
 import com.example.movie.model.dto.MemberDTO;
 import com.example.movie.model.dto.ReviewDTO;
@@ -13,9 +14,9 @@ import java.util.List;
 @Log4j2
 public class ReviewService {
     private static ReviewService instance;
-
+    private final MovieDAO movieDAO;
     private ReviewService() {
-
+        movieDAO = new MovieDAO();
     }
 
     public static ReviewService getInstance() {
@@ -25,7 +26,7 @@ public class ReviewService {
         return instance;
     }
 
-    public boolean addReview(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+    public boolean addReview(HttpServletRequest request) throws Exception {
         log.info("addReview() ...");
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
         log.info((String) request.getSession().getAttribute("memberId"));
@@ -40,7 +41,12 @@ public class ReviewService {
                 .score(request.getParameter("score"))
                 .build();
         log.info(reviewDTO.getMemberId());
-        return reviewDAO.insertReview(reviewDTO);
+        boolean result = reviewDAO.insertReview(reviewDTO);
+        int movieNo = reviewDTO.getMovieNo();
+        float avgScore = reviewDAO.avgScore(Integer.valueOf(request.getParameter("num")));
+        movieDAO.updateAvgScore(movieNo, avgScore);
+        return result;
+//        return reviewDAO.insertReview(reviewDTO);
     }
 
 
@@ -65,10 +71,17 @@ public class ReviewService {
     }
 
 
-    public boolean removeReview(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+    public boolean removeReview(HttpServletRequest request) throws Exception {
         log.info("removeReview()...");
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
         int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-        return reviewDAO.deleteReview(reviewNo);
+        ReviewDTO reviewDTO = reviewDAO.selectReviewOne(reviewNo);
+        log.info(reviewDTO);
+        boolean result = reviewDAO.deleteReview(reviewNo);
+        log.info("--------result : "+result);
+        int movieNo = reviewDTO.getMovieNo();
+        float avgScore = reviewDAO.avgScore(movieNo);
+        movieDAO.updateAvgScore(movieNo, avgScore);
+        return result;
     }
 }
