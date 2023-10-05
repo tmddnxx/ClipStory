@@ -1,5 +1,6 @@
 package com.example.movie.model.dao;
 
+import com.example.movie.model.dto.MemberDTO;
 import com.example.movie.model.dto.MovieDTO;
 import lombok.extern.log4j.Log4j2;
 
@@ -181,6 +182,42 @@ public class MovieDAO {
         preparedStatement.setString(11, movieDTO.getPoster());
         preparedStatement.setString(12, movieDTO.getMo());
         preparedStatement.executeUpdate();
+    }
+
+    public boolean selectMovieLike(int movieNo, String memberId) throws SQLException {
+        String sql = "select * FROM `zzim` WHERE `memberId` = ? and `movieNo` = ?";
+
+
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        preparedStatement.setInt(2,movieNo);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+
+        if(resultSet.next())
+            return true;
+        return false;
+    }
+
+    public boolean insertMovieLike(int movieNo, String memberId) throws SQLException {
+        String sql = "INSERT INTO `zzim` VALUES (?, ?) ";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        preparedStatement.setInt(2,movieNo);
+
+        return preparedStatement.executeUpdate() == 1;
+    }
+
+    public boolean removeMovieLike(int movieNo, String memberId) throws  SQLException {
+        String sql = "DELETE from `zzim` where memberId = ? and movieNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        preparedStatement.setInt(2,movieNo);
+
+        return preparedStatement.executeUpdate() == 1;
     }
 //
 //    public List<MovieDTO> selectAll() throws Exception { // 목록을 저장할 컬렉션 객체
