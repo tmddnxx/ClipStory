@@ -35,6 +35,7 @@ public class MemberDAO {
                     .passwd(resultSet.getString("passwd"))
                     .name(resultSet.getString("name"))
                     .nickName(resultSet.getString("nickName"))
+                    .zzimCnt(resultSet.getInt("zzimCnt"))
                     .joinDate(resultSet.getString("joinDate"))
                     .build();
         }
@@ -57,6 +58,7 @@ public class MemberDAO {
                     .passwd(resultSet.getString("passwd"))
                     .name(resultSet.getString("name"))
                     .nickName(resultSet.getString("nickName"))
+                    .zzimCnt(resultSet.getInt("zzimCnt"))
                     .joinDate(resultSet.getString("joinDate"))
                     .build();
         }
@@ -94,6 +96,19 @@ public class MemberDAO {
 
         preparedStatement.setString(1,memberId);
         preparedStatement.executeUpdate();
+    }
 
+    public void zzimCntUpdate(String memberId, boolean flag) throws Exception{
+        String sql = "";
+        if(flag){
+            sql = "update `member` set zzimCnt = zzimCnt + 1 where memberId = ?";
+        }
+        else{
+            sql = "update `member` set zzimCnt = zzimCnt - 1 where memberId = ?";
+        }
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        preparedStatement.executeUpdate();
     }
 }

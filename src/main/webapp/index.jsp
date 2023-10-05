@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<% response.sendRedirect("/list.movie?action=list"); %>
+<% response.sendRedirect("/main.movie?action=main"); %>
 <!DOCTYPE html>
 <html>
 <head>

@@ -16,7 +16,7 @@ public enum ConnectionUtil {
         config.setDriverClassName("org.mariadb.jdbc.Driver");
         config.setJdbcUrl("jdbc:mariadb://localhost:3308/moviedb");
         config.setUsername("root");
-        config.setPassword("7061");
+        config.setPassword("1460");
         config.addDataSourceProperty("cachePrepStmts","true");
         config.addDataSourceProperty("prepStmtCacheSize","250");
         config.addDataSourceProperty("preStmtCacheSqlLimit","2048");

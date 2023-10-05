@@ -23,4 +23,5 @@ public class MovieDTO {
    private String outline;
    private String poster;
    private String mo;
+   private float avgScore;
 }

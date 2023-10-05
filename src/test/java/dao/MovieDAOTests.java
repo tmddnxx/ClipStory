@@ -68,6 +68,15 @@ public class MovieDAOTests {
         movieDAO.deleteOne(4);
         log.info("삭제완료");
     }
+
+    @Test
+    public void movieLikeTest() throws Exception {
+        String memberId = "test1";
+        int movieNo = 1;
+        boolean result = false;
+        result = movieDAO.selectMovieLike(movieNo,memberId);
+        log.info(result);
+    }
 //    @Test
 //    public void testUpdateOne() throws Exception {
 //        MovieDTO movieDTO = MovieDTO.builder()

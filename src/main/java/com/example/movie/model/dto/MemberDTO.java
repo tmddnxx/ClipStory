@@ -12,6 +12,7 @@ public class MemberDTO {
     private String passwd;
     private String name;
     private String nickName;
+    private int zzimCnt;
     private String joinDate;
     private String zzim;
 }
