@@ -60,4 +60,5 @@ public class CommentDAOTest {
             commentDAO.insertCommentRe(commentDTO);
         }
     }
+
 }

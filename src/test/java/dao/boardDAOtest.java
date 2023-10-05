@@ -28,13 +28,13 @@ public class boardDAOtest {
 
     }
 
-//    @Test
-//    public void testSelectAll() throws Exception { // 전체목록
-//        List<BoardDTO> boardList = boardDAO.selectAll();
-//        for(BoardDTO boardDTO : boardList){
-//            log.info(boardDTO);
-//        }
-//    }
+    @Test
+    public void testSelectAll() throws Exception { // 전체목록
+        List<BoardDTO> boardList = boardDAO.selectAll(2,1,"nickName","test");
+        for(BoardDTO boardDTO : boardList){
+            log.info(boardDTO);
+        }
+    }
 
     @Test
     public void testSelectOne() throws Exception { // 개별 선택

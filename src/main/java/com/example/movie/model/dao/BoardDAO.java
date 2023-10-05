@@ -75,6 +75,7 @@ public class BoardDAO {
             boardDTO.setAddDate(resultSet.getTimestamp("addDate"));
             boardDTO.setHit(resultSet.getInt("hit"));
             boardDTO.setMemberId(resultSet.getString("memberId"));
+            boardDTO.setCnt(resultSet.getInt("cnt"));
             boardList.add(boardDTO);
         }
         return boardList;
@@ -98,6 +99,7 @@ public class BoardDAO {
             boardDTO.setAddDate(resultSet.getTimestamp("addDate"));
             boardDTO.setHit(resultSet.getInt("hit"));
             boardDTO.setMemberId(resultSet.getString("memberId"));
+            boardDTO.setCnt(resultSet.getInt("cnt"));
         }
         return boardDTO;
     }
@@ -132,5 +134,13 @@ public class BoardDAO {
         preparedStatement.executeUpdate();
     }
 
+    public void commentCount(int contentNo) throws Exception{
+        // 댓글 수 증가
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        String sql = "update board set cnt = board.cnt + 1 where contentNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, contentNo);
+        preparedStatement.executeUpdate();
 
+    }
 }

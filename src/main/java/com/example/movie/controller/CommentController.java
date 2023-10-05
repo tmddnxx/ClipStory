@@ -40,6 +40,7 @@ public class CommentController extends HttpServlet {
                 try {
                     JSONObject jsonObject = new JSONObject();
                     if (commentService.addComment(req)){
+
                         commentService.updateParentNo();
                         jsonObject.put("result", "true");
                     }

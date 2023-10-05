@@ -1,5 +1,6 @@
 package com.example.movie.service;
 
+import com.example.movie.model.dao.BoardDAO;
 import com.example.movie.model.dao.CommentDAO;
 import com.example.movie.model.dto.CommentDTO;
 import com.example.movie.model.dto.MemberDTO;
@@ -28,6 +29,15 @@ public enum CommentService {
                 .memberId(memberDTO.getMemberId())
                 .contentNo(Integer.parseInt(req.getParameter("contentNo")))
                 .build();
+
+        int contentNo = Integer.parseInt(req.getParameter("contentNo"));
+        BoardDAO boardDAO = new BoardDAO();
+        try{
+            boardDAO.commentCount(contentNo);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
         return commentDAO.insertComment(commentDTO);
     }
 

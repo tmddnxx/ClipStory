@@ -33,6 +33,7 @@ public class MovieDAO {
 
     public List<MovieDTO> selectAll() throws SQLException {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+
         List<MovieDTO> movieList = new ArrayList<>();
 
         String sql = "SELECT * FROM movie";
