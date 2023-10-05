@@ -52,11 +52,69 @@ public class MovieDAO {
                     .runningtime(resultSet.getString("runningtime"))
                     .outline(resultSet.getString("outline"))
                     .poster(resultSet.getString("poster"))
-                    .m_or_o(resultSet.getString("m_or_o"))
+                    .mo(resultSet.getString("mo"))
                     .build();
             movieList.add(movieDTO);
         }
         return movieList;
+    }
+
+    public List<MovieDTO> selectMovie() throws SQLException{
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        List<MovieDTO> movieList = new ArrayList<>();
+
+        String sql = "select * from movie where `mo` = 'm'";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            MovieDTO movieDTO = MovieDTO.builder()
+                    .movieNo(resultSet.getInt("movieNo"))
+                    .movieName(resultSet.getString("movieName"))
+                    .director(resultSet.getString("director"))
+                    .actor(resultSet.getString("actor"))
+                    .releaseDate(resultSet.getString("releaseDate"))
+                    .region(resultSet.getString("region"))
+                    .genre(resultSet.getString("genre"))
+                    .audience(resultSet.getInt("audience"))
+                    .ranking(resultSet.getInt("ranking"))
+                    .runningtime(resultSet.getString("runningtime"))
+                    .outline(resultSet.getString("outline"))
+                    .poster(resultSet.getString("poster"))
+                    .mo(resultSet.getString("mo"))
+                    .build();
+            movieList.add(movieDTO);
+        }
+        return movieList;
+    }
+
+    public List<MovieDTO> selectOtt() throws SQLException {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        List<MovieDTO> ottList = new ArrayList<>();
+
+        String sql = "SELECT * FROM movie where mo = 'o'";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()){
+            MovieDTO movieDTO = MovieDTO.builder()
+                    .movieNo(resultSet.getInt("movieNo"))
+                    .movieName(resultSet.getString("movieName"))
+                    .director(resultSet.getString("director"))
+                    .actor(resultSet.getString("actor"))
+                    .releaseDate(resultSet.getString("releaseDate"))
+                    .region(resultSet.getString("region"))
+                    .genre(resultSet.getString("genre"))
+                    .audience(resultSet.getInt("audience"))
+                    .ranking(resultSet.getInt("ranking"))
+                    .runningtime(resultSet.getString("runningtime"))
+                    .outline(resultSet.getString("outline"))
+                    .poster(resultSet.getString("poster"))
+                    .mo(resultSet.getString("mo"))
+                    .build();
+            ottList.add(movieDTO);
+        }
+        return ottList;
     }
 
     public MovieDTO selectOne(int movieNo) throws SQLException {
@@ -85,7 +143,7 @@ public class MovieDAO {
                     .runningtime(resultSet.getString("runningtime"))
                     .outline(resultSet.getString("outline"))
                     .poster(resultSet.getString("poster"))
-                    .m_or_o(resultSet.getString("m_or_o"))
+                    .mo(resultSet.getString("mo"))
                     .build();
         }
         return movieDTO;
@@ -106,7 +164,7 @@ public class MovieDAO {
 
     public void insert(MovieDTO movieDTO) throws Exception {
         String sql = "INSERT INTO movie (movieName, director, actor, releaseDate,"
-                + " region, genre, audience, ranking, runningtime, outline, poster, m_or_o)"
+                + " region, genre, audience, ranking, runningtime, outline, poster, mo)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -121,7 +179,7 @@ public class MovieDAO {
         preparedStatement.setString(9, movieDTO.getRunningtime());
         preparedStatement.setString(10, movieDTO.getOutline());
         preparedStatement.setString(11, movieDTO.getPoster());
-        preparedStatement.setString(12, movieDTO.getM_or_o());
+        preparedStatement.setString(12, movieDTO.getMo());
         preparedStatement.executeUpdate();
     }
 //
