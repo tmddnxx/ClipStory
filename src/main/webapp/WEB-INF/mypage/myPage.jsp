@@ -107,6 +107,7 @@
   </div>
 </div>
 <script>
+  // 아코디언 자바 스크립트
   const accordions = document.querySelectorAll(".accordion");
   let i;
 
