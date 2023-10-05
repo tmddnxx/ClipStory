@@ -13,4 +13,5 @@ public class MemberDTO {
     private String name;
     private String nickName;
     private String joinDate;
+    private String zzim;
 }

@@ -35,8 +35,13 @@ public class MovieController extends HttpServlet {
         }
 
         switch (action) {
-            case "list" : // 리스트를 들고오는 코드
+            case "main" :
                 movieService.listMovie(req);
+                movieService.listOtt(req);
+                req.getRequestDispatcher("/WEB-INF/movie/movieMain.jsp").forward(req, resp);
+                break;
+            case "list" : // 리스트를 들고오는 코드
+                movieService.movieListAll(req);
                 req.getRequestDispatcher("/WEB-INF/movie/movieList.jsp").forward(req, resp);
                 break;
             case "remove":

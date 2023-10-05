@@ -17,7 +17,7 @@ public class MovieService {
     }
 
 
-    public void listMovie(HttpServletRequest request) {
+    public void movieListAll(HttpServletRequest request) {
         // movieList.jsp에서 영화 목록을 보여주기 위한 요청을 처리하는 메소드
         List<MovieDTO> movieList;
         try {
@@ -29,6 +29,29 @@ public class MovieService {
             request.setAttribute("error", "영화 목록이 정상적으로 처리되지 않았습니다.");
         }
 
+    }
+
+    public void listMovie(HttpServletRequest request) {
+        List<MovieDTO> listMovie;
+        try {
+            listMovie = movieDAO.selectMovie();
+            request.setAttribute("listMovie", listMovie);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            log.info("영화 목록 생성 과정에서 문제 발생");
+            request.setAttribute("error", "영화 목록이 정상적으로 처리되지 않았습니다.");
+        }
+    }
+    public void listOtt(HttpServletRequest request) {
+        List<MovieDTO> listOtt;
+        try {
+            listOtt = movieDAO.selectOtt();
+            request.setAttribute("listOtt", listOtt);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            log.info("OTT 목록 생성 과정에서 문제 발생");
+            request.setAttribute("error", "OTT 목록이 정상적으로 처리되지 않았습니다.");
+        }
     }
 
     public void getMovieDTO(HttpServletRequest request) {
