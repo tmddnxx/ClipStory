@@ -141,6 +141,13 @@ public class BoardDAO {
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, contentNo);
         preparedStatement.executeUpdate();
-
+    }
+    public void commentdisCount(int contentNo) throws Exception{
+        // 댓글 수 삭제
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        String sql = "update board set cnt = board.cnt - 1 where contentNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, contentNo);
+        preparedStatement.executeUpdate();
     }
 }

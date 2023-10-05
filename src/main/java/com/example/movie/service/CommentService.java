@@ -52,6 +52,15 @@ public enum CommentService {
                 .contentNo(Integer.parseInt(req.getParameter("contentNo")))
                 .parentNo(Integer.parseInt(req.getParameter("parentNo")))
                 .build();
+
+        int contentNo = Integer.parseInt(req.getParameter("contentNo"));
+        BoardDAO boardDAO = new BoardDAO();
+        try{
+            boardDAO.commentCount(contentNo);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
         return commentDAO.insertCommentRe(commentDTO);
     }
 
@@ -78,6 +87,15 @@ public enum CommentService {
         log.info("removeComment()...");
 
         int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+
+        int contentNo = Integer.parseInt(request.getParameter("contentNo"));
+        BoardDAO boardDAO = new BoardDAO();
+        try{
+            boardDAO.commentdisCount(contentNo);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
         return commentDAO.deleteComment(commentNo);
     }
 
