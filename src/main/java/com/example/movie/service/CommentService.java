@@ -88,13 +88,13 @@ public enum CommentService {
 
         int commentNo = Integer.parseInt(request.getParameter("commentNo"));
 
-        int contentNo = Integer.parseInt(request.getParameter("contentNo"));
-        BoardDAO boardDAO = new BoardDAO();
-        try{
-            boardDAO.commentdisCount(contentNo);
-        }catch (Exception e){
-            log.error(e.getMessage());
-        }
+//        int contentNo = Integer.parseInt(request.getParameter("contentNo"));
+//        BoardDAO boardDAO = new BoardDAO();
+//        try{
+//            boardDAO.commentdisCount(contentNo);
+//        }catch (Exception e){
+//            log.error(e.getMessage());
+//        }
 
         return commentDAO.deleteComment(commentNo);
     }
