@@ -35,7 +35,7 @@
                     </a>
                 <p>${searchVO.releaseDate}</p>
                 <p style="text-align: right">${searchVO.genre}</p>
-                <p style="text-align: right">${searchVO.m_or_o}</p>
+                <p style="text-align: right">${searchVO.mo}</p>
             </li>
         </c:forEach>
         <c:if test="${empty searchVOList}"> <%-- 검색결과가 없는경우 --%>
@@ -54,7 +54,7 @@
                     </a>
                     <p>${searchVO.releaseDate}</p>
                     <p style="text-align: right">${searchVO.genre}</p>
-                    <p style="text-align: right">${searchVO.m_or_o}</p>
+                    <p style="text-align: right">${searchVO.mo}</p>
                 </li>
         </c:forEach>
         <c:if test="${empty searchVOListM}"> <%-- 검색결과가 없는경우 --%>
@@ -73,7 +73,7 @@
                 </a>
                 <p>${searchVO.releaseDate}</p>
                 <p style="text-align: right">${searchVO.genre}</p>
-                <p style="text-align: right">${searchVO.m_or_o}</p>
+                <p style="text-align: right">${searchVO.mo}</p>
             </li>
         </c:forEach>
         <c:if test="${empty searchVOListO}"> <%-- 검색결과가 없는경우 --%>
