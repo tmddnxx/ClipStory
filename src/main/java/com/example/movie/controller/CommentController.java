@@ -40,8 +40,6 @@ public class CommentController extends HttpServlet {
                 try {
                     JSONObject jsonObject = new JSONObject();
                     if (commentService.addComment(req)){
-
-                        commentService.updateParentNo();
                         jsonObject.put("result", "true");
                     }
                     else{
@@ -96,7 +94,7 @@ public class CommentController extends HttpServlet {
                         jsonObject.put("result", "false");
                     }
                     resp.getWriter().println(jsonObject.toJSONString());
-                } catch (SQLException | ClassNotFoundException e){
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 break;

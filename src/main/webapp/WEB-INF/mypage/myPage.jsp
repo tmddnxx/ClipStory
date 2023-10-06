@@ -38,7 +38,7 @@
 </div>
 
 <div class="container">
-  <h3 class="display-5">
+  <h3 class="display-5"> <%-- 프로필 --%>
     <a class="nav-link" href="/modify.member?action=modify&memberId=${loginInfo.memberId}">프로필</a>
   </h3>
   <form name="frmMypage" action="/modify.mypage?action=mypage" method="post">
@@ -70,7 +70,7 @@
 </div>
 <div class="container">
   <button class="accordion">
-    <h3 class="display-5">내가 쓴 글</h3>
+    <h3 class="display-5">내가 쓴 글</h3> <%-- 내가 쓴 글 리스트 --%>
   </button>
   <div class="panel">
     <ul class="list-group">
@@ -90,17 +90,61 @@
     </ul>
   </div>
   <button class="accordion">
-    <h3 class="display-5">내가 쓴 댓글</h3>
+    <h3 class="display-5">내가 쓴 댓글</h3> <%-- 댓글 리스트 --%>
   </button>
   <div class="panel">
     <ul class="list-group">
       <c:forEach var="commentDTO" items="${commentDTOList}" varStatus="status">
         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-            <a href="get.board?action=get&contentNo=${commentDTO.contentNo}" class="text-decoration-none" >
+          <a href="get.board?action=get&contentNo=${commentDTO.contentNo}" class="text-decoration-none" >
               ${commentDTO.commentNo}
               ${commentDTO.addDate}
               ${commentDTO.nickName}
-            </a>
+          </a>
+        </li>
+      </c:forEach>
+    </ul>
+  </div>
+  <button class="accordion">
+    <h3 class="display-5">내가 쓴 리뷰</h3> <%-- 리뷰 리스트 --%>
+  </button>
+  <div class="panel">
+    <ul class="list-group">
+      <c:forEach var="reviewDTO" items="${reviewDTOList}" varStatus="status">
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <a href="view.movie?action=view&movieNo=${reviewDTO.movieNo}" class="text-decoration-none" >
+              ${reviewDTO.score}
+              ${reviewDTO.review}
+              ${reviewDTO.nickName}
+              ${reviewDTO.addDate}
+          </a>
+        </li>
+      </c:forEach>
+    </ul>
+  </div>
+  <button class="accordion">
+    <h3 class="display-5">내가 찜한 영화</h3> <%-- 찜한 영화 리스트 --%>
+  </button>
+  <div class="panel">
+    <ul class="list-group">
+      <c:forEach var="movieDTO" items="${zzimMovieList}" varStatus="status">
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <a href="view.movie?action=view&movieNo=${movieDTO.movieNo}" class="text-decoration-none" >
+              ${movieDTO.movieNo}
+              ${movieDTO.movieName}
+              ${movieDTO.director}
+              ${movieDTO.actor}
+              ${movieDTO.releaseDate}
+              ${movieDTO.region}
+              ${movieDTO.genre}
+              ${movieDTO.audience}
+              ${movieDTO.ranking}
+              ${movieDTO.runningtime}
+              ${movieDTO.outline}
+              ${movieDTO.poster}
+              ${movieDTO.mo}
+              ${movieDTO.avgScore}
+          </a>
         </li>
       </c:forEach>
     </ul>

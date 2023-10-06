@@ -1,35 +1,59 @@
-//package com.example.movie.service;
-//
-//import com.example.movie.model.dao.MemberDAO;
-//import com.example.movie.model.dto.BoardDTO;
-//import lombok.extern.log4j.Log4j2;
-//
-//import javax.servlet.http.HttpServletRequest;
-//
-//@Log4j2
-//public enum MyPageService {
-//    INSTANCE, BoardDTO;
-//
-//    private MemberDAO memberDAO;
-//
-//    MyPageService(){
-//        memberDAO = new MemberDAO();
-//    }
-//
-//
-//    public void getMyBoard(HttpServletRequest request){ // 게시물 개별
-//        int contentNo = Integer.parseInt(request.getParameter("contentNo"));
-//        if (getMemberId().equals(memberId))
-//            try{
-//                BoardDTO boardDTO = boardDAO.selectOne(contentNo);
-//                request.setAttribute("boardDTO", boardDTO);
-//            } catch (Exception e){
-//                log.error(e.getMessage());
-//                log.info("게시물 가져오는 과정에서 에러");
-//                request.setAttribute("error", "게시물을 정상적으로 가져오지 못함");
-//            }
-//    }
-//
-//    private Object getMemberId() {
-//    }
-//}
+package com.example.movie.service;
+
+import com.example.movie.model.dao.CommentDAO;
+import com.example.movie.model.dao.MemberDAO;
+import com.example.movie.model.dao.MyPageDAO;
+import com.example.movie.model.dto.*;
+
+import lombok.extern.log4j.Log4j2;
+
+import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
+import java.util.List;
+
+@Log4j2
+public enum MyPageService {
+    INSTANCE, BoardDTO;
+
+    private MyPageDAO myPageDAO;
+    private CommentDAO commentDAO;
+
+    MyPageService() {
+        myPageDAO = new MyPageDAO();
+    }
+
+    public void getMyBoard(HttpServletRequest request) throws Exception { //  내 게시물 보기
+        List<BoardDTO> boardDTOList = myPageDAO.viewMyContent((String)request.getSession().getAttribute("sessionId"));
+        request.setAttribute("boardDTOList", boardDTOList);
+
+        log.info(boardDTOList);
+
+    }
+
+    public void getMyComments(HttpServletRequest request) throws Exception {
+        // 내 댓글 보기
+        List<CommentDTO> commentDTOList = myPageDAO.viewMyComment((String)request.getSession().getAttribute("sessionId"));
+        request.setAttribute("commentDTOList", commentDTOList);
+
+        log.info(commentDTOList);
+
+    }
+
+    public void getMyReviews(HttpServletRequest request) throws Exception {
+        // 내 댓글 보기
+        List<ReviewDTO> reviewDTOList = myPageDAO.viewMyReview((String)request.getSession().getAttribute("sessionId"));
+        request.setAttribute("reviewDTOList", reviewDTOList);
+
+        log.info(reviewDTOList);
+
+    }
+    public void getMyZZimMovies(HttpServletRequest request) throws Exception {
+        // 내 찜영화 보기
+        List<MovieDTO> zzimMovieList = myPageDAO.viewMyZZim((String)request.getSession().getAttribute("sessionId"));
+        request.setAttribute("zzimMovieList", zzimMovieList);
+
+        log.info(zzimMovieList);
+
+    }
+
+}

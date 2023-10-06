@@ -131,7 +131,8 @@
                             <option value="title" <% if(items.equals("title")){%>selected<%}%>>제목</option>
                             <option value="content" <% if(items.equals("content")){%>selected<%}%>>내용</option>
                             <option value="nickName" <% if(items.equals("nickName")){%>selected<%}%>>닉네임</option>
-                        </select> <input name="text" type="text" value="<%=text%>"/>
+                        </select>
+                        <input name="text" type="text" value="<%=text%>"/>
                         <input type="button" id="btn-search" class="btn btn-primary" value="검색"/>
                         <input type="button" id="btn-reset" class="btn btn-secondary" value="취소"/>
                     </td>
