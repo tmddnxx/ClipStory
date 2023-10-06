@@ -15,8 +15,10 @@ import java.util.List;
 public class ReviewService {
     private static ReviewService instance;
     private final MovieDAO movieDAO;
+    private final MemberDTO memberDTO;
     private ReviewService() {
         movieDAO = new MovieDAO();
+        memberDTO = new MemberDTO();
     }
 
     public static ReviewService getInstance() {
@@ -29,7 +31,7 @@ public class ReviewService {
     public boolean addReview(HttpServletRequest request) throws Exception {
         log.info("addReview() ...");
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
-        log.info((String) request.getSession().getAttribute("memberId"));
+        log.info((String) request.getSession().getAttribute("loginInfo"));
         ReviewDTO reviewDTO = ReviewDTO.builder()
                 .movieNo(Integer.valueOf(request.getParameter("num")))
 //                .memberId((String) request.getSession().getAttribute("memberId"))
@@ -45,6 +47,12 @@ public class ReviewService {
         int movieNo = reviewDTO.getMovieNo();
         float avgScore = reviewDAO.avgScore(Integer.valueOf(request.getParameter("num")));
         movieDAO.updateAvgScore(movieNo, avgScore);
+        log.info(reviewDTO.getMemberId() + "@@" + memberDTO.getMemberId());
+        if(reviewDTO.getMemberId() == memberDTO.getMemberId()) {
+            result = false;
+        }
+
+
         return result;
 //        return reviewDAO.insertReview(reviewDTO);
     }

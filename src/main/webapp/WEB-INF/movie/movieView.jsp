@@ -123,7 +123,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-4">
-                    <span class="btn btn-primary" id="goReviewSubmit">등록</span>
+                    <span class="btn btn-primary" id="goReviewSubmit">등록하기</span>
                 </div>
             </div>
         </form>
