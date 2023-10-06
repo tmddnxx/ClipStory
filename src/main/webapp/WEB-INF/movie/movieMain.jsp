@@ -21,12 +21,6 @@
 <body>
 <jsp:include page="../header.jsp"/>
 <div class=container"" style="max-width: 5000px; overflow: hidden;">
-    <nav class="nav" style="padding-top: 26px; text-align: center; justify-content: center; font-size: 26px;">
-        <%--        <a class="nav-link active" aria-current="page" href="#" style="font-weight: 600; color: black;">홈</a>--%>
-        <a class="nav-link" href="#" style="font-weight: 600; color: black;">랭킹</a>
-        <a class="nav-link" href="#" style="font-weight: 600; color: black;">상영/예정작</a>
-        <%--        <a class="nav-link " aria-disabled="true" style="font-weight: 600; color: black;">게시판</a>--%>
-    </nav>
     <hr>
     <div class="container" style="width: 700px">
         <form name="searchList" action="./list.search?action=list" method="post" style="display: flex; justify-content: center;">
@@ -34,10 +28,24 @@
                 <option value="movieName" <% if(items.equals("movieName")){%>selected<%}%>>영화제목</option>
                 <option value="actor" <% if(items.equals("actor")){%>selected<%}%>>배우</option>
                 <option value="genre" <% if(items.equals("genre")){%>selected<%}%>>장르</option>
-            </select> <input class="form-control" name="text" type="text" value="<%=text%>"/>
+            </select> <input class="form-control" id="search-input" name="text" type="text" value="<%=text%>"/>
             <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (e) {
+            const input = document.querySelector('#search-input').value;
+            const submitBtn = document.querySelector('#btn-search');
+            // console.log("검색창 : "+input);
+
+            submitBtn.addEventListener('click', function (e) {
+                if (input === "") {
+                    e.preventDefault();
+                    alert("검색어는 특수문자 제외 2자이상 입력하셔야 합니다.");
+                }
+            });
+        });
+    </script>
     <hr>
     <%--  영화 리스트  --%>
     <h3 style="text-align: center; margin-bottom: 50px">영화</h3>
