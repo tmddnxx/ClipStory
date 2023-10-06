@@ -32,6 +32,8 @@ public class MypageController extends HttpServlet {
                 try {
                     myPageService.getMyBoard(req);
                     myPageService.getMyComments(req);
+                    myPageService.getMyReviews(req);
+                    myPageService.getMyZZimMovies(req);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

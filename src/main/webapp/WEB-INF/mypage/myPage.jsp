@@ -117,7 +117,33 @@
               ${reviewDTO.review}
               ${reviewDTO.nickName}
               ${reviewDTO.addDate}
-              //http://localhost:8080/view.movie?action=view&movieNo=3
+          </a>
+        </li>
+      </c:forEach>
+    </ul>
+  </div>
+  <button class="accordion">
+    <h3 class="display-5">내가 찜한 영화</h3> <%-- 찜한 영화 리스트 --%>
+  </button>
+  <div class="panel">
+    <ul class="list-group">
+      <c:forEach var="movieDTO" items="${zzimMovieList}" varStatus="status">
+        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          <a href="view.movie?action=view&movieNo=${movieDTO.movieNo}" class="text-decoration-none" >
+              ${movieDTO.movieNo}
+              ${movieDTO.movieName}
+              ${movieDTO.director}
+              ${movieDTO.actor}
+              ${movieDTO.releaseDate}
+              ${movieDTO.region}
+              ${movieDTO.genre}
+              ${movieDTO.audience}
+              ${movieDTO.ranking}
+              ${movieDTO.runningtime}
+              ${movieDTO.outline}
+              ${movieDTO.poster}
+              ${movieDTO.mo}
+              ${movieDTO.avgScore}
           </a>
         </li>
       </c:forEach>

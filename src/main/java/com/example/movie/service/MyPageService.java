@@ -3,9 +3,7 @@ package com.example.movie.service;
 import com.example.movie.model.dao.CommentDAO;
 import com.example.movie.model.dao.MemberDAO;
 import com.example.movie.model.dao.MyPageDAO;
-import com.example.movie.model.dto.BoardDTO;
-import com.example.movie.model.dto.CommentDTO;
-import com.example.movie.model.dto.MemberDTO;
+import com.example.movie.model.dto.*;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -30,12 +28,6 @@ public enum MyPageService {
 
         log.info(boardDTOList);
 
-//        try {
-//            myPageDAO.viewMyContent(boardDTOList);
-//        } catch (Exception e) {
-//            log.error(e.getMessage());
-//        }
-//        return boardDTOList;
     }
 
     public void getMyComments(HttpServletRequest request) throws Exception {
@@ -46,4 +38,22 @@ public enum MyPageService {
         log.info(commentDTOList);
 
     }
+
+    public void getMyReviews(HttpServletRequest request) throws Exception {
+        // 내 댓글 보기
+        List<ReviewDTO> reviewDTOList = myPageDAO.viewMyReview((String)request.getSession().getAttribute("sessionId"));
+        request.setAttribute("reviewDTOList", reviewDTOList);
+
+        log.info(reviewDTOList);
+
+    }
+    public void getMyZZimMovies(HttpServletRequest request) throws Exception {
+        // 내 찜영화 보기
+        List<MovieDTO> zzimMovieList = myPageDAO.viewMyZZim((String)request.getSession().getAttribute("sessionId"));
+        request.setAttribute("zzimMovieList", zzimMovieList);
+
+        log.info(zzimMovieList);
+
+    }
+
 }
