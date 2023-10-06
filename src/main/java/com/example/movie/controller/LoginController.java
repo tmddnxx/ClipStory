@@ -34,7 +34,6 @@ public class LoginController extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("loginInfo", memberDTO);
                 session.setAttribute("sessionId", memberDTO.getMemberId()); // board에서 id값만 들고올려고 추가함
-                session.setAttribute("nickName", memberDTO.getNickName()); // 닉네임
                 log.info(memberDTO);
                 resp.sendRedirect("main.movie?action=main");
                 return;

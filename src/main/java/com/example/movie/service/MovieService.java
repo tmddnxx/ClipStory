@@ -67,7 +67,7 @@ public class MovieService {
     }
 
     public void getMovieDTO(HttpServletRequest request) {
-        // 특정 뉴스 기사를 클릭했을 때 호출하기 위한 요청을 처리하는 메소드
+        // 특정 영화를 클릭했을 때 호출하기 위한 요청을 처리하는 메소드
         int movieNo = Integer.parseInt((request.getParameter("movieNo"))); // movieNo 파라미터를 추출해서
         String memberId = (String) request.getSession().getAttribute("sessionId");
         try {

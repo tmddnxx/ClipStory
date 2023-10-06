@@ -3,6 +3,7 @@ package com.example.movie.model.dao;
 import com.example.movie.model.dto.ReviewDTO;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Connection;
@@ -106,8 +107,18 @@ public class ReviewDAO {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, movieNo);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return resultSet.getFloat("avgScore");
+    }
+
+    public boolean isWrite(String memberId, int movieNo) throws SQLException {
+        String sql = "select * from review where memberId = ? and movieNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, memberId);
+        preparedStatement.setInt(2, movieNo);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet.next();
     }
 }

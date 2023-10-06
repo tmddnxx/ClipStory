@@ -35,7 +35,7 @@
                     <form name="frmZzim" method="post">
                         <input type="hidden" name="zzim" value="${zzim}"/>
                         <input type="hidden" name="movieNo" value="${movieDTO.movieNo}"/>
-                        <input type="hidden" name="memberId" value="${loginInfo.memberId}"/>
+                        <input type="hidden" name="memberId" value="${sessionId}"/>
 
                         <div class="movielike">
                             <i class="fa-solid fa-heart fa-2x"></i>
@@ -53,7 +53,7 @@
 
         </ul>
     </div>
-    <%-- 리플 목록 출력 영역 --%>
+    <!-- 리플 목록 출력 영역 -->
     <form name="frmReviewView" method="post">
         <input type="hidden" name="num" value="${movieDTO.movieNo}">
     </form>
@@ -101,12 +101,13 @@
         });
     </script>
     <%-- 리플 시작 --%>
-    <c:if test="${loginInfo != null}">
+    <c:if test="${loginInfo != null && isWrite != true}">
         <form name="frmReview" method="post">
             <input type="hidden" name="num" value="${movieDTO.movieNo}">
             <div class="form-group row">
                 <div class="col-sm-3">
-                    <input name="nickName" type="text" class="form-control" value="${nickName}" placeholder="nickName" readonly>
+                    <input name="nickName" type="text" class="form-control" value="${loginInfo.nickName}" readonly>
+                    <input name="memberId" type="text" value="${sessionId}" readonly>
                 </div>
             </div>
             <div>
@@ -166,6 +167,7 @@
                     const nickName = frmReview.nickName.value;
                     const review = frmReview.review.value;
                     const score = frmReview.score.value;
+
 
                     if(review === "") {
                         e.preventDefault();

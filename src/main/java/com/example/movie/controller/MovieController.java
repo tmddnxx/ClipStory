@@ -2,6 +2,7 @@ package com.example.movie.controller;
 
 import com.example.movie.service.MemberService;
 import com.example.movie.service.MovieService;
+import com.example.movie.service.ReviewService;
 import lombok.extern.log4j.Log4j2;
 import org.json.simple.JSONObject;
 
@@ -29,6 +30,7 @@ public class MovieController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MovieService movieService = new MovieService();
 
+        ReviewService reviewService = ReviewService.getInstance();
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=utf-8");
 
@@ -53,6 +55,13 @@ public class MovieController extends HttpServlet {
                 break;
             case "view":
                 movieService.getMovieDTO(req);
+                try {
+                    reviewService.getReviews(req);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 req.getRequestDispatcher("/WEB-INF/movie/movieView.jsp").forward(req, resp);
                 break;
             case "zzimAdd":

@@ -64,6 +64,7 @@ public class ReviewController extends HttpServlet {
                         jsonObject.put("review", reviewDTO.getReview());
                         jsonObject.put("addDate", reviewDTO.getAddDate());
                         jsonObject.put("score", reviewDTO.getScore());
+                        jsonObject.put("memberId", reviewDTO.getMemberId());
                         jsonObject.put("isLogin", reviewDTO.isLogin());
                         jsonArray.add(jsonObject);
                     }

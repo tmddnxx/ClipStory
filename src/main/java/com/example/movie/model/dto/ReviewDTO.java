@@ -17,4 +17,5 @@ public class ReviewDTO {
     private String addDate; // insertDate
     private String score; // ip??
     private boolean isLogin; // isLogin
+
 }
