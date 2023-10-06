@@ -197,7 +197,7 @@
             if(boardDTO.getMemberId().equals(sessionId)){ // 본인이 작성한 글일 시 수정/ 삭제 버튼 활성화
         %>
         <a href="modify.board?action=modify&contentNo=${boardDTO.contentNo}" class="btn btn-primary" style="text-align: right">수정</a>
-        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" class="btn btn-danger remove">삭제 </a>
+        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" onclick="return confirm('정말 삭제하시겠습니까?');" class="btn btn-danger remove">삭제 </a>
         <%
             }
         %>
