@@ -20,7 +20,8 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class=container"" style="max-width: 5000px; overflow: hidden;">
+<div>
+<div class=container"" style="max-width: 5000px; overflow: hidden; padding-top:200px; height: 1000px">
     <hr>
     <div class="container" style="width: 700px">
         <form name="searchList" action="./list.search?action=list" method="post" style="display: flex; justify-content: center;">
@@ -121,5 +122,7 @@
         </div>
     </c:if>
 </div>
+</div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
