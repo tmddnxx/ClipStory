@@ -35,9 +35,6 @@
     <hr>
     <div class="form-group row user-comment-list">
         <ul>
-
-
-
         </ul>
     </div>
     <form name ="frmCommentView" method="post">
@@ -101,7 +98,7 @@
                     '</div>' +
                     '<div class="form-group row">' +
                     '<div class="col-sm-4">' +
-                    '<span class="btn btn-primary" onclick="submitCommentRe(this)">등록</span>' +
+                    '<span class="btn btn-primary subcommentRe" onclick="submitCommentRe(this)">등록</span>' +
                     '</div>' +
                     '</div>' +
                     '</form>';
@@ -111,7 +108,6 @@
 
             }
         }
-
         const displayCommentRe = function (btn) {
             const commentReFrm = btn.nextElementSibling;
             const commentReFrmAll = document.querySelectorAll('form[name=frmCommentRe]');
@@ -133,6 +129,12 @@
             const nickName = commentReFrm.nickName.value;
             const comment = commentReFrm.comment.value;
             const parentNo = commentReFrm.parentNo.value;
+
+            if(comment.trim() == ""){
+                alert("내용을 입력해주세요");
+                comment.focus();
+                return false;
+            }
             xhr.open('POST', '/comment/addre?contentNo=' + contentNo + '&nickName=' + nickName + '&comment=' + comment + '&parentNo=' + parentNo);
             xhr.send();
             xhr.onreadystatechange = () => {
@@ -185,17 +187,17 @@
             <input type="hidden" name="pageNum" value="<%=pageNum%>">
             <input type="hidden" name="num" value="<%=boardDTO.getContentNo()%>">
         </form>
-        <a href="javascript:history.back()" class="btn btn-primary"><< Back</a>
+        <button type="button" class="btn btn-success mt-3" onclick=window.location.href="list.board">뒤로가기</button>
         <%
             if(boardDTO.getMemberId().equals(sessionId)){ // 본인이 작성한 글일 시 수정/ 삭제 버튼 활성화
         %>
         <a href="modify.board?action=modify&contentNo=${boardDTO.contentNo}" class="btn btn-primary" style="text-align: right">수정</a>
-        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" class="btn btn-danger">삭제 </a>
+        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" class="btn btn-danger remove">삭제 </a>
         <%
             }
         %>
-<%--        <a href="modify.board?action=modify&contentNo=${boardDTO.contentNo}" class="btn btn-primary" style="text-align: right">Modify</a>--%>
     </div>
+    <%-- 댓글창 --%>
     <c:if test="${loginInfo != null}">
         <form name="frmComment" method="post">
             <input type="hidden" name="contentNo" value="${boardDTO.contentNo}">
@@ -216,9 +218,15 @@
                 const xhr = new XMLHttpRequest();
                 const btnCommentSubmit = document.querySelector('#goCommentSubmit');
                 const frmComment = document.querySelector('form[name=frmComment]');
+                const commentbox = document.querySelector('textarea[name=comment]');
 
+                btnCommentSubmit.addEventListener('click', function(e) {
+                    if(commentbox.value.trim() == ""){
+                        alert("내용을 입력해주세요.");
+                        commentbox.focus();
+                        return false;
+                    }
 
-                btnCommentSubmit.addEventListener('click', function() {
                     const contentNo = frmComment.contentNo.value;
                     const nickName = frmComment.nickName.value;
                     const comment = frmComment.comment.value;
@@ -245,6 +253,16 @@
             });
         </script>
     </c:if>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (){
+            const removebtn = document.querySelector('.remove');
+            removebtn.addEventListener('click', function (e){
+                if(!confirm("정말 삭제하시겠습니까?")){
+                    e.preventDefault()
+                }
+            })
+        })
+    </script>
 </div>
 </body>
 </html>
