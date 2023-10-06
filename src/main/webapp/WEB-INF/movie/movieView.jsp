@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div>
-                1<input type="radio" name="score" value="1">
+                1<input type="radio" name="score" value="1" checked>
                 2<input type="radio" name="score" value="2">
                 3<input type="radio" name="score" value="3">
                 4<input type="radio" name="score" value="4">
@@ -159,13 +159,18 @@
                 const btnReviewSubmit = document.querySelector('#goReviewSubmit'); // 리플 등록 버튼
                 const frmReview = document.querySelector('form[name=frmReview]');
 
-                btnReviewSubmit.addEventListener('click', function () { // 등록 버튼 클릭시
+
+                btnReviewSubmit.addEventListener('click', function (e) { // 등록 버튼 클릭시
                     // form 안에 input 태그가 있지만 form을 submit하는 것이 아니라 ajax로 값을 남겨야 되어서 값을 추출 함.
                     const num = frmReview.num.value;
                     const nickName = frmReview.nickName.value;
                     const review = frmReview.review.value;
                     const score = frmReview.score.value;
 
+                    if(review === "") {
+                        e.preventDefault();
+                        alert('리뷰는 한 글자 이상 입력해야 합니다.')
+                    }
                     xhr.open('POST', '/review/add?num=' + num + '&nickName=' + nickName + '&review=' + review + '&score=' + score);
                     xhr.send();
                     xhr.onreadystatechange = () => {
@@ -187,6 +192,9 @@
                         }
                     }
                 });
+
+
+
             });
         </script>
     </c:if>
