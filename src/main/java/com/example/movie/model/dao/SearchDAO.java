@@ -37,7 +37,7 @@ public class SearchDAO {
                     .runningtime(resultSet.getString("runningtime"))
                     .outline(resultSet.getString("outline"))
                     .poster(resultSet.getString("poster"))
-                    .m_or_o(resultSet.getString("m_or_o"))
+                    .m_or_o(resultSet.getString("mo"))
                     .build();
             searchVoList.add(searchVO);
         }
@@ -47,7 +47,7 @@ public class SearchDAO {
     public List<SearchVO> searchM(String items, String text) throws Exception{
         /* 무비 검색하기 */
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        String sql = "select * from movie where m_or_o = 'm' and " + items + " like '%" + text + "%' order by ranking";
+        String sql = "select * from movie where mo = 'm' and " + items + " like '%" + text + "%' order by ranking";
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -66,7 +66,7 @@ public class SearchDAO {
                     .runningtime(resultSet.getString("runningtime"))
                     .outline(resultSet.getString("outline"))
                     .poster(resultSet.getString("poster"))
-                    .m_or_o(resultSet.getString("m_or_o"))
+                    .m_or_o(resultSet.getString("mo"))
                     .build();
             searchVoListM.add(searchVO);
         }
@@ -76,7 +76,7 @@ public class SearchDAO {
     public List<SearchVO> searchO(String items, String text) throws Exception{
         /* OTT 검색하기 */
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        String sql = "select * from movie where m_or_o = 'o' and " + items + " like '%" + text + "%' order by ranking";
+        String sql = "select * from movie where mo = 'o' and " + items + " like '%" + text + "%' order by ranking";
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -95,7 +95,7 @@ public class SearchDAO {
                     .runningtime(resultSet.getString("runningtime"))
                     .outline(resultSet.getString("outline"))
                     .poster(resultSet.getString("poster"))
-                    .m_or_o(resultSet.getString("m_or_o"))
+                    .m_or_o(resultSet.getString("mo"))
                     .build();
             searchVoListO.add(searchVO);
         }
