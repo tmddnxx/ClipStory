@@ -91,9 +91,14 @@ public enum CommentService {
         log.info("removeComment()...");
 
         int commentNo = Integer.parseInt(request.getParameter("commentNo"));
-
+        int parentNo = Integer.parseInt(request.getParameter("parentNo"));
         int contentNo = commentDAO.getContentNoByComment(commentNo);
-        boolean result = commentDAO.deleteComment(commentNo);
+        boolean result;
+        if(commentDAO.checkHasRe(parentNo) && commentNo == parentNo)
+            result = commentDAO.updateCommentDie(commentNo);
+        else
+            result = commentDAO.deleteComment(commentNo);
+
         int cnt = commentDAO.commentCnt(contentNo);
         BoardDAO boardDAO = new BoardDAO();
         try{
