@@ -52,12 +52,12 @@
                     <c:otherwise>
                         <li class="nav-item" style="padding-top: 7px; color: white;">${loginInfo.nickName} 님</li>
                         <li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/modify.member?action=modify&memberId=${loginInfo.memberId}">회원 수정</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/remove.member?action=remove&memberId=${loginInfo.memberId}">회원 탈퇴</a></li>
                     </c:otherwise>
                 </c:choose>
                 <li class="nav-item"><a class="nav-link" href="/list.movie?action=list">영화</a></li>
                 <li class="nav-item"><a class="nav-link" href="/list.board?action=list">게시판</a></li>
+                <li class="nav-item"><a class="nav-link" href="/search.search">검색</a></li>
+                <li class="nav-item"><a class="nav-link" href="/list.mypage?action=list">마이페이지</a></li>
             </ul>
         </div>
     </div>

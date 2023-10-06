@@ -97,7 +97,7 @@ public class CommentDAO {
     }
 
     public int commentCnt(int contentNo) throws SQLException, ClassNotFoundException {
-        String sql = "SELECT count(*) as cnt from comment where contentNo = ?";
+        String sql = "SELECT count(*) as cnt from comment where contentNo = ? and memberId != ''";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, contentNo);
@@ -106,5 +106,30 @@ public class CommentDAO {
         return resultSet.getInt("cnt");
     }
 
+    public boolean checkHasRe(int parentNo) throws SQLException{
+        String sql = "SELECT count(*) as cnt from comment where parentNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, parentNo);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        int cnt = resultSet.getInt("cnt");
+        if(cnt != 1)
+            return true;
+        return false;
 
+    }
+
+
+    public boolean updateCommentDie(int commentNo) throws SQLException{
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        String sql = "UPDATE `comment` set nickName = ?, comment = ?, memberId = ? where commentNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "");
+        preparedStatement.setString(2, "삭제된 댓글입니다");
+        preparedStatement.setString(3, "");
+        preparedStatement.setInt(4, commentNo);
+
+        return preparedStatement.executeUpdate() == 1;
+    }
 }

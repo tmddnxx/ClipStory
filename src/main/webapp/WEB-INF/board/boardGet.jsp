@@ -73,17 +73,22 @@
             tagUl.innerHTML = '';
             for (const item of items){
                 const tagLi = document.createElement('li');
-                if(item.commentNo !== item.parentNo)
-                    tagLi.innerHTML = '➥  '
-                tagLi.innerHTML += item.comment + ' | ' + item.nickName + ' | ' + item.addDate;
-                if (item.isLogin === true) {
-                    tagLi.innerHTML +=
-                        ' <span class="btn btn-danger" onclick="goCommentDelete(\'' + item.commentNo + '\');">삭제</span>';
+                if(item.memberId !== "" && item.nickName !== ""){
+                    if(item.commentNo !== item.parentNo)
+                        tagLi.innerHTML = '➥  '
+                    tagLi.innerHTML += item.comment + ' | ' + item.nickName + ' | ' + item.addDate;
+                    if (item.isLogin === true) {
+                        tagLi.innerHTML +=
+                            ' <span class="btn btn-danger" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>';
+                    }
+                    if(item.commentNo === item.parentNo) {
+                        tagLi.innerHTML += '<c:if test="${loginInfo != null}">' +
+                            ' <span class="btn btn-primary" onclick="displayCommentRe(this);">답글</span>' +
+                            '</c:if>';
+                    }
                 }
-                if(item.commentNo === item.parentNo) {
-                    tagLi.innerHTML += '<c:if test="${loginInfo != null}">' +
-                        ' <span class="btn btn-primary" onclick="displayCommentRe(this);">답글</span>' +
-                        '</c:if>';
+                else{
+                    tagLi.innerHTML += item.comment;
                 }
 
                 tagLi.innerHTML += '<form name="frmCommentRe" method="post" style="display: none">' +
@@ -155,9 +160,9 @@
                 }
             }
         }
-        const goCommentDelete = function(commentNo) {
+        const goCommentDelete = function(commentNo,parentNo) {
             if (confirm("삭제하시겠습니까?")) {
-                xhr.open('POST', '/comment/remove?commentNo=' + commentNo);
+                xhr.open('POST', '/comment/remove?commentNo=' + commentNo + '&parentNo=' + parentNo);
                 xhr.send();
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState !== XMLHttpRequest.DONE) return;
@@ -192,7 +197,7 @@
             if(boardDTO.getMemberId().equals(sessionId)){ // 본인이 작성한 글일 시 수정/ 삭제 버튼 활성화
         %>
         <a href="modify.board?action=modify&contentNo=${boardDTO.contentNo}" class="btn btn-primary" style="text-align: right">수정</a>
-        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" class="btn btn-danger remove">삭제 </a>
+        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" onclick="return confirm('정말 삭제하시겠습니까?');" class="btn btn-danger remove">삭제 </a>
         <%
             }
         %>
@@ -253,16 +258,6 @@
             });
         </script>
     </c:if>
-    <script>
-        document.addEventListener('DOMContentLoaded', function (){
-            const removebtn = document.querySelector('.remove');
-            removebtn.addEventListener('click', function (e){
-                if(!confirm("정말 삭제하시겠습니까?")){
-                    e.preventDefault()
-                }
-            })
-        })
-    </script>
 </div>
 </body>
 </html>
