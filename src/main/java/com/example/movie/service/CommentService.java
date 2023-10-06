@@ -21,47 +21,51 @@ public enum CommentService {
 
     public boolean addComment(HttpServletRequest req) throws Exception {
         log.info("addComment()..");
-
+        int contentNo = Integer.parseInt(req.getParameter("contentNo"));
         MemberDTO memberDTO= (MemberDTO) req.getSession().getAttribute("loginInfo");
         CommentDTO commentDTO = CommentDTO.builder()
                 .nickName(req.getParameter("nickName"))
                 .comment(req.getParameter("comment"))
                 .memberId(memberDTO.getMemberId())
-                .contentNo(Integer.parseInt(req.getParameter("contentNo")))
+                .contentNo(contentNo)
                 .build();
 
-        int contentNo = Integer.parseInt(req.getParameter("contentNo"));
+        boolean result = commentDAO.insertComment(commentDTO);
+        commentDAO.updateParentNo();
+
+        int cnt = commentDAO.commentCnt(contentNo);
         BoardDAO boardDAO = new BoardDAO();
         try{
-            boardDAO.commentCount(contentNo);
+            boardDAO.updateCnt(contentNo, cnt);
         }catch (Exception e){
             log.error(e.getMessage());
         }
 
-        return commentDAO.insertComment(commentDTO);
+        return result;
     }
 
     public boolean addCommentRe(HttpServletRequest req) throws Exception {
         log.info("addCommentRe()..");
-
+        int contentNo = Integer.parseInt(req.getParameter("contentNo"));
         MemberDTO memberDTO= (MemberDTO) req.getSession().getAttribute("loginInfo");
         CommentDTO commentDTO = CommentDTO.builder()
                 .nickName(req.getParameter("nickName"))
                 .comment(req.getParameter("comment"))
                 .memberId(memberDTO.getMemberId())
-                .contentNo(Integer.parseInt(req.getParameter("contentNo")))
+                .contentNo(contentNo)
                 .parentNo(Integer.parseInt(req.getParameter("parentNo")))
                 .build();
 
-        int contentNo = Integer.parseInt(req.getParameter("contentNo"));
+        boolean result = commentDAO.insertCommentRe(commentDTO);
+        int cnt = commentDAO.commentCnt(contentNo);
         BoardDAO boardDAO = new BoardDAO();
         try{
-            boardDAO.commentCount(contentNo);
+            boardDAO.updateCnt(contentNo, cnt);
         }catch (Exception e){
             log.error(e.getMessage());
         }
 
-        return commentDAO.insertCommentRe(commentDTO);
+        return result;
     }
 
     public List<CommentDTO> getComments(HttpServletRequest req) throws SQLException, ClassNotFoundException {
@@ -83,25 +87,22 @@ public enum CommentService {
         return commentDTOS;
     }
 
-    public boolean removeComment(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+    public boolean removeComment(HttpServletRequest request) throws Exception {
         log.info("removeComment()...");
 
         int commentNo = Integer.parseInt(request.getParameter("commentNo"));
 
-//        int contentNo = Integer.parseInt(request.getParameter("contentNo"));
-//        BoardDAO boardDAO = new BoardDAO();
-//        try{
-//            boardDAO.commentdisCount(contentNo);
-//        }catch (Exception e){
-//            log.error(e.getMessage());
-//        }
+        int contentNo = commentDAO.getContentNoByComment(commentNo);
+        boolean result = commentDAO.deleteComment(commentNo);
+        int cnt = commentDAO.commentCnt(contentNo);
+        BoardDAO boardDAO = new BoardDAO();
+        try{
+            boardDAO.updateCnt(contentNo, cnt);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
 
-        return commentDAO.deleteComment(commentNo);
+        return result;
     }
 
-    public void updateParentNo() throws SQLException, ClassNotFoundException {
-        log.info("service updateParentNo()");
-
-        commentDAO.updateParentNo();
-    }
 }
