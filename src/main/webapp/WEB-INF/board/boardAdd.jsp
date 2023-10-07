@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ko">
 <head>
-    <title>Title</title>
+    <title>글쓰기페이지</title>
 </head>
 <%
   MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
@@ -17,7 +17,7 @@
 %>
 <body>
 <jsp:include page="../header.jsp"/>
-  <div class="card card-body">
+  <div class="card card-body" style="padding-top: 15vh">
     <form method="post" action="./add.board?action=add" class="writeForm">
       <label class="form-label">제목</label>
       <input type="text" name="title" class="form-control">
