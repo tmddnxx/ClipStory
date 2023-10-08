@@ -1,5 +1,3 @@
-<%@ page import="com.example.movie.model.dto.ReviewDTO" %>
-<%@ page import="com.example.movie.model.dao.MovieDAO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,6 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/2404a35405.js" crossorigin="anonymous"></script>
+    <link href="../../css/common.css" rel="stylesheet" type="text/css">
+
     <title>영화 상세 페이지</title>
 </head>
 <body>
@@ -20,7 +20,6 @@
 %>
 <jsp:include page="../header.jsp"/>
 <div class="container w-75 mt-5 mx-auto">
-    <%--    <h2>${movieDTO.movieName}</h2>--%>
     <hr>
     <style>
 
@@ -96,6 +95,33 @@
             }
 
         };
+
+        const goReviewDelete = function (reviewNo) {
+            if (confirm("삭제하시겠습니까?")) {
+                xhr.open('POST', '/review/remove?reviewNo=' + reviewNo);
+                xhr.send();
+
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState !== XMLHttpRequest.DONE) {
+                        return;
+                    }
+                    if (xhr.status === 200) {
+                        console.log(xhr.response);
+                        const json = JSON.parse(xhr.response);
+                        if (json.result === 'true') {
+                            getReviews();
+                        }
+                        else {
+                            alert("삭제에 실패했습니다.");
+                        }
+                    }
+                    else {
+                        console.error('Error', xhr.status, xhr.statusText);
+                    }
+                }
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', function () {
             getReviews();
         });
@@ -129,32 +155,6 @@
             </div>
         </form>
         <script>
-            const goReviewDelete = function (reviewNo) {
-                if (confirm("삭제하시겠습니까?")) {
-                    xhr.open('POST', '/review/remove?reviewNo=' + reviewNo);
-                    xhr.send();
-                    xhr.onreadystatechange = () => {
-                        if (xhr.readyState !== XMLHttpRequest.DONE) {
-                            return;
-                        }
-                        if (xhr.status === 200) {
-                            console.log(xhr.response);
-                            const json = JSON.parse(xhr.response);
-                            if (json.result === 'true') {
-                                getReviews();
-                            }
-                            else {
-                                alert("삭제에 실패했습니다.");
-                            }
-                        }
-                        else {
-                            console.error('Error', xhr.status, xhr.statusText);
-                        }
-                    }
-                }
-            };
-
-
             document.addEventListener('DOMContentLoaded', function () {
                 const xhr = new XMLHttpRequest(); // ajax 작업을 위한 객체 생성
                 const btnReviewSubmit = document.querySelector('#goReviewSubmit'); // 리플 등록 버튼
