@@ -32,36 +32,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">--%>
     <link href="/css/boardCSS/boardList.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
+    <script src="/js/boardJS/boardList.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <title>게시판 목록</title>
 </head>
 <body>
+<div class="wrap">
 <jsp:include page="../header.jsp"/>
-<div class="container w-75 mt-5 mx-auto main">
+    <div class="container w-75 mt-5 mx-auto main">
     <h2>게시판 목록</h2>
-    <hr>
     <ul class="list-group">
         <c:forEach var="boardDTO" items="${boardDTOList}" varStatus="status">
             <%-- 현재시간 , 작성시간 구하기 --%>
             <fmt:parseNumber value="${currentTime.time / (1000*60*60)}" integerOnly="true" var="currentFmtTime" scope="request"/>
             <fmt:parseNumber value="${boardDTO.addDate.time / (1000*60*60)}" integerOnly="true" var="addFmtTime" scope="request"/>
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <li class="list">
                 <p style="text-align: right">
                     <c:if test="${(currentFmtTime - addFmtTime) < 24}"> <%-- 현재시간-작성시간 24시간 미만이면 N표시 뜨게함 --%>
-                        <span style="color: blue; font-weight: bold">N</span>
+                        <span>N</span>
                         <c:if test="${boardDTO.hit > 10}"> <%-- 24시간 미만이고 조회수가 10이상이면 H표시 --%>
-                            <span style="color: red; font-weight: bold">H</span>
+                            <span>H</span>
                         </c:if>
                     </c:if>
-                <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="text-decoration-none">
-                    [<%=(totalRecord--)-(pageNum-1)*limit%>] ${boardDTO.title} (${boardDTO.cnt})<%--( 댓글수 )--%>
-                </a>
+                <div class="first">
+                    <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="text-decoration-none">
+                        [<%=(totalRecord--)-(pageNum-1)*limit%>] ${boardDTO.title} (${boardDTO.cnt})<%--( 댓글수 )--%>
+                    </a>
+                </div>
                 <p>${boardDTO.addDate}</p>
-                <p style="text-align: right">${boardDTO.nickName}</p>
-                <p style="text-align: right">${boardDTO.hit}</p>
+                <p>${boardDTO.nickName}</p>
+                <p>${boardDTO.hit}</p>
             </li>
             <%
                 startNum--;
@@ -80,13 +83,13 @@
         %>
         <c:set var="pageNum" value="<%=pageNum%>" />
         <c:forEach var="i" begin="<%=firstPage%>" end="<%=lastPage%>">
-            <a href="pageNum.board?action=list&pageNum=${i}">
+            <a href="pageNum.board?action=list&pageNum=${i}" class="pager">
                 <c:choose>
                     <c:when test="${pageNum==i}"> <!--현재 페이지이면 볼드처리 -->
-                        <span style="color: #4C5317; font-weight: bold">[${i}]</span>
+                        <span>[${i}]</span>
                     </c:when>
                     <c:otherwise>
-                        <span style="color: #4C5317;">[${i}]</span>
+                        <span>[${i}]</span>
                     </c:otherwise>
                 </c:choose>
             </a>
@@ -121,20 +124,20 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     </c:if>
-    <button class="btn btn-outline-info mb-3" type="button" onclick="location.href='add.board?action=add'">글 쓰기</button>
-    <div align="left">
+    <button class="write-btn" type="button" onclick="location.href='add.board?action=add'">글 쓰기</button>
+    <div class="form-box">
         <form name="frmList" action="./list.board?action=list" method="get">
             <input type="hidden" name="pageNum" value="<%=pageNum%>">
             <input type="hidden" name="num">
             <table>
                 <tr>
-                    <td width="100%" align="left">
+                    <td>
                         <select name="items" class="txt">
                             <option value="title" <% if(items.equals("title")){%>selected<%}%>>제목</option>
                             <option value="content" <% if(items.equals("content")){%>selected<%}%>>내용</option>
                             <option value="nickName" <% if(items.equals("nickName")){%>selected<%}%>>닉네임</option>
                         </select>
-                        <input name="text" type="text" value="<%=text%>"/>
+                        <input name="text" type="text" value="<%=text%>" placeholder="검색어를 입력해주세요"/>
                         <input type="button" id="btn-search" class="btn btn-primary" value="검색"/>
                         <input type="button" id="btn-reset" class="btn btn-secondary" value="취소"/>
                     </td>
@@ -155,36 +158,7 @@
 <%--            </form>--%>
 <%--        </div>--%>
 <%--    </div>--%>
+    </div>
 </div>
 </body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        //페이징 영역의 a태그를 클릭할 때 a 태그의 기능을 막고, 폼을 적용
-        const btnPaging = document.querySelectorAll('.paging a');
-        const frmList = document.querySelector('form[name=frmList]');
-        btnPaging.forEach(btn => {
-            btn.addEventListener('click', function (e){
-                e.preventDefault(); // a링크 막음
-                frmList.pageNum.value = e.target.parentNode.href.split('?')[1].split('&')[1].split('=')[1];
-                frmList.action = 'list.board';
-                console.log(e.target);
-                frmList.submit();
-            }, false);
-        });
-        // 검색 클릭시 검색 조건은 그대로, 1페이지로 이동
-        const  btnSearch = document.querySelector('#btn-search');
-        btnSearch.addEventListener('click', function (){
-            frmList.pageNum.value=1;
-            frmList.submit();
-        });
-
-        const btnReset = document.querySelector('#btn-reset');
-        btnReset.addEventListener('click', function (){
-            frmList.pageNum.value = 1;
-            frmList.items.value = 'subject';
-            frmList.text.value = '';
-            frmList.submit();
-        });
-    });
-</script>
 </html>

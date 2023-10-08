@@ -1,0 +1,92 @@
+.wrap{
+    width: 100%;
+    height: 150vh;
+    background-color: #111;
+}
+.write-content{
+    width: 80%;
+    height: 90vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.title-box{
+    width: 1000px;
+    height: 10vh;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 25px;
+    color: white;
+
+    gap: 10px;
+}
+.title-box input{
+    width: 90%;
+    height: 50px;
+    outline: none;
+}
+.content-box{
+    width: 1000px;
+    height: 60vh;
+    margin-bottom: 250px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-size: 25px;
+    gap: 10px;
+    color: white;
+}
+.content-box textarea{
+    width: 90%;
+    height: 700px;
+    outline: none;
+}
+
+.write-btnbox {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.write-btnbox .write-submit-btn{
+    width: 100px;
+    height: 50px;
+    background-color: red;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.write-btnbox .write-back-btn{
+    width: 120px;
+    height: 50px;
+    background-color: red;
+    border: 2px solid red;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.write-back-btn:hover{
+    background-color: red;
+    color: white;
+}

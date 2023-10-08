@@ -10,6 +10,13 @@
         margin: 0;
         padding: 0;
     }
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    li{
+        list-style: none;
+    }
     .mypage,
     .join,
     .login,
@@ -17,7 +24,6 @@
         color: white;
         font-size: 25px;
     }
-
     .header{
         width: 100%;
         height: 10vh;
@@ -46,14 +52,7 @@
         margin-right: 20px;
         font-size: 20pt;
     }
-    a{
-        text-decoration: none;
-        color: inherit;
-    }
-    li{
-        list-style: none;
 
-    }
     .nickName{
         font-size: 16pt;
     }
@@ -117,4 +116,5 @@
             header.style.opacity = "1";
         }
     });
+
 </script>

@@ -16,20 +16,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-<%--    <script type="text/javascript" charset="UTF-8" src="/js/boardGet.js" defer></script>--%>
+    <link href="/css/boardCSS/boardGet.css" rel="stylesheet">
+    <link href="./css/common.css" rel="stylesheet">
+    <script src="/js/boardJS/boardGet.js" defer></script>
     <title>게시글 상세페이지</title>
 </head>
 <body>
+<div class="wrap">
 <jsp:include page="../header.jsp"/>
-<div class="container w-75 mt-5 mx-auto">
-    <h2 style="text-align: center">${boardDTO.title}</h2>
+<div class="container w-75 mt-5 mx-auto main">
+    <h2>${boardDTO.title}</h2>
     <hr>
-    <h4 class="card-title" style="text-align: right">Date: ${boardDTO.addDate}</h4>
-    <p>조회수 : ${boardDTO.hit}</p>
-    <h4 style="text-align: right">닉네임 : ${boardDTO.nickName}</h4>
-    <div class="card w-75 mx-auto">
-        <div class="card-body">
-            <p class="card-text">Content: ${boardDTO.content}</p>
+    <div class="text-box">
+        <div class="text-box-in">
+        <p>Date: ${boardDTO.addDate}</p>
+        <p>조회수 : ${boardDTO.hit}</p>
+        <p>닉네임 : ${boardDTO.nickName}</p>
+    </div>
+    </div>
+    <div class="content-box">
+        <div class="content-box-inner">
+            <p class="content-text">Content: ${boardDTO.content}</p>
         </div>
     </div>
     <hr>
@@ -42,222 +49,41 @@
         <input type="hidden" name="nickName" value="${loginInfo.nickName}">
         <input type="hidden" name="memberId" value="${loginInfo.memberId}">
     </form>
-    <script>
-        const xhr = new XMLHttpRequest();
-
-        const getComments = function () {
-            const contentNo = document.querySelector('form[name=frmCommentView] input[name=contentNo]').value;
-            xhr.open('GET', '/comment/get?contentNo=' + contentNo);
-            xhr.send();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState !== XMLHttpRequest.DONE) return;
-
-                if (xhr.status === 200) {
-                    console.log(xhr.response);
-                    const json = JSON.parse(xhr.response);
-                    for (let data of json) {
-                        console.log(data);
-                    }
-                    addCommentTag(json);
-                } else {
-                    console.error('Error', xhr.status, xhr.statusText);
-                }
-            }
-        }
-
-        const addCommentTag = function (items){
-            const contentNo = document.querySelector('form[name=frmCommentView] input[name=contentNo]').value;
-            const nickName = document.querySelector('form[name=frmCommentView] input[name=nickName]').value;
-            const memberId = document.querySelector('form[name=frmCommentView] input[name=memberId]').value;
-            const tagUl = document.querySelector('.user-comment-list ul');
-            tagUl.innerHTML = '';
-            for (const item of items){
-                const tagLi = document.createElement('li');
-                if(item.memberId !== "" && item.nickName !== ""){
-                    if(item.commentNo !== item.parentNo)
-                        tagLi.innerHTML = '➥  '
-                    tagLi.innerHTML += item.comment + ' | ' + item.nickName + ' | ' + item.addDate;
-                    if (item.isLogin === true) {
-                        tagLi.innerHTML +=
-                            ' <span class="btn btn-danger" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>';
-                    }
-                    if(item.commentNo === item.parentNo) {
-                        tagLi.innerHTML += '<c:if test="${loginInfo != null}">' +
-                            ' <span class="btn btn-primary" onclick="displayCommentRe(this);">답글</span>' +
-                            '</c:if>';
-                    }
-                }
-                else{
-                    tagLi.innerHTML += item.comment;
-                }
-
-                tagLi.innerHTML += '<form name="frmCommentRe" method="post" style="display: none">' +
-                    '<input type="hidden" name="contentNo" value="' + contentNo + '"/>' +
-                    '<input type="hidden" name="parentNo" value="' + item.commentNo + '"/>' +
-                    '<input type="hidden" name="memberId" value="' + memberId + '"/>' +
-                    '<div class="form-group row">' +
-                    '<input type="text" name="nickName" value="' +  nickName + '" class="form-control" readonly/>' +
-                    '</div>' +
-                    '<div class="form-group row">' +
-                    '<textarea name="comment" class="form-control" cols="50" rows="3"></textarea>' +
-                    '</div>' +
-                    '<div class="form-group row">' +
-                    '<div class="col-sm-4">' +
-                    '<span class="btn btn-primary subcommentRe" onclick="submitCommentRe(this)">등록</span>' +
-                    '</div>' +
-                    '</div>' +
-                    '</form>';
-
-                tagLi.setAttribute('class', 'list-group-item');
-                tagUl.append(tagLi);
-
-            }
-        }
-        const displayCommentRe = function (btn) {
-            const commentReFrm = btn.nextElementSibling;
-            const commentReFrmAll = document.querySelectorAll('form[name=frmCommentRe]');
-            if(commentReFrm.style.display === 'flex'){
-                commentReFrm.style.display = 'none';
-            }
-            else{
-                commentReFrmAll.forEach(function (frm){
-                    frm.style.display = 'none';
-                })
-                commentReFrm.style.display = 'flex';
-            }
-        }
-
-        const submitCommentRe = function (btn){
-            const xhr = new XMLHttpRequest();
-            const commentReFrm = btn.parentNode.parentNode.parentNode;
-            const contentNo = commentReFrm.contentNo.value;
-            const nickName = commentReFrm.nickName.value;
-            const comment = commentReFrm.comment.value;
-            const parentNo = commentReFrm.parentNo.value;
-
-            if(comment.trim() == ""){
-                alert("내용을 입력해주세요");
-                comment.focus();
-                return false;
-            }
-            xhr.open('POST', '/comment/addre?contentNo=' + contentNo + '&nickName=' + nickName + '&comment=' + comment + '&parentNo=' + parentNo);
-            xhr.send();
-            xhr.onreadystatechange = () => {
-                if(xhr.readyState !== XMLHttpRequest.DONE)
-                    return;
-
-                if(xhr.status === 200){
-                    console.log(xhr.response);
-                    const json = JSON.parse(xhr.response);
-                    if (json.result === 'true'){
-                        commentReFrm.comment.value = '';
-                        getComments();
-                    } else {
-                        alert('등록에 실패했습니다.');
-                    }
-                } else {
-                    console.error(xhr.status, xhr.statusText);
-                }
-            }
-        }
-        const goCommentDelete = function(commentNo,parentNo) {
-            if (confirm("삭제하시겠습니까?")) {
-                xhr.open('POST', '/comment/remove?commentNo=' + commentNo + '&parentNo=' + parentNo);
-                xhr.send();
-                xhr.onreadystatechange = () => {
-                    if (xhr.readyState !== XMLHttpRequest.DONE) return;
-
-                    if (xhr.status === 200) {
-                        console.log(xhr.response);
-                        const json = JSON.parse(xhr.response);
-                        if (json.result === 'true'){
-                            getComments();
-                        }
-                        else {
-                            alert("삭제에 실패했습니다.");
-                        }
-                    } else {
-                        console.error('Error', xhr.status, xhr.statusText);
-                    }
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            getComments();
-        });
-    </script>
     <div>
         <form name="frmView" method="post">
             <input type="hidden" name="pageNum" value="<%=pageNum%>">
             <input type="hidden" name="num" value="<%=boardDTO.getContentNo()%>">
         </form>
-        <button type="button" class="btn btn-success mt-3" onclick=window.location.href="list.board">뒤로가기</button>
-        <%
-            if(boardDTO.getMemberId().equals(sessionId)){ // 본인이 작성한 글일 시 수정/ 삭제 버튼 활성화
-        %>
-        <a href="modify.board?action=modify&contentNo=${boardDTO.contentNo}" class="btn btn-primary" style="text-align: right">수정</a>
-        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" onclick="return confirm('정말 삭제하시겠습니까?');" class="btn btn-danger remove">삭제 </a>
-        <%
-            }
-        %>
+        <div class="btn-box">
+            <%
+                if(boardDTO.getMemberId().equals(sessionId)){ // 본인이 작성한 글일 시 수정/ 삭제 버튼 활성화
+            %>
+            <a href="modify.board?action=modify&contentNo=${boardDTO.contentNo}" class="modify-btn" >수정</a>
+            <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}" onclick="return confirm('정말 삭제하시겠습니까?');" class="remove-btn">삭제 </a>
+            <%
+                }
+            %>
+            <button type="button" class="back-btn" onclick=window.location.href="list.board">뒤로가기</button>
+        </div>
     </div>
     <%-- 댓글창 --%>
     <c:if test="${loginInfo != null}">
-        <form name="frmComment" method="post">
-            <input type="hidden" name="contentNo" value="${boardDTO.contentNo}">
-            <div class="form-group row">
-                <input type="text" name="nickName" value="${loginInfo.nickName}" class="form-control" readonly>
-            </div>
-            <div class="form-group row">
-                <textarea name="comment" class="form-control" cols="50" rows="3"></textarea>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-4">
-                    <span class="btn btn-primary" id="goCommentSubmit">등록</span>
+            <form name="frmComment" method="post" class="comment-form">
+                <input type="hidden" name="contentNo" value="${boardDTO.contentNo}">
+                <div class="comment-nick">
+                    <input type="text" name="nickName" value="${loginInfo.nickName}" readonly>
                 </div>
-            </div>
-        </form>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const xhr = new XMLHttpRequest();
-                const btnCommentSubmit = document.querySelector('#goCommentSubmit');
-                const frmComment = document.querySelector('form[name=frmComment]');
-                const commentbox = document.querySelector('textarea[name=comment]');
-
-                btnCommentSubmit.addEventListener('click', function(e) {
-                    if(commentbox.value.trim() == ""){
-                        alert("내용을 입력해주세요.");
-                        commentbox.focus();
-                        return false;
-                    }
-
-                    const contentNo = frmComment.contentNo.value;
-                    const nickName = frmComment.nickName.value;
-                    const comment = frmComment.comment.value;
-                    xhr.open('POST', '/comment/add?contentNo=' + contentNo + '&nickName=' + nickName + '&comment=' + comment);
-                    xhr.send();
-                    xhr.onreadystatechange = () => {
-                        if(xhr.readyState !== XMLHttpRequest.DONE)
-                            return;
-
-                        if(xhr.status === 200){
-                            console.log(xhr.response);
-                            const json = JSON.parse(xhr.response);
-                            if (json.result === 'true'){
-                                frmComment.comment.value = '';
-                                getComments();
-                            } else {
-                                alert('등록에 실패했습니다.');
-                            }
-                        } else {
-                            console.error(xhr.status, xhr.statusText);
-                        }
-                    }
-                })
-            });
-        </script>
+                <div class="comment-content">
+                    <textarea name="comment" class="form-control" cols="50" rows="3"></textarea>
+                </div>
+                <div class="comment-submit">
+                    <div class="col-sm-4">
+                        <span class="btn btn-submit" id="goCommentSubmit">등록</span>
+                    </div>
+                </div>
+            </form>
     </c:if>
+</div>
 </div>
 </body>
 </html>

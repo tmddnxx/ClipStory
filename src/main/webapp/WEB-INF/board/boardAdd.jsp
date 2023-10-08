@@ -2,6 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ko">
 <head>
+  <link href="/css/boardCSS/boardAdd.css" rel="stylesheet">
+  <link href="./css/common.css" rel="stylesheet">
+  <script src="/js/boardJS/boardAdd.js" defer></script>
     <title>글쓰기페이지</title>
 </head>
 <%
@@ -16,38 +19,26 @@
   }
 %>
 <body>
+<div class="wrap">
 <jsp:include page="../header.jsp"/>
-  <div class="card card-body" style="padding-top: 15vh">
+  <div class="write-content" style="padding-top: 15vh">
     <form method="post" action="./add.board?action=add" class="writeForm">
-      <label class="form-label">제목</label>
-      <input type="text" name="title" class="form-control">
-      <label class="form-label">내용</label>
-      <textarea cols="50" rows="5" name="content" class="form-control"></textarea>
+      <div class="title-box">
+        <label class="content-title-in">제목</label>
+        <input type="text" name="title" class="form-control">
+      </div>
+      <div class="content-box">
+        <label class="form-label">내용</label>
+        <textarea cols="50" rows="5" name="content" class="form-control"></textarea>
+      </div>
       <input type="text" name="memberId" class="form-control" value="${loginInfo.memberId}" hidden>
       <input type="text" name="nickName" class="form-control" value="${loginInfo.nickName}" hidden>
-      <button type="submit" class="btn btn-success mt-3">저장</button>
-      <button type="button" class="btn btn-success mt-3" onclick=window.location.href="list.board">뒤로가기</button>
+      <div class="write-btnbox">
+        <button type="submit" class="write-submit-btn">저장</button>
+        <a href="list.board" class="write-back-btn" onclick="return confirm('입력하신 내용이 저장되지 않았습니다.');">뒤로가기</a>
+      </div>
     </form>
   </div>
+</div>
 </body>
-<script>
-  document.addEventListener('DOMContentLoaded', function (){
-    const titlebox = document.querySelector('input[name=title]');
-    const contentbox = document.querySelector('textarea[name=content]');
-    const subbtn = document.querySelector('button[type=submit]');
-
-    subbtn.addEventListener('click', function (e){
-      if(titlebox.value.trim() ==""){
-        alert("제목을 입력해주세요");
-        titlebox.focus();
-        e.preventDefault();
-      }
-      else if(contentbox.value.trim() == ""){
-        alert("내용을 입력해주세요");
-        contentbox.focus();
-        e.preventDefault()
-      }
-    })
-  })
-</script>
 </html>
