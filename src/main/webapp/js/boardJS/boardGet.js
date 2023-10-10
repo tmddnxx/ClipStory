@@ -30,16 +30,26 @@ const addCommentTag = function (items){
     for (const item of items){
         const tagLi = document.createElement('li');
         if(item.memberId !== "" && item.nickName !== ""){
-            if(item.commentNo !== item.parentNo)
-                tagLi.innerHTML = '➥  '
-            tagLi.innerHTML += item.comment + ' | ' + item.nickName + ' | ' + item.addDate;
+            if(item.commentNo !== item.parentNo) {
+                tagLi.innerHTML = '<div><span>➥</span>' +
+                            '<div><p class="comment-writer">' + item.nickName + ' (' + item.addDate + ')</p>' +
+                            '<p class="comment-content">' + item.comment + '</p></div></div>';
+            }
+            else {
+                tagLi.innerHTML = '<div>' +
+                            '<div><p class="comment-writer">' + item.nickName + ' (' + item.addDate + ')</p>' +
+                            '<p class="comment-content">' + item.comment + '</p></div></div>';
+            }
+            // tagLi.innerHTML += '<p class="comment-writer">' + item.nickName + ' (' + item.addDate + ')</p>' +
+            //                     '<p class="comment-content">' + item.comment + '</p></div>';
+            // tagLi.innerHTML += item.comment + ' | ' + item.nickName + ' | ' + item.addDate;
             if (item.isLogin === true) {
                 tagLi.innerHTML +=
-                    ' <span class="btn btn-danger" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>';
+                    ' <span class="delete-span-btn" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>';
             }
             if(item.commentNo === item.parentNo) {
                 if(memberId !== "")
-                    tagLi.innerHTML += '<span class="btn btn-primary" onclick="displayCommentRe(this);">답글</span>';
+                    tagLi.innerHTML += '<span class="reply-span-btn" onclick="displayCommentRe(this);">답글</span>';
             }
         }
         else{
