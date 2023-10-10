@@ -37,7 +37,7 @@ h2{
     font-size: 18px;
     padding-left: 10px;
     padding-top: 8px;
-    cursor: pointer;
+    outline: none;
 }
 .input-container > input::placeholder{
     color: #565151;
