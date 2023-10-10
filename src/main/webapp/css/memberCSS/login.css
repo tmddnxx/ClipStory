@@ -1,6 +1,7 @@
 body{
     display: block;
     margin: auto;
+    width: 100%;
     height: 100%;
     background-color: black;
 }
@@ -9,14 +10,26 @@ body{
     flex-direction: column;
     justify-content: space-between;
     margin: 0 auto;
-    padding-top: 200px;
+    padding-top: 250px;
     width: 100%;
     height: 100%;
 }
-.top-container{
-    margin-bottom: 30px;
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
-h2{
+section{
+    width: 40%;
+}
+.top-container{
+    margin-bottom: 20px;
+    height: 50px;
+}
+.head-title{
+    font-size: 30px;
+    font-weight: bold;
     color: white;
     text-align: center;
     margin: 10px;
@@ -27,8 +40,8 @@ h2{
     align-items: center;
 }
 .input-container > input{
-    width: 330px;
-    height: 40px;
+    width: 90%;
+    height: 60px;
     border-radius: 5px;
     background-color: #242222;
     margin-bottom: 10px;
@@ -41,14 +54,14 @@ h2{
 }
 .input-container > input::placeholder{
     color: #565151;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .input-container > span{
-    width: 320px;
+    width: 90%;
     color: red;
     text-align: left;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -76,12 +89,17 @@ label > span{
 button{
     background-color: #f33e3e;
     color: white;
-    font-size: 17px;
+    font-size: 23px;
     font-weight: 900;
-    width: 350px;
-    height: 60px;
+    width: 90%;
+    height: 80px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+button:hover{
+    background-color: #d54949;
+
 }
 
 .register-container{
@@ -91,13 +109,13 @@ button{
 }
 span{
     color: #6e6e6e;
-    font-size: 15px;
+    font-size: 20px;
     margin-right: 20px;
 }
 .register-link{
     text-decoration-line: none;
     color: #9a9090;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .register-link:hover{

@@ -38,9 +38,8 @@ const addCommentTag = function (items){
                     ' <span class="btn btn-danger" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>';
             }
             if(item.commentNo === item.parentNo) {
-                tagLi.innerHTML += '<c:if test="${loginInfo != null}">' +
-                    ' <span class="btn btn-primary" onclick="displayCommentRe(this);">답글</span>' +
-                    '</c:if>';
+                if(memberId !== "")
+                    tagLi.innerHTML += '<span class="btn btn-primary" onclick="displayCommentRe(this);">답글</span>';
             }
         }
         else{
@@ -74,7 +73,7 @@ getComments(); // 댓글리스트
 
 const displayCommentRe = function (btn) {
     console.log("답글누름");
-    const commentReFrm = btn.parentElement.nextElementSibling;
+    const commentReFrm = btn.nextElementSibling;
     console.log(commentReFrm);
     const commentReFrmAll = document.querySelectorAll('form[name=frmCommentRe]');
     if(commentReFrm.style.display === 'flex'){

@@ -44,7 +44,7 @@
       <div class="login-container">
         <!--       맨 위             -->
         <div class="top-container">
-          <h2>로그인</h2>
+          <h2 class="head-title">로그인</h2>
         </div>
         <!--       아이디 비밀번호             -->
         <form class="frmlogin" action="/login" method="post">
