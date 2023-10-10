@@ -32,14 +32,12 @@ section{
     margin: 1.3rem 0;
 }
 
-#register-title > span{
+#register-title > h3{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
     text-align: center;
-    margin: 0.3rem;
-}
-
-#register-title > span:last-child{
-    font-size: 1.3rem;
-    color: #ABABAB;
+    margin: 10px;
 }
 
 
@@ -65,10 +63,12 @@ input{
     font-size: 1.1rem;
     color: #ABABABAA;
 }
-.register-input > span:last-child{
+
+.register-input > p{
     font-size: 13px;
     font-weight: bold;
     color: #ec4646;
+    margin-top: 10px;
 }
 
 .register-input-div{

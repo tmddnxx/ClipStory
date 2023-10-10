@@ -64,6 +64,9 @@ li{
 .main-inner{
     text-align: center;
 }
+.main-inner > a{
+    text-decoration: none;
+}
 .logo{
     color: red;
     font-weight: bold;
