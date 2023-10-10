@@ -1,15 +1,14 @@
 package com.example.movie.controller;
 
-import com.example.movie.model.dto.MemberDTO;
 import com.example.movie.service.MemberService;
 import lombok.extern.log4j.Log4j2;
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("*.member")
@@ -31,15 +30,6 @@ public class MemberController extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/member/register.jsp").forward(req,resp);
                 break;
             case "modify":
-                MemberDTO memberDTO = null;
-                try {
-                    memberDTO = memberService.getWithMemberId(req.getParameter("memberId"));
-                } catch (Exception e) {
-                    log.info("수정 get 컨트롤러 이상 : " + e.getMessage());
-                }
-
-                HttpSession session = req.getSession();
-                session.setAttribute("loginInfo", memberDTO);
                 req.getRequestDispatcher("/WEB-INF/member/modify.jsp").forward(req,resp);
                 break;
             case "remove":
@@ -82,10 +72,52 @@ public class MemberController extends HttpServlet {
                 } catch (Exception e) {
                     log.info("수정 post 컨트롤러 이상 : " + e.getMessage());
                 }
-                resp.sendRedirect("/list.movie?action=list");
+                resp.sendRedirect("/list.mypage?action=list");
                 break;
             case "remove":
-                resp.sendRedirect("/list.movie?action=list");
+                resp.sendRedirect("/main.movie?action=main");
+                break;
+            case "idCheck":
+                try {
+                    JSONObject jsonObject = new JSONObject();
+
+                    if (memberService.idCheck(req)) {
+                        jsonObject.put("result", "true");
+                    } else {
+                        jsonObject.put("result", "false");
+                    }
+                    resp.getWriter().println(jsonObject.toJSONString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "nameCheck":
+                try {
+                    JSONObject jsonObject = new JSONObject();
+
+                    if (memberService.nameCheck(req)) {
+                        jsonObject.put("result", "true");
+                    } else {
+                        jsonObject.put("result", "false");
+                    }
+                    resp.getWriter().println(jsonObject.toJSONString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "nickCheck":
+                try {
+                    JSONObject jsonObject = new JSONObject();
+
+                    if (memberService.nickCheck(req)) {
+                        jsonObject.put("result", "true");
+                    } else {
+                        jsonObject.put("result", "false");
+                    }
+                    resp.getWriter().println(jsonObject.toJSONString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 break;
         }
     }

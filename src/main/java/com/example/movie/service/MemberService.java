@@ -64,4 +64,20 @@ public enum MemberService {
         String memberId = req.getParameter("memberId");
         memberDAO.removeMember(memberId);
     }
+
+    public boolean idCheck(HttpServletRequest req) throws Exception {
+        String memberId = req.getParameter("memberId");
+        return memberDAO.idCheck(memberId);
+    }
+
+    public boolean nameCheck(HttpServletRequest req) throws Exception {
+        String name = req.getParameter("name");
+        log.info("name : " + name);
+        return memberDAO.nameCheck(name);
+    }
+
+    public boolean nickCheck(HttpServletRequest req) throws Exception {
+        String nickName = req.getParameter("nickName");
+        return memberDAO.nickCheck(nickName);
+    }
 }

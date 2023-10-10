@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    position: relative;
+    width: 100vw;
+    height: 900px;
+    background: #000000;
+    color: white;
+    font-size: 1.6rem;
+
+    font-family: 'Gothic A1', sans-serif;
+}
+main{
+    padding-top: 200px;
+    display: flex;
+    justify-content: center;
+}
+section{
+    width: 35rem;
+    margin: 0 auto;
+}
+#register-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 2.6rem;
+    margin: 1.3rem 0;
+}
+
+#register-title > span{
+    text-align: center;
+    margin: 0.3rem;
+}
+
+#register-title > span:last-child{
+    font-size: 1.3rem;
+    color: #ABABAB;
+}
+
+
+
+input{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: #323232;
+    padding: 1.3rem 1.8rem;
+    margin: 0.3rem 0;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    color: whitesmoke;
+}
+
+.register-input{
+    margin: 1.5rem 0;
+}
+
+.register-input > span{
+    font-size: 1.1rem;
+    color: #ABABABAA;
+}
+.register-input > span:last-child{
+    font-size: 13px;
+    font-weight: bold;
+    color: #ec4646;
+}
+
+.register-input-div{
+    position: relative;
+}
+
+.register-input-div i{
+    position: absolute;
+    display: inline-block;
+    top: 40%;
+    right: 1rem;
+}
+
+#register-buttons{
+    display: flex;
+    margin: 0.3rem 0;
+    padding: 0.3rem;
+}
+
+#register-buttons > input {
+    margin: 0.5rem;
+    font-weight: bold;
+}
+
+#register-buttons > input:hover {
+    cursor: pointer;
+    margin: 0.5rem;
+    color: black;
+}
+
+#register-buttons > input:hover:first-child {
+    background-color: whitesmoke;
+}
+
+#register-buttons > input:hover:last-child {
+    background-color: #F93D3D;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

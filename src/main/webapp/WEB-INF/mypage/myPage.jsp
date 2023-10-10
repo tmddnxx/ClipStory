@@ -41,6 +41,7 @@
   <h3 class="display-5"> <%-- 프로필 --%>
     <a class="nav-link" href="/modify.member?action=modify&memberId=${loginInfo.memberId}">프로필</a>
   </h3>
+  <a href="/modify.member?action=modify"><input type="button" value="회원수정"></a>
   <form name="frmMypage" action="/modify.mypage?action=mypage" method="post">
     <div class="form-group row">
       <label class="col-sm-2">아이디</label>

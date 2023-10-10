@@ -111,4 +111,43 @@ public class MemberDAO {
         preparedStatement.setString(1,memberId);
         preparedStatement.executeUpdate();
     }
+
+    public boolean idCheck(String memberId) throws Exception {
+        String sql = "SELECT * FROM `member` where memberId = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,memberId);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next())
+            return true;
+        else
+            return false;
+
+    }
+
+    public boolean nameCheck(String name) throws Exception{
+        String sql = "SELECT * FROM `member` where name = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,name);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next())
+            return true;
+        else
+            return false;
+    }
+    public boolean nickCheck(String nickName) throws Exception{
+        String sql = "SELECT * FROM `member` where nickName = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,nickName);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next())
+            return true;
+        else
+            return false;
+    }
 }
