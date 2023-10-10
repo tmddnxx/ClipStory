@@ -5,22 +5,27 @@
 </head>
 <style>
     .footer{
-        margin: 50px 50px 50px 20px;
+        background-color: black;
+        width: 100%;
     }
     .inner{
         display: flex;
         justify-content: space-evenly;
         height: 300px;
         line-height: 40px;
-        margin-top: 30px
+        margin-top: 30px;
+        color: white;
     }
     .QnA{
-        background-color: black;
-        color: white;
+        background-color: white;
+        color: black;
         font-weight: bold;
     }
     .footer-info{
-       display: flex
+       display: flex;
+        color: white;
+        margin-left: 50px;
+        margin-top: 20px;
     }
     .info-inner{
       display: flex;
@@ -35,6 +40,11 @@
     img {
         width: 40px;
         height: 40px;
+    }
+    .com-info{
+        color: white;
+        margin-left: 50px;
+        padding-bottom: 20px;
     }
 </style>
 <body>
@@ -80,7 +90,7 @@
                   <a href="#" class="inner-text"><img src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMDlfMjIg/MDAxNTc4NTQ0MTMwODI3.W5pMwGQb22xW8hYGIBgF4Y2DheotJCj0dc_MZLiVhGQg.4I9ekROurF7sjus0WC1GbV-B4N_Qtrm3vIdaFoolBYsg.PNG.kmj070444/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1_%ED%88%AC%EB%AA%85_png.png?type=w800" alt="kakao"></a>
               </div>
           </div>
-          <div>
+          <div class="com-info">
               <br><p>MOP 주식회사 · 대표 MOP 사업자등록번호 : 123-456-7890 사업자정보확인통신판매업 : 제 1234-대구-4567호
               <br>사업장소재지 : 대구광역시 중구 ooo-ooo ooo호 </p>
           </div>

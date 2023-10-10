@@ -12,7 +12,7 @@
   <link href="./css/common.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../../inc/header.jsp"/>
 <%--<div class="jumbotron">--%>
 <%--  <div class="container">--%>
 <%--    <h1 class="display-3">로그인</h1>--%>

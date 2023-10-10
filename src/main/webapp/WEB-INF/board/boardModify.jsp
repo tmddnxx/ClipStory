@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="wrap">
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../../inc/header.jsp"/>
 <div class="main">
   <h3 id="title">게시물 수정</h3>
   <hr>

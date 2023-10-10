@@ -10,7 +10,7 @@
   <title>회원 수정</title>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../../inc/header.jsp"/>
 
 <%--<div class="container">--%>
 <%--  <form name="frmMember" action="/modify.member?action=modify" method="post">--%>

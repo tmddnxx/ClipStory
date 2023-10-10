@@ -41,7 +41,7 @@
 </head>
 <body>
 <div class="wrap">
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../../inc/header.jsp"/>
     <div class="container w-75 mt-5 mx-auto main">
     <h2>게시판 목록</h2>
     <ul class="list-group">
@@ -160,5 +160,6 @@
 <%--    </div>--%>
     </div>
 </div>
+<jsp:include page="../../inc/footer.jsp"/>
 </body>
 </html>

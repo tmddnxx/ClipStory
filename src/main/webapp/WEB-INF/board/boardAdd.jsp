@@ -20,7 +20,7 @@
 %>
 <body>
 <div class="wrap">
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../../inc/header.jsp"/>
   <div class="write-content" style="padding-top: 15vh">
     <form method="post" action="./add.board?action=add" class="writeForm">
       <div class="title-box">
