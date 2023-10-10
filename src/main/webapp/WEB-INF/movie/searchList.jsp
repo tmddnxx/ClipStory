@@ -2,20 +2,22 @@
 <%@ page import="com.example.movie.model.dto.SearchVO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-    List<SearchVO> searchVOList = (List) request.getAttribute("searchVOList");
-
-    String items = request.getParameter("items") != null ? request.getParameter("items") : "title";
-    String text = request.getParameter("text") != null ? request.getParameter("text") : "";
-
-%>
-
 <html>
-<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../../js/movieJS/searchList.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="../../css/movieCSS/searchList.css" rel="stylesheet" type="text/css">
+    <head>
     <title>Title</title>
 </head>
+<%
+    List<SearchVO> searchVOList = (List) request.getAttribute("searchVOList");
+    String items = request.getParameter("items") != null ? request.getParameter("items") : "title";
+    String text = request.getParameter("text") != null ? request.getParameter("text") : "";
+%>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="inc/movieMainHeader.jsp"/>
 <a href="javascript:history.back()" class="btn btn-primary"><< back</a>
 <div class="container w-75 mt-5 mx-auto">
     <h2>검색 목록</h2>
@@ -82,31 +84,6 @@
     </ul>
     </div>
 </div>
+<jsp:include page="inc/movieFooter.jsp"/>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function (){
-        const allbtn = document.querySelector('.allBtn');
-        const boxofficebtn = document.querySelector('.boxofficeBtn');
-        const ottbtn = document.querySelector('.ottBtn');
-        const allListBox = document.querySelector('.allListBox');
-        const boxofficeBox = document.querySelector('.boxofficeBox');
-        const ottBox = document.querySelector('.ottBox');
-
-        allbtn.addEventListener('click', function (){
-            allListBox.style.display = 'block';
-            boxofficeBox.style.display = 'none';
-            ottBox.style.display = 'none';
-        })
-        boxofficebtn.addEventListener('click', function (){
-            boxofficeBox.style.display = 'block';
-            allListBox.style.display = 'none';
-            ottBox.style.display = 'none';
-        })
-        ottbtn.addEventListener('click', function (){
-            ottBox.style.display = 'block';
-            boxofficeBox.style.display = 'none';
-            allListBox.style.display = 'none';
-        })
-    })
-</script>
 </html>

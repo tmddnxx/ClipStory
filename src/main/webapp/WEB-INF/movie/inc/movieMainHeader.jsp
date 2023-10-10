@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://kit.fontawesome.com/e83b9315c8.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<%--font-family: 'Caprasimo', cursive;--%>
-<%--font-family: 'Noto Sans KR', sans-serif;--%>
-<%--font-family: 'Righteous', cursive;--%>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Righteous&display=swap');
   *{
@@ -36,7 +33,7 @@
     height: 10vh;
     color: white;
     padding: 1rem;
-
+    z-index: 100;
   }
 
   .top-list{
@@ -44,13 +41,13 @@
     justify-content:space-between;
     align-items: center;
   }
-  .nav-link{
+  .goContent{
     margin-right: 30px;
     font-size: 20pt;
   }
 
   .nickName{
-    font-size: 16pt;
+    font-size: 14pt;
   }
   .top-inner{
     display: flex;
@@ -93,15 +90,15 @@
     </div>
     <div class="top-inner">
       <ul class="top-list">
-        <li class="nav-item"><a class="nav-link" href="/list.movie?action=list">영화</a></li>
-        <li class="nav-item"><a class="nav-link" href="/list.board?action=list">게시판</a></li>
+        <li class="content"><a class="goContent" href="/list.movie?action=list">영화</a></li>
+        <li class="content"><a class="goContent" href="/list.board?action=list">게시판</a></li>
         <c:choose>
           <c:when test="${empty loginInfo}">
             <li class="nav-item"><a class="nav-link" href="/login"><i class="fa-solid fa-arrow-right-to-bracket login"></i></a></li>
             <li class="nav-item"><a class="nav-link" href="/register.member?action=register"><i class="fa-solid fa-user-plus join"></i></a></li>
           </c:when>
           <c:otherwise>
-            <li class="nav-item nickName">${loginInfo.nickName} 님</li>
+            <li class="nav-item nickName">[${loginInfo.nickName} 님]</li>
             <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket logout"></i></a></li>
           </c:otherwise>
         </c:choose>
@@ -120,5 +117,4 @@
         $("#header").addClass("deactive");
       }
     });
-
 </script>

@@ -1,0 +1,99 @@
+.outerDiv {
+    z-index: -3;
+    background-image: url("../../css/movieCSS/img/img1234.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.blurDiv {
+    z-index: -2;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(80px);
+}
+
+.movielike {
+    text-align: right;
+    color: red;
+}
+
+.card-title {
+    font-size: 15pt;
+
+}
+
+/*영화 세부 내용*/
+.movieDetail {
+    z-index: -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+.movie-info {
+    margin-left: 100px;
+    margin-top: 200px;
+    width: 100%;
+    height: 100%;
+}
+.contentDetail {
+    z-index: 0;
+    position: relative;
+    top: -70px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-image: linear-gradient(180deg, transparent, #111111 10%);
+    align-items: center;
+}
+.card-body {
+    color: white;
+    background: rgba(0,0,0,0.3);
+    margin-right: 100px;
+}
+
+/* 주요 정보 */
+.mainInfo {
+    margin-top: 100px;
+    text-align: center;
+    color: white;
+}
+.infoTitle{
+    color: white;
+    font-size: 15pt;
+}
+/* 출연/제작 */
+.castInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 2000px;
+    max-height: 100%;
+    padding-left: 200px;
+}
+.castPhoto {
+    width: 200px;
+    height: 200px;
+}
+/* 미디어(예고편, 포토) */
+.media {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 2000px;
+    max-height: 100%;
+    padding-left: 200px;
+}
+.mediaPhoto {
+    width: 250px;
+    height: 250px;
+}
+
+.goMain {
+    z-index: 0;
+    position: relative;
+    top: -70px;
+    background-image: linear-gradient(0deg, transparent, #111111 90%);
+}

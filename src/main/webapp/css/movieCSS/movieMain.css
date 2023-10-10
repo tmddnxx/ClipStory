@@ -1,0 +1,107 @@
+.outerDiv {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    height: 100%;
+}
+
+.movieSection {
+    width: 100%;
+    height: 70vh;
+    background-image: url("https://image.tving.com/upload/fe/highlight/2023/1006/20231006140815banner_image_url_u.jpg/dims/resize/F_webp,1920")
+                      ,linear-gradient(0deg,transparent,black);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: -1;
+    position: relative;
+}
+.ottSection {
+    position: relative;
+    top: -100px;
+    width: 100%;
+    height: 70vh;
+    background-image: url("https://image.tving.com/upload/fe/highlight/2023/1006/20231006140815banner_image_url_u.jpg/dims/resize/F_webp,1920")
+                      ,linear-gradient(0deg,transparent,black);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.searchSector {
+    width: 700px!important;
+    display: flex;
+    justify-content: center;
+}
+
+.searchList {
+    position: relative;
+    top: -70px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(to top, transparent, #111111 5%);
+}
+
+/*.contentSectorMovie {*/
+/*    position: relative;*/
+/*    top: -20px;*/
+/*    height: 48px;*/
+/*    font-size: 20px;*/
+/*    font-style: italic;*/
+/*    background-image: linear-gradient(180deg, transparent, #111111 30%);*/
+/*    z-index: 0;*/
+/*}*/
+
+/*.contentSectorOtt {*/
+/*    font-size: 20px;*/
+/*    font-style: italic;*/
+/*    background: #111111;*/
+/*}*/
+
+.movieList {
+    position: relative;
+    top: -70px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 3600px;
+    max-height: 100%;
+    padding-left: 130px;
+    z-index: 0;
+    background-image: linear-gradient(180deg, transparent, #111111 10%);
+}
+
+.ottList {
+    position: relative;
+    top: -150px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 3600px;
+    max-height: 100%;
+    padding-left: 130px;
+    z-index: 0;
+    background-image: linear-gradient(180deg, transparent, #111111 10%);
+}
+
+.movieBox {
+    width: 250px;
+    height: 400px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.contentCnt {
+    margin: 10px 170px 0px 0px;
+    font-size: 60px;
+    font-style: italic;
+}
+
+.contentDetail {
+    margin-top: 260px;
+}

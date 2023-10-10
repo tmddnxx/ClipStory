@@ -1,0 +1,53 @@
+.outContainer { /*제일 바깥 container div*/
+    width: 3000px;
+    overflow: hidden;
+    background: #111111;
+
+}
+
+.searchDiv { /*영화 검색창 영역*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    background: #111111;
+}
+
+.searchList { /*영화 검색창 Category Select*/
+    display: flex;
+    margin-top: 100px;
+    width: 700px;
+}
+
+.contentList { /*영화 리스트 container div*/
+    margin-top: 100px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contentTitle {
+    margin-left: 20px;
+    color: white;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+.contentCnt {
+    margin-right: 150px;
+    margin-top: 20px;
+    font-size: 30pt;
+}
+.oneBox{ /*영화 1개 정보 div*/
+    width: 200px;
+    height: 200px;
+    background: #dddddd;
+    text-align: center;
+}
+
+.oneMovieSpan { /*영화 이름, 개봉일 span*/
+    margin-top: 100px;
+}
