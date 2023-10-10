@@ -46,7 +46,8 @@ public class MovieController extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/movie/movieMain.jsp").forward(req, resp);
                 break;
             case "list" : // 리스트를 들고오는 코드
-                movieService.movieListAll(req);
+                movieService.listMovie(req);
+                movieService.listOtt(req);
                 req.getRequestDispatcher("/WEB-INF/movie/movieList.jsp").forward(req, resp);
                 break;
             case "remove":
