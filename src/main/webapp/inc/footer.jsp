@@ -1,52 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<style>
-    .footer{
-        background-color: black;
-        width: 100%;
-    }
-    .inner{
-        display: flex;
-        justify-content: space-evenly;
-        height: 300px;
-        line-height: 40px;
-        margin-top: 30px;
-        color: white;
-    }
-    .QnA{
-        background-color: white;
-        color: black;
-        font-weight: bold;
-    }
-    .footer-info{
-       display: flex;
-        color: white;
-        margin-left: 50px;
-        margin-top: 20px;
-    }
-    .info-inner{
-      display: flex;
-      line-height: 40px;
-    }
-    .inner-text{
-        margin-right: 50px;
-    }
-    .icon{
-        display: flex;
-    }
-    img {
-        width: 40px;
-        height: 40px;
-    }
-    .com-info{
-        color: white;
-        margin-left: 50px;
-        padding-bottom: 20px;
-    }
-</style>
+<link href="/css/incCSS/footer.css" rel="stylesheet">
 <body>
   <div class="footer">
       <hr>
@@ -97,4 +50,3 @@
       </div>
   </div>
 </body>
-</html>
