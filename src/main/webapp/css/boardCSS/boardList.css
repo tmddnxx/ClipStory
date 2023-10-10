@@ -45,17 +45,24 @@ body{
     justify-content: space-evenly;
     align-items: center;
     color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 .first {
     width: 25%;
     display: flex;
     justify-content: start;
     align-items: center;
-}
-.list a{
     padding: 20px;
     text-align: center;
     font-size: 20px;
+}
+.list span:first-child{
+    color: blue;
+    font-weight: 700;
+}
+.list span:nth-child(2){
+    color: red;
+    font-weight: 700;
 }
 .list p{
     text-align: center;
@@ -67,19 +74,17 @@ body{
     width: 50px;
     font-size: 15px;
 }
-.list span:first-child{
-    color: blue;
-    font-weight: 700;
-}
-.list span:last-child{
-    color: red;
-    font-weight: 700;
-}
-
 .list p:nth-child(3){
     text-align: center;
 }
+.list p:nth-child(4){
+    text-align: right;
+    margin-right: 15px;
+}
 .list p:nth-child(5){
+    text-align: center;
+}
+.list p:nth-child(6){
     text-align: right;
     margin-right: 15px;
 }
@@ -125,8 +130,6 @@ hr{
     bottom: -35%;
     width: 700px;
     height: 100px;
-
-
 }
 .form-box td{
     width: 650px;

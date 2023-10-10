@@ -49,23 +49,24 @@
             <%-- 현재시간 , 작성시간 구하기 --%>
             <fmt:parseNumber value="${currentTime.time / (1000*60*60)}" integerOnly="true" var="currentFmtTime" scope="request"/>
             <fmt:parseNumber value="${boardDTO.addDate.time / (1000*60*60)}" integerOnly="true" var="addFmtTime" scope="request"/>
+            <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="list-a">
             <li class="list">
-                <p style="text-align: right">
-                    <c:if test="${(currentFmtTime - addFmtTime) < 24}"> <%-- 현재시간-작성시간 24시간 미만이면 N표시 뜨게함 --%>
-                        <span>N</span>
-                        <c:if test="${boardDTO.hit > 10}"> <%-- 24시간 미만이고 조회수가 10이상이면 H표시 --%>
-                            <span>H</span>
-                        </c:if>
-                    </c:if>
                 <div class="first">
-                    <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="text-decoration-none">
-                        [<%=(totalRecord--)-(pageNum-1)*limit%>] ${boardDTO.title} (${boardDTO.cnt})<%--( 댓글수 )--%>
-                    </a>
+                    <div class="NH">
+                        <c:if test="${(currentFmtTime - addFmtTime) < 24}"> <%-- 현재시간-작성시간 24시간 미만이면 N표시 뜨게함 --%>
+                            <span>N</span>
+                            <c:if test="${boardDTO.hit > 10}"> <%-- 24시간 미만이고 조회수가 10이상이면 H표시 --%>
+                                <span>H</span>
+                            </c:if>
+                        </c:if>
+                    </div>
+                        &nbsp;[<%=(totalRecord--)-(pageNum-1)*limit%>] ${boardDTO.title} (${boardDTO.cnt})
                 </div>
                 <p>${boardDTO.addDate}</p>
                 <p>${boardDTO.nickName}</p>
                 <p>${boardDTO.hit}</p>
             </li>
+            </a>
             <%
                 startNum--;
             %>
