@@ -60,6 +60,20 @@ hr{
     font-size: 20px;
     color: white;
 }
+/* 댓글 폼 */
+.main > div > ul > li{
+    background-color: #333;
+    border-bottom: grey;
+    color: white;
+}
+.main > div > ul > li > div{
+    display: flex;
+    flex-direction: column;
+}
+.main > div > ul > li > p{
+    color: white;
+    margin-bottom: 10px;
+}
 .btn-box{
     width: 100%;
     height: 100px;
