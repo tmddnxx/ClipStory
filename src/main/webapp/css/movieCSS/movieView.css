@@ -92,10 +92,8 @@
     font-size: 20px;
     font-weight: bold;
 }
-.movie-outline{
-    width: 70%;
+.movie-detail-outline p:last-child{
     font-size: 18px;
-    white-space: normal;
 }
 .contentDetail {
     z-index: 0;

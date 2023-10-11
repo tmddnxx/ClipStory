@@ -83,7 +83,7 @@
             </div>
             <div class="movie-detail-outline">
                 <p>개요</p>
-                <p class="movie-outline">${movieDTO.outline}</p>
+                ${movieDTO.outline}
             </div>
         </div>
     </div>
