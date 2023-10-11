@@ -18,34 +18,73 @@
 %>
 <body>
 <jsp:include page="inc/movieMainHeader.jsp"/>
-<div class="outerDiv">
+<div class="outerDiv" style="background-image: url('${movieDTO.poster}');">
     <div class="blurDiv">
     <%-- 영화 상세 내용 영역 --%>
     <div class="movieDetail">
         <div class="movie-info">
-            <img class="rounded-lg movieImg" src="../../css/movieCSS/img/img1234.jpg">
+            <img class="rounded-lg movieImg" src="${movieDTO.poster}">
         </div>
-        <div class="rounded-lg card-body">
+        <div class="movie-detail-info">
+            <div class="movie-detail-title">
+                <h3 class="movie-title">${movieDTO.movieName}</h3>
             <form name="frmZzim" method="post">
                 <input type="hidden" name="zzim" value="${zzim}"/>
                 <input type="hidden" name="movieNo" value="${movieDTO.movieNo}"/>
                 <input type="hidden" name="memberId" value="${loginInfo.memberId}"/>
-                <strong class="card-title">영화제목: ${movieDTO.movieName}</strong>
                 <div class="movielike">
                     <i class="fa-solid fa-heart fa-2x"></i>
                     <i class="fa-regular fa-heart fa-2x"></i>
                 </div>
-                <p class="card-text">개봉일: ${movieDTO.releaseDate}</p>
-                <p class="card-text">감독: ${movieDTO.director}</p>
-                <p class="card-text">출연: ${movieDTO.actor}</p>
-                <p class="card-text">지역: ${movieDTO.region}</p>
-                <p class="card-text">장르: ${movieDTO.genre}</p>
-                <p class="card-text">관객 수: ${movieDTO.audience}</p>
-                <p class="card-text">순위: ${movieDTO.ranking}</p>
-                <p class="card-text">러닝타임: ${movieDTO.runningtime}</p>
-                <p class="card-text">평점: ${movieDTO.avgScore}</p>
-                <p class="card-text">개요: ${movieDTO.outline}</p>
             </form>
+            </div>
+            <div class="movie-detail-content">
+                <div class="movie-detail-inner">
+                    <dl class="movie-inner-dl">
+                        <dt>개봉</dt>
+                        <dd>${movieDTO.releaseDate}</dd>
+                    </dl>
+                    <dl class="movie-inner-dl">
+                        <dt>장르</dt>
+                        <dd>${movieDTO.genre}</dd>
+                    </dl>
+                    <dl class="movie-inner-dl">
+                        <dt>국가</dt>
+                        <dd>${movieDTO.region}</dd>
+                    </dl>
+                    <dl class="movie-inner-dl">
+                        <dt>러닝타임</dt>
+                        <dd>${movieDTO.runningtime}</dd>
+                    </dl>
+                    <dl class="movie-inner-dl">
+                        <dt>감독</dt>
+                        <dd>${movieDTO.director}</dd>
+                    </dl>
+                    <dl class="movie-inner-dl">
+                        <dt>출연</dt>
+                        <dd>${movieDTO.actor}</dd>
+                    </dl>
+                </div>
+                <div class="movie-detail-inner">
+                    <dl class="movie-inner-dl">
+                        <dt>관객 수</dt>
+                        <dd>${movieDTO.audience}명</dd>
+                    </dl>
+                    <dl class="movie-inner-dl">
+                        <dt>순위</dt>
+                        <dd>${movieDTO.ranking}위</dd>
+                    </dl>
+                    <dl class="movie-inner-dl">
+                        <dt>평점</dt>
+                        <i class="fa-solid fa-star" style="color: #fa0000;"></i>
+                        <dd>${movieDTO.avgScore}</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="movie-detail-outline">
+                <p>개요</p>
+                <p class="movie-outline">${movieDTO.outline}</p>
+            </div>
         </div>
     </div>
     <div class="contentDetail">
@@ -112,9 +151,9 @@
                     <span class="btn btn-primary" id="goReviewSubmit">등록하기</span>
                 </div>
             </div>
-            <script src="/js/movieJS/reviewForm.js"></script>
+            </form>
+            <script src="/js/movieJS/reviewForm.js" defer></script>
             </c:if>
-        </form>
     </div>
     <div class="goMain">
         <a href="/main.movie?action=main" class="btn btn-primary"><< 메인화면</a>

@@ -60,15 +60,15 @@ hr{
     color: white;
 }
 /* 댓글 폼 */
-.main > div{
+.user-comment-list{
     display: flex;
     justify-content: center;
 }
-.main > div > ul{
+.user-comment-list > ul{
     width: 90%;
 }
 /* 댓글 1개*/
-.main > div > ul > li{
+.user-comment-list > ul > li{
     background-color: #333;
     border-bottom: grey;
     color: white;
@@ -76,56 +76,56 @@ hr{
     border-bottom: 1px solid white;
 }
 /*닉네임 날짜 내용 div*/
-.main > div > ul > li > div:first-child{
+.user-comment-list > ul > li > div:first-child{
     display: flex;
     flex-direction: row;
 }
-.main > div > ul > li > div:first-child{
+.user-comment-list > ul > li > div:first-child{
     display: flex;
     align-items: center;
 }
 /* 답글 화살표*/
-.main > div > ul > li > div:first-child > span{
+.user-comment-list > ul > li > div:first-child > span{
     font-size: 25px;
     margin-right: 10px;
 }
-.main > div > ul > li > div:first-child > div{
+.user-comment-list > ul > li > div:first-child > div{
     display: flex;
     flex-direction: column;
 }
 
-.main > div > ul > li > div:first-child > div > p{
+.user-comment-list > ul > li > div:first-child > div > p{
     color: white;
     margin-bottom: 10px;
 }
 /* 내용 */
-.main > div > ul > li > div:first-child > div > p:last-child{
+.user-comment-list > ul > li > div:first-child > div > p:last-child{
     word-break: break-all;
     line-height: 1.6;
     padding : 20px;
 }
 /* 삭제, 답글 버튼*/
-.main > div > ul > li > .comment-btn-div{
+.comment-btn-div{
     display: flex;
     flex-direction: row;
     justify-content: right;
     padding-right: 20px;
     margin-bottom: 15px;
 }
-.main > div > ul > li > .comment-btn-div > span{
+.comment-btn-div > span{
     color: #aba8a8;
 }
-.main > div > ul > li > .comment-btn-div > span:hover{
+.comment-btn-div > span:hover{
     color: white;
     cursor: pointer;
 }
 
-.main > div > ul > li > .comment-btn-div > span:nth-last-of-type(2):hover{
+.comment-btn-div > span:nth-last-of-type(2):hover{
     color: #aba8a8;
     cursor: default;
 }
 /* 답글 폼 */
-.main > div > ul > li > form{
+.user-comment-list > ul > li > form{
     flex-direction: row;
 }
 .reply-nick{
