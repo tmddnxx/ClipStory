@@ -31,7 +31,7 @@ const addCommentTag = function (items){
         const tagLi = document.createElement('li');
         if(item.memberId !== "" && item.nickName !== ""){
             if(item.commentNo !== item.parentNo) {
-                tagLi.innerHTML = '<div><span>➥</span>' +
+                tagLi.innerHTML = '<div><span>➥&nbsp</span>' +
                             '<div><p class="comment-writer">' + item.nickName + ' (' + item.addDate + ')</p>' +
                             '<p class="comment-content">' + item.comment + '</p></div></div>';
             }
@@ -43,13 +43,19 @@ const addCommentTag = function (items){
             // tagLi.innerHTML += '<p class="comment-writer">' + item.nickName + ' (' + item.addDate + ')</p>' +
             //                     '<p class="comment-content">' + item.comment + '</p></div>';
             // tagLi.innerHTML += item.comment + ' | ' + item.nickName + ' | ' + item.addDate;
-            if (item.isLogin === true) {
+            if (item.isLogin === true && item.commentNo === item.parentNo){
                 tagLi.innerHTML +=
-                    ' <span class="delete-span-btn" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>';
+                    ' <div class="comment-btn-div"><span class="delete-span-btn" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>' +
+                    '<span>&nbsp|&nbsp</span>' +
+                    '<span class="reply-span-btn" onclick="displayCommentRe(this);">답글</span></div>';
             }
-            if(item.commentNo === item.parentNo) {
+            else if (item.isLogin === true) {
+                tagLi.innerHTML +=
+                    ' <div class="comment-btn-div"><span class="delete-span-btn" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span></div>';
+            }
+            else if(item.commentNo === item.parentNo) {
                 if(memberId !== "")
-                    tagLi.innerHTML += '<span class="reply-span-btn" onclick="displayCommentRe(this);">답글</span>';
+                    tagLi.innerHTML += '<div class="comment-btn-div"><span class="reply-span-btn" onclick="displayCommentRe(this);">답글</span></div>';
             }
         }
         else{
@@ -60,15 +66,15 @@ const addCommentTag = function (items){
             '<input type="hidden" name="contentNo" value="' + contentNo + '"/>' +
             '<input type="hidden" name="parentNo" value="' + item.commentNo + '"/>' +
             '<input type="hidden" name="memberId" value="' + memberId + '"/>' +
-            '<div class="form-group row">' +
-            '<input type="text" name="nickName" value="' +  nickName + '" class="form-control" readonly/>' +
+            '<div class="reply-nick">' +
+            '<input type="text" name="nickName" value="' +  nickName + '" readonly/>' +
             '</div>' +
-            '<div class="form-group row">' +
-            '<textarea name="comment" class="form-control" cols="50" rows="3"></textarea>' +
+            '<div class="reply-content">' +
+            '<textarea name="comment" cols="50" rows="3"></textarea>' +
             '</div>' +
-            '<div class="form-group row">' +
-            '<div class="col-sm-4">' +
-            '<span class="btn btn-primary subcommentRe" onclick="submitCommentRe(this)">등록</span>' +
+            '<div class="reply-submit">' +
+            '<div>' +
+            '<span class="btn btn-submit" onclick="submitCommentRe(this)">등록</span>' +
             '</div>' +
             '</div>' +
             '</form>';
@@ -83,7 +89,7 @@ getComments(); // 댓글리스트
 
 const displayCommentRe = function (btn) {
     console.log("답글누름");
-    const commentReFrm = btn.nextElementSibling;
+    const commentReFrm = btn.parentElement.nextElementSibling;
     console.log(commentReFrm);
     const commentReFrmAll = document.querySelectorAll('form[name=frmCommentRe]');
     if(commentReFrm.style.display === 'flex'){
@@ -107,7 +113,7 @@ const submitCommentRe = function (btn){
 
     if(comment.trim() == ""){
         alert("내용을 입력해주세요");
-        comment.focus();
+        commentReFrm.comment.focus();
         return false;
     }
     xhr.open('POST', '/comment/addre?contentNo=' + contentNo + '&nickName=' + nickName + '&comment=' + comment + '&parentNo=' + parentNo);
