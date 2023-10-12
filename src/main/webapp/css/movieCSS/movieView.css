@@ -1,3 +1,4 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 .outerDiv {
     z-index: -3;
     /*background-image: url("../../css/movieCSS/img/img1234.jpg");*/
@@ -35,12 +36,15 @@
 }
 .movie-info {
     display: flex;
-    margin-left: 20%;
+    margin-left: 13%;
     width: 30%;
     height: 100%;
     margin-top: 100px;
     align-items: center;
-
+}
+.movie-info img{
+    width: 408px;
+    height: 596px;
 }
 .movie-detail-info{
     display: flex;
@@ -98,7 +102,6 @@
 .contentDetail {
     z-index: 0;
     position: relative;
-    top: -70px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -148,9 +151,174 @@
     height: 250px;
 }
 
+/* 리뷰 폼*/
+.frmReview{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    margin-bottom: 30px;
+    width: 45%;
+}
+.review-nick{
+    width: 15%;
+    display: flex;
+    align-items: end;
+}
+.review-nick input{
+    width: 100%;
+    height: 90px;
+    text-align: center;
+    font-size: 20px;
+    background-color: #777;
+    outline: none;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+.review-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 120px;
+}
+.review-content textarea{
+    width: 100%;
+    height: 85px;
+    border-radius: 10px;
+    padding: 10px;
+    line-height: 1.4;
+}
+.review-submit{
+    display: flex;
+    align-items: end;
+    width: 20%;
+    height: 90px;
+}
+.review-submit > div{
+    display: block;
+    width: 100%;
+    height: 90px;
+    background-color: red;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 30px;
+}
+.review-submit > div:hover{
+    color: black;
+    cursor: pointer;
+}
+
+/* 별점 */
+.score { display: inline-block; position: relative; border: 0;margin-right: 15px; right: 80%;}
+.score > input {display: none;}
+.score > label {float: right;color: #ddd}
+.score > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+.score .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+.score input:checked ~ label,
+.score label:hover,.score label:hover ~ label { color: #f73c32 !important;  }
+.score input:checked + .score label:hover,
+.score input input:checked ~ label:hover,
+.score input:checked ~ .score label:hover ~ label,
+.score label:hover ~ input:checked ~ label { color: #f73c32 !important;  }
+
+/* 리뷰 목록 */
+.user-review-list{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 1890px;
+    overflow: hidden;
+}
+.user-review-list > ul{
+    width: 90%;
+}
+/* 리뷰 1개*/
+.user-review-list > ul > li{
+    background-color: #1c1c1c;
+    color: white;
+    padding: 20px 20px 20px 20px;
+    border-bottom: 1px solid #898686;
+}
+/*닉네임 날짜 내용 div*/
+.user-review-list > ul > li > div:first-child{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.user-review-list > ul > li > div:first-child span{
+    color: red;
+    font-size: 18px;
+}
+/* 내용 */
+.user-review-list > ul > li > div:first-child > div > p:last-child{
+    word-break: break-all;
+    line-height: 1.6;
+    padding : 20px;
+}
+/* 삭제 버튼*/
+.review-btn-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-right: 20px;
+    margin-bottom: 15px;
+}
+.review-btn-div > span{
+    color: #aba8a8;
+}
+.review-btn-div > span:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.review-btn-div > span:nth-last-of-type(2):hover{
+    color: #aba8a8;
+    cursor: default;
+}
+
+.review-more{
+    width: 44%;
+    background-color: #8a8787;
+    color: white;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 25px;
+
+}
+.review-more:hover{
+    cursor: pointer;
+    background-color: #9a9090;
+}
 .goMain {
-    z-index: 0;
+    display: flex;
+    justify-content: center;
     position: relative;
-    top: -70px;
-    background-image: linear-gradient(0deg, transparent, #111111 90%);
+    left: 28%;
+    z-index: 0;
+    text-align: center;
+    width: 100%;
+    bottom: 20%;
+    background-image: linear-gradient(180deg, transparent, #111111 10%);
+    width: 44%;
+    /*background-image: linear-gradient(0deg, transparent, #111111 90%);*/
+}
+.home-btn{
+    display: block;
+    background-color: #f33e3e;
+    color: white;
+    font-size: 23px;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding-top: 7px;
+}
+
+.home-btn:hover{
+    background-color: #d54949;
 }

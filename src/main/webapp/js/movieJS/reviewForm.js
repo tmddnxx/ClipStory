@@ -12,10 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const review = frmReview.review.value; // 유저가 작성한 리뷰내용을 들고 온다.
             const score = frmReview.score.value; // 유저가 매긴 평점을 들고 온다.
 
+            if(score === ""){ // 평점 체크 안할시
+                alert('평점은 1점이상 등록 가능합니다.');
+                return;
+            }
 
             if (review === "") { // 리뷰를 빈칸으로 적을 시 출력
-                e.preventDefault();
                 alert('리뷰는 한 글자 이상 입력해야 합니다.')
+                return;
             }
 
             xhr.open('POST', '/review/add?num=' + num + '&nickName=' + nickName + '&review=' + review + '&score=' + score);

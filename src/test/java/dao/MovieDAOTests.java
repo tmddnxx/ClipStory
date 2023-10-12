@@ -1,7 +1,10 @@
 package dao;
 
 import com.example.movie.model.dao.MovieDAO;
+import com.example.movie.model.dao.ReviewDAO;
+import com.example.movie.model.dto.CommentDTO;
 import com.example.movie.model.dto.MovieDTO;
+import com.example.movie.model.dto.ReviewDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,11 +14,13 @@ import java.util.List;
 @Log4j2
 public class MovieDAOTests {
     private MovieDAO movieDAO;
+    private ReviewDAO reviewDAO;
 
 
     @BeforeEach
     public void ready() {
         movieDAO = new MovieDAO();
+        reviewDAO = ReviewDAO.getInstance();
     }
 
     @Test
@@ -67,6 +72,21 @@ public class MovieDAOTests {
     public void testDeleteOne() throws Exception {
         movieDAO.deleteOne(4);
         log.info("삭제완료");
+    }
+
+    @Test
+    public void testInsertReview() throws Exception {
+
+        for(int i = 0; i < 40; i++) {
+            ReviewDTO reviewDTO = ReviewDTO.builder()
+                    .nickName("hong")
+                    .review("리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰" + i)
+                    .movieNo(1)
+                    .score("3")
+                    .memberId("test")
+                    .build();
+            reviewDAO.insertReview(reviewDTO);
+        }
     }
 
     @Test

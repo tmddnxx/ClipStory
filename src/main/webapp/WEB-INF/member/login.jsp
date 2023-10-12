@@ -50,7 +50,7 @@
         <form class="frmlogin" action="/login" method="post">
           <div class="input-container">
             <input type="text" placeholder="아이디" name="memberId">
-            <input type="text" placeholder="비밀번호" name="passwd">
+            <input type="password" placeholder="비밀번호" name="passwd">
           <c:if test="${result != null}">
             <span>ID나 비밀번호가 일치하지 않습니다</span>
           </c:if>
