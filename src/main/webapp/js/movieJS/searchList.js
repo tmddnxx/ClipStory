@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function (){
     const ottBox = document.getElementById('ottBox');
     const morebtn = document.querySelector('.moreView');
     const nomorebtn = document.querySelector('.noMoreView');
+    const allListContent = document.getElementById('allList');
     const content = document.querySelector('.searchContent');
 
     allbtn.addEventListener('click', function (){ // '전체'버튼 클릭시
@@ -29,13 +30,22 @@ document.addEventListener('DOMContentLoaded', function (){
     });
 
     morebtn.addEventListener('click', function (){
-        const currentHeight = allListBox.clientHeight;
-        const newHeight = currentHeight + 550;
-        allListBox.style.height = newHeight+'px';
-        if(content.clientHeight <= newHeight){
-            morebtn.style.display = 'none';
-        }
+        const divHeight = allListBox.clientHeight; // div 높이
+        const ulHeight = allListContent.clientHeight; // ul 높이
+        const liHeight = content.clientHeight; // li높이
+        const newHeight = divHeight + 480;
         nomorebtn.style.display = 'block';
+
+        if(newHeight > ulHeight){
+            console.log(ulHeight + 'px');
+            allListBox.style.height = ulHeight + 60 + 'px';
+            morebtn.style.display = 'none'
+        }
+        else{
+            allListBox.style.height = newHeight + 'px';
+        }
+
+
     })
 
     nomorebtn.addEventListener('click', function (){

@@ -28,6 +28,7 @@
         <a href="#ottBox" class="ottBtn">OTT</a>
     </div>
     <hr>
+
     <div id="listWrap">
     <div id="allListBox" class="searchBox"> <%--전체목록--%>
         <p>전체</p>
@@ -62,6 +63,7 @@
             <p>검색결과가 없습니다</p>
         </c:if>
     </div>
+        <hr>
     <div id="boxofficeBox" class="searchBox"> <%--박스오피스목록--%>
         <p>박스오피스</p>
         <ul id="boxoffice" class="list-group">
@@ -95,6 +97,7 @@
             <p>검색결과가 없습니다</p>
         </c:if>
     </div>
+        <hr>
     <div id="ottBox" class="searchBox"> <%--OTT목록--%>
         <p>OTT</p>
         <ul id="ott" class="list-group">
