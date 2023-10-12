@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchVO {
+public class SearchVO { // movie 테이블 가져옴
     private int movieNo;
     private String movieName;
     private String director;

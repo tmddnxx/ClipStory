@@ -2,12 +2,11 @@
 <%@ page import="com.example.movie.model.dto.SearchVO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="../../js/movieJS/searchList.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="../../css/movieCSS/searchList.css" rel="stylesheet" type="text/css">
+    <link href="./css/common.css" rel="stylesheet">
     <head>
     <title>Title</title>
 </head>
@@ -17,73 +16,121 @@
     String text = request.getParameter("text") != null ? request.getParameter("text") : "";
 %>
 <body>
-<jsp:include page="inc/movieMainHeader.jsp"/>
-<a href="javascript:history.back()" class="btn btn-primary"><< back</a>
-<div class="container w-75 mt-5 mx-auto">
-    <h2>검색 목록</h2>
-    <h3>"<%=text%>" 에 대한 검색결과입니다</h3>
+<jsp:include page="/inc/header.jsp"/>
+<div class="wrap">
+<div class="main">
+    <h2><p>"<%=text%>"</p> 에 대한 검색결과입니다</h2>
+    <h1>검색 목록</h1>
     <hr>
-    <a href="#allList" class="allBtn">전체 | </a>
-    <a href="#boxoffice" class="boxofficeBtn">박스오피스 | </a>
-    <a href="#ott" class="ottBtn">OTT</a>
-
-    <div class="allListBox">
-    <p style="font-weight: bold">전체</p>
-    <ul id="allList" class="list-group">
-        <c:forEach var="searchVO" items="${searchVOList}" varStatus="status">
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    <div class="chooseBox">
+        <a href="#allListBox" class="allBtn">전체</a>
+        <a href="#boxofficeBox" class="boxofficeBtn">박스오피스</a>
+        <a href="#ottBox" class="ottBtn">OTT</a>
+    </div>
+    <hr>
+    <div id="listWrap">
+    <div id="allListBox" class="searchBox"> <%--전체목록--%>
+        <p>전체</p>
+        <ul id="allList" class="list-group">
+            <c:forEach var="searchVO" items="${searchVOList}" varStatus="status">
+                <li class="searchContent">
                     <a href="view.movie?action=view&movieNo=${searchVO.movieNo}" class="text-decoration-none">
-                       [${searchVO.ranking}] [${searchVO.movieName}], <img src="${searchVO.poster}" width="100px" height="100px">
+                        <img src="${searchVO.poster}">
                     </a>
-                <p>${searchVO.releaseDate}</p>
-                <p style="text-align: right">${searchVO.genre}</p>
-                <p style="text-align: right">${searchVO.mo}</p>
-            </li>
-        </c:forEach>
+                    <div class="searchContentFlex">
+                        <a href="view.movie?action=view&movieNo=${searchVO.movieNo}" class="text-decoration-none">
+                            <div class="searchContentLink">
+                                <p>순위 : [${searchVO.ranking}]</p>
+                                <p>${searchVO.movieName}</p>
+                            </div>
+                        </a>
+                        <div class="searchContentInfo">
+                            <p>${searchVO.releaseDate}</p>
+                            <p>${searchVO.genre}</p>
+                            <p>${searchVO.mo}</p>
+                        </div>
+                    </div>
+                </li>
+                <hr>
+            </c:forEach>
+            <c:if test="${fn:length(searchVOList) >= 5}">
+                <button class="moreView"> 더보기 + </button>
+                <button class="noMoreView"> 접기 - </button>
+            </c:if>
+        </ul>
         <c:if test="${empty searchVOList}"> <%-- 검색결과가 없는경우 --%>
             <p>검색결과가 없습니다</p>
         </c:if>
-    </ul>
     </div>
-    <hr>
-    <div class="boxofficeBox">
-    <p style="font-weight: bold">박스오피스</p>
-    <ul id="boxoffice" class="list-group">
-        <c:forEach var="searchVO" items="${searchVOListM}" varStatus="status">
-                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    <div id="boxofficeBox" class="searchBox"> <%--박스오피스목록--%>
+        <p>박스오피스</p>
+        <ul id="boxoffice" class="list-group">
+            <c:forEach var="searchVO" items="${searchVOListM}" varStatus="status">
+                <li class="searchContent">
                     <a href="view.movie?action=view&movieNo=${searchVO.movieNo}" class="text-decoration-none">
-                        [${searchVO.ranking}] [${searchVO.movieName}],<img src="${searchVO.poster}" width="100px" height="100px">
+                        <img src="${searchVO.poster}">
                     </a>
-                    <p>${searchVO.releaseDate}</p>
-                    <p style="text-align: right">${searchVO.genre}</p>
-                    <p style="text-align: right">${searchVO.mo}</p>
+                    <div class="searchContentFlex">
+                        <a href="view.movie?action=view&movieNo=${searchVO.movieNo}" class="text-decoration-none">
+                            <div class="searchContentLink">
+                                <p>순위 : [${searchVO.ranking}]</p>
+                                <p>${searchVO.movieName}</p>
+                            </div>
+                        </a>
+                        <div class="searchContentInfo">
+                            <p>${searchVO.releaseDate}</p>
+                            <p>${searchVO.genre}</p>
+                            <p>${searchVO.mo}</p>
+                        </div>
+                    </div>
                 </li>
-        </c:forEach>
+                <hr>
+            </c:forEach>
+            <c:if test="${fn:length(searchVOListM) >= 5}">
+                <button class="moreView"> 더보기 + </button>
+                <button class="noMoreView"> 접기 - </button>
+            </c:if>
+        </ul>
         <c:if test="${empty searchVOListM}"> <%-- 검색결과가 없는경우 --%>
             <p>검색결과가 없습니다</p>
         </c:if>
-    </ul>
     </div>
-    <hr>
-    <div class="ottBox">
-    <p style="font-weight: bold">OTT</p>
-    <ul id="ott" class="list-group">
+    <div id="ottBox" class="searchBox"> <%--OTT목록--%>
+        <p>OTT</p>
+        <ul id="ott" class="list-group">
         <c:forEach var="searchVO" items="${searchVOListO}" varStatus="status">
-            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <li class="searchContent">
                 <a href="view.movie?action=view&movieNo=${searchVO.movieNo}" class="text-decoration-none">
-                    [${searchVO.ranking}] [${searchVO.movieName}],<img src="${searchVO.poster}" width="100px" height="100px">
+                    <img src="${searchVO.poster}">
                 </a>
-                <p>${searchVO.releaseDate}</p>
-                <p style="text-align: right">${searchVO.genre}</p>
-                <p style="text-align: right">${searchVO.mo}</p>
+                <div class="searchContentFlex">
+                    <a href="view.movie?action=view&movieNo=${searchVO.movieNo}" class="text-decoration-none">
+                        <div class="searchContentLink">
+                            <p>순위 : [${searchVO.ranking}]</p>
+                            <p>${searchVO.movieName}</p>
+                        </div>
+                    </a>
+                    <div class="searchContentInfo">
+                        <p>${searchVO.releaseDate}</p>
+                        <p>${searchVO.genre}</p>
+                        <p>${searchVO.mo}</p>
+                    </div>
+                </div>
             </li>
+            <hr>
         </c:forEach>
         <c:if test="${empty searchVOListO}"> <%-- 검색결과가 없는경우 --%>
             <p>검색결과가 없습니다</p>
         </c:if>
     </ul>
+        <c:if test="${fn:length(searchVOListO) >= 5}">
+            <button class="moreView"> 더보기 + </button>
+            <button class="noMoreView"> 접기 - </button>
+        </c:if>
     </div>
+    </div>
+    <jsp:include page="../../inc/footer.jsp"/>
 </div>
-<jsp:include page="inc/movieFooter.jsp"/>
+</div>
 </body>
 </html>

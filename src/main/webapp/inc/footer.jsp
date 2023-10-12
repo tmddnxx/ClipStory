@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="/css/incCSS/footer.css" rel="stylesheet">
-<body>
   <div class="footer">
       <hr>
       <div class="inner">
@@ -49,4 +48,3 @@
           </div>
       </div>
   </div>
-</body>

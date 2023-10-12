@@ -20,7 +20,7 @@ public class MovieDAOTests {
 
     @Test
     public void testInsert() throws Exception {
-        for(int i = 1; i <= 40; i++) {
+        for(int i = 1; i <= 10; i++) {
             MovieDTO movieDTO = MovieDTO.builder()
                     .movieName("무비"+i)
                     .director("홍길동"+i)
@@ -33,7 +33,8 @@ public class MovieDAOTests {
                     .ranking(3+i)
                     .runningtime("180분"+i)
                     .outline("어쩌구저쩌구 어쩌구저쩌구 이리쿵 저리쿵 그래서 하지만 그러나 그럼에도 불구하고 그러므로 그리고 "+i)
-                    .poster("img.jpg")
+                    .poster("https://img1.daumcdn.net/thumb/C408x596/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F27c29998d10ba744f8898f99541b93405bef27ec")
+                    .mo("o")
                     .build();
             movieDAO.insert(movieDTO);
             log.info("입력완료");
