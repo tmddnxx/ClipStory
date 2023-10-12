@@ -1,0 +1,113 @@
+.wrap{
+    width: 100%;
+    background-color: black;
+}
+.main{
+    width: 100%;
+    padding-top: 200px;
+    color: white;
+}
+.main>h2{
+    text-align: center;
+    font-size: 30pt;
+    font-weight: bold;
+}
+.main>h2>p {
+    color: red;
+    display: inline;
+}
+.main>h1{
+    font-size: 20pt;
+    margin: 15px;
+}
+.chooseBox{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: center;
+}
+.allBtn{
+    margin-right: 20px;
+}
+.allBtn:hover{
+    background-color: red;
+}
+.boxofficeBtn {
+    margin-right: 20px;
+}
+.boxofficeBtn:hover{
+    background-color: red;
+}
+.ottBtn:hover{
+    background-color: red;
+}
+#listWrap{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    background-color: #333333;
+}
+.searchBox{
+    height: 550px;
+    overflow: hidden;
+    position: relative;
+}
+.moreView {
+    width: 60px;
+    height: 30px;
+    border-radius: 10%;
+    position: absolute;
+    bottom: 35px;
+    right: 80px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+.noMoreView {
+    width: 60px;
+    height: 30px;
+    border-radius: 10%;
+    position: absolute;
+    bottom: 35px;
+    right: 10px;
+    display: none;
+    background-color: #555555;
+    color: white;
+    cursor: pointer;
+}
+.searchBox>p{
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 20pt;
+    font-weight: bold;
+}
+.searchContent{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    margin: 30px;
+}
+.searchContent a{
+    padding-left: 15px;
+    display: flex;
+}
+.searchContent a>img{
+    width: 100px;
+    height: 100px;
+}
+.searchContentFlex{
+    display: flex;
+    flex-direction: column;
+}
+.searchContentFlex p {
+    text-align: left;
+}
+.searchContentLink{
+    height: 40px;
+}
+.searchContentInfo{
+    padding-left: 15px;
+}
