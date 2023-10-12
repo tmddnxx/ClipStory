@@ -76,6 +76,12 @@ public class MovieService {
                 request.setAttribute("zzim", true);
             else
                 request.setAttribute("zzim", false);
+
+            String[] actors = movieDTO.getActor().split("\\|");
+            String[] directors = movieDTO.getDirector().split("\\|");
+
+            request.setAttribute("actors",actors);
+            request.setAttribute("directors",directors);
             request.setAttribute("movieDTO", movieDTO);
         } catch (Exception e) {
             log.info(e.getMessage());

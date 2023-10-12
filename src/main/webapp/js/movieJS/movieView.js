@@ -3,6 +3,7 @@
     const zzimBtn = document.querySelector('.movielike');
     const zzimCheck = document.querySelector('input[name=zzim]');
     const frmZzim = document.querySelector('form[name=frmZzim]');
+    const moreBtn = document.querySelector('.review-more');
 
     console.log("first : " + zzimCheck.value);
 
@@ -60,6 +61,26 @@
 
     })
 
+    moreBtn.addEventListener('click', function (){
+        const reviewList = document.querySelector('.user-review-list');
+        const reviewListUl = document.querySelector('.user-review-list ul');
+        const reviewListLi = document.querySelector('.user-review-list ul > li');
+
+        const ulHeight = reviewListUl.clientHeight;
+        const LiHeight = reviewListLi.clientHeight;
+        const divHeight = reviewList.clientHeight;
+
+        const newHeight = divHeight + LiHeight * 10;
+        console.log('클릭됨' + newHeight);
+        if(newHeight > ulHeight){
+            reviewList.style.height = ulHeight + 'px';
+            moreBtn.style.display = 'none';
+        }
+        else{
+            reviewList.style.height = newHeight + 'px';
+        }
+    });
+
     const getReviews = function () {
         const num = document.querySelector('form[name=frmReviewView] input[name=num]').value;
         xhr.open('GET', '/review/get?num=' + num);
@@ -84,10 +105,19 @@
         tagUl.innerHTML = '';
         for (const item of items) {
             const tagLi = document.createElement('li');
-            tagLi.innerHTML = '평점 : ' + item.score + ' | ' + item.review + ' | ' + item.nickName + ' | ' + item.addDate;
+            let score = "";
+            for(let i = 1; i <= 5; i++){
+                if(i <= item.score)
+                    score += "★";
+                else
+                    score += "☆";
+            }
+            tagLi.innerHTML = '<div>' +
+                '<div><p class="reviw-writer"><span>' + score +'&nbsp' + item.score +'&nbsp</span>' + item.nickName + ' (' + item.addDate + ')</p>' +
+                '<p class="review-content">' + item.review + '</p></div></div>';
             if (item.isLogin === true) {
                 tagLi.innerHTML +=
-                    '<span class="btn btn-danger" onclick="goReviewDelete(\'' + item.reviewNo + '\');">>삭제</span>'
+                    ' <div class="review-btn-div"><span class="delete-span-btn" onclick="goReviewDelete(\'' + item.reviewNo + '\');">삭제</span></div>';
             }
             tagLi.setAttribute('class', 'list-group-item');
             tagUl.append(tagLi);

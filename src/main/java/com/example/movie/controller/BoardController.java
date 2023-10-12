@@ -26,7 +26,7 @@ public class BoardController extends HttpServlet {
         }
 
         switch (action) {
-            case "list" :
+            case "list" : // 게시물 목록뷰
                 try {
                     boardService.listBoard(req);
                 } catch (Exception e) {
@@ -34,10 +34,10 @@ public class BoardController extends HttpServlet {
                 }
                 req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req, resp);
                 break;
-            case "add" :
+            case "add" : // 게시물 추가 뷰
                 req.getRequestDispatcher("/WEB-INF/board/boardAdd.jsp").forward(req, resp);
                 break;
-            case "modify" :
+            case "modify" : // 게시물 수정 뷰
                 try{
                     boardService.getBoard(req);
                     req.getRequestDispatcher("/WEB-INF/board/boardModify.jsp").forward(req, resp);
@@ -46,11 +46,11 @@ public class BoardController extends HttpServlet {
                     throw new ServletException("read error");
                 }
                 break;
-            case "remove" :
+            case "remove" : // 삭제
                 boardService.removeBoard(req);
                 resp.sendRedirect("list.board?action=list");
                 break;
-            case "get" :
+            case "get" : // 상세뷰
                 boardService.getBoard(req);
                 boardService.increaseHit(req);
                 req.getRequestDispatcher("/WEB-INF/board/boardGet.jsp").forward(req, resp);
@@ -73,7 +73,7 @@ public class BoardController extends HttpServlet {
         }
 
         switch (action) {
-            case "list" :
+            case "list" : // 게시물 목록
                 try {
                     boardService.listBoard(req);
                 } catch (Exception e) {
@@ -82,13 +82,13 @@ public class BoardController extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req, resp);
                 break;
 
-            case "add" :
+            case "add" : // 게시물 추가
                 boardService.addBoard(req);
                 resp.sendRedirect("list.board?action=list");
                 break;
 
 
-            case "modify" :
+            case "modify" : // 게시물 수정
                 boardService.modifyBoard(req);
                 resp.sendRedirect("list.board?action=list");
         }

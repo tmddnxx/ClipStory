@@ -1,5 +1,6 @@
 package com.example.movie.controller;
 
+import com.example.movie.service.MovieService;
 import com.example.movie.service.SearchService;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,7 @@ public class SearchController extends HttpServlet {
         }
 
         switch (action){
-            case "list" :
+            case "list" : // 검색목록 출력
                 try {
                     searchService.SearchList(req);
                     searchService.SearchListM(req);

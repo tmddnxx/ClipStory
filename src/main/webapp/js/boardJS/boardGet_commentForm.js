@@ -32,5 +32,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error(xhr.status, xhr.statusText);
             }
         }
-    })
-})
+    });
+});
