@@ -32,8 +32,6 @@ public class CommentController extends HttpServlet {
         String command = RequestURI.substring(contextPath.length());
 
         log.info("command : " + command);
-        resp.setContentType("text/html; charset=utf-8");
-        req.setCharacterEncoding("utf-8");
 
         switch (command){
             case "/comment/add":

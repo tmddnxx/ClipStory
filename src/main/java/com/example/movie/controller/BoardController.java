@@ -17,8 +17,7 @@ public class BoardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardService boardService = new BoardService();
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html; charset=utf-8");
+
 
         String action = req.getParameter("action");
         if(action == null){
@@ -64,8 +63,6 @@ public class BoardController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardService boardService = new BoardService();
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html; charset=utf-8");
 
         String action = req.getParameter("action");
         if(action == null){

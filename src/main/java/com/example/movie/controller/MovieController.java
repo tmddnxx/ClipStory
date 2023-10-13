@@ -31,8 +31,6 @@ public class MovieController extends HttpServlet {
         MovieService movieService = new MovieService();
 
         ReviewService reviewService = ReviewService.getInstance();
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=utf-8");
 
         String action = req.getParameter("action");
         if (action == null) {

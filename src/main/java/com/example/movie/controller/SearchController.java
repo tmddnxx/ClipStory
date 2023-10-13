@@ -20,8 +20,6 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SearchService searchService = new SearchService();
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html; charset=utf-8");
 
         String action = req.getParameter("action");
         if(action == null){

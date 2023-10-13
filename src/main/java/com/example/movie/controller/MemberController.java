@@ -18,8 +18,6 @@ public class MemberController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MemberService memberService = MemberService.INSTANCE;
         log.info("doget");
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=utf-8");
         String action = req.getParameter("action");
         if (action == null){
             action = "list";
@@ -49,8 +47,6 @@ public class MemberController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MemberService memberService = MemberService.INSTANCE;
         log.info("dopost");
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=utf-8");
 
         String action = req.getParameter("action");
         if (action == null){
