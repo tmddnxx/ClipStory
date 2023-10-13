@@ -1,8 +1,7 @@
 package com.example.movie.model.dao;
 
 public class AdminDAO {
-
-//    addCrew // 제작진 제작 - 은석
+    //    addCrew // 제작진 제작 - 은석
 //    addCast // 출연정보 제작 - 은석
 //    addPhoto 제작 - 은석
 //    addMovie 수정 - 은석

@@ -7,7 +7,7 @@ public class AdminService {
 //    addMovie 수정 - 은석
 
 
-//    (super)login 복붙 - 종원
+//    (super)login 복붙 - 종원 // 새로운 관리자 전용 session 생성
 //    memberList 제작 - 종원
 
 
