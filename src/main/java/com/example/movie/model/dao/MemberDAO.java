@@ -42,7 +42,7 @@ public class MemberDAO {
         return memberDTO;
     }
 
-    public MemberDTO getWithMemberId(String memberId) throws SQLException {
+    public MemberDTO getWithMemberId(String memberId) throws SQLException { // 회
         String sql = "select * FROM `member` WHERE `memberId` = ?";
 
         MemberDTO memberDTO = null;
