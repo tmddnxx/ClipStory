@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../../inc/header.jsp"/>
 
 <div class="profile">
   <h3 class="display-5"> <%-- 프로필 --%>
@@ -171,7 +171,7 @@
     </div>
   </div>
 </div>
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../../inc/footer.jsp"/>
 <script>
   // 초기 tab-content hidden 설정
   const allTabContents = document.querySelectorAll(".tab-content");
