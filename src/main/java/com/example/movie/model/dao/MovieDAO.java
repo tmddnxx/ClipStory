@@ -1,6 +1,8 @@
 package com.example.movie.model.dao;
 
+import com.example.movie.model.dto.CrewDTO;
 import com.example.movie.model.dto.MovieDTO;
+import com.example.movie.model.dto.PhotoDTO;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
 
@@ -203,6 +205,45 @@ public class MovieDAO {
         preparedStatement.setString(11, movieDTO.getPoster());
         preparedStatement.setString(12, movieDTO.getMo());
         preparedStatement.setFloat(13, movieDTO.getAvgScore());
+        preparedStatement.executeUpdate();
+    }
+
+    // 출연 정보 추가
+    public void insertCast(int crewNo, int movieNo) throws Exception{
+        String sql = "INSERT INTO cast (crewNo, movieNo)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, crewNo);
+        preparedStatement.setInt(2,movieNo);
+        preparedStatement.executeUpdate();
+    }
+
+    // 출연진 가져오기
+//    public List<CrewDTO> getCasts(int movieNo) throws Exception{
+//        String sql = "SELECT crew.crewName, crew.crewImg, cast.castRole FROM crew JOIN cast ON crew.crewNo = cast.crewNo WHERE cast.movieNo = ?";
+//
+//    }
+
+    // 배우|감독 추가
+    public void insertCrew(CrewDTO crewDTO) throws Exception{
+        String sql = "INSERT INTO crew (crewName, crewImg)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, crewDTO.getCrewName());
+        preparedStatement.setString(2, crewDTO.getCrewImg());
+        preparedStatement.executeUpdate();
+    }
+
+    // 포토 추가
+    public void insertPhoto(PhotoDTO photoDTO) throws Exception{
+        String sql = "INSERT INTO photo (photoImg, movieNo)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, photoDTO.getPhotoImg());
+        preparedStatement.setInt(2, photoDTO.getMovieNo());
         preparedStatement.executeUpdate();
     }
 

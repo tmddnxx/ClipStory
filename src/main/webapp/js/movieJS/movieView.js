@@ -123,6 +123,23 @@
             tagUl.append(tagLi);
         }
 
+        const reviewList = document.querySelector('.user-review-list');
+        const reviewListUl = document.querySelector('.user-review-list ul');
+        const LiCnt = reviewListUl.childElementCount;
+
+        console.log(LiCnt);
+        if(LiCnt === 0){
+            reviewList.style.height = 0 + 'px';
+            moreBtn.style.display = 'none';
+        }
+        else if(LiCnt <= 10){
+            const reviewListLi = document.querySelector('.user-review-list ul > li');
+            const LiHeight = reviewListLi.clientHeight;
+            reviewList.style.height = LiHeight * LiCnt + 'px';
+            moreBtn.style.display = 'none';
+
+        }
+
     };
     getReviews();
 
