@@ -1,13 +1,13 @@
 package com.example.movie.service;
 
-import com.example.movie.model.dao.CommentDAO;
-import com.example.movie.model.dao.MemberDAO;
+
 import com.example.movie.model.dao.MyPageDAO;
 import com.example.movie.model.dto.*;
 
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,8 +15,8 @@ import java.util.List;
 public enum MyPageService {
     INSTANCE, BoardDTO;
 
+
     private MyPageDAO myPageDAO;
-    private CommentDAO commentDAO;
 
     MyPageService() {
         myPageDAO = new MyPageDAO();
@@ -41,12 +41,14 @@ public enum MyPageService {
 
     public void getMyReviews(HttpServletRequest request) throws Exception {
         // 내 댓글 보기
+
         List<ReviewDTO> reviewDTOList = myPageDAO.viewMyReview((String)request.getSession().getAttribute("sessionId"));
         request.setAttribute("reviewDTOList", reviewDTOList);
 
         log.info(reviewDTOList);
 
     }
+
     public void getMyZZimMovies(HttpServletRequest request) throws Exception {
         // 내 찜영화 보기
         List<MovieDTO> zzimMovieList = myPageDAO.viewMyZZim((String)request.getSession().getAttribute("sessionId"));
@@ -55,5 +57,7 @@ public enum MyPageService {
         log.info(zzimMovieList);
 
     }
+
+
 
 }

@@ -39,62 +39,117 @@
         }
     });
 });
-    // "전체 선택" button click 핸들 1번
-    function checkAll1(checked1) {
-    const checkboxes = document.querySelectorAll('.list-group-1 input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-    checkbox.checked = checked1;
-});
-}
-
-    // "전체 선택" button1 정의
+    // "전체 선택" button1
     const checkAllButton1 = document.querySelector('.btn-checkAll1');
-
-    //  "전체 선택" button1
-    checkAllButton1.addEventListener('click', function () {
-    const checked1 = this.value === '전체 선택';
-    checkAll1(checked1);
-
-    // Toggle the button text
-    this.value = checked1 ? '전체 해제' : '전체 선택';
-});
-
-
-    // "전체 선택" button click 핸들 2번
-    function checkAll2(checked2) {
-    const checkboxes = document.querySelectorAll('.list-group-2 input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-    checkbox.checked = checked2;
-});
-}
-
-    // "전체 선택" button2 정의
-    const checkAllButton2 = document.querySelector('.btn-checkAll2');
+    const checkboxes1 = document.querySelectorAll('.list-group-1 input[type="checkbox"]');
+    handleCheckAllButtonClick(checkAllButton1, checkboxes1);
 
     // "전체 선택" button2
-    checkAllButton2.addEventListener('click', function () {
-    const checked2 = this.value === '전체 선택';
-    checkAll2(checked2);
-
-    // Toggle the button text
-    this.value = checked2 ? '전체 해제' : '전체 선택';
-});
-    // "전체 선택" button click 핸들 3번
-    function checkAll(checked3) {
-    const checkboxes = document.querySelectorAll('.list-group-3 input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-    checkbox.checked = checked3;
-});
-}
-
-    // "전체 선택" button3 정의
-    const checkAllButton3 = document.querySelector('.btn-checkAll3');
+    const checkAllButton2 = document.querySelector('.btn-checkAll2');
+    const checkboxes2 = document.querySelectorAll('.list-group-2 input[type="checkbox"]');
+    handleCheckAllButtonClick(checkAllButton2, checkboxes2);
 
     // "전체 선택" button3
-    checkAllButton3.addEventListener('click', function () {
-    const checked3 = this.value === '전체 선택';
-    checkAll(checked3);
+    const checkAllButton3 = document.querySelector('.btn-checkAll3');
+    const checkboxes3 = document.querySelectorAll('.list-group-3 input[type="checkbox"]');
+    handleCheckAllButtonClick(checkAllButton3, checkboxes3);
 
-    // Toggle the button text
-    this.value = checked3 ? '전체 해제' : '전체 선택';
-});
+    // "전체 선택" 버튼 클릭 시 체크
+    function handleCheckAllButtonClick(button, checkboxes) {
+        button.addEventListener('click', function () {
+            const checked = this.value === '전체 선택';
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = checked;
+            });
+            this.value = checked ? '전체 해제' : '전체 선택';
+        });
+    }
+
+    // X 버튼 클릭 시 개별 컨텐츠 삭제 자바스크립트
+    const removeButtonX = document.querySelectorAll(".remove-btn");
+    removeButtonX.forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault(); // 경로 설정
+            const listItem = this.closest("li"); // 삭제 할 컨텐츠 리스트
+            if (listItem) {
+                const confirmRemove = confirm("삭제 하시겠습니까?"); // 경고 문구
+                if (confirmRemove) {
+                    listItem.remove(); // 삭제 실행
+                }
+            }
+        });
+    });
+
+    // 선택 삭제 선택 시 삭제
+    function handleRemoveSelected(btnClass, listClass) {
+        const removeSelectedButton = document.querySelector(btnClass);
+        removeSelectedButton.addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
+            const selectedItems = [];
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedItems.push(checkbox.value);
+                }
+            });
+
+            if (selectedItems.length === 0) {
+                alert(`마이 컨텐츠가 없습니다.`);
+            } else {
+                const confirmMessage = `해당 컨텐츠, ${selectedItems.length} 개를 삭제하시겠습니까?`;
+                if (confirm(confirmMessage)) {
+                    selectedItems.forEach(contentNo => {
+                        const listItem = document.querySelector(`#chk${contentNo}`).closest('li');
+                        if (listItem) {
+                            listItem.remove();
+                        }
+                    });
+                }
+            }
+        });
+    }
+    // 각 부분으로 동작하게 호출
+    handleRemoveSelected('.btn-selected1', '.list-group-1');
+    handleRemoveSelected('.btn-selected2', '.list-group-2');
+    handleRemoveSelected('.btn-selected3', '.list-group-3');
+
+    // 전체 삭제 선택 시 삭제
+    function handleRemoveAll(btnClass, listClass) {
+        const removeAllButton = document.querySelector(btnClass);
+        removeAllButton.addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
+            const selectedItems = [];
+
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedItems.push(checkbox.value);
+                }
+            });
+
+            if (selectedItems.length !== checkboxes.length) {
+                alert('체크박스를 모두 체크해주세요.')
+            }
+            else { // 체크박스 다 체크된 경우만
+                const confirmMessage = `모두 삭제하시겠습니까?`;
+                if (confirm(confirmMessage)) {
+                    selectedItems.forEach(contentNo => {
+                        const listItem = document.querySelector(`#chk${contentNo}`).closest('li');
+                        if (listItem) {
+                            listItem.remove();
+                        }
+                    });
+                }
+            }
+        });
+    }
+    // 각 부분으로 동작하게 호출
+    handleRemoveAll('.btn-removeAll1', '.list-group-1');
+    handleRemoveAll('.btn-removeAll2', '.list-group-2');
+    handleRemoveAll('.btn-removeAll3', '.list-group-3');
+
+
+
+
+
+
+

@@ -10,21 +10,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet("*.mypage")
 @Log4j2
 public class MypageController extends HttpServlet {
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MyPageService myPageService = MyPageService.INSTANCE;
         log.info("doget");
+        // 로그인 확인
+
         String action = req.getParameter("action");
         if (action == null){
             action = "list";
         }
         log.info(action);
+
         switch (action) {
             case "list": // mypage 메인
                 try {
@@ -37,6 +43,7 @@ public class MypageController extends HttpServlet {
                 }
                 req.getRequestDispatcher("/WEB-INF/mypage/myPage.jsp").forward(req,resp);
                 break;
+
         }
 
     }
@@ -51,18 +58,7 @@ public class MypageController extends HttpServlet {
             action = "list";
         }
         log.info(action);
-        switch (action){
-            case "modify":
-                try {
-                    memberService.modifyMember(req);
-                } catch (Exception e) {
-                    log.info("수정 post 컨트롤러 이상 : " + e.getMessage());
-                }
-                resp.sendRedirect("/list.movie?action=list");
-                break;
-            case "remove":
-                resp.sendRedirect("/list.movie?action=list");
-                break;
-        }
+
     }
+
 }
