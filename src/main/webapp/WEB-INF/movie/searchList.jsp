@@ -55,15 +55,15 @@
                 <hr>
             </c:forEach>
             <c:if test="${fn:length(searchVOList) >= 5}">
-                <button class="moreView"> 더보기 + </button>
-                <button class="noMoreView"> 접기 - </button>
+                <button id="moreViewA" class="moreView"> 더보기 + </button>
+                <button id="noMoreViewA" class="noMoreView"> 접기 - </button>
             </c:if>
         </ul>
         <c:if test="${empty searchVOList}"> <%-- 검색결과가 없는경우 --%>
             <p>검색결과가 없습니다</p>
         </c:if>
     </div>
-        <hr>
+        <hr class="boundary">
     <div id="boxofficeBox" class="searchBox"> <%--박스오피스목록--%>
         <p>박스오피스</p>
         <ul id="boxoffice" class="list-group">
@@ -89,15 +89,15 @@
                 <hr>
             </c:forEach>
             <c:if test="${fn:length(searchVOListM) >= 5}">
-                <button class="moreView"> 더보기 + </button>
-                <button class="noMoreView"> 접기 - </button>
+                <button id="moreViewM" class="moreView"> 더보기 + </button>
+                <button id="noMoreViewM" class="noMoreView"> 접기 - </button>
             </c:if>
         </ul>
         <c:if test="${empty searchVOListM}"> <%-- 검색결과가 없는경우 --%>
             <p>검색결과가 없습니다</p>
         </c:if>
     </div>
-        <hr>
+        <hr class="boundary">
     <div id="ottBox" class="searchBox"> <%--OTT목록--%>
         <p>OTT</p>
         <ul id="ott" class="list-group">
@@ -127,8 +127,8 @@
         </c:if>
     </ul>
         <c:if test="${fn:length(searchVOListO) >= 5}">
-            <button class="moreView"> 더보기 + </button>
-            <button class="noMoreView"> 접기 - </button>
+            <button id="moreViewO" class="moreView"> 더보기 + </button>
+            <button id="noMoreViewO" class="noMoreView"> 접기 - </button>
         </c:if>
     </div>
     </div>

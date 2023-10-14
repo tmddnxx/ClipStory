@@ -55,6 +55,11 @@
     overflow: hidden;
     position: relative;
 }
+.boundary{
+    color: red;
+    height: 1px;
+    border: 1px;
+}
 .moreView {
     width: 60px;
     height: 30px;
