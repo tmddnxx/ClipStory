@@ -22,8 +22,8 @@ public class MovieService {
     }
 
 
+    // movieList.jsp에서 영화 목록을 보여주기 위한 요청을 처리하는 메소드(관리자용)
     public void movieListAll(HttpServletRequest request) {
-        // movieList.jsp에서 영화 목록을 보여주기 위한 요청을 처리하는 메소드
         List<MovieDTO> movieList;
         try {
             movieList = movieDAO.selectAll();
@@ -33,9 +33,9 @@ public class MovieService {
             log.info("영화 목록 생성 과정에서 문제 발생");
             request.setAttribute("error", "영화 목록이 정상적으로 처리되지 않았습니다.");
         }
-
     }
 
+    // movie만 출력하는 메소드
     public void listMovie(HttpServletRequest request) {
         List<MovieDTO> listMovie;
         try {
@@ -51,6 +51,8 @@ public class MovieService {
             request.setAttribute("error", "영화 목록이 정상적으로 처리되지 않았습니다.");
         }
     }
+
+    // ott만 출력하는 메소드
     public void listOtt(HttpServletRequest request) {
         List<MovieDTO> listOtt;
         try {
@@ -66,8 +68,9 @@ public class MovieService {
         }
     }
 
+
+    // 특정 영화를 클릭했을 때 호출하기 위한 요청을 처리하는 메소드
     public void getMovieDTO(HttpServletRequest request) {
-        // 특정 영화를 클릭했을 때 호출하기 위한 요청을 처리하는 메소드
         int movieNo = Integer.parseInt((request.getParameter("movieNo"))); // movieNo 파라미터를 추출해서
         String memberId = (String) request.getSession().getAttribute("sessionId");
         try {
@@ -76,10 +79,8 @@ public class MovieService {
                 request.setAttribute("zzim", true);
             else
                 request.setAttribute("zzim", false);
-
             String[] actors = movieDTO.getActor().split("\\|");
             String[] directors = movieDTO.getDirector().split("\\|");
-
             request.setAttribute("actors",actors);
             request.setAttribute("directors",directors);
             request.setAttribute("movieDTO", movieDTO);
@@ -90,6 +91,7 @@ public class MovieService {
         }
     }
 
+    // 영화 삭제 메소드(관리자용)
     public void removeMovieDTO (HttpServletRequest request) {
         int movieNo = Integer.parseInt(request.getParameter("movieNo"));
         try {

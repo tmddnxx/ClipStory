@@ -28,6 +28,7 @@ public class ReviewDAO {
         return instance;
     }
 
+    // 리뷰 추가하기 위한 메소드
     public boolean insertReview(ReviewDTO reviewDTO) throws SQLException, ClassNotFoundException {
         log.info("insertReview() ...");
 
@@ -45,6 +46,7 @@ public class ReviewDAO {
     }
 
 
+    // 리뷰 전체목록 출력하기 위한 메소드
     public List<ReviewDTO> selectReviews(int movieNo) throws SQLException, ClassNotFoundException {
         log.info("selectReview()...");
 
@@ -69,6 +71,7 @@ public class ReviewDAO {
         return reviewDTOS;
     }
 
+    // 리뷰 삭제하기 위한 메소드
     public boolean deleteReview(int reviewNo) throws SQLException, ClassNotFoundException {
         log.info("deleteReview()...");
         String sql = "DELETE FROM `review` WHERE `reviewNo` = ?";
@@ -79,6 +82,8 @@ public class ReviewDAO {
 
         return preparedStatement.executeUpdate() == 1;
     }
+
+    // 리뷰 한개 선택 하기 위한 메소드 (movie 테이블에 평점 넣어 주기 위해 작성한 메소드)
     public ReviewDTO selectReviewOne(int reviewNo) throws SQLException, ClassNotFoundException {
         log.info("selectReview()...");
         String sql = "select * from `review` where `reviewNo` = ?";
@@ -102,6 +107,7 @@ public class ReviewDAO {
     }
 
 
+    // 리뷰평점 평균내기 위한 메소드
     public float avgScore(int movieNo) throws SQLException, ClassNotFoundException {
         String sql = "SELECT (ROUND(AVG(score), 2)) as avgScore from review where movieNo = ?;";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -112,6 +118,7 @@ public class ReviewDAO {
         return resultSet.getFloat("avgScore");
     }
 
+    // 세션에 등록된 아이디가 리뷰를 적었는 지 확인 하기 위한 메소드
     public boolean isWrite(String memberId, int movieNo) throws SQLException {
         String sql = "select * from review where memberId = ? and movieNo = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();

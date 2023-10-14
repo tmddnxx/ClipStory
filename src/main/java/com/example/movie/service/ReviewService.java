@@ -28,6 +28,7 @@ public class ReviewService {
         return instance;
     }
 
+    // 리뷰 추가 메소드
     public boolean addReview(HttpServletRequest request) throws Exception {
         log.info("addReview() ...");
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
@@ -43,19 +44,23 @@ public class ReviewService {
                 .score(request.getParameter("score"))
                 .build();
         log.info(reviewDTO.getMemberId());
-        boolean result = reviewDAO.insertReview(reviewDTO);
-        int movieNo = reviewDTO.getMovieNo();
-        float avgScore = reviewDAO.avgScore(Integer.valueOf(request.getParameter("num")));
-        movieDAO.updateAvgScore(movieNo, avgScore);
-        return result;
+
+        // 리뷰 등록할 때 평점 평균값 계산해서 movie테이블로 넣어주는 코드
+        boolean result = reviewDAO.insertReview(reviewDTO); // 위에서 받은 reviewDTO 값이 review테이블에 있는지 확인하기 위한 boolean형 변수 선언
+        int movieNo = reviewDTO.getMovieNo(); // 리뷰를 입력한 영화의 PK를 가져와서 담아준다.
+        float avgScore = reviewDAO.avgScore(Integer.valueOf(request.getParameter("num"))); // 리뷰테이블에 해당 movieNo의 모든 평점의 평균을 계산해서 변수에 넣어준다.
+        movieDAO.updateAvgScore(movieNo, avgScore); // 해당영화의 movieNo와 평균낸 평점을 movie테이블에 넣어준다.
+        return result; // 리뷰작성 여부 확인 결과를 반환한다.
 //        return reviewDAO.insertReview(reviewDTO);
     }
 
 
+    // 전체리뷰목록 불러와서 request로 전해주는 메소드
     public List<ReviewDTO> getReviews(HttpServletRequest request) throws SQLException, ClassNotFoundException {
         log.info("getReviews() ...");
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
         int num;
+        // movieNo 파라미터가 하나로 통일되어 있지 않아서 movieNo와 num 모두 확인해서 movieNo로 인식하기 위한 if문
         if(request.getParameter("movieNo")!=null){
             num = Integer.parseInt(request.getParameter("movieNo"));
         }
@@ -73,15 +78,14 @@ public class ReviewService {
                 reviewDTO.setLogin(true);
             }
         }
-
         boolean isWrite = reviewDAO.isWrite((String) request.getSession().getAttribute("sessionId"),num);
         log.info("--------------------------------"+isWrite);
         request.setAttribute("isWrite",isWrite);
-
         return reviewDTOS;
     }
 
 
+    // 리뷰 삭제 메소드
     public boolean removeReview(HttpServletRequest request) throws Exception {
         log.info("removeReview()...");
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
@@ -92,6 +96,7 @@ public class ReviewService {
         log.info("--------result : "+result);
         int movieNo = reviewDTO.getMovieNo();
         float avgScore = reviewDAO.avgScore(movieNo);
+        // 리뷰 삭제할 때 무비테이블에 리뷰평점도 업데이트해준다.
         movieDAO.updateAvgScore(movieNo, avgScore);
         return result;
     }

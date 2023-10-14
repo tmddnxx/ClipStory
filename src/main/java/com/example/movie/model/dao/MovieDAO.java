@@ -1,6 +1,8 @@
 package com.example.movie.model.dao;
 
+import com.example.movie.model.dto.CrewDTO;
 import com.example.movie.model.dto.MovieDTO;
+import com.example.movie.model.dto.PhotoDTO;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
 
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Log4j2
 public class MovieDAO {
+
+    // 영화 목록 전체 출력(사실상 유저페이지 에선 쓰이진 않음)
     public List<MovieDTO> selectAll() throws SQLException {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         List<MovieDTO> movieList = new ArrayList<>();
@@ -44,6 +48,7 @@ public class MovieDAO {
         return movieList;
     }
 
+    // movie만 불러오는 메소드
     public List<MovieDTO> selectMovie() throws SQLException{
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         List<MovieDTO> movieList = new ArrayList<>();
@@ -74,6 +79,7 @@ public class MovieDAO {
         return movieList;
     }
 
+    // ott만 불러오는 메소드
     public List<MovieDTO> selectOtt() throws SQLException {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         List<MovieDTO> ottList = new ArrayList<>();
@@ -104,8 +110,8 @@ public class MovieDAO {
         return ottList;
     }
 
+    // 해당 movie나 ott 선택했을 때 해당 컨텐츠의 PK를 가져와서 출력하는 메소드
     public MovieDTO selectOne(int movieNo) throws SQLException {
-        // 뉴스 목록에서 뉴스를 선택했을 때 특정 뉴스 기사의 세부 내용을 보여주기 위한 메소드
         log.info("selectOne(int movieNo) ...");
 
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -138,6 +144,7 @@ public class MovieDAO {
 
     }
 
+    // 해당 컨텐츠 삭제하는 메소드 (PK기준으로 선택)
     public void deleteOne(int movieNo) throws SQLException {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
 
@@ -151,8 +158,6 @@ public class MovieDAO {
 
     public boolean selectMovieLike(int movieNo, String memberId) throws SQLException {
         String sql = "select * FROM `zzim` WHERE `memberId` = ? and `movieNo` = ?";
-
-
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,memberId);
@@ -206,7 +211,47 @@ public class MovieDAO {
         preparedStatement.executeUpdate();
     }
 
+    // 출연 정보 추가
+    public void insertCast(int crewNo, int movieNo) throws Exception{
+        String sql = "INSERT INTO cast (crewNo, movieNo)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, crewNo);
+        preparedStatement.setInt(2,movieNo);
+        preparedStatement.executeUpdate();
+    }
 
+    // 출연진 가져오기
+//    public List<CrewDTO> getCasts(int movieNo) throws Exception{
+//        String sql = "SELECT crew.crewName, crew.crewImg, cast.castRole FROM crew JOIN cast ON crew.crewNo = cast.crewNo WHERE cast.movieNo = ?";
+//
+//    }
+
+    // 배우|감독 추가
+    public void insertCrew(CrewDTO crewDTO) throws Exception{
+        String sql = "INSERT INTO crew (crewName, crewImg)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, crewDTO.getCrewName());
+        preparedStatement.setString(2, crewDTO.getCrewImg());
+        preparedStatement.executeUpdate();
+    }
+
+    // 포토 추가
+    public void insertPhoto(PhotoDTO photoDTO) throws Exception{
+        String sql = "INSERT INTO photo (photoImg, movieNo)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, photoDTO.getPhotoImg());
+        preparedStatement.setInt(2, photoDTO.getMovieNo());
+        preparedStatement.executeUpdate();
+    }
+
+
+    // 리뷰 등록할때 평점 계산해서 movie테이블에 넣어주기 위한 메소드
     public void updateAvgScore(int movieNo, float avgScore) throws Exception {
         String sql = "UPDATE movie set avgScore = ? where movieNo = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();

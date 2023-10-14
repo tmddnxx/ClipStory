@@ -1,0 +1,193 @@
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 1000px;
+    color: white;
+    background-color: black;
+}
+.button { /* 버튼 디자인 */
+    background-color: black;
+    border: 1px solid gray;
+    padding: 2px;
+    color: white;
+    font-size: 25px;
+    margin-left: 30px;
+}
+
+
+.profile { /* 프로필 헤더*/
+    padding-left: 300px;
+    padding-top: 200px;
+    font-size: 40px;
+}
+
+.profileInfo { /* 프로필 상세 */
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+
+.tab-item { /* 내 컨텐츠 버튼 */
+    border-top: 1px solid white;
+    padding-left: 300px;
+    padding-top: 30px;
+
+}
+
+.tab {
+    cursor: pointer;
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    border: 2px solid black;
+    text-align: left;
+    width: 100%;
+    outline: none;
+    transition: 0.4s;
+    padding-left: 300px;
+    margin-bottom: 20px;
+}
+
+.tab.active {
+    background-color: white;
+    border-bottom: 3px solid white;
+    border-bottom-color: white;
+    color: black;
+
+}
+
+.tab-content {
+    display: none;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.nav-item { /* 내 컨텐츠 부분 */
+    display: inline-flex;
+    color: white;
+    padding-right: 5px;
+    font-size: 30px;
+
+}
+#tab1 { /* 내가 쓴 글 */
+    display: inline-flex;
+    width: 800px;
+    border: 1px solid white;
+    padding: 15px;
+}
+
+#tab2 { /* 내가 쓴 댓글 */
+    display: inline-flex;
+    width: 800px;
+    border: 1px solid white;
+    padding: 15px;
+}
+
+#tab3 { /* 내가 쓴 리뷰 */
+    display: inline-flex;
+    width: 800px;
+    border: 1px solid white;
+    padding: 15px;
+}
+#tab4 { /*내가 찜한 영화 */
+    display: inline-flex;
+    width: 1200px;
+    border: 1px solid white;
+    padding: 15px;
+}
+
+.heart  {
+    color: red;
+    border: none;
+    padding-top: 6px;
+}
+#zzim {
+    display: flex;
+    flex-direction: row;
+}
+
+.myList{ /* mylist 스타일 */
+    border-bottom: 1px solid white;
+    font-size: 30px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.flex_my {
+    display: flex;
+    flex-direction: row;
+}
+.remove-btn {
+    padding-left: 20px;
+    font-size: 30px;
+}
+
+/* 체크박스 CSS 시작 */
+input[type="checkbox"] {
+    display: none;
+}
+
+.circle{
+    display: inline-flex; /* 영역적용가능해짐 */
+    width: 30px; height: 30px;
+    border: 2px solid white;
+    box-sizing: border-box;
+    border-radius: 15px; /* 모서리둥글게 처리 */
+    position: relative; top: 4px;
+    cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
+    flex-direction: row;
+    margin-right: 10px;
+    top: 30px;
+}
+
+.circle:after{
+    content: '\2714'; /* 체크박스 특수문자 */
+    font-size: 32px; color: white;
+    position: absolute; top: -24px; left: 0;
+
+    opacity: 0; /* 처음엔 안보이게 처리 */
+    transition: 0.2s; /* CSS변화에 시간차 처리 */
+}
+
+/* input이 체크되면 특수문자 보이게 처리 */
+#chk${boardDTO.contentNo}:checked + .circle:after{ opacity: 1; }
+#chk2:checked + .circle:after{ opacity: 1; }
+#chk${commentDTO.commentNo} + .circle:after{ opacity: 1; }
+
+/* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
+#chk1{ position: absolute; left: -999em; }
+#chk2{ position: absolute; left: -999em; }
+#chk${commentDTO.commentNo}{ position: absolute; left: -999em; }
+/* 체크박스 CSS 끝 */
+
+/* 이미지 크기 조정 */
+.img {
+   width: 150px;
+   height: 250px;
+}
+
+.button1 input {
+    width: 120px;
+    height: 50px;
+    background-color: darkgray;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
