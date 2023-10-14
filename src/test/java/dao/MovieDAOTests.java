@@ -2,7 +2,7 @@ package dao;
 
 import com.example.movie.model.dao.MovieDAO;
 import com.example.movie.model.dao.ReviewDAO;
-import com.example.movie.model.dto.CommentDTO;
+import com.example.movie.model.dto.CastDTO;
 import com.example.movie.model.dto.MovieDTO;
 import com.example.movie.model.dto.ReviewDTO;
 import lombok.extern.log4j.Log4j2;
@@ -56,6 +56,12 @@ public class MovieDAOTests {
             log.info(movieDTO);
             log.info("출력완료");
         }
+    }
+
+    @Test
+    public void testGetCasts() throws  Exception{
+        List<CastDTO> castList = movieDAO.getCasts(1);
+        castList.forEach(castDTO -> log.info(castDTO));
     }
 
     @Test
