@@ -153,13 +153,13 @@ input[type="checkbox"] {
 
 /* input이 체크되면 특수문자 보이게 처리 */
 #chk${boardDTO.contentNo}:checked + .circle:after{ opacity: 1; }
-#chk2:checked + .circle:after{ opacity: 1; }
-#chk${commentDTO.commentNo} + .circle:after{ opacity: 1; }
+#chk${commentDTO.commentNo}:checked + .circle:after{ opacity: 1; }
+#chk${reviewDTO.reviewNo}:checked + .circle:after{ opacity: 1; }
 
 /* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
-#chk1{ position: absolute; left: -999em; }
-#chk2{ position: absolute; left: -999em; }
+#chk${boardDTO.contentNo}{ position: absolute; left: -999em; }
 #chk${commentDTO.commentNo}{ position: absolute; left: -999em; }
+#chk${reviewDTO.reviewNo}{ position: absolute; left: -999em; }
 /* 체크박스 CSS 끝 */
 
 /* 이미지 크기 조정 */
@@ -180,6 +180,8 @@ input[type="checkbox"] {
     font-size: 20px;
     margin-right: 15px;
 }
+
+
 
 
 
