@@ -4,6 +4,7 @@ import com.example.movie.model.dao.MemberDAO;
 import com.example.movie.model.dao.MovieDAO;
 import com.example.movie.model.dao.ReviewDAO;
 import com.example.movie.model.dto.CastDTO;
+import com.example.movie.model.dto.CrewDTO;
 import com.example.movie.model.dto.MovieDTO;
 import com.example.movie.model.dto.PhotoDTO;
 import lombok.extern.log4j.Log4j2;
@@ -126,5 +127,12 @@ public class MovieService {
         String memberId = (String) request.getSession().getAttribute("sessionId");
         memberDAO.zzimCntUpdate(memberId,false);
         return movieDAO.removeMovieLike(movieNo, memberId);
+    }
+
+    // 배우/감독 가져오기
+    public List<CrewDTO> getCrews() throws  Exception {
+
+        List<CrewDTO> crewList = movieDAO.getCrews();
+        return crewList;
     }
 }

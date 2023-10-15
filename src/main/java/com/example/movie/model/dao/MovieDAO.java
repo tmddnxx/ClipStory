@@ -215,13 +215,13 @@ public class MovieDAO {
     }
 
     // 출연 정보 추가
-    public void insertCast(int crewNo, int movieNo) throws Exception{
-        String sql = "INSERT INTO cast (crewNo, movieNo)"
-                + "VALUES (?, ?)";
+    public void insertCast(int crewNo, int movieNo, String castRole) throws Exception {
+        String sql = "INSERT INTO `cast` (`crewNo`, `movieNo`, `castRole`) VALUES (?, ?, ?)";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, crewNo);
-        preparedStatement.setInt(2,movieNo);
+        preparedStatement.setInt(2, movieNo);
+        preparedStatement.setString(3, castRole);
         preparedStatement.executeUpdate();
     }
 
@@ -283,14 +283,60 @@ public class MovieDAO {
     }
 
     // 포토 추가
-    public void insertPhoto(PhotoDTO photoDTO) throws Exception{
+    public void insertPhoto(String photoImg, int movieNo) throws Exception{
         String sql = "INSERT INTO photo (photoImg, movieNo)"
                 + "VALUES (?, ?)";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, photoDTO.getPhotoImg());
-        preparedStatement.setInt(2, photoDTO.getMovieNo());
+        preparedStatement.setString(1, photoImg);
+        preparedStatement.setInt(2, movieNo);
         preparedStatement.executeUpdate();
+    }
+    // 영화 테이블의 감독/배우 갱신
+    public void updateCrewInMovie(String director, String actor, int movieNo) throws Exception{
+        String sql = "UPDATE movie set director = ?, actor = ? where movieNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, director);
+        preparedStatement.setString(2, actor);
+        preparedStatement.setInt(3, movieNo);
+        preparedStatement.executeUpdate();
+    }
+
+    // 배우/감독 목록 출력
+    public List<CrewDTO> getCrews() throws Exception {
+        String sql = "SELECT * from crew";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<CrewDTO> crewList = new ArrayList<>();
+        while(resultSet.next()){
+            CrewDTO crewDTO = CrewDTO.builder()
+                    .crewNo(resultSet.getInt("crewNo"))
+                    .crewName(resultSet.getString("crewName"))
+                    .crewImg(resultSet.getString("crewImg"))
+                    .build();
+
+            crewList.add(crewDTO);
+        }
+        return crewList;
+    }
+    // 가장 최근에 등록한 영화 넘버 가져오기
+    public int getLastMovieNo() throws Exception{
+        String sql = "SELECT * from movie order by movieNo desc";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        int movieNo = 0;
+        if(resultSet.next()){
+            movieNo = resultSet.getInt("movieNo");
+        }
+
+        return movieNo;
     }
 
 

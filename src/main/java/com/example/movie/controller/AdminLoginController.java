@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/login/admin")
 @Log4j2
 public class AdminLoginController extends HttpServlet {
-    private final AdminService adminService = AdminService.INSTANCE;
+    AdminService adminService = new AdminService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

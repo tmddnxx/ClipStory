@@ -13,8 +13,8 @@
 </div>
 <div style="margin-top: 100px;">
     <div style="display: flex; ">
-        <button style="width: 500px; height: 500px; font-size: 60pt;">영화추가</button>
-        <button style="width: 500px; height: 500px; font-size: 60pt;">감독 / 배우등록</button>
+        <button style="width: 500px; height: 500px; font-size: 60pt;" onclick='location.href="/admin?action=addMovie";'>영화추가</button>
+        <button style="width: 500px; height: 500px; font-size: 60pt;" onclick='location.href="/admin?action=addCrew";'>감독 / 배우등록</button>
         <button style="width: 500px; height: 500px; font-size: 60pt;">영화수정</button>
     </div>
     <div style="display: flex;">
