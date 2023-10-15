@@ -102,9 +102,11 @@ body{
     border: none;
     padding-top: 6px;
 }
-#zzim {
+#zzimh {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .myList{ /* mylist 스타일 */
@@ -153,19 +155,19 @@ input[type="checkbox"] {
 
 /* input이 체크되면 특수문자 보이게 처리 */
 #chk${boardDTO.contentNo}:checked + .circle:after{ opacity: 1; }
-#chk2:checked + .circle:after{ opacity: 1; }
-#chk${commentDTO.commentNo} + .circle:after{ opacity: 1; }
+#chk${commentDTO.commentNo}:checked + .circle:after{ opacity: 1; }
+#chk${reviewDTO.reviewNo}:checked + .circle:after{ opacity: 1; }
 
 /* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
-#chk1{ position: absolute; left: -999em; }
-#chk2{ position: absolute; left: -999em; }
+#chk${boardDTO.contentNo}{ position: absolute; left: -999em; }
 #chk${commentDTO.commentNo}{ position: absolute; left: -999em; }
+#chk${reviewDTO.reviewNo}{ position: absolute; left: -999em; }
 /* 체크박스 CSS 끝 */
 
 /* 이미지 크기 조정 */
 .img {
-   width: 150px;
-   height: 250px;
+    max-width: 100%;
+    height: auto;
 }
 
 .button1 input {
@@ -180,6 +182,32 @@ input[type="checkbox"] {
     font-size: 20px;
     margin-right: 15px;
 }
+
+.margin-img {
+    clear: both;
+}
+
+.list-group-zzim {
+    float: left;
+    width: calc(25% - 10px); /* 그림자 설정 */
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.list-group-zzim a {
+    display: block;
+    text-decoration: none;
+}
+.list-group-zzim img {
+   width: 200px;
+   height: 200px;
+}
+
+
+
+
 
 
 
