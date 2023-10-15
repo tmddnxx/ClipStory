@@ -27,7 +27,7 @@
             <input type="text" placeholder="아이디" name="superId">
             <input type="password" placeholder="비밀번호" name="superPw">
             <c:if test="${result != null}">
-              <span>아이디나 비밀번호가 일치하지 않습니다.</span>
+              <span>관리자 권한이 없습니다.</span>
             </c:if>
           </div>
           <div class="login-btn-container">
