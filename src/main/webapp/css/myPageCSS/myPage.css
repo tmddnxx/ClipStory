@@ -102,7 +102,7 @@ body{
     border: none;
     padding-top: 6px;
 }
-#zzim {
+#zzimh {
     display: flex;
     flex-direction: row;
 }
