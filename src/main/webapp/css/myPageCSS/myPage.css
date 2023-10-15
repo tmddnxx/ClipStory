@@ -164,8 +164,8 @@ input[type="checkbox"] {
 
 /* 이미지 크기 조정 */
 .img {
-   width: 150px;
-   height: 250px;
+    max-width: 100%;
+    height: auto;
 }
 
 .button1 input {
@@ -180,6 +180,27 @@ input[type="checkbox"] {
     font-size: 20px;
     margin-right: 15px;
 }
+
+.margin-img {
+    width: 100%;
+    height: 20px; /* Adjust the height to control spacing between rows */
+    clear: both;
+}
+
+.list-group-zzim {
+    width: calc(25% - 10px); /* 그림자 설정 */
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.list-group-zzim a {
+    display: block;
+    text-decoration: none;
+}
+
+
 
 
 
