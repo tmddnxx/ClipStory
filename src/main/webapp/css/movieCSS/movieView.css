@@ -134,9 +134,24 @@
     max-height: 100%;
     padding-left: 200px;
 }
+.castInfo div{
+    display: flex;
+    flex-direction: column;
+}
+.crew-name-p{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+.cast-role-p{
+    text-align: center;
+    color: #b7b7b7;
+    font-size: 16px;
+}
 .castPhoto {
     width: 200px;
     height: 200px;
+    margin-right: 5%;
 }
 /* 미디어(예고편, 포토) */
 .media {
@@ -148,8 +163,9 @@
     padding-left: 200px;
 }
 .mediaPhoto {
-    width: 250px;
+    width: 300px;
     height: 250px;
+    margin-right: 5%;
 }
 
 /* 리뷰 폼*/

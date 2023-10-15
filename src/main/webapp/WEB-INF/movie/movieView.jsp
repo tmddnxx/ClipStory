@@ -8,9 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <%--    <script type="text/javascript" src="../../js/movieJS/movieView.js?after"></script>--%>
-    <script src="/js/movieJS/movieView.js" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="../../css/movieCSS/movieView.css?after" rel="stylesheet" type="text/css">
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <link href="../../css/movieCSS/movieView.css" rel="stylesheet" type="text/css">
     <title>영화 상세 페이지</title>
 </head>
 <%
@@ -93,25 +92,28 @@
                 <span class="InfoTitle">주요 정보</span><br>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
-                <br>
+            <br>
             <%-- 출연 제작 --%>
-                <span class="infoTitle">출연 / 제작</span>
-            <div class="castInfo">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-            </div>
+            <span class="infoTitle">출연 / 제작</span>
+                <br>
+            <%-- 캐스트 목록 출력--%>
+                <div class="castInfo">
+                    <c:forEach var="castDTO" items="${castList}">
+                        <div class="castInfo-div">
+                            <img class="loaded-lg castPhoto" src="${castDTO.crewImg}">
+                            <p class="crew-name-p">${castDTO.crewName}</p>
+                            <p class="cast-role-p">${castDTO.castRole}</p>
+                        </div>
+                    </c:forEach>
+                </div>
                 <br>
             <%-- 미디어 --%>
                 <span class="infoTitle">예고편 / 포토</span><br>
+            <%--      포토 출력          --%>
             <div class="media">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
+                <c:forEach var="photoDTO" items="${photoList}">
+                    <img class="loaded-lg mediaPhoto" src="${photoDTO.photoImg}">
+                </c:forEach>
             </div>
                 <br>
             <!-- 리뷰 목록 출력 -->
@@ -167,5 +169,6 @@
     </div>
 </div>
 <jsp:include page="/inc/footer.jsp"/>
+<script src="/js/movieJS/movieView.js" defer></script>
 </body>
 </html>

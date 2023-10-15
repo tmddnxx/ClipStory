@@ -14,30 +14,6 @@ import java.util.List;
 @Log4j2
 public class MyPageDAO {
 
-    private MemberDAO MemberDTO;
-
-
-    public MemberDAO viewProfile(String memberId) throws Exception { // 프로필 보기
-        String sql = "select * FROM `member` WHERE `memberId` = ?";
-
-        MemberDTO memberDTO = null;
-
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,memberId);
-        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-
-        if(resultSet.next()){
-            memberDTO = memberDTO.builder()
-                    .memberId(resultSet.getString("memberId"))
-                    .name(resultSet.getString("name"))
-                    .nickName(resultSet.getString("nickName"))
-                    .zzimCnt(resultSet.getInt("zzim"))
-                    .joinDate(String.valueOf(resultSet.getTimestamp("joinDate")))
-                    .build();
-        }
-        return MemberDTO;
-    }
     public List<BoardDTO> viewMyContent(String memberId) throws Exception { // 내 작성글 
         String sql = "select * FROM `board` WHERE `memberId` = ?";
 
@@ -62,8 +38,6 @@ public class MyPageDAO {
         }
         return boardList;
     }
-
-
 
     public List<CommentDTO> viewMyComment(String memberId) throws Exception { // 내 댓글
         String sql = "select * FROM `comment` WHERE `memberId` = ?";
@@ -112,6 +86,7 @@ public class MyPageDAO {
         }
         return reviewList;
     }
+
     public List<MovieDTO> viewMyZZim(String memberId) throws Exception { // 내 찜
         String sql = "select m.* from zzim z join movie m on m.movieNo = z.movieNo where z.memberId = ?";
         List<MovieDTO> myZZimList = new ArrayList<>();

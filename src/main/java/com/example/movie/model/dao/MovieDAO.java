@@ -1,5 +1,6 @@
 package com.example.movie.model.dao;
 
+import com.example.movie.model.dto.CastDTO;
 import com.example.movie.model.dto.CrewDTO;
 import com.example.movie.model.dto.MovieDTO;
 import com.example.movie.model.dto.PhotoDTO;
@@ -156,6 +157,7 @@ public class MovieDAO {
         }
     }
 
+    // 해당 영화 찜등록 여부
     public boolean selectMovieLike(int movieNo, String memberId) throws SQLException {
         String sql = "select * FROM `zzim` WHERE `memberId` = ? and `movieNo` = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -169,6 +171,7 @@ public class MovieDAO {
             return true;
         return false;
     }
+    // 찜 등록
     public boolean insertMovieLike(int movieNo, String memberId) throws SQLException {
         String sql = "INSERT INTO `zzim` VALUES (?, ?) ";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -178,7 +181,7 @@ public class MovieDAO {
 
         return preparedStatement.executeUpdate() == 1;
     }
-
+    // 찜 제거
     public boolean removeMovieLike(int movieNo, String memberId) throws  SQLException {
         String sql = "DELETE from `zzim` where memberId = ? and movieNo = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -223,10 +226,50 @@ public class MovieDAO {
     }
 
     // 출연진 가져오기
-//    public List<CrewDTO> getCasts(int movieNo) throws Exception{
-//        String sql = "SELECT crew.crewName, crew.crewImg, cast.castRole FROM crew JOIN cast ON crew.crewNo = cast.crewNo WHERE cast.movieNo = ?";
-//
-//    }
+    public List<CastDTO> getCasts(int movieNo) throws Exception{
+        String sql = "SELECT crew.crewName, crew.crewImg, cast.* FROM crew JOIN cast ON crew.crewNo = cast.crewNo WHERE cast.movieNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, movieNo);
+
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<CastDTO> castList = new ArrayList<>();
+        while(resultSet.next()){
+            CastDTO castDTO = CastDTO.builder()
+                    .crewName(resultSet.getString("crewName"))
+                    .crewImg(resultSet.getString("crewImg"))
+                    .crewNo(resultSet.getInt("crewNo"))
+                    .movieNo(resultSet.getInt("movieNo"))
+                    .castRole(resultSet.getString("castRole"))
+                    .build();
+
+            castList.add(castDTO);
+        }
+
+        return castList;
+    }
+    // 포토 가져오기
+    public List<PhotoDTO> getPhoto(int movieNo) throws Exception{
+        String sql = "SELECT * from photo where movieNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, movieNo);
+
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<PhotoDTO> photoList = new ArrayList<>();
+        while(resultSet.next()){
+            PhotoDTO photoDTO = PhotoDTO.builder()
+                    .photoImg(resultSet.getString("photoImg"))
+                    .photoNo(resultSet.getInt("photoNo"))
+                    .movieNo(resultSet.getInt("movieNo"))
+                    .build();
+
+            photoList.add(photoDTO);
+        }
+        return photoList;
+    }
 
     // 배우|감독 추가
     public void insertCrew(CrewDTO crewDTO) throws Exception{

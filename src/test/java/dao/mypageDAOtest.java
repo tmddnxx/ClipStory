@@ -19,27 +19,27 @@ public class mypageDAOtest {
 
     @Test
     public void getMyPageBoardTest() throws Exception {
-        myPageDAO.viewMyContent("1111");
+        myPageDAO.viewMyContent("test");
         log.info(myPageDAO.viewMyContent("1111"));
-        List<BoardDTO> myBoardList = myPageDAO.viewMyContent("1111");
+        List<BoardDTO> myBoardList = myPageDAO.viewMyContent("test");
         for(BoardDTO boardDTO : myBoardList){
             log.info(boardDTO);
         }
     }
     @Test
     public void getMyPageCommentTest() throws Exception {
-        myPageDAO.viewMyComment("1111");
+        myPageDAO.viewMyComment("test");
         log.info(myPageDAO.viewMyComment("1111"));
-        List<CommentDTO> myCommentList = myPageDAO.viewMyComment("1111");
+        List<CommentDTO> myCommentList = myPageDAO.viewMyComment("test");
         for(CommentDTO commentDTO : myCommentList){
             log.info(commentDTO);
         }
     }
     @Test
     public void getMyPageReviewTest() throws Exception {
-        myPageDAO.viewMyReview("1111");
+        myPageDAO.viewMyReview("test");
         log.info(myPageDAO.viewMyReview("1111"));
-        List<ReviewDTO> myReviewList = myPageDAO.viewMyReview("1111");
+        List<ReviewDTO> myReviewList = myPageDAO.viewMyReview("test");
         for(ReviewDTO reviewDTO : myReviewList){
             log.info(reviewDTO);
         }
@@ -47,9 +47,9 @@ public class mypageDAOtest {
 
     @Test
     public void getMyPageZZimTest() throws Exception {
-        myPageDAO.viewMyZZim("1111");
+        myPageDAO.viewMyZZim("test");
         log.info(myPageDAO.viewMyZZim("1111"));
-        List<MovieDTO> myZZimList = (List<MovieDTO>) myPageDAO.viewMyZZim("1111");
+        List<MovieDTO> myZZimList = (List<MovieDTO>) myPageDAO.viewMyZZim("test");
         for (MovieDTO movieDTO : myZZimList) {
             log.info(myZZimList);
         }
