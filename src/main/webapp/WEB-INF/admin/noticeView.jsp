@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="wrap">
-    <jsp:include page="../../inc/header.jsp"/>
+    <jsp:include page="./inc/adminHeader.jsp"/>
     <div class="container w-75 mt-5 mx-auto main">
         <h2>${adminBoardDTO.title}</h2>
         <hr>

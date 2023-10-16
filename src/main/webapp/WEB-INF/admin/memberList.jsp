@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="./css/common.css" rel="stylesheet">
+    <link href="/css/boardCSS/boardGet.css" rel="stylesheet">
     <title>회원 목록</title>
 </head>
 <body>
-<link href="./css/common.css" rel="stylesheet">
-<link href="/css/boardCSS/boardGet.css" rel="stylesheet">
+<jsp:include page="./inc/adminHeader.jsp"/>
 <div class="AdminMember">
     <h2>회원 목록</h2>
     <form name="frmAdminMember" action="/admin?action=memberList" method="post">

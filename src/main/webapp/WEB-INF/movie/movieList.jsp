@@ -71,6 +71,6 @@
         </div>
     </c:if>
 </div>
-<jsp:include page="inc/movieFooter.jsp"/>
+<jsp:include page="../../inc/footer.jsp"/>
 </body>
 </html>

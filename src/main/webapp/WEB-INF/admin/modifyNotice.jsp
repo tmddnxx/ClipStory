@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="wrap">
-    <jsp:include page="../../inc/header.jsp"/>
+    <jsp:include page="./inc/adminHeader.jsp"/>
     <div class="main">
         <h3 id="title">공지사항 수정</h3>
         <hr>

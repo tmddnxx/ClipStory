@@ -4,6 +4,7 @@ package com.example.movie.model.dao;
 import com.example.movie.model.dto.AdminBoardDTO;
 import com.example.movie.model.dto.AdminDTO;
 import com.example.movie.model.dto.MemberDTO;
+import com.example.movie.model.dto.MovieDTO;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
 
@@ -247,13 +248,93 @@ public List<MemberDTO> viewMyMember(String memberId) throws Exception { // 회�
     /* 게시판 메서드 작업 끝 */
 /* ---------------------------------------------------------------------------------------------------- */
 
+//    movieList 복붙 - 수홍
+// 영화 목록 전체 출력(관리자용)
+    public List<MovieDTO> adminSelectAll() throws SQLException {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        List<MovieDTO> movieList = new ArrayList<>();
 
+        String sql = "SELECT * FROM movie";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
 
+        while(resultSet.next()) {
+            MovieDTO movieDTO = MovieDTO.builder()
+                    .movieNo(resultSet.getInt("movieNo"))
+                    .movieName(resultSet.getString("movieName"))
+                    .director(resultSet.getString("director"))
+                    .actor(resultSet.getString("actor"))
+                    .releaseDate(resultSet.getString("releaseDate"))
+                    .region(resultSet.getString("region"))
+                    .genre(resultSet.getString("genre"))
+                    .audience(resultSet.getInt("audience"))
+                    .ranking(resultSet.getInt("ranking"))
+                    .runningtime(resultSet.getString("runningtime"))
+                    .outline(resultSet.getString("outline"))
+                    .poster(resultSet.getString("poster"))
+                    .mo(resultSet.getString("mo"))
+                    .avgScore(resultSet.getFloat("avgScore"))
+                    .build();
+            movieList.add(movieDTO);
+        }
+        return movieList;
+    }
+    //    removeMovie 복붙  - 수홍
+// 해당 컨텐츠 삭제하는 메소드 (PK기준으로 선택)(관리자용)
+    public void adminDeleteOne(int movieNo) throws SQLException {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
 
-//    movieList 수정 - 수홍
-//    removeMovie 복붙  - 수홍
-//    modifyMovie 복붙 -수홍
-//    movieView 복붙 - 수홍
-//    reviewList 복붙 - 수홍
-//    removeReview 복붙 - 수홍
+        String sql = "DELETE FROM movie WHERE movieNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, movieNo);
+        if(preparedStatement.executeUpdate() == 0) {
+            throw new SQLException("DB에러");
+        }
+    }
+    //    modifyMovie 복붙 -수홍
+// 영화 수정 메소드
+    public void adminModifyMovie(MovieDTO movieDTO) throws Exception {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        String sql = "update movie set movieName = ?,  director = ?, actor = ?, " +
+                "releaseDate = ?, region = ?, genre = ?, audience = ?, ranking = ?, runningtime = ?, " +
+                "outline = ?, poster = ?, mo = ? where movieNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, movieDTO.getMovieName());
+        preparedStatement.setString(2, movieDTO.getDirector());
+        preparedStatement.setString(3, movieDTO.getActor());
+        preparedStatement.setString(4, movieDTO.getReleaseDate());
+        preparedStatement.setString(5, movieDTO.getRegion());
+        preparedStatement.setString(6, movieDTO.getGenre());
+        preparedStatement.setInt(7, movieDTO.getAudience());
+        preparedStatement.setInt(8,movieDTO.getRanking());
+        preparedStatement.setString(9, movieDTO.getRunningtime());
+        preparedStatement.setString(10, movieDTO.getOutline());
+        preparedStatement.setString(11, movieDTO.getPoster());
+        preparedStatement.setString(12, movieDTO.getMo());
+        preparedStatement.setInt(13, movieDTO.getMovieNo());
+        preparedStatement.executeUpdate();
+    }
+
+    // 영화 추가
+    public void adminAddMovie(MovieDTO movieDTO) throws Exception {
+        String sql = "INSERT INTO movie (movieName, director, actor, releaseDate,"
+                + " region, genre, audience, ranking, runningtime, outline, poster, mo, avgScore)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, movieDTO.getMovieName());
+        preparedStatement.setString(2, movieDTO.getDirector());
+        preparedStatement.setString(3, movieDTO.getActor());
+        preparedStatement.setString(4, movieDTO.getReleaseDate());
+        preparedStatement.setString(5, movieDTO.getRegion());
+        preparedStatement.setString(6, movieDTO.getGenre());
+        preparedStatement.setInt(7, movieDTO.getAudience());
+        preparedStatement.setInt(8, movieDTO.getRanking());
+        preparedStatement.setString(9, movieDTO.getRunningtime());
+        preparedStatement.setString(10, movieDTO.getOutline());
+        preparedStatement.setString(11, movieDTO.getPoster());
+        preparedStatement.setString(12, movieDTO.getMo());
+        preparedStatement.setFloat(13, movieDTO.getAvgScore());
+        preparedStatement.executeUpdate();
+    }
 }

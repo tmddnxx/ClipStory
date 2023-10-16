@@ -36,7 +36,7 @@
 </head>
 <body>
 <div class="wrap">
-  <jsp:include page="../../inc/header.jsp"/>
+  <jsp:include page="./inc/adminHeader.jsp"/>
   <div class="main">
     <h2>공지사항 목록</h2>
     <ul class="list-group">

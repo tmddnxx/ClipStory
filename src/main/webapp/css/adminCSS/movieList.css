@@ -1,0 +1,44 @@
+.outContainer { /*제일 바깥 container div*/
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.contentList { /*영화 리스트 container div*/
+    display: flex;
+    margin-top: 100px;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.contentTitle {
+    margin-left: 20px;
+    color: white;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+.contentCnt {
+    font-size: 30pt;
+}
+
+.oneMovieSpan {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.oneBox{ /*영화 1개 정보 div*/
+    width: 100%;
+    background: #dddddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.badge {
+    font-size: 18px;
+}

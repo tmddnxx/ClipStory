@@ -13,7 +13,7 @@
 %>
 <body>
 <div class="wrap">
-    <jsp:include page="../../inc/header.jsp"/>
+    <jsp:include page="./inc/adminHeader.jsp"/>
     <div class="write-content" style="padding-top: 15vh">
         <form method="post" action="/admin?action=noticeAdd" class="writeForm">
             <div class="title-box">

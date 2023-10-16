@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="wrap">
-  <jsp:include page="../../inc/header.jsp"/>
+  <jsp:include page="./inc/adminHeader.jsp"/>
   <div class="main">
     <h2>${boardDTO.title}</h2>
     <hr>

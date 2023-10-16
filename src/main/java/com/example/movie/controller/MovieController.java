@@ -1,6 +1,5 @@
 package com.example.movie.controller;
 
-import com.example.movie.service.MemberService;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.ReviewService;
 import lombok.extern.log4j.Log4j2;
@@ -34,7 +33,7 @@ public class MovieController extends HttpServlet {
 
         String action = req.getParameter("action");
         if (action == null) {
-            action = "list";
+            action = "main";
         }
 
         switch (action) {
@@ -48,17 +47,11 @@ public class MovieController extends HttpServlet {
                 movieService.listOtt(req);
                 req.getRequestDispatcher("/WEB-INF/movie/movieList.jsp").forward(req, resp);
                 break;
-            case "remove":
-                movieService.removeMovieDTO(req);
-                resp.sendRedirect("list.movie?action=list");
-                break;
             case "view":
-                movieService.getMovieDTO(req);
+                movieService.getMovie(req);
                 try {
                     reviewService.getReviews(req);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (ClassNotFoundException e) {
+                } catch (SQLException | ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
                 req.getRequestDispatcher("/WEB-INF/movie/movieView.jsp").forward(req, resp);

@@ -1,6 +1,7 @@
 package com.example.movie.service;
 
 import com.example.movie.model.dao.AdminDAO;
+import com.example.movie.model.dao.MemberDAO;
 import com.example.movie.model.dto.AdminBoardDTO;
 import com.example.movie.model.dto.AdminDTO;
 import com.example.movie.model.dto.MemberDTO;
@@ -279,10 +280,56 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
 
 
 
-//    movieList 수정 - 수홍
-//    removeMovie 복붙  - 수홍
-//    modifyMovie 복붙 -수홍
-//    movieView 복붙 - 수홍
-//    reviewList 복붙 - 수홍
-//    removeReview 복붙 - 수홍
+    // movieList - 수홍
+// movieList.jsp에서 영화 목록을 보여주기 위한 요청을 처리하는 메소드(관리자용)
+    public void adminMovieListAll(HttpServletRequest request) {
+        List<MovieDTO> movieList;
+        try {
+            movieList = adminDAO.adminSelectAll();
+            request.setAttribute("movieList", movieList);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            log.info("영화 목록 생성 과정에서 문제 발생");
+            request.setAttribute("error", "영화 목록이 정상적으로 처리되지 않았습니다.");
+        }
+    }
+    // removeMovie - 수홍
+// 영화 삭제 메소드(관리자용)
+    public void adminRemoveMovie (HttpServletRequest request) {
+        int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+        try {
+            adminDAO.adminDeleteOne(movieNo);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            log.info("영화를 삭제하는 과정에서 문제 발생");
+            request.setAttribute("error", "영화를 정상적으로 삭제하지 못했습니다.");
+        }
+    }
+    // modifyMovie - 수홍
+// 영화 수정 메소드(관리자용)
+    public void adminModifyMovie(HttpServletRequest request) {
+        MovieDTO movieDTO = new MovieDTO();
+
+        movieDTO.setMovieNo(Integer.parseInt(request.getParameter("movieNo")));
+        movieDTO.setMovieName(request.getParameter("movieName"));
+        movieDTO.setDirector(request.getParameter("director"));
+        movieDTO.setActor(request.getParameter("actor"));
+        movieDTO.setReleaseDate(request.getParameter("releaseDate"));
+        movieDTO.setRegion(request.getParameter("region"));
+        movieDTO.setGenre(request.getParameter("genre"));
+        movieDTO.setAudience(Integer.parseInt(request.getParameter("audience")));
+        movieDTO.setRanking(Integer.parseInt(request.getParameter("ranking")));
+        movieDTO.setRunningtime(request.getParameter("runnintime"));
+        movieDTO.setOutline(request.getParameter("outline"));
+        movieDTO.setPoster(request.getParameter("poster"));
+        movieDTO.setMo(request.getParameter("mo"));
+
+        try {
+            adminDAO.adminModifyMovie(movieDTO);
+            log.info(movieDTO);
+        } catch (Exception e){
+            log.info(e.getMessage());
+            request.setAttribute("error", "수정 오류");
+        }
+    }
 }

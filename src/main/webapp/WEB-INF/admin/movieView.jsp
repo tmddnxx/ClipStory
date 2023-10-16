@@ -10,14 +10,14 @@
     <%--    <script type="text/javascript" src="../../js/movieJS/movieView.js?after"></script>--%>
     <script src="/js/movieJS/movieView.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="../../css/movieCSS/movieView.css?after" rel="stylesheet" type="text/css">
+    <link href="../../css/adminCSS/movieView.css?after" rel="stylesheet" type="text/css">
     <title>관리자 영화 상세 페이지</title>
 </head>
 <%
     boolean zzim = (boolean) request.getAttribute("zzim");
 %>
 <body>
-<jsp:include page="inc/movieMainHeader.jsp"/>
+<jsp:include page="inc/adminHeader.jsp"/>
 <div class="outerDiv" style="background-image: url('${movieDTO.poster}');">
     <div class="blurDiv">
         <%-- 영화 상세 내용 영역 --%>
@@ -100,15 +100,11 @@
                 <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
                 <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
                 <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
             </div>
             <br>
             <%-- 미디어 --%>
             <span class="infoTitle">예고편 / 포토</span><br>
             <div class="media">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
                 <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
                 <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
                 <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
@@ -158,14 +154,12 @@
             </form>
             <div class="review-more"><span class="review-more-btn" id="more-btn">더보기</span></div>
         </div>
-        <div class="goMain">
-            <a href="/main.movie?action=main" class="home-btn">메인</a>
-            <%--            <br>--%>
-            <%--            <br>--%>
-            <%--            <a href="javascript:history.back()" class="back-btn"><< 뒤로가기</a>--%>
+        <div class="goMain" style="margin: 20px 0px 20px 0px;">
+            <a href="/admin?action=main" class="home-btn">메인</a>
+            <a href="/admin?action=movieList" class="home-btn" style="margin: 0px 5px 0px 5px">영화목록</a>
+            <a href="/admin?action=modifyMovie?movieNo=${movieDTO.movieNo}" class="home-btn">영화수정</a>
         </div>
     </div>
 </div>
-<jsp:include page="/inc/footer.jsp"/>
 </body>
 </html>

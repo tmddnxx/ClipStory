@@ -3,14 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="/css/memberCSS/register.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
 <%--    <script src="/js/memberJS/register.js" defer></script>--%>
     <title>회원 가입</title>
 </head>
 <body>
-<jsp:include page="../../inc/header.jsp"/>
+<jsp:include page="./inc/adminHeader.jsp"/>
 <main>
     <section>
         <div id="register-title">
