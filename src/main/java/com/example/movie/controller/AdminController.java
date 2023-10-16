@@ -148,6 +148,16 @@ public class AdminController extends HttpServlet {
             case "commentRemove" : // 댓글삭제
 
             /*----------- 댓글 컨트롤러 끝-----------*/
+
+            /* 멤버 리스트 컨트롤러 */
+            case "memberList" :
+                try {
+                    adminService.getMemberList(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                req.getRequestDispatcher("admin?action=memberList").forward(req,resp);
+                break;
         }
     }
 }
