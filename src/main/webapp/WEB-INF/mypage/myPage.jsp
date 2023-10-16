@@ -59,8 +59,8 @@
                 <div class="flex_my">
                 <form action="#" >
                   <!--label 태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
-                  <label for="chk${boardDTO.contentNo}">
-                    <input type="checkbox" name="selectedItems1" class="button chkButton" value="${boardDTO.contentNo}" id="chk${boardDTO.contentNo}">
+                  <label for="chk-board-${boardDTO.contentNo}">
+                    <input type="checkbox" name="selectedItems1" class="button chkButton1" value="${boardDTO.contentNo}" id="chk-board-${boardDTO.contentNo}">
                     <i class="circle"></i>
                   </label>
                 </form>
@@ -97,8 +97,8 @@
                 <div class="flex_my">
                 <form action="#" >
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
-                  <label for="chk${commentDTO.commentNo}">
-                    <input type="checkbox" name="selectedItems2" class="button chkButton" value="${commentDTO.commentNo}" id="chk${commentDTO.commentNo}">
+                  <label for="chk-comment-${commentDTO.commentNo}">
+                    <input type="checkbox" name="selectedItems2" class="button chkButton2" value="${commentDTO.commentNo}" id="chk-comment-${commentDTO.commentNo}">
                     <i class="circle"></i>
                   </label>
                 </form>
@@ -134,8 +134,8 @@
                 <div class="flex_my">
                 <form action="#">
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
-                  <label for="chk${reviewDTO.reviewNo}">
-                    <input type="checkbox" name="selectedItems3" class="button chkButton" value="${reviewDTO.reviewNo}" id="chk${reviewDTO.reviewNo}">
+                  <label for="chk-review-${reviewDTO.reviewNo}">
+                    <input type="checkbox" name="selectedItems3" class="button chkButton3" value="${reviewDTO.reviewNo}" id="chk-review-${reviewDTO.reviewNo}">
                     <i class="circle"></i>
                   </label>
                 </form>
