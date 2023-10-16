@@ -1,3 +1,5 @@
+<%@ page import="com.example.movie.model.dto.MemberDTO" %>
+<%@ page import="com.example.movie.model.dto.AdminDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -5,6 +7,17 @@
 <head>
     <title>관리자 페이지</title>
 </head>
+<%
+    AdminDTO adminDTO = (AdminDTO) session.getAttribute("superInfo");
+    if(adminDTO == null){
+%>
+<script>
+    alert('관리자 권한이 필요한 서비스입니다');
+    location.href="/login/admin";
+</script>
+<%
+    }
+%>
 <body>
     <form name="frmAdminMain" action="/admin/main" method="post">
         <div style="position: fixed; margin-top: -100px;">

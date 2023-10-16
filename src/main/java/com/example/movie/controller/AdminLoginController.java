@@ -36,7 +36,7 @@ public class AdminLoginController extends HttpServlet {
                 session.setAttribute("superInfo", adminDTO);
                 session.setAttribute("superId", adminDTO.getSuperId());
                 log.info(adminDTO);
-                resp.sendRedirect("/WEB-INF/admin/main.jsp");
+                resp.sendRedirect("/admin");
                 return;
             }
         } catch (Exception e) {
