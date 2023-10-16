@@ -35,8 +35,6 @@ public class AdminService {
         log.info("file name : " + fileName);
         return fileName;
     }
-public class AdminService {
-    private final AdminDAO adminDAO;
 //    addCrew // 제작진 제작 - 은석
     public void adminAddCrew(HttpServletRequest request){
 
@@ -148,10 +146,6 @@ public class AdminService {
 
 
     }
-//    addCast // 출연정보 제작 - 은석
-//    addPhoto 제작 - 은석
-//    addMovie 수정 - 은석
-
 
 //    (super)login 복붙 - 종원 // 새로운 관리자 전용 session 생성
 
@@ -172,15 +166,9 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
     return memberDTOList;
 }
 
-
-
+    /*---------- 게시판 메서드 작업 시작 -------------*/
     static final int LISTCOUNT = 10; // 페이지당 게시믈 수 제한
     static final int NOTIECOUNT = 10; // 공지사항 제한 갯수
-
-
-    public AdminService(){ adminDAO = new AdminDAO();}
-
-    /*---------- 게시판 메서드 작업 시작 -------------*/
 
     // 공지사항 전체 목록
     public void adminListNotice(HttpServletRequest request) throws Exception {
@@ -224,7 +212,6 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
             request.setAttribute("error" , "게시글 목록이 정상적으로 생성되지 않았습니다");
         }
     }
-
 
     // 공지사항 상세뷰
     public void adminGetNotice(HttpServletRequest request){
