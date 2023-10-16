@@ -109,6 +109,7 @@
     <div class="form-box">
       <form name="frmList" action="/admin?action=noticeList" method="get">
         <input type="hidden" name="pageNum" value="<%=pageNum%>">
+        <input type="hidden" name="action" value="noticeList">
         <input type="hidden" name="num">
         <table>
           <tr>

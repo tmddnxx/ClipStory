@@ -1,5 +1,6 @@
 <%@ page import="com.example.movie.model.dto.MemberDTO" %>
 <%@ page import="com.example.movie.model.dto.AdminBoardDTO" %>
+<%@ page import="com.example.movie.model.dto.AdminDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ko">
 <head>
@@ -10,6 +11,7 @@
 </head>
 <%
     AdminBoardDTO adminBoardDTO = (AdminBoardDTO) request.getAttribute("adminBoardDTO");
+    AdminDTO adminDTO = (AdminDTO) session.getAttribute("superInfo");
 %>
 <body>
 <div class="wrap">
@@ -24,8 +26,8 @@
                 <label class="form-label">내용</label>
                 <textarea cols="50" rows="5" name="content" class="form-control"></textarea>
             </div>
-            <input type="text" name="superId" class="form-control" value="${adminBoardDTO.superId}" hidden>
-            <input type="text" name="superName" class="form-control" value="${adminBoardDTO.superName}" hidden>
+            <input type="text" name="superId" class="form-control" value="${superInfo.superId}" hidden>
+            <input type="text" name="superName" class="form-control" value="${superInfo.superName}" hidden>
             <div class="write-btnbox">
                 <button type="submit" class="write-submit-btn">저장</button>
                 <a href="/admin?action=noticeList" class="write-back-btn" onclick="return confirm('입력하신 내용이 저장되지 않았습니다.');">뒤로가기</a>

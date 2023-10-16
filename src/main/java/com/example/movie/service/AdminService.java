@@ -220,6 +220,7 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
 
         try{
             AdminBoardDTO adminBoardDTO = adminDAO.adminSelectNotice(cno);
+            request.setAttribute("adminBoardDTO", adminBoardDTO);
         } catch (Exception e){
             log.error(e.getMessage());
             log.info("공지사항을 가져오는 과정에서 에러");
@@ -233,7 +234,7 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
 
         adminBoardDTO.setTitle(request.getParameter("title"));
         adminBoardDTO.setContent(request.getParameter("content"));
-        adminBoardDTO.setSuperId(request.getParameter("super    Id"));
+        adminBoardDTO.setSuperId(request.getParameter("superId"));
         adminBoardDTO.setSuperName(request.getParameter("superName"));
 
         log.info(adminBoardDTO);

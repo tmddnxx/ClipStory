@@ -103,6 +103,7 @@ public class BoardController extends HttpServlet {
             case "modify" : // 게시물 수정
                 boardService.modifyBoard(req);
                 resp.sendRedirect("list.board?action=list");
+                break;
         }
     }
 }

@@ -124,8 +124,9 @@
 
     <%--검색창--%>
     <div class="form-box">
-      <form name="frmList" action="/admin/boardList" method="get">
+      <form name="frmList" action="/admin" method="get">
         <input type="hidden" name="pageNum" value="<%=pageNum%>">
+        <input type="hidden" name="action" value="boardList">
         <input type="hidden" name="num">
         <table>
           <tr>

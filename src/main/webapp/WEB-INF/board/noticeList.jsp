@@ -31,20 +31,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/boardCSS/boardList.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
-    <script src="/js/boardJS/boardList.js" defer></script>
-    <title>게시판 목록</title>
+    <script src="/js/boardJS/noticeList.js" defer></script>
+    <title>공지사항 목록</title>
 </head>
 <body>
 <div class="wrap">
     <jsp:include page="../../inc/header.jsp"/>
     <div class="container w-75 mt-5 mx-auto main">
-        <h2>게시판 목록</h2>
+        <h2>공지사항 목록</h2>
         <ul class="list-group">
             <c:forEach var="adminBoardDTO" items="${adminBoardDTOList}" varStatus="status">
                 <a href="get.board?action=getNotice&cno=${adminBoardDTO.cno}" class="list-a">
                     <li class="list">
                         <div class="first">
-                            &nbsp;[<%=(totalRecord--)-(pageNum-1)*limit%>] [공지사항] ${adminBoardDTO.title}
+                            &nbsp;[<%=(totalRecord--)-(pageNum-1)*limit%>] ${adminBoardDTO.title}
                         </div>
                         <p>${adminBoardDTO.addDate}</p>
                         <p>${adminBoardDTO.superName}</p>
@@ -99,6 +99,7 @@
         <div class="form-box">
             <form name="frmList" action="./list.board?action=noticeList" method="get">
                 <input type="hidden" name="pageNum" value="<%=pageNum%>">
+                <input type="hidden" name="action" value="noticeList">
                 <input type="hidden" name="num">
                 <table>
                     <tr>

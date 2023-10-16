@@ -137,11 +137,11 @@ public class AdminController extends HttpServlet {
 
             case "noticeGet" : // 공지사항 상세 뷰
                 adminService.adminGetNotice(req);
-                req.getRequestDispatcher("WEB-INF/admin/noticeView.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/admin/noticeView.jsp").forward(req, resp);
                 break;
 
             case "noticeAddView" : // 공지사항 글쓰기 뷰
-                req.getRequestDispatcher("WEB-INF/admin/addNotice.jsp").forward(req, resp);
+                req.getRequestDispatcher("/WEB-INF/admin/addNotice.jsp").forward(req, resp);
                 break;
 
             case "noticeAdd" : // 공지사항 추가
@@ -155,6 +155,7 @@ public class AdminController extends HttpServlet {
                 break;
 
             case "noticeModifyView" : // 공지사항 수정뷰
+                adminService.adminGetNotice(req);
                 req.getRequestDispatcher("/WEB-INF/admin/modifyNotice.jsp").forward(req, resp);
                 break;
 

@@ -17,7 +17,7 @@
     <div class="main">
         <h3 id="title">공지사항 수정</h3>
         <hr>
-        <p>${adminBoardDTO.nickName}</p>
+        <p>${adminBoardDTO.superName}</p>
         <div class="modify-content">
             <form method="post" action="/admin?action=noticeModify&cno=${adminBoardDTO.cno}">
                 <div class="title-box">

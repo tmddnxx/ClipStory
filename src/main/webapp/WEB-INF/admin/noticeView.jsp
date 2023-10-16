@@ -34,10 +34,10 @@
         </div>
         <hr>
         <div>
-            <form name="frmView" method="post">
-                <input type="hidden" name="pageNum" value="<%=pageNum%>">
-                <input type="hidden" name="num" value="<%=adminBoardDTO.getCno()%>">
-            </form>
+<%--            <form name="frmView" method="post">--%>
+<%--                <input type="hidden" name="pageNum" value="<%=pageNum%>">--%>
+<%--                <input type="hidden" name="num" value="<%=adminBoardDTO.getCno()%>">--%>
+<%--            </form>--%>
             <div class="btn-box">
                 <a href="/admin?action=noticeModifyView&cno=${adminBoardDTO.cno}" class="modify-btn" >수정</a>
                 <a href="/admin?action=noticeRemove&cno=${adminBoardDTO.cno}" onclick="return confirm('정말 삭제하시겠습니까?');" class="remove-btn">삭제 </a>
