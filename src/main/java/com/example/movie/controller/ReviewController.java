@@ -30,6 +30,7 @@ public class ReviewController extends HttpServlet {
         String RequestURI = req.getRequestURI();
         String contextPath = req.getContextPath();
         String command = RequestURI.substring(contextPath.length());
+        resp.setCharacterEncoding("UTF-8");
 
         log.info("command : " + command);
 
@@ -57,6 +58,7 @@ public class ReviewController extends HttpServlet {
                     // collection List를 json으로 변환.
                     JSONArray jsonArray = new JSONArray(); // 목록을 저장해야 되서 JSONArray 사용.
                     for (ReviewDTO reviewDTO : reviewDTOS) {
+                        log.info("리뷰 : " + reviewDTO);
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("reviewNo", reviewDTO.getReviewNo());
                         jsonObject.put("nickName", reviewDTO.getNickName());

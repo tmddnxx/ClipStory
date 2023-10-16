@@ -169,6 +169,6 @@
     </div>
 </div>
 <jsp:include page="/inc/footer.jsp"/>
-<script src="/js/movieJS/movieView.js" defer></script>
+<script src="/js/movieJS/movieView.js" charset="UTF-8" defer></script>
 </body>
 </html>

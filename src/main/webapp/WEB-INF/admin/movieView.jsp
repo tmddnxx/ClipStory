@@ -95,19 +95,25 @@
             </div>
             <br>
             <%-- 출연 제작 --%>
-            <span class="infoTitle">출연 / 제작</span>
-            <div class="castInfo">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg castPhoto" src="../../css/movieCSS/img/img1235.jpg">
-            </div>
+                <span class="infoTitle">출연 / 제작</span>
+                <br>
+                <%-- 캐스트 목록 출력--%>
+                <div class="castInfo">
+                    <c:forEach var="castDTO" items="${castList}">
+                        <div class="castInfo-div">
+                            <img class="loaded-lg castPhoto" src="${castDTO.crewImg}">
+                            <p class="crew-name-p">${castDTO.crewName}</p>
+                            <p class="cast-role-p">${castDTO.castRole}</p>
+                        </div>
+                    </c:forEach>
+                </div>
             <br>
             <%-- 미디어 --%>
             <span class="infoTitle">예고편 / 포토</span><br>
             <div class="media">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
-                <img class="loaded-lg mediaPhoto" src="../../css/movieCSS/img/img1235.jpg">
+                <c:forEach var="photoDTO" items="${photoList}">
+                    <img class="loaded-lg mediaPhoto" src="${photoDTO.photoImg}">
+                </c:forEach>
             </div>
             <br>
             <!-- 리뷰 목록 출력 -->

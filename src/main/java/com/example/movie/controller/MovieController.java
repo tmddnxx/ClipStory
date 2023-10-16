@@ -16,9 +16,7 @@ import java.sql.SQLException;
 
 @WebServlet("*.movie")
 @Log4j2
-// 뉴스 이미지 파일 업로드 처리를 위해 @MultipartConfig를 추가
-// 최대 파일 크기와 저장 위치를 지정
-@MultipartConfig(maxFileSize = 2 * 1024 * 1024, location = "c:/upload")
+@MultipartConfig(maxFileSize = 2 * 1024 * 1024, location = "/upload")
 public class MovieController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

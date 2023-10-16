@@ -101,9 +101,9 @@
           <c:otherwise>
             <li class="nav-item nickName">[${loginInfo.nickName} 님]</li>
             <li class="nav-item"><a class="goContent" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket logout"></i></a></li>
+            <li class="nav-item"><a class="goContent" href="/list.mypage?action=list"><i class="fa-solid fa-house-user mypage"></i></a></li>
           </c:otherwise>
         </c:choose>
-        <li class="nav-item"><a class="goContent" href="/list.mypage?action=list"><i class="fa-solid fa-house-user mypage"></i></a></li>
       </ul>
     </div>
 </header>

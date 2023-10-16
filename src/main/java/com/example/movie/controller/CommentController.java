@@ -27,10 +27,11 @@ public class CommentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String RequestURI = req.getRequestURI();
         String contextPath = req.getContextPath();
         String command = RequestURI.substring(contextPath.length());
-
+        resp.setCharacterEncoding("UTF-8");
         log.info("command : " + command);
 
         switch (command){

@@ -2,8 +2,10 @@ package com.example.movie.service;
 
 import com.example.movie.model.dao.MemberDAO;
 import com.example.movie.model.dao.MovieDAO;
+import com.example.movie.model.dto.CastDTO;
 import com.example.movie.model.dto.CrewDTO;
 import com.example.movie.model.dto.MovieDTO;
+import com.example.movie.model.dto.PhotoDTO;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,12 +63,20 @@ public class MovieService {
         String memberId = (String) request.getSession().getAttribute("sessionId");
         try {
             MovieDTO movieDTO = movieDAO.selectOne(movieNo); // DB에서 해당 movieNo 값들을 호출
+            List<CastDTO> castList = movieDAO.getCasts(movieNo); // 출연진
+            List<PhotoDTO> photoList = movieDAO.getPhoto(movieNo); // 포토
             if(movieDAO.selectMovieLike(movieNo,memberId))
                 request.setAttribute("zzim", true);
             else
                 request.setAttribute("zzim", false);
             String[] actors = movieDTO.getActor().split("\\|");
             String[] directors = movieDTO.getDirector().split("\\|");
+            log.info("cast list : -----------------" +castList);
+            request.setAttribute("actors",actors); // 상단 배우이름
+            request.setAttribute("directors",directors); // 상단 감독 이름
+            request.setAttribute("movieDTO", movieDTO); // 영화 정보
+            request.setAttribute("castList",castList); // 출연,제작진 리스트
+            request.setAttribute("photoList",photoList); // 포토 리스트
             request.setAttribute("actors",actors);
             request.setAttribute("directors",directors);
             request.setAttribute("movieDTO", movieDTO);

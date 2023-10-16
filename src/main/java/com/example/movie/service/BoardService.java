@@ -45,6 +45,10 @@ public class BoardService {
        int totalRecord = boardDAO.getListCount(items, text);
        boardDTOList = boardDAO.selectAll(pageNum, limit, items, text);
 
+       for(BoardDTO boardDTO : boardDTOList){
+           log.info("board -------------------- : " + boardDTO.getTitle());
+       }
+
        int totalPage; //전체 페이지 계산
         if(totalRecord % limit == 0){
             totalPage = totalRecord /limit;

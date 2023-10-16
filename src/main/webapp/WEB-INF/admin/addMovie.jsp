@@ -13,7 +13,7 @@
 <jsp:include page="./inc/adminHeader.jsp"/>
 <main>
     <section>
-        <div id="register-title">
+        <div id="addMovie-title">
             <h3 class="head-title">영화 등록</h3>
         </div>
         <form name="frmMember" action="/admin?action=addMovieProcess" method="post" enctype="multipart/form-data">

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 public class AdminService {
@@ -44,6 +45,8 @@ public class AdminService {
             String fileName = this.getFileName(part);
             log.info("crewImg : " + fileName);
             if(fileName != null && !fileName.isEmpty()){
+                UUID uuid = UUID.randomUUID();
+                fileName = uuid + fileName;
                 log.info("crewImg if : " + fileName);
                 part.write(fileName);
             }
@@ -74,33 +77,38 @@ public class AdminService {
         fileName = this.getFileName(partPoster);
         log.info("poster : " + fileName);
         if (fileName != null && !fileName.isEmpty()) {
+            UUID uuid = UUID.randomUUID();
+            fileName = uuid + fileName;
             log.info("poster if : " + fileName);
             partPoster.write(fileName);
         }
-        String poster = "/upload" + fileName;
+        String poster = "/upload/" + fileName;
 
         // 포토 등록
         List<String> photoList = new ArrayList<>();
-        photoList.add("/upload/photo1");
-        photoList.add("/upload/photo2");
-        photoList.add("/upload/photo3");
+//        photoList.add("/upload/photo1");
+//        photoList.add("/upload/photo2");
+//        photoList.add("/upload/photo3");
 
-//        int photoCnt = 1;
-//        while(true){
-//            String photo = "photo" + photoCnt;
-//            if(request.getPart(photo) == null)
-//                break;
-//
-//            Part partPhoto = request.getPart(photo);
-//            fileName = this.getFileName(partPhoto);
-//            log.info("photo : " + fileName);
-//            if (fileName != null && !fileName.isEmpty()) {
-//                log.info("photo if : " + fileName);
-//                partPoster.write(fileName);
-//            }
-//            photoList.add("/upload" + fileName);
-//            photoCnt++;
-//        }
+        int photoCnt = 1;
+        while(true){
+            String photo = "photo" + photoCnt;
+            if(request.getPart(photo) == null)
+                break;
+
+            Part partPhoto = request.getPart(photo);
+            fileName = this.getFileName(partPhoto);
+            log.info("photo : " + fileName);
+            if (fileName != null && !fileName.isEmpty()) {
+                UUID uuid = UUID.randomUUID();
+                fileName = uuid + fileName;
+                log.info("photo if : " + fileName);
+                partPhoto.write(fileName);
+                log.info("photoWrite success");
+            }
+            photoList.add("/upload/" + fileName);
+            photoCnt++;
+        }
 
         MovieDTO movieDTO = MovieDTO.builder()
                 .movieName(movieName)
@@ -118,20 +126,28 @@ public class AdminService {
                 .mo(mo)
                 .build();
 
+        log.info("movie insert------------" + movieDTO);
         // 영화 등록
         movieDAO.insert(movieDTO);
+        log.info("movie insert complete------------");
 
         int movieNo = movieDAO.getLastMovieNo(); // 방금 등록한 영화 넘버
 
+        log.info("get movieNo ------------" + movieNo);
+
+        log.info("cast insert------------");
         // 출연진 등록
         for(String crewNo : crewNoList){
             String castRole = request.getParameter("castRole_" + crewNo);
             movieDAO.insertCast(Integer.parseInt(crewNo),movieNo,castRole);
         }
+        log.info("cast insert complete------------");
+
         // 포토 등록
         for(String photoImg : photoList){
             movieDAO.insertPhoto(photoImg, movieNo);
         }
+        log.info("photo insert complete------------");
         String directors = "";
         String actors = "";
 

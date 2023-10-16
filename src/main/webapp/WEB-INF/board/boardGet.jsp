@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/boardCSS/boardGet.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
-    <script src="/js/boardJS/boardGet.js" defer></script>
+    <script src="/js/boardJS/boardGet.js" charset="UTF-8" defer></script>
     <title>게시글 상세페이지</title>
 </head>
 <body>

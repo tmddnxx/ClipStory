@@ -104,6 +104,7 @@
         const tagUl = document.querySelector('.user-review-list ul');
         tagUl.innerHTML = '';
         for (const item of items) {
+            console.log("리뷰 : " + item);
             const tagLi = document.createElement('li');
             let score = "";
             for(let i = 1; i <= 5; i++){
