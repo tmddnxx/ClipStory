@@ -112,6 +112,16 @@ public class BoardService {
 
     }
 
+    public void removeMyBoard(HttpServletRequest request) throws Exception { // 게시물 삭제
+        log.info("remove board----------------");
+            String [] conNo = request.getParameterValues("selectedItems1");
+            for(String no : conNo){// no = 각각의 게시물 넘버값
+                log.info(no);
+                boardDAO.deleteBoard(Integer.parseInt(no));
+            }
+
+    }
+
     public void modifyBoard(HttpServletRequest request){ // 게시물 수정
         BoardDTO boardDTO = new BoardDTO();
 

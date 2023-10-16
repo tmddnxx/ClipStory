@@ -67,6 +67,9 @@
 
     // X 버튼 클릭 시 개별 컨텐츠 삭제 자바스크립트
     const removeButtonX = document.querySelectorAll(".remove-btn");
+    const xhr = new XMLHttpRequest(); // ajax 작업을 위한 객체 생성
+
+
     removeButtonX.forEach(button => {
         button.addEventListener("click", function (event) {
             event.preventDefault(); // 경로 설정
@@ -80,11 +83,42 @@
         });
     });
 
+
+
     // 선택 삭제 선택 시 삭제
-    function handleRemoveSelected(btnClass, listClass) {
-        const removeSelectedButton = document.querySelector(btnClass);
-        removeSelectedButton.addEventListener('click', function () {
+    // function handleRemoveSelected(btnClass, listClass) {
+    //     const removeSelectedButton = document.querySelector(btnClass);
+    //     removeSelectedButton.addEventListener('click', function () {
+    //         const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
+    //         const selectedItems = [];
+    //
+    //         checkboxes.forEach(checkbox => {
+    //             if (checkbox.checked) {
+    //                 selectedItems.push(checkbox.value);
+    //             }
+    //         });
+    //
+    //         if (selectedItems.length === 0) {
+    //             alert(`마이 컨텐츠가 없습니다.`);
+    //         } else {
+    //             const confirmMessage = `해당 컨텐츠, ${selectedItems.length} 개를 삭제하시겠습니까?`;
+    //             if (confirm(confirmMessage)) {
+    //                 selectedItems.forEach(contentNo => {
+    //                     const listItem = document.querySelector(`#chk${contentNo}`).closest('li');
+    //                     if (listItem) {
+    //                         listItem.remove();
+    //                     }
+    //                 });
+    //
+    //             }
+    //         }
+    //     });
+    // }
+    function removeSelectedContents(listNo){
+            const listClass = ".list-group-" + listNo;
+            const frmNo = 'form[name=frmRemoveSelected' + listNo + ']';
             const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
+            const frmRemoveSelected = document.querySelector(frmNo);
             const selectedItems = [];
 
             checkboxes.forEach(checkbox => {
@@ -96,22 +130,29 @@
             if (selectedItems.length === 0) {
                 alert(`마이 컨텐츠가 없습니다.`);
             } else {
-                const confirmMessage = `해당 컨텐츠, ${selectedItems.length} 개를 삭제하시겠습니까?`;
+                const confirmMessage = `해당 컨텐츠 ${selectedItems.length} 개를 삭제하시겠습니까?`;
                 if (confirm(confirmMessage)) {
-                    selectedItems.forEach(contentNo => {
-                        const listItem = document.querySelector(`#chk${contentNo}`).closest('li');
-                        if (listItem) {
-                            listItem.remove();
-                        }
-                    });
+                    // selectedItems.forEach(contentNo => {
+                    //     const listItem = document.querySelector(`#chk${contentNo}`).closest('li');
+                    //     if (listItem) {
+                    //         listItem.remove();
+                    //     }
+                    // });
+                    frmRemoveSelected.submit();
                 }
             }
-        });
     }
+
+    const removeBoardBtn = document.querySelector(".btn-selected1"); // 게시글 삭제 버튼
+    const removeCommentBtn = document.querySelector(".btn-selected2"); // 댓글 삭제 버튼
+    const removeReviewBtn = document.querySelector(".btn-selected3"); // 리뷰 삭제 버튼
+
+    removeBoardBtn.addEventListener('click', function(){removeSelectedContents(1)}); // 버튼 클릭시 게시글 삭제 함수 실행
+
     // 각 부분으로 동작하게 호출
-    handleRemoveSelected('.btn-selected1', '.list-group-1');
-    handleRemoveSelected('.btn-selected2', '.list-group-2');
-    handleRemoveSelected('.btn-selected3', '.list-group-3');
+    // handleRemoveSelected('.btn-selected1', '.list-group-1');
+    // handleRemoveSelected('.btn-selected2', '.list-group-2');
+    // handleRemoveSelected('.btn-selected3', '.list-group-3');
 
     // 전체 삭제 선택 시 삭제
     function handleRemoveAll(btnClass, listClass) {
@@ -135,6 +176,7 @@
                     selectedItems.forEach(contentNo => {
                         const listItem = document.querySelector(`#chk${contentNo}`).closest('li');
                         if (listItem) {
+                            listItem.submit();
                             listItem.remove();
                         }
                     });
@@ -146,6 +188,9 @@
     handleRemoveAll('.btn-removeAll1', '.list-group-1');
     handleRemoveAll('.btn-removeAll2', '.list-group-2');
     handleRemoveAll('.btn-removeAll3', '.list-group-3');
+
+
+
 
 
 

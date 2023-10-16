@@ -108,6 +108,13 @@ public class BoardController extends HttpServlet {
                 boardService.modifyBoard(req);
                 resp.sendRedirect("list.board?action=list");
                 break;
+            case "remove" : // 마이페이지 게시물 삭제 연동
+                try {
+                    boardService.removeMyBoard(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.sendRedirect("list.mypage");
         }
     }
 }

@@ -52,27 +52,27 @@
         <input type="button" class="btn-removeAll1"  value="전체 삭제">
         <input type="button" class="btn-selected1"  value="선택 삭제">
       </div>
-        <form name="frmRemoveSelected1" method="post">
+        <form name="frmRemoveSelected1" method="post" action="./remove.board?action=remove">
           <ul class="list-group-1">
             <c:forEach var="boardDTO" items="${boardDTOList}" varStatus="status">
               <li>
                 <div class="flex_my">
-                <form action="#" >
+
                   <!--label 태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-board-${boardDTO.contentNo}">
                     <input type="checkbox" name="selectedItems1" class="button chkButton1" value="${boardDTO.contentNo}" id="chk-board-${boardDTO.contentNo}">
                     <i class="circle"></i>
                   </label>
-                </form>
+
                     <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="text-decoration-none" type="hidden">
                       <p class="myList" > ${boardDTO.title}
                           ${boardDTO.addDate}
                           ${boardDTO.nickName}
                           ${boardDTO.hit}
-                        <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}"
-                           class="remove-btn" style="font-size: 30px">X</a>
                       </p>
                     </a>
+                    <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}"
+                      class="remove-btn" style="font-size: 30px">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -95,21 +95,22 @@
             <c:forEach var="commentDTO" items="${commentDTOList}" varStatus="status">
               <li>
                 <div class="flex_my">
-                <form action="#" >
+
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-comment-${commentDTO.commentNo}">
                     <input type="checkbox" name="selectedItems2" class="button chkButton2" value="${commentDTO.commentNo}" id="chk-comment-${commentDTO.commentNo}">
                     <i class="circle"></i>
                   </label>
-                </form>
+
                     <a href="get.board?action=get&contentNo=${commentDTO.contentNo}" class="text-decoration-none" >
                        <p class="myList"> ${commentDTO.commentNo}
                            ${commentDTO.addDate}
                            ${commentDTO.nickName}
-                      <a href="./remove.board?action=remove&contentNo=${commentDTO.commentNo}"
-                         class="remove-btn" style="font-size: 30px">X</a>
+
                        </p>
                     </a>
+                    <a href="./remove.board?action=remove&contentNo=${commentDTO.commentNo}"
+                       class="remove-btn" style="font-size: 30px">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -132,21 +133,21 @@
             <c:forEach var="reviewDTO" items="${reviewDTOList}" varStatus="status">
               <li>
                 <div class="flex_my">
-                <form action="#">
+
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-review-${reviewDTO.reviewNo}">
                     <input type="checkbox" name="selectedItems3" class="button chkButton3" value="${reviewDTO.reviewNo}" id="chk-review-${reviewDTO.reviewNo}">
                     <i class="circle"></i>
                   </label>
-                </form>
                     <a href="view.movie?action=view&movieNo=${reviewDTO.movieNo}" class="text-decoration-none" >
                       <p class="myList"> ${reviewDTO.review}
                           ${reviewDTO.addDate}
                           ${reviewDTO.nickName}
-                        <a href="./remove.movie?action=remove&movieNo=${reviewDTO.movieNo}"
-                           class="remove-btn" style="font-size: 30px">X</a>
+
                       </p>
                     </a>
+                    <a href="./remove.movie?action=remove&movieNo=${reviewDTO.movieNo}"
+                       class="remove-btn" style="font-size: 30px">X</a>
                   </div>
               </li>
             </c:forEach>
