@@ -154,14 +154,14 @@ input[type="checkbox"] {
 }
 
 /* input이 체크되면 특수문자 보이게 처리 */
-#chk${boardDTO.contentNo}:checked + .circle:after{ opacity: 1; }
-#chk${commentDTO.commentNo}:checked + .circle:after{ opacity: 1; }
-#chk${reviewDTO.reviewNo}:checked + .circle:after{ opacity: 1; }
+#chk-board-${boardDTO.contentNo}:checked + .circle:after{ opacity: 1; }
+#chk-comment-${commentDTO.commentNo}:checked + .circle:after{ opacity: 1; }
+#chk-review-${reviewDTO.reviewNo}:checked + .circle:after{ opacity: 1; }
 
 /* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
-#chk${boardDTO.contentNo}{ position: absolute; left: -999em; }
-#chk${commentDTO.commentNo}{ position: absolute; left: -999em; }
-#chk${reviewDTO.reviewNo}{ position: absolute; left: -999em; }
+#chk-board-${boardDTO.contentNo}{ position: absolute; left: -999em; }
+#chk-comment-${commentDTO.commentNo}{ position: absolute; left: -999em; }
+#chk-review-${reviewDTO.reviewNo}{ position: absolute; left: -999em; }
 /* 체크박스 CSS 끝 */
 
 /* 이미지 크기 조정 */
