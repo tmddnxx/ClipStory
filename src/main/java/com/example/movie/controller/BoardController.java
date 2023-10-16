@@ -1,6 +1,7 @@
 package com.example.movie.controller;
 
 import com.example.movie.model.dto.BoardDTO;
+import com.example.movie.service.AdminService;
 import com.example.movie.service.BoardService;
 import lombok.extern.log4j.Log4j2;
 
@@ -14,10 +15,10 @@ import java.io.IOException;
 @Log4j2
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
+    BoardService boardService = new BoardService();
+    AdminService adminService = new AdminService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BoardService boardService = new BoardService();
-
 
         String action = req.getParameter("action");
         if(action == null){
@@ -33,9 +34,11 @@ public class BoardController extends HttpServlet {
                 }
                 req.getRequestDispatcher("/WEB-INF/board/boardList.jsp").forward(req, resp);
                 break;
+
             case "add" : // 게시물 추가 뷰
                 req.getRequestDispatcher("/WEB-INF/board/boardAdd.jsp").forward(req, resp);
                 break;
+
             case "modify" : // 게시물 수정 뷰
                 try{
                     boardService.getBoard(req);
@@ -45,17 +48,30 @@ public class BoardController extends HttpServlet {
                     throw new ServletException("read error");
                 }
                 break;
+
             case "remove" : // 삭제
                 boardService.removeBoard(req);
                 resp.sendRedirect("list.board?action=list");
                 break;
+
             case "get" : // 상세뷰
                 boardService.getBoard(req);
                 boardService.increaseHit(req);
                 req.getRequestDispatcher("/WEB-INF/board/boardGet.jsp").forward(req, resp);
                 break;
 
+            case "noticeList" : // 공지사항 목록
+                try {
+                    adminService.adminListNotice(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                req.getRequestDispatcher("/WEB-INF/board/noticeList.jsp").forward(req, resp);
+                break;
 
+            case "getNotice" : // 공지사항 상세뷰
+                adminService.adminGetNotice(req);
+                req.getRequestDispatcher("/WEB-INF/board/noticeGet.jsp").forward(req, resp);
         }
 
     }
@@ -83,7 +99,6 @@ public class BoardController extends HttpServlet {
                 boardService.addBoard(req);
                 resp.sendRedirect("list.board?action=list");
                 break;
-
 
             case "modify" : // 게시물 수정
                 boardService.modifyBoard(req);

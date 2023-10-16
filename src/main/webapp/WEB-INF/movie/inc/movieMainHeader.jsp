@@ -92,6 +92,7 @@
       <ul class="top-list">
         <li class="content"><a class="goContent" href="/list.movie?action=list">영화</a></li>
         <li class="content"><a class="goContent" href="/list.board?action=list">게시판</a></li>
+        <li class="content"><a class="goContent" href="/list.board?action=noticeList">공지사항</a></li>
         <c:choose>
           <c:when test="${empty loginInfo}">
             <li class="nav-item"><a class="goContent" href="/login"><i class="fa-solid fa-arrow-right-to-bracket login"></i></a></li>

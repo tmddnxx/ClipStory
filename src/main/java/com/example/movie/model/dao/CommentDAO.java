@@ -16,7 +16,7 @@ import java.util.List;
 public class CommentDAO {
 
     public boolean insertComment(CommentDTO commentDTO) throws Exception {
-        /* 게시물 추가 */
+        /* 댓글달기 */
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         String sql = "insert into `comment` (nickName, comment, addDate, memberId, contentNo) values(?, ?, now(), ?, ?)";
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -28,7 +28,7 @@ public class CommentDAO {
     }
 
     public boolean insertCommentRe(CommentDTO commentDTO) throws Exception {
-        /* 게시물 추가 */
+        /* 대댓글달기 */
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         String sql = "insert into `comment` (nickName, comment, addDate, memberId, contentNo, parentNo) values(?, ?, now(), ?, ?, ?)";
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -117,7 +117,6 @@ public class CommentDAO {
         if(cnt != 1)
             return true;
         return false;
-
     }
 
 

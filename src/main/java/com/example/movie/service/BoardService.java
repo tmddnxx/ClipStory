@@ -29,7 +29,6 @@ public class BoardService {
         } catch (Exception e){
             log.error(e.getMessage());
         }
-
     }
 
     public void listBoard(HttpServletRequest request) throws Exception { // 게시물 전체목록
