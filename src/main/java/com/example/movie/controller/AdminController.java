@@ -1,5 +1,6 @@
 package com.example.movie.controller;
 
+import com.example.movie.model.dto.AdminDTO;
 import com.example.movie.model.dto.CommentDTO;
 import com.example.movie.model.dto.CrewDTO;
 import com.example.movie.model.dto.ReviewDTO;
@@ -34,7 +35,7 @@ public class AdminController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
         String action = req.getParameter("action");
@@ -198,25 +199,9 @@ public class AdminController extends HttpServlet {
         String RequestURI = req.getRequestURI();
         String contextPath = req.getContextPath();
         String command = RequestURI.substring(contextPath.length());
+        AdminDTO adminDTO = new AdminDTO();
         log.info("command : " + command);
         switch (command) {
-            case "/review/add":
-                try {
-                    JSONObject jsonObject = new JSONObject(); // json 정보를 담기 위해 객체 생성
-                    // 성공, 실패의 결과를 json에 저장
-                    if (reviewService.addReview(req)) {
-                        //
-                        jsonObject.put("result", "true");
-                    } else {
-                        jsonObject.put("result", "false");
-                    }
-                    resp.getWriter().println(jsonObject.toJSONString());
-                } catch (SQLException | ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                break;
             case "/review/get":
                 try {
                     List<ReviewDTO> reviewDTOS = reviewService.getReviews(req);

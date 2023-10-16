@@ -82,8 +82,10 @@
     height: 400px;
     background: rgba(0, 0, 0, 0.6);
 }
-.movieSection .movieBackSlide .test {
-    height: 700px;
+.movieSection .movieBackSlide .draggable {
+    margin-top: -10px;
+    z-index: -3;
+    height: 800px;
 }
 
 div.slick-track {
@@ -153,10 +155,14 @@ div.slick-track {
     margin-top: 260px;
 }
 
+.form-select {
+    width: 150px;
+}
+
 
 /*검색 영역*/
 .searchSector {
-    width: 700px!important;
+    width: 1000px!important;
     display: flex;
     justify-content: center;
 }

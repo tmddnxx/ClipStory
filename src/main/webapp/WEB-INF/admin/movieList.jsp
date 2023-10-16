@@ -12,6 +12,7 @@
     <title>관리자 영화 목록</title>
 </head>
 <body>
+
 <div>
 <jsp:include page="./inc/adminHeader.jsp"/>
 <div class="outContainer"><!-- 제일 바깥 container div -->
@@ -41,9 +42,9 @@
                                     </span>
                                 </a>
                                 <a href="./admin?action=removeMovie&movieNo=${movie.movieNo}">
-                                    <span class="badge bg-danger">삭제</span>
+                                    <span class="badge bg-danger remove">삭제</span>
                                 </a>
-                                <a href="./admin?action=removeMovie&movieNo=${movie.movieNo}">
+                                <a href="./admin?action=modifyMovie&movieNo=${movie.movieNo}">
                                     <span class="badge bg-primary">수정</span>
                                 </a>
                             </div>
@@ -65,9 +66,9 @@
                                         </span>
                                     </a>
                                     <a href="./admin?action=removeMovie&movieNo=${movie.movieNo}">
-                                        <span class="badge bg-danger">삭제</span>
+                                        <span class="badge bg-danger remove">삭제</span>
                                     </a>
-                                    <a href="./admin?action=removeMovie&movieNo=${movie.movieNo}">
+                                    <a href="./admin?action=modifyMove&movieNo=${movie.movieNo}">
                                         <span class="badge bg-primary">수정</span>
                                     </a>
                                 </div>
@@ -77,8 +78,21 @@
                 </div>
             </div>
     </div>
-    <style>
+    <script>
 
-    </style>
+            const btnRemove = document.querySelectorAll('.remove');
+
+            for (const button of btnRemove) {
+                button.addEventListener('click', function(e) {
+                    if (confirm('해당 영화를 삭제하시겠습니까?')){
+                        location.href="./admin?action=removeMovie&movieNo=${movie.movieNo}";
+                    }
+                    else {
+                        e.preventDefault();
+                    }
+                });
+            }
+
+    </script>
 </body>
 </html>

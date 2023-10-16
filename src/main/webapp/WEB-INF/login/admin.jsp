@@ -11,8 +11,7 @@
   <link href="./css/common.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../../inc/header.jsp"/>
-
+<jsp:include page="../admin/inc/adminMainHeader.jsp"/>
 <div class="login-movie-container">
   <main>
     <section>
