@@ -86,16 +86,26 @@ public class BoardService {
         }
     }
 
-    public void removeBoard(HttpServletRequest request){ // 게시물 삭제
-        int contentNo = Integer.parseInt(request.getParameter("contentNo"));
-
-        try{
-           boardDAO.deleteBoard(contentNo);
-        } catch (Exception e){
-            log.error(e.getMessage());
-            log.info("게시물 삭제하는 과정에서 에러");
-            request.setAttribute("error", "게시물을 정상적으로 삭제하지 못함");
+    public void removeBoard(HttpServletRequest request) throws Exception { // 게시물 삭제
+        log.info("remove board----------------");
+        if(request.getParameter("contentNo") == null){ // 다중 삭제
+            String [] conNo = request.getParameterValues("chBox");
+            for(String no : conNo){
+                Integer.parseInt(no); // no = 각각의 게시물 넘버값
+                log.info(no);
+                boardDAO.deleteBoard(Integer.parseInt(no));
+            }
+        } else { // 개별삭제
+            int contentNo = Integer.parseInt(request.getParameter("contentNo"));
+            try{
+                boardDAO.deleteBoard(contentNo);
+            } catch (Exception e){
+                log.error(e.getMessage());
+                log.info("게시물 삭제하는 과정에서 에러");
+                request.setAttribute("error", "게시물을 정상적으로 삭제하지 못함");
+            }
         }
+
     }
 
     public void modifyBoard(HttpServletRequest request){ // 게시물 수정

@@ -55,7 +55,7 @@
                 %>
             </c:forEach>
         </ul>
-        <hr>
+        <hr class="hr">
         <%--페이징--%>
         <div align="center" class="paging">
             <a href="<c:url value="list.board?action=noticeList&pageNum=1"/>"><span>첫페이지</span></a>

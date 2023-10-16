@@ -50,7 +50,11 @@ public class BoardController extends HttpServlet {
                 break;
 
             case "remove" : // 삭제
-                boardService.removeBoard(req);
+                try {
+                    boardService.removeBoard(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 resp.sendRedirect("list.board?action=list");
                 break;
 

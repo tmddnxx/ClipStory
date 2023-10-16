@@ -39,6 +39,7 @@
   <jsp:include page="./inc/adminHeader.jsp"/>
   <div class="main">
     <h2>공지사항 목록</h2>
+    <form name="frmBoardList" action="/admin?action=noticeRemove" method="post">
     <ul class="list-group">
       <div class="checkBtnBox">
         <div class="allCheck">
@@ -56,7 +57,7 @@
             <p>${adminBoardDTO.addDate}</p>
             <p>${adminBoardDTO.superName}</p>
             <a href="/admin?action=noticeRemove&cno=${adminBoardDTO.cno}"
-               class="remove-btn"> X </a>
+               class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')"> X </a>
           </li>
         </a>
         <%
@@ -64,6 +65,7 @@
         %>
       </c:forEach>
     </ul>
+    </form>
     <hr>
     <%--페이징--%>
     <div align="center" class="paging">

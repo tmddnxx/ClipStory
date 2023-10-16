@@ -1,5 +1,9 @@
+<%@ page import="com.example.movie.model.dto.AdminDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    AdminDTO adminDTO = (AdminDTO) session.getAttribute("superInfo");
+%>
 <script src="https://kit.fontawesome.com/e83b9315c8.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
@@ -94,11 +98,11 @@
         <li class="content"><a class="goContent" href="/admin?action=boardList">게시판</a></li>
         <li class="content"><a class="goContent" href="/admin?action=noticeList">공지사항</a></li>
         <c:choose>
-          <c:when test="${empty loginInfo}">
+          <c:when test="${empty superInfo}">
             <li class="nav-item"><a class="goContent" href="/login">(관리자)로그인</a></li>
           </c:when>
           <c:otherwise>
-            <li class="nav-item nickName">[${loginInfo.nickName} 님]</li>
+            <li class="nav-item nickName">[${superInfo.superName} 님]</li>
             <li class="nav-item"><a class="goContent" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket logout"></i></a></li>
           </c:otherwise>
         </c:choose>

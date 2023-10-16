@@ -30,7 +30,7 @@ public class MovieService {
 //                movieDTO.setAvgScore(reviewDAO.avgScore(movieDTO.getMovieNo()));
 //            }
             request.setAttribute("listMovie", listMovie);
-            log.info("리스트무비 : " + listMovie);
+//            log.info("리스트무비 : " + listMovie);
         } catch (Exception e) {
             log.info(e.getMessage());
             log.info("영화 목록 생성 과정에서 문제 발생");

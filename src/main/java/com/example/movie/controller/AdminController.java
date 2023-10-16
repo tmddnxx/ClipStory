@@ -122,7 +122,11 @@ public class AdminController extends HttpServlet {
                 break;
 
             case "boardRemove" : // 유저게시물 삭제
-                boardService.removeBoard(req);
+                try {
+                    boardService.removeBoard(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 resp.sendRedirect("/admin?action=boardList");
                 break;
 
@@ -150,7 +154,11 @@ public class AdminController extends HttpServlet {
                 break;
 
             case "noticeRemove" : // 공지사항 삭제
-                adminService.adminRemoveNotice(req);
+                try {
+                    adminService.adminRemoveNotice(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 resp.sendRedirect("/admin?action=noticeList");
                 break;
 

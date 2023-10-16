@@ -247,15 +247,22 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
     }
 
     // 공지사항 삭제
-    public void adminRemoveNotice(HttpServletRequest request){
-        int cno = Integer.parseInt(request.getParameter("cno"));
-
-        try{
-            adminDAO.adminDeleteNotice(cno);
-        } catch (Exception e){
-            log.error(e.getMessage());
-            log.info("공지사항 삭제하는 과정에서 에러");
-            request.setAttribute("error", "공지사항을 정상적으로 삭제하지 못함");
+    public void adminRemoveNotice(HttpServletRequest request) throws Exception {
+        if(request.getParameter("cno") == null){ // 다중 삭제
+            String[] cno = request.getParameterValues("chBox");
+            for(String no : cno){
+                Integer.parseInt(no); // no = 각각의 게시물 넘버값
+                adminDAO.adminDeleteNotice(Integer.parseInt(no));
+            }
+        } else{ // 개별삭제
+            int cno = Integer.parseInt(request.getParameter("cno"));
+            try{
+                adminDAO.adminDeleteNotice(cno);
+            } catch (Exception e){
+                log.error(e.getMessage());
+                log.info("공지사항 삭제하는 과정에서 에러");
+                request.setAttribute("error", "공지사항을 정상적으로 삭제하지 못함");
+            }
         }
     }
 

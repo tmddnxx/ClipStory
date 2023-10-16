@@ -110,7 +110,9 @@
         </div>
     </c:if>
         <%--페이징 끝--%>
-    <button class="write-btn" type="button" onclick="location.href='add.board?action=add'">글 쓰기</button>
+        <div class="wrap-write">
+            <button class="write-btn" type="button" onclick="location.href='add.board?action=add'">글 쓰기</button>
+        </div>
         <%--검색창--%>
     <div class="form-box">
         <form name="frmList" action="./list.board?action=list" method="get">

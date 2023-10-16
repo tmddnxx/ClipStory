@@ -14,22 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 개별 삭제
-    const removeButtonX = document.querySelectorAll(".remove-btn");
-    removeButtonX.forEach(button => {
-        button.addEventListener("click", function (event) {
-            event.preventDefault(); // 경로 설정
-            const listItem = this.closest("li"); // 삭제 할 컨텐츠 리스트
-            if (listItem) {
-                const confirmRemove = confirm("삭제 하시겠습니까?"); // 경고 문구
-                if (confirmRemove) {
-                    listItem.remove(); // 삭제 실행
-                }
-            }
-        });
-    });
-
     // 선택삭제
+    const frmBoardList = document.querySelector('form[name=frmBoardList]');
     function handleRemoveSelected(btnClass, listClass) {
         const removeSelectBtn = document.querySelector(btnClass);
         removeSelectBtn.addEventListener('click', function () {
@@ -48,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 const confirmMessage = `게시물 ${selected.length} 개를 삭제하시겠습니까?`;
                 if (confirm(confirmMessage)) {
                     selected.forEach(contentNo => {
-                        const selectList = document.querySelector(`#chk${contentNo}`).closest('li');
+                        const selectList = document.querySelector(`#chk${contentNo}`);
                         if (selectList) {
-                            selectList.remove();
+                            frmBoardList.submit();
                         }
                     });
                 }
@@ -58,9 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     handleRemoveSelected('.selectDelete_btn', '.list');
-
-
-
 
     //페이징 영역의 a태그를 클릭할 때 a 태그의 기능을 막고, 폼을 적용
     const btnPaging = document.querySelectorAll('.paging a');
