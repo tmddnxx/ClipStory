@@ -82,12 +82,10 @@
                     </div>
                 </div>
             </div>
-
             <div id="register-buttons">
                 <input type="submit" id="submit-btn" value="등록">
                 <input type="button" onclick=window.location.href="/admin?action=main" value="취소">
             </div>
-
         </form>
     </section>
 </main>

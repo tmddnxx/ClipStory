@@ -84,11 +84,11 @@ public class MovieDAOTests {
     @Test
     public void testInsertReview() throws Exception {
 
-        for(int i = 0; i < 40; i++) {
+        for(int i = 0; i < 10; i++) {
             ReviewDTO reviewDTO = ReviewDTO.builder()
-                    .nickName("hong")
+                    .nickName("hong" + i)
                     .review("리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰" + i)
-                    .movieNo(1)
+                    .movieNo(14)
                     .score("3")
                     .memberId("test")
                     .build();

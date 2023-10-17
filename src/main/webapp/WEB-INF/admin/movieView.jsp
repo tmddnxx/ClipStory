@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <%--    <script type="text/javascript" src="../../js/movieJS/movieView.js?after"></script>--%>
-    <script src="/js/movieJS/movieView.js" defer></script>
+    <script src="/js/adminJS/adminMovieView.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="../../css/adminCSS/movieView.css?after" rel="stylesheet" type="text/css">
     <title>관리자 영화 상세 페이지</title>
@@ -118,39 +117,7 @@
             <br>
             <!-- 리뷰 목록 출력 -->
             <span class="infoTitle">리뷰 및 평점</span>
-            <%-- 리뷰 작성 --%>
-            <c:if test="${loginInfo != null && isWrite != true}">
-                <form name="frmReview" class="frmReview" method="post">
-                    <input type="hidden" name="num" value="${movieDTO.movieNo}">
-                    <div class="review-nick">
-                        <input name="nickName" type="text" class="form-control" value="${loginInfo.nickName}" readonly>
-                    </div>
-                    <div class="review-content">
-                        <div class="score">
-                            <input type="radio" id="score5" name="score" value="5">
-                            <label for="score5" title="5점"></label>
-                            <input type="radio" id="score4" name="score" value="4">
-                            <label for="score4" title="4점"></label>
-                            <input type="radio" id="score3" name="score" value="3">
-                            <label for="score3" title="3점"></label>
-                            <input type="radio" id="score2" name="score" value="2">
-                            <label for="score2" title="2점"></label>
-                            <input type="radio" id="score1" name="score" value="1">
-                            <label for="score1" title="1점"></label>
-                        </div>
-                        <div class="review-text">
-                            <textarea name="review" class="form-control" cols="50" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="review-submit">
-                        <div>
-                            <span class="review-submit-btn" id="goReviewSubmit">등록</span>
-                        </div>
-                    </div>
-                </form>
-                <script src="/js/movieJS/reviewForm.js" defer></script>
-            </c:if>
-            <div class="form-group row user-review-list">
+                <div class="form-group row user-review-list">
                 <ul>
 
                 </ul>

@@ -5,8 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -58,16 +56,17 @@
     <script src="/js/movieJS/slick/movieMainMovieSlick.js" defer></script>
 
     <!-- 검색 영역 -->
-    <form name="searchList" class="searchList" action="./list.search?action=list" method="post">
-        <div class="container searchSector">
-            <select name="items" class="txt">
-                <option value="movieName" <% if(items.equals("movieName")){%>selected<%}%>>영화제목</option>
-                <option value="actor" <% if(items.equals("actor")){%>selected<%}%>>배우</option>
-                <option value="genre" <% if(items.equals("genre")){%>selected<%}%>>장르</option>
-            </select> <input class="form-control" id="search-input" name="text" type="text" value="<%=text%>"/>
-            <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
-        </div>
-    </form>
+        <form name="searchList" class="searchList" action="./list.search?action=list" method="post">
+            <div class="container searchSector">
+                <select name="items" class="form-select" >
+                    <option value="movieName" <% if(items.equals("movieName")){%>selected<%}%>>영화제목</option>
+                    <option value="actor" <% if(items.equals("actor")){%>selected<%}%>>배우</option>
+                    <option value="genre" <% if(items.equals("genre")){%>selected<%}%>>장르</option>
+                </select>
+                <input class="form-control" id="search-input" name="text" type="text" value="<%=text%>"/>
+                <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
+            </div>
+        </form>
 
     <%--  OTT 리스트  --%>
         <div class="ottSection">

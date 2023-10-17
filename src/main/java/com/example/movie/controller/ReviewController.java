@@ -31,7 +31,7 @@ public class ReviewController extends HttpServlet {
         String contextPath = req.getContextPath();
         String command = RequestURI.substring(contextPath.length());
         resp.setCharacterEncoding("UTF-8");
-
+        resp.setCharacterEncoding("UTF-8");
         log.info("command : " + command);
 
         switch (command) {
