@@ -100,4 +100,29 @@ public class ReviewService {
         movieDAO.updateAvgScore(movieNo, avgScore);
         return result;
     }
+    
+    // 마이 페이지 리뷰 선택삭제 메서드
+    public boolean removeMyReviews(HttpServletRequest request) throws Exception {
+        log.info("removeMyReviews()...");
+        ReviewDAO reviewDAO = ReviewDAO.getInstance();
+
+        String[] reviewNumbers = request.getParameterValues("reviewNo"); // 리뷰 번호의 배열을 얻습니다
+
+        for (String reviewNumber : reviewNumbers) {
+            int reviewNo = Integer.parseInt(reviewNumber);
+            ReviewDTO reviewDTO = reviewDAO.selectReviewOne(reviewNo);
+            log.info(reviewDTO);
+            boolean result = reviewDAO.deleteReview(reviewNo);
+            log.info("--------resultMy : " + result);
+
+            int movieNo = reviewDTO.getMovieNo();
+            float avgScore = reviewDAO.avgScore(movieNo);
+
+            // 리뷰 삭제할 때 무비테이블에 리뷰평점도 업데이트해줍니다.
+            movieDAO.updateAvgScore(movieNo, avgScore);
+        }
+
+        return true; // 필요에 따라 반환 값을 수정할 수 있습니다.
+    }
+
 }

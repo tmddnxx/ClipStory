@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @WebServlet("/review/*")
@@ -82,6 +83,7 @@ public class ReviewController extends HttpServlet {
                     } else {
                         jsonObject.put("result", "false");
                     }
+
                     resp.getWriter().println(jsonObject.toJSONString());
                 } catch (SQLException | ClassNotFoundException e) {
                     throw new RuntimeException(e);
@@ -89,6 +91,32 @@ public class ReviewController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+
+            case "/mypage": // 마이페이지 리뷰 삭제
+                try {
+                    JSONArray jsonArray = new JSONArray(req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+
+                    JSONObject jsonObject = new JSONObject();
+                    boolean allDeleted = true;
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        int reviewId = jsonArray.getInt(i);
+                        if (!reviewService.removeReview(reviewId)) {
+                            allDeleted = false;
+                            break;
+                        }
+                    }
+
+                    jsonObject.put("result", allDeleted ? "true" : "false");
+                    resp.getWriter().println(jsonObject.toString());
+                } catch (SQLException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
+
         }
 
     }

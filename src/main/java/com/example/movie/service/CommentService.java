@@ -110,4 +110,41 @@ public enum CommentService {
         return result;
     }
 
+    // 리뷰 마이페이지 선택삭제 버튼 메서드
+    public boolean removeMyComment(HttpServletRequest request) throws Exception { // 내 댓글
+        log.info("removeMyComment()...");
+
+        String[] commentNumbers = request.getParameterValues("commentNo"); // 댓글 번호의 배열을 얻습니다
+        int contentNo = 0; // contentNo를 초기화합니다
+
+        for (String commentNumber : commentNumbers) {
+            int commentNo = Integer.parseInt(commentNumber);
+            int parentNo = Integer.parseInt(request.getParameter("parentNo"));
+
+            if (contentNo == 0) {
+                contentNo = commentDAO.getContentNoByComment(commentNo);
+            }
+
+            boolean result;
+
+            if (commentDAO.checkHasRe(parentNo) && commentNo == parentNo) {
+                result = commentDAO.updateCommentDie(commentNo);
+            } else {
+                result = commentDAO.deleteComment(commentNo);
+            }
+
+            int cnt = commentDAO.commentCnt(contentNo);
+            BoardDAO boardDAO = new BoardDAO();
+
+            try {
+                boardDAO.updateCnt(contentNo, cnt);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+
+        return true; // 필요에 따라 반환 값을 수정할 수 있습니다.
+    }
+
+
 }

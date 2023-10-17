@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @WebServlet("/comment/*")
@@ -97,6 +98,27 @@ public class CommentController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "/comment/remove/mypage": // 마이페이지 리뷰 삭제
+                try {
+                    JSONArray jsonArray = new JSONArray(req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+                    JSONObject jsonObject = new JSONObject();
+                    boolean allDeleted = true;
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        int commentId = jsonArray.getInt(i);
+                        if (!commentService.removeComment(commentId)) {
+                            allDeleted = false;
+                            break;
+                        }
+                    }
+
+                    jsonObject.put("result", allDeleted ? "true" : "false");
+                    resp.getWriter().println(jsonObject.toString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+
         }
     }
 
