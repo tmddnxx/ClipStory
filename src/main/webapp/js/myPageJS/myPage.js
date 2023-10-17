@@ -69,23 +69,10 @@
 
     // X 버튼 클릭 시 개별 컨텐츠 삭제 자바스크립트
     const removeButtonX = document.querySelectorAll(".remove-btn");
-    const xhr = new XMLHttpRequest(); // ajax 작업을 위한 객체 생성
 
 
-    removeButtonX.forEach(button => {
-        button.addEventListener("click", function (event) {
-            event.preventDefault(); // 경로 설정
-            const listItem = this.closest("li"); // 삭제 할 컨텐츠 리스트
-            if (listItem) {
-                const confirmRemove = confirm("삭제 하시겠습니까?"); // 경고 문구
-                if (confirmRemove) {
-                    listItem.remove(); // 삭제 실행
-                }
-            }
-        });
-    });
 
-    function removeSelectedContents(listNo) { // 내 작성글 선택삭제 자바스크립트
+    function removeSelectedContents(listNo){ // 내 작성글 선택삭제 자바스크립트
         const listClass = ".list-group-" + listNo;
         const frmNo = 'form[name=frmRemoveSelected' + listNo + ']';
         const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
@@ -100,81 +87,32 @@
 
         if (selectedItems.length === 0) {
             alert(`마이 컨텐츠가 없습니다.`);
-        } else if (selectedItems.length !== checkboxes.length) {
-                const confirmMessage = `해당 컨텐츠 ${selectedItems.length} 개를 삭제하시겠습니까?`;
-                if (confirm(confirmMessage)) {
-                    frmRemoveSelected.submit();
-                }
         } else {
             const confirmMessage = `해당 컨텐츠 ${selectedItems.length} 개를 삭제하시겠습니까?`;
             if (confirm(confirmMessage)) {
                 frmRemoveSelected.submit();
             }
         }
-        }
-
-        const removeBoardBtn = document.querySelector(".btn-selected1"); // 게시글 선택삭제 버튼
-        const removeCommentBtn = document.querySelector(".btn-selected2"); // 댓글 선택삭제 버튼
-        const removeReviewBtn = document.querySelector(".btn-selected3"); // 리뷰 선택삭제 버튼
-
-        removeBoardBtn.addEventListener('click', function () {
-            removeSelectedContents(1)
-        }); // 버튼 클릭시 게시글 삭제 함수 실행
-        removeCommentBtn.addEventListener('click', function () {
-            removeSelectedContents(2)
-        }); // 버튼 클릭시 댓글 삭제 함수 실행
-        removeReviewBtn.addEventListener('click', function () {
-            removeSelectedContents(3)
-        }); //  버튼 클릭시 리뷰 삭제 함수 실행
-    function removeAllContents(listNo) { // 내 컨텐츠 전체삭제 자바스크립트
-        const listClass = ".list-group-" + listNo;
-        const frmNo = 'form[name=frmRemoveSelected' + listNo + ']';
-        const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
-        const frmRemoveSelected = document.querySelector(frmNo);
-        const selectedItems = [];
-
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedItems.push(checkbox.value);
-            }
-        });
-
-        if (selectedItems.length === 0) {
-            alert(`마이 컨텐츠가 없습니다.`);
-        } else {
-            let confirmMessage = '';
-
-            if (listNo === 1) {
-                confirmMessage = `전체 게시글을 삭제하시겠습니까?`;
-            } else if (listNo === 2) {
-                confirmMessage = `전체 댓글을 삭제하시겠습니까?`;
-            } else if (listNo === 3) {
-                confirmMessage = `전체 리뷰를 삭제하시겠습니까?`;
-            }
-
-            if (confirm(confirmMessage)) {
-                frmRemoveSelected.submit();
-            }
-        }
     }
 
+    const removeBoardBtn = document.querySelector(".btn-selected1"); // 게시글 선택삭제 버튼
+    const removeCommentBtn = document.querySelector(".btn-selected2"); // 댓글 선택삭제 버튼
+    const removeReviewBtn = document.querySelector(".btn-selected3"); // 리뷰 선택삭제 버튼
 
-        const removeBoardAll = document.querySelector(".btn-removeAll1"); // 게시글 전체삭제 버튼
-        const removeCommentAll = document.querySelector(".btn-removeAll2"); // 댓글 전체삭제 버튼
-        const removeReviewAll = document.querySelector(".btn-removeAll3"); // 리뷰 전체삭제 버튼
+    removeBoardBtn.addEventListener('click', function(){removeSelectedContents(1)}); // 버튼 클릭시 게시글 삭제 함수 실행
+    removeCommentBtn.addEventListener('click', function(){removeSelectedContents(2)}); // 버튼 클릭시 댓글 삭제 함수 실행
+    removeReviewBtn.addEventListener('click', function(){removeSelectedContents(3)}); // 버튼 클릭시 리뷰 삭제 함수 실행
 
 
+    const removeBoardAll = document.querySelector(".btn-removeAll1"); // 게시글 전체삭제 버튼
+    const removeCommentAll = document.querySelector(".btn-removeAll2"); // 댓글 전체삭제 버튼
+    const removeReviewAll = document.querySelector(".btn-removeAll3"); // 리뷰 전체삭제 버튼
 
-        // 전체 삭제 버튼 클릭 시 경고창 표시 및 동작 수행
-        removeBoardAll.addEventListener('click', function () {
-            removeAllContents(1)
-        }); // 전체 삭제 버튼 클릭시 게시글 삭제 함수 실행
-        removeCommentAll.addEventListener('click', function () {
-            removeAllContents(2)
-        }); // 전체 삭제 버튼 클릭시 댓글 삭제 함수 실행
-        removeReviewAll.addEventListener('click', function () {
-            removeAllContents(3)
-        }); // 전체 버튼 클릭시 리뷰 삭제 함수 실행
+    removeBoardAll.addEventListener('click', function(){removeSelectedContents(1)}); // 전체 삭제 버튼 클릭시 게시글 삭제 함수 실행
+    removeCommentAll.addEventListener('click', function(){removeSelectedContents(2)}); // 전체 삭제 버튼 클릭시 댓글 삭제 함수 실행
+    removeReviewAll.addEventListener('click', function(){removeSelectedContents(3)}); // 전체 삭제 버튼 클릭시 리뷰 삭제 함수 실행
+
+
 
 
 
