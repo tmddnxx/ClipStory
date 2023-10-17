@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -111,39 +112,14 @@ public enum CommentService {
     }
 
     // 리뷰 마이페이지 선택삭제 버튼 메서드
-    public boolean removeMyComment(HttpServletRequest request) throws Exception { // 내 댓글
-        log.info("removeMyComment()...");
-
-        String[] commentNumbers = request.getParameterValues("commentNo"); // 댓글 번호의 배열을 얻습니다
-        int contentNo = 0; // contentNo를 초기화합니다
-
-        for (String commentNumber : commentNumbers) {
-            int commentNo = Integer.parseInt(commentNumber);
-            int parentNo = Integer.parseInt(request.getParameter("parentNo"));
-
-            if (contentNo == 0) {
-                contentNo = commentDAO.getContentNoByComment(commentNo);
-            }
-
-            boolean result;
-
-            if (commentDAO.checkHasRe(parentNo) && commentNo == parentNo) {
-                result = commentDAO.updateCommentDie(commentNo);
-            } else {
-                result = commentDAO.deleteComment(commentNo);
-            }
-
-            int cnt = commentDAO.commentCnt(contentNo);
-            BoardDAO boardDAO = new BoardDAO();
-
-            try {
-                boardDAO.updateCnt(contentNo, cnt);
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
+    public void  removeMyComment(HttpServletRequest request) throws Exception {
+        log.info("remove board----------------");
+        String [] conNo = request.getParameterValues("selectedItems2");
+        for(String no : conNo){// no = 각각의 게시물 넘버값
+            log.info(no);
+            commentDAO.deleteComment(Integer.parseInt(no));
         }
-
-        return true; // 필요에 따라 반환 값을 수정할 수 있습니다.
+        log.info("removeMyComment()...");
     }
 
 

@@ -7,8 +7,8 @@ import com.example.movie.model.dto.ReviewDTO;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
@@ -16,6 +16,7 @@ public class ReviewService {
     private static ReviewService instance;
     private final MovieDAO movieDAO;
     private final MemberDTO memberDTO;
+
     private ReviewService() {
         movieDAO = new MovieDAO();
         memberDTO = new MemberDTO();
@@ -102,27 +103,15 @@ public class ReviewService {
     }
     
     // 마이 페이지 리뷰 선택삭제 메서드
-    public boolean removeMyReviews(HttpServletRequest request) throws Exception {
-        log.info("removeMyReviews()...");
+    public void removeMyReviews(HttpServletRequest request) throws Exception {
+        log.info("remove board----------------");
         ReviewDAO reviewDAO = ReviewDAO.getInstance();
-
-        String[] reviewNumbers = request.getParameterValues("reviewNo"); // 리뷰 번호의 배열을 얻습니다
-
-        for (String reviewNumber : reviewNumbers) {
-            int reviewNo = Integer.parseInt(reviewNumber);
-            ReviewDTO reviewDTO = reviewDAO.selectReviewOne(reviewNo);
-            log.info(reviewDTO);
-            boolean result = reviewDAO.deleteReview(reviewNo);
-            log.info("--------resultMy : " + result);
-
-            int movieNo = reviewDTO.getMovieNo();
-            float avgScore = reviewDAO.avgScore(movieNo);
-
-            // 리뷰 삭제할 때 무비테이블에 리뷰평점도 업데이트해줍니다.
-            movieDAO.updateAvgScore(movieNo, avgScore);
+        String[] conNo = request.getParameterValues("selectedItems3");
+        for (String no : conNo) {// no = 각각의 게시물 넘버값
+            log.info(no);
+            reviewDAO.deleteReview(Integer.parseInt(no));
         }
-
-        return true; // 필요에 따라 반환 값을 수정할 수 있습니다.
+        log.info("removeMyComment()...");
     }
 
 }

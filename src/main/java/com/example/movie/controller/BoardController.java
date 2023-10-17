@@ -115,6 +115,7 @@ public class BoardController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 resp.sendRedirect("list.mypage");
+                break;
         }
     }
 }

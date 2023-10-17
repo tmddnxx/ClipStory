@@ -98,27 +98,16 @@ public class CommentController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-//            case "/comment/remove/mypage": // 마이페이지 리뷰 삭제
-//                try {
-//                    JSONArray jsonArray = new JSONArray(req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-//                    JSONObject jsonObject = new JSONObject();
-//                    boolean allDeleted = true;
-//
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        int commentId = jsonArray.getInt(i);
-//                        if (!commentService.removeComment(commentId)) {
-//                            allDeleted = false;
-//                            break;
-//                        }
-//                    }
-//
-//                    jsonObject.put("result", allDeleted ? "true" : "false");
-//                    resp.getWriter().println(jsonObject.toString());
-//                } catch (Exception e) {
-//                    throw new RuntimeException(e);
-//                }
-//                break;
 
+            case "/comment/myRemove":
+                try {
+                    // 댓글을 삭제하고 삭제된 댓글 목록을 얻기 위해 removeMyComment 메서드를 호출합니다
+                    commentService.removeMyComment(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.sendRedirect("/list.mypage");
+                break;
         }
     }
 
