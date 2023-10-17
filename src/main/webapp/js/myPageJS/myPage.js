@@ -149,6 +149,7 @@
 
     removeBoardBtn.addEventListener('click', function(){removeSelectedContents(1)}); // 버튼 클릭시 게시글 삭제 함수 실행
 
+
     // 각 부분으로 동작하게 호출
     // handleRemoveSelected('.btn-selected1', '.list-group-1');
     // handleRemoveSelected('.btn-selected2', '.list-group-2');

@@ -112,6 +112,7 @@ public class BoardService {
 
     }
 
+
     public void removeMyBoard(HttpServletRequest request) throws Exception { // 게시물 삭제
         log.info("remove board----------------");
             String [] conNo = request.getParameterValues("selectedItems1");
