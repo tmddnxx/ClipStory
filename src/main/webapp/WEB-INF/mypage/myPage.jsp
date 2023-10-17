@@ -90,7 +90,7 @@
         <input type="button" class="btn-removeAll2"  value="전체 삭제">
         <input type="button" class="btn-selected2" value="선택 삭제">
       </div>
-        <form name="frmRemoveSelected2" method="post">
+        <form name="frmRemoveSelected2" method="post" action="/comment/remove">
           <ul class="list-group-2">
             <c:forEach var="commentDTO" items="${commentDTOList}" varStatus="status">
               <li>
@@ -128,7 +128,7 @@
         <input type="button" class="btn-removeAll3" value="전체 삭제">
         <input type="button" class="btn-selected3"  value="선택 삭제">
       </div>
-        <form name="frmRemoveSelected3" method="post">
+        <form name="frmRemoveSelected3" method="post" action="/review/remove">
           <ul class="list-group-3">
             <c:forEach var="reviewDTO" items="${reviewDTOList}" varStatus="status">
               <li>
