@@ -65,14 +65,16 @@
         });
     }
 
+    // X 버튼 클릭 시 내 글 개별 삭제
+    const removeBtnX = document.querySelectorAll(".remove-btn");
+
+    // "X" 버튼 클릭 시 개별 컨텐츠 삭제
 
 
-    // X 버튼 클릭 시 개별 컨텐츠 삭제 자바스크립트
-    const removeButtonX = document.querySelectorAll(".remove-btn");
 
 
 
-    function removeSelectedContents(listNo){ // 내 작성글 선택삭제 자바스크립트
+    function removeSelectedContents(listNo){ // 내 작성글 삭제 자바스크립트
         const listClass = ".list-group-" + listNo;
         const frmNo = 'form[name=frmRemoveSelected' + listNo + ']';
         const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
