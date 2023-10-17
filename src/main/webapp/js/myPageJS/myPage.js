@@ -87,6 +87,10 @@
 
         if (selectedItems.length === 0) {
             alert(`마이 컨텐츠가 없습니다.`);
+        } else if (selectedItems.length === checkboxes.length) {
+            if (confirm("모든 게시글을 삭제하시겠습니까?")) {
+                frmRemoveSelected.submit();
+            }
         } else {
             const confirmMessage = `해당 컨텐츠 ${selectedItems.length} 개를 삭제하시겠습니까?`;
             if (confirm(confirmMessage)) {
