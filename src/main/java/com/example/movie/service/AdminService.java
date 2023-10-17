@@ -9,8 +9,11 @@ import com.example.movie.model.dao.MovieDAO;
 import com.example.movie.model.dto.*;
 import lombok.extern.log4j.Log4j2;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -65,6 +68,7 @@ public class AdminService {
         String releaseDate = request.getParameter("releaseDate");
         String region = request.getParameter("region");
         String genre = request.getParameter("genre");
+        int audience = Integer.parseInt(request.getParameter("audience"));
         String runningtime = request.getParameter("runningtime");
         String outline = request.getParameter("outline");
         String mo = request.getParameter("mo");
@@ -118,7 +122,7 @@ public class AdminService {
                 .score(0)
                 .region(region)
                 .genre(genre)
-                .audience(0)
+                .audience(audience)
                 .ranking(0)
                 .runningtime(runningtime)
                 .outline(outline)
@@ -163,6 +167,19 @@ public class AdminService {
 
 
     }
+
+    // 영화 수정 페이지용 데이터 얻기
+    public void adminGetMovie(HttpServletRequest request) throws Exception {
+        int movieNo = Integer.parseInt((request.getParameter("movieNo"))); // movieNo 파라미터를 추출해서
+        MovieDTO movieDTO = movieDAO.selectOne(movieNo); // DB에서 해당 movieNo 값들을 호출
+        List<CastDTO> castList = movieDAO.getCasts(movieNo); // 출연진
+        List<PhotoDTO> photoList = movieDAO.getPhoto(movieNo); // 포토
+
+        request.setAttribute("movieDTO", movieDTO); // 영화 정보
+        request.setAttribute("castList",castList); // 출연,제작진 리스트
+        request.setAttribute("photoList",photoList); // 포토 리스트
+    }
+
 
 //    (super)login 복붙 - 종원 // 새로운 관리자 전용 session 생성
 
@@ -331,29 +348,106 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
     }
     // modifyMovie - 수홍
 // 영화 수정 메소드(관리자용)
-    public void adminModifyMovie(HttpServletRequest request) {
-        MovieDTO movieDTO = new MovieDTO();
+    public void adminModifyMovie(HttpServletRequest request) throws Exception {
 
-        movieDTO.setMovieNo(Integer.parseInt(request.getParameter("movieNo")));
-        movieDTO.setMovieName(request.getParameter("movieName"));
-        movieDTO.setDirector(request.getParameter("director"));
-        movieDTO.setActor(request.getParameter("actor"));
-        movieDTO.setReleaseDate(request.getParameter("releaseDate"));
-        movieDTO.setRegion(request.getParameter("region"));
-        movieDTO.setGenre(request.getParameter("genre"));
-        movieDTO.setAudience(Integer.parseInt(request.getParameter("audience")));
-        movieDTO.setRanking(Integer.parseInt(request.getParameter("ranking")));
-        movieDTO.setRunningtime(request.getParameter("runnintime"));
-        movieDTO.setOutline(request.getParameter("outline"));
-        movieDTO.setPoster(request.getParameter("poster"));
-        movieDTO.setMo(request.getParameter("mo"));
+        int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+        String movieName = request.getParameter("movieName");
+        String releaseDate = request.getParameter("releaseDate");
+        String region = request.getParameter("region");
+        String genre = request.getParameter("genre");
+        int audience = Integer.parseInt(request.getParameter("audience"));
+        String runningtime = request.getParameter("runningtime");
+        String outline = request.getParameter("outline");
+        String mo = request.getParameter("mo");
+        String[] crewNoList = request.getParameterValues("crewNo");
 
-        try {
-            adminDAO.adminModifyMovie(movieDTO);
-            log.info(movieDTO);
-        } catch (Exception e){
-            log.info(e.getMessage());
-            request.setAttribute("error", "수정 오류");
+        String fileName = "";
+        String poster = request.getParameter("prePoster"); // 기존 포스터 경로
+
+        // 포스터가 변경됐으면 새로 등록
+        if(request.getPart("poster") != null) {
+            Part partPoster = request.getPart("poster");
+            fileName = this.getFileName(partPoster);
+            log.info("poster : " + fileName);
+            if (fileName != null && !fileName.isEmpty()) {
+                UUID uuid = UUID.randomUUID();
+                fileName = uuid + fileName;
+                log.info("poster if : " + fileName);
+                partPoster.write(fileName);
+            }
+            poster = "/upload/" + fileName;
         }
+
+        // 포토 등록
+        List<String> photoList = new ArrayList<>();
+
+        int photoCnt = 1;
+        while(true){
+            String photo = "photo" + photoCnt;
+            if(request.getPart(photo) == null)
+                break;
+
+            Part partPhoto = request.getPart(photo);
+            fileName = this.getFileName(partPhoto);
+            log.info("photo : " + fileName);
+            if (fileName != null && !fileName.isEmpty()) {
+                UUID uuid = UUID.randomUUID();
+                fileName = uuid + fileName;
+                log.info("photo if : " + fileName);
+                partPhoto.write(fileName);
+                log.info("photoWrite success");
+            }
+            photoList.add("/upload/" + fileName);
+            photoCnt++;
+        }
+
+        MovieDTO movieDTO = MovieDTO.builder()
+                .movieNo(movieNo)
+                .movieName(movieName)
+                .director("")
+                .actor("")
+                .releaseDate(releaseDate)
+                .region(region)
+                .genre(genre)
+                .audience(audience)
+                .runningtime(runningtime)
+                .outline(outline)
+                .poster(poster)
+                .mo(mo)
+                .build();
+
+        log.info("movie update------------" + movieDTO);
+        // 영화 업데이트
+        adminDAO.adminModifyMovie(movieDTO);
+        log.info("movie update complete------------");
+
+        // 기존 출연진 비우기
+        log.info("cast remove complete------------");
+        movieDAO.removeCast(movieNo);
+
+        // 출연진 등록
+        for(String crewNo : crewNoList){
+            String castRole = request.getParameter("castRole_" + crewNo);
+            movieDAO.insertCast(Integer.parseInt(crewNo),movieNo,castRole);
+        }
+        log.info("cast insert complete------------");
+
+        // 포토 등록
+        for(String photoImg : photoList){
+            movieDAO.insertPhoto(photoImg, movieNo);
+        }
+        log.info("photo insert complete------------");
+        String directors = "";
+        String actors = "";
+
+        List<CastDTO> castList = movieDAO.getCasts(movieNo);
+        for(CastDTO castDTO : castList){
+            if(castDTO.getCastRole().equals("감독"))
+                directors += castDTO.getCrewName() + "|";
+            else
+                actors += castDTO.getCrewName() + "|";
+        }
+        // 무비 테이블 배우, 감독 갱신
+        movieDAO.updateCrewInMovie(directors,actors,movieNo);
     }
 }

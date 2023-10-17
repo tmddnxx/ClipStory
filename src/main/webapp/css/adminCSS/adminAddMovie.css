@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    position: relative;
+    width: 100vw;
+    height: 900px;
+    background: #000000;
+    color: white;
+    font-size: 1.6rem;
+
+    font-family: 'Gothic A1', sans-serif;
+}
+main{
+    padding-top: 200px;
+    display: flex;
+    justify-content: center;
+}
+section{
+    width: 35rem;
+    margin: 0 auto;
+}
+#Movie-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 2.6rem;
+    margin: 1.3rem 0;
+}
+
+#Movie-title > h3{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 10px;
+}
+
+.Movie-input-div input{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: #323232;
+    padding: 1.3rem 1.8rem;
+    margin: 0.3rem 0;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    color: whitesmoke;
+}
+
+.Movie-input{
+    margin: 1.5rem 0;
+}
+
+.Movie-input > span{
+    font-size: 1.1rem;
+    color: #ABABABAA;
+}
+.Movie-input > p{
+    font-size: 13px;
+    font-weight: bold;
+    color: #ec4646;
+    margin-top: 10px;
+}
+
+.Movie-input-div{
+    position: relative;
+}
+
+.Movie-input-div i{
+    position: absolute;
+    display: inline-block;
+    top: 40%;
+    right: 1rem;
+}
+#mo-radio-div{
+    display: flex;
+    flex-direction: row;
+}
+.Movie-input-div label{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 2rem;
+    padding: 0.2em 0.4em;
+    margin-right: 10px;
+}
+.Movie-input-div label input{
+    appearance: none;
+    border: max(2px, 0.1em) solid gray;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    padding: 1px 1px;
+    margin-right: 5px;
+}
+.Movie-input-div label input:checked{
+    background-color: #fa3f1e;
+}
+.etc-btn{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: #323232;
+    padding: 1.3rem 1.8rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    color: whitesmoke;
+    font-weight: bold;
+}
+.etc-btn:hover{
+    cursor: pointer;
+    color: black;
+    background-color: whitesmoke;
+}
+/* 포스터 */
+#poster-title{
+    text-align: center;
+    outline: none;
+}
+#poster-title:hover{
+    cursor: default;
+    color: whitesmoke;
+    background-color: #323232;
+}
+/* 출연진 목록*/
+#castList{
+    margin-top: 10px;
+}
+#castList div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#castList div div{
+    width: 15%;
+}
+#castList div div span{
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 2.5rem;
+    color: white;
+}
+.removeCastBtn{
+    width: 7%;
+    height: 20px;
+    background-color: #323232;
+    color: whitesmoke;
+}
+.removeCastBtn:hover{
+    background-color: whitesmoke;
+    color: #323232;
+}
+/* 포토 */
+#photo-title{
+    text-align: center;
+    outline: none;
+}
+#photo-title:hover{
+    cursor: default;
+    color: whitesmoke;
+    background-color: #323232;
+}
+#morePhotoBtn{
+    background-color: rgba(154, 152, 152, 0.5);
+}
+#morePhotoBtn:hover{
+    background-color: rgba(50, 50, 50, 0.7);
+    color: whitesmoke;
+}
+#Movie-buttons{
+    display: flex;
+    margin: 0.3rem 0;
+    padding: 0.3rem;
+}
+
+#Movie-buttons > input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: #323232;
+    padding: 1.3rem 1.8rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    color: whitesmoke;
+    margin: 0.5rem;
+    font-weight: bold;
+}
+
+#Movie-buttons > input:hover {
+    cursor: pointer;
+    margin: 0.5rem;
+    color: black;
+}
+
+#Movie-buttons > input:hover:first-child {
+    background-color: whitesmoke;
+}
+
+#Movie-buttons > input:hover:last-child {
+    background-color: #F93D3D;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

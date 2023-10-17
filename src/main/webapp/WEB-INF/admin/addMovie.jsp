@@ -4,85 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link href="/css/memberCSS/register.css" rel="stylesheet">
+    <link href="/css/adminCSS/adminAddMovie.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
     <%--    <script src="/js/memberJS/register.js" defer></script>--%>
-    <title>회원 가입</title>
+    <title>영화 등록</title>
 </head>
 <body>
 <jsp:include page="./inc/adminHeader.jsp"/>
 <main>
     <section>
-        <div id="addMovie-title">
+        <div id="Movie-title">
             <h3 class="head-title">영화 등록</h3>
         </div>
         <form name="frmMember" action="/admin?action=addMovieProcess" method="post" enctype="multipart/form-data">
-            <div id="register-container">
-                <div id="register-input-container">
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <input id="register-input-id" type="text" placeholder="제목" name="movieName">
+            <div id="Movie-container">
+                <div id="Movie-input-container">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <input id="Movie-input-title" type="text" placeholder="제목" name="movieName">
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <input id="register-input-pw" type="date" placeholder="개봉일" name="releaseDate">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <input id="Movie-input-rel" type="date" placeholder="개봉일" name="releaseDate">
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <input  type="text" placeholder="국가" name="region">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <input type="text" placeholder="국가" name="region">
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <input  type="text" placeholder="장르" name="genre">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <input type="text" placeholder="장르" name="genre">
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <input  type="text" placeholder="러닝타임" name="runningtime">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <input type="text" placeholder="관객수" name="audience">
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <input type="text" placeholder="러닝타임" name="runningtime">
+                        </div>
+                    </div>
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
                             <textarea cols="50" rows="5" name="outline" placeholder="개요" class="form-control"></textarea>
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <input  type="file" placeholder="포스터" name="poster">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <input type="text" class="etc-btn" id="poster-title" value="포스터 등록" readonly/>
+                            <div><img id=poster-preview width="100%" height="300px" style="display: none"></div>
+                            <input type="file" id="poster-file" name="poster" onchange="displayPreviewImg(this);">
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <label>
-                                <input  type="radio" value="m" name="mo">
-                                MOVIE
-                            </label>
-                            <label>
-                                <input  type="radio" value="m" name="mo">
-                                OTT
-                            </label>
-                        </div>
-                    </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
-                            <button type="button" id="addCastButton">출연진 등록</button>
-                            <div id="selectedItems">
+                    <div class="Movie-input">
+                        <div class="Movie-input-div">
+                            <button type="button" id="addCastButton" class="etc-btn">출연진 등록</button>
+                            <div id="castList">
                                 <!-- Cast 버튼을 통해 선택한 목록이 여기에 추가됩니다. -->
                             </div>
                         </div>
                     </div>
-                    <div class="register-input">
-                        <div class="register-input-div">
+                    <div class="Movie-input">
+                        <input type="text" class="etc-btn" id="photo-title" value="포토 등록" readonly/>
+                        <div class="Movie-input-div">
                             <input type="file" placeholder="포토" name="photo1">
                         </div>
-                        <button type="button" id="morePhotoBtn">포토 추가</button>
+                        <button type="button" class="etc-btn" id="morePhotoBtn">+ 포토 추가</button>
+                    </div>
+                    <div class="Movie-input">
+                        <div class="Movie-input-div" id="mo-radio-div">
+                            <label>
+                                <input type="radio" value="m" name="mo" checked>
+                                <span>MOVIE</span>
+                            </label>
+                            <label>
+                                <input type="radio" value="o" name="mo">
+                                <span>OTT</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="register-buttons">
+            <div id="Movie-buttons">
                 <input type="submit" id="submit-btn" value="등록">
                 <input type="button" onclick=window.location.href="/admin?action=main" value="취소">
             </div>
@@ -108,44 +116,58 @@
         });
     });
 
+    // 이미지 업로드 미리보기
+    function displayPreviewImg(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('poster-preview').src = e.target.result;
+                document.getElementById('poster-preview').style.display = "flex";
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('poster-preview').src = "";
+            document.getElementById('poster-preview').style.display = "none";
+        }
+    }
     // 포토 추가 버튼 클릭
     document.getElementById("morePhotoBtn").addEventListener("click", function (){
         const morePhotoBtn = document.getElementById("morePhotoBtn");
         let photoDiv = document.createElement("div");
-        photoDiv.innerHTML = '<div class="register-input-div">'
+        photoDiv.innerHTML = '<div class="Movie-input-div">'
             + '<input type="file" placeholder="포토" name="photo' + photoCnt + '">'
             + '</div>';
-        morePhotoBtn.parentNode.insertBefore(photoDiv, morePhotoBtn);
+        morePhotoBtn.parentNode.insertBefore(photoDiv,morePhotoBtn);
 
         photoCnt++;
     })
 
     // 선택한 목록을 표시
     function displaySelectedItems() {
-        const selectedItemsDiv = document.getElementById("selectedItems");
-        selectedItemsDiv.innerHTML = ""; // 이전 목록 초기화
+        const castListDiv = document.getElementById("castList");
+        castListDiv.innerHTML = ""; // 이전 목록 초기화
         console.log(selectedItems);
         selectedItems.forEach(function(crew) {
             console.log(crew);
             let listItem = document.createElement("div");
-            listItem.innerHTML = '<span>' + crew.crewName + '</span>'
+            listItem.innerHTML = '<div><span class="crew-Name-span">' + crew.crewName + '</span></div>'
                 + '<input type="hidden" name="crewNo" value="' + crew.crewNo + '">'
-                + '<label>'
+                + '<label class="cast-role-label">'
                 + '<input type="radio" name="castRole_' + crew.crewNo + '" value="감독"> 감독'
                 + '</label>'
-                + '<label>'
-                + '<input type="radio" name="castRole_' + crew.crewNo + '" value="출연"> 출연'
+                + '<label class="cast-role-label">'
+                + '<input type="radio" name="castRole_' + crew.crewNo + '" value="출연" checked> 출연'
                 + '</label>'
-                + '<button class="removeItem" data-crewNo="' + crew.crewNo + '">x</button>';
+                + '<button type="button" class="removeCastBtn" data-crewNo="' + crew.crewNo + '">x</button>';
 
                 console.log(listItem);
-            selectedItemsDiv.appendChild(listItem);
+            castListDiv.appendChild(listItem);
         });
 
         // 삭제 버튼 클릭 시 해당 항목 삭제
-        const removeButtons = selectedItemsDiv.getElementsByClassName("removeItem");
-        for (let i = 0; i < removeButtons.length; i++) {
-            removeButtons[i].addEventListener("click", function() {
+        const removeCastBtns = castListDiv.getElementsByClassName("removeCastBtn");
+        for (let i = 0; i < removeCastBtns.length; i++) {
+            removeCastBtns[i].addEventListener("click", function() {
                 let crewNoToRemove = this.getAttribute("data-crewNo");
                 // 선택한 목록에서 해당 항목을 제거
                 selectedItems = selectedItems.filter(item => item.crewNo != crewNoToRemove);

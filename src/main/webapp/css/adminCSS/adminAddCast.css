@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    position: relative;
+    width: 100vw;
+    height: 900px;
+    background: #000000;
+    color: white;
+    font-size: 1.6rem;
+
+    font-family: 'Gothic A1', sans-serif;
+}
+#crewList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#crewList li{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-bottom: 1px solid grey;
+}
+#crewList li input{
+    margin-right: 20px;
+}
+#crewList li div{
+    width: 20%;
+}
+#crewList li div span{
+    line-height: 2.8rem;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#confirmButton{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: red;
+    padding: 1.3rem 1.8rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    color: whitesmoke;
+    font-weight: bold;
+}
+#confirmButton:hover{
+    background-color: #b62222;
+}

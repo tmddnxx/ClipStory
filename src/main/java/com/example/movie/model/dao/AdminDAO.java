@@ -296,7 +296,7 @@ public List<MemberDTO> viewMyMember(String memberId) throws Exception { // íšŒì›
     public void adminModifyMovie(MovieDTO movieDTO) throws Exception {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         String sql = "update movie set movieName = ?,  director = ?, actor = ?, " +
-                "releaseDate = ?, region = ?, genre = ?, audience = ?, ranking = ?, runningtime = ?, " +
+                "releaseDate = ?, region = ?, genre = ?, audience = ?, runningtime = ?, " +
                 "outline = ?, poster = ?, mo = ? where movieNo = ?";
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, movieDTO.getMovieName());
@@ -306,12 +306,11 @@ public List<MemberDTO> viewMyMember(String memberId) throws Exception { // íšŒì›
         preparedStatement.setString(5, movieDTO.getRegion());
         preparedStatement.setString(6, movieDTO.getGenre());
         preparedStatement.setInt(7, movieDTO.getAudience());
-        preparedStatement.setInt(8,movieDTO.getRanking());
-        preparedStatement.setString(9, movieDTO.getRunningtime());
-        preparedStatement.setString(10, movieDTO.getOutline());
-        preparedStatement.setString(11, movieDTO.getPoster());
-        preparedStatement.setString(12, movieDTO.getMo());
-        preparedStatement.setInt(13, movieDTO.getMovieNo());
+        preparedStatement.setString(8, movieDTO.getRunningtime());
+        preparedStatement.setString(9, movieDTO.getOutline());
+        preparedStatement.setString(10, movieDTO.getPoster());
+        preparedStatement.setString(11, movieDTO.getMo());
+        preparedStatement.setInt(12, movieDTO.getMovieNo());
         preparedStatement.executeUpdate();
     }
 

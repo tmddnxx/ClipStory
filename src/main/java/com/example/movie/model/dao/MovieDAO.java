@@ -349,5 +349,15 @@ public class MovieDAO {
         preparedStatement.setInt(2, movieNo);
         preparedStatement.executeUpdate();
     }
+
+    // 해당 영화의 출연정보 비우기
+    public void removeCast(int movieNo) throws Exception {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+
+        String sql = "DELETE FROM cast WHERE movieNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, movieNo);
+        preparedStatement.executeUpdate();
+    }
 }
 

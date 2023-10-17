@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link href="/css/adminCSS/adminAddCast.css" rel="stylesheet">
+        <link href="./css/common.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>출연진 목록</title>
 </head>
 <body>
-<h2>팝업 페이지</h2>
-<!-- 테이블 목록을 표시할 요소 -->
-<ul id="tableItemList"></ul>
+<ul id="crewList"></ul>
 <button id="confirmButton">등록</button>
 
 <script>
-  // 선택한 목록을 저장할 배열
   const xhr = new XMLHttpRequest();
-  let selectedItems = [];
+  let selectedItems = []; // 선택한 목록
   let serverData = [];
   const getCasts = function () {
       console.log("getCastts");
@@ -34,20 +36,20 @@
   };
 
   const displayCrewTag = function (items){
-      const tableItemList = document.getElementById("tableItemList");
+      const crewList = document.getElementById("crewList");
       items.forEach(function (crew){
           serverData.push(crew);
           let listItem = document.createElement("li");
-          listItem.innerHTML = ' <input type="checkbox" name="tableItem" value=" ' + crew.crewNo + '">'
-                + crew.crewName
+          listItem.innerHTML = '<input type="checkbox" name="chkCrew" value=" ' + crew.crewNo + '">'
+                + '<div><span class="crew-name-span">' +crew.crewName + '</span></div>'
                 + '<img src="' + crew.crewImg + '" width="50px" height="50px">';
-          tableItemList.appendChild(listItem);
+          crewList.appendChild(listItem);
       });
   }
 
   // 등록 버튼 클릭 시 선택한 목록을 부모 페이지로 전달
   document.getElementById("confirmButton").addEventListener("click", function() {
-    var selectedTableItems = Array.from(document.querySelectorAll('input[name="tableItem"]:checked'));
+    let selectedTableItems = Array.from(document.querySelectorAll('input[name="chkCrew"]:checked'));
 
     selectedTableItems.forEach(function(item) {
       let crewNo = item.value;

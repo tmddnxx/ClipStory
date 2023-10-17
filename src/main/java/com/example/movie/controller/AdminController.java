@@ -36,7 +36,6 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
 
         String action = req.getParameter("action");
         if(action == null){
@@ -57,8 +56,12 @@ public class AdminController extends HttpServlet {
                 adminService.adminRemoveMovie(req);
                 resp.sendRedirect("/admin?action=movieList");
                 break;
-            case "modifyMovie" : // 영화 한개 수정
-                adminService.adminModifyMovie(req);
+            case "modifyMovieProcess" : // 영화 한개 수정
+                try {
+                    adminService.adminModifyMovie(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 resp.sendRedirect("/admin?action=movieList");
                 break;
             case "movieView" : // 영화 상세 페이지
@@ -75,6 +78,14 @@ public class AdminController extends HttpServlet {
                 break;
             case "addMovie": // 영화 등록 페이지
                 req.getRequestDispatcher("/WEB-INF/admin/addMovie.jsp").forward(req, resp);
+                break;
+            case "modifyMovie": // 영화 수정 페이지
+                try {
+                    adminService.adminGetMovie(req); // 수정용 데이터 가져오기
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                req.getRequestDispatcher("/WEB-INF/admin/modifyMovie.jsp").forward(req, resp);
                 break;
             case "addCast": // 출연진 등록 팝업 페이지
                 req.getRequestDispatcher("/WEB-INF/admin/addCast.jsp").forward(req, resp);

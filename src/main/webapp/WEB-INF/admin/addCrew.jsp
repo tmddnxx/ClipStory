@@ -7,7 +7,7 @@
     <link href="/css/memberCSS/register.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
 <%--    <script src="/js/memberJS/register.js" defer></script>--%>
-    <title>회원 가입</title>
+    <title>배우/감독 등록</title>
 </head>
 <body>
 <jsp:include page="./inc/adminHeader.jsp"/>

@@ -130,7 +130,7 @@
         <div class="goMain" style="margin: 20px 0px 20px 0px;">
             <a href="/admin?action=main" class="home-btn">메인</a>
             <a href="/admin?action=movieList" class="home-btn" style="margin: 0px 5px 0px 5px">영화목록</a>
-            <a href="/admin?action=modifyMovie?movieNo=${movieDTO.movieNo}" class="home-btn">영화수정</a>
+            <a href="/admin?action=modifyMovie&movieNo=${movieDTO.movieNo}" class="home-btn">영화수정</a>
         </div>
     </div>
 </div>

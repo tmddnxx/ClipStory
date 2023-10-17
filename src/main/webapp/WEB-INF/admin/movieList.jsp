@@ -68,7 +68,7 @@
                                     <a href="./admin?action=removeMovie&movieNo=${movie.movieNo}">
                                         <span class="badge bg-danger remove">삭제</span>
                                     </a>
-                                    <a href="./admin?action=modifyMove&movieNo=${movie.movieNo}">
+                                    <a href="./admin?action=modifyMovie&movieNo=${movie.movieNo}">
                                         <span class="badge bg-primary">수정</span>
                                     </a>
                                 </div>
