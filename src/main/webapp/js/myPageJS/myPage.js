@@ -117,10 +117,6 @@
         const removeCommentBtn = document.querySelector(".btn-selected2"); // 댓글 선택삭제 버튼
         const removeReviewBtn = document.querySelector(".btn-selected3"); // 리뷰 선택삭제 버튼
 
-        const removeBoardAll = document.querySelector(".btn-removeAll1"); // 게시글 전체삭제 버튼
-        const removeCommentAll = document.querySelector(".btn-removeAll2"); // 댓글 전체삭제 버튼
-        const removeReviewAll = document.querySelector(".btn-removeAll3"); // 리뷰 전체삭제 버튼
-
         removeBoardBtn.addEventListener('click', function () {
             removeSelectedContents(1)
         }); // 버튼 클릭시 게시글 삭제 함수 실행
@@ -129,18 +125,56 @@
         }); // 버튼 클릭시 댓글 삭제 함수 실행
         removeReviewBtn.addEventListener('click', function () {
             removeSelectedContents(3)
-        }); // 버튼 클릭시 리뷰 삭제 함수 실행
+        }); //  버튼 클릭시 리뷰 삭제 함수 실행
+    function removeAllContents(listNo) { // 내 컨텐츠 전체삭제 자바스크립트
+        const listClass = ".list-group-" + listNo;
+        const frmNo = 'form[name=frmRemoveSelected' + listNo + ']';
+        const checkboxes = document.querySelectorAll(listClass + ' input[type="checkbox"]');
+        const frmRemoveSelected = document.querySelector(frmNo);
+        const selectedItems = [];
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedItems.push(checkbox.value);
+            }
+        });
+
+        if (selectedItems.length === 0) {
+            alert(`마이 컨텐츠가 없습니다.`);
+        } else {
+            let confirmMessage = '';
+
+            if (listNo === 1) {
+                confirmMessage = `전체 게시글을 삭제하시겠습니까?`;
+            } else if (listNo === 2) {
+                confirmMessage = `전체 댓글을 삭제하시겠습니까?`;
+            } else if (listNo === 3) {
+                confirmMessage = `전체 리뷰를 삭제하시겠습니까?`;
+            }
+
+            if (confirm(confirmMessage)) {
+                frmRemoveSelected.submit();
+            }
+        }
+    }
+
+
+        const removeBoardAll = document.querySelector(".btn-removeAll1"); // 게시글 전체삭제 버튼
+        const removeCommentAll = document.querySelector(".btn-removeAll2"); // 댓글 전체삭제 버튼
+        const removeReviewAll = document.querySelector(".btn-removeAll3"); // 리뷰 전체삭제 버튼
+
+
 
         // 전체 삭제 버튼 클릭 시 경고창 표시 및 동작 수행
         removeBoardAll.addEventListener('click', function () {
-            removeSelectedContents(1)
-        }); // 버튼 클릭시 게시글 삭제 함수 실행
+            removeAllContents(1)
+        }); // 전체 삭제 버튼 클릭시 게시글 삭제 함수 실행
         removeCommentAll.addEventListener('click', function () {
-            removeSelectedContents(2)
-        }); // 버튼 클릭시 댓글 삭제 함수 실행
+            removeAllContents(2)
+        }); // 전체 삭제 버튼 클릭시 댓글 삭제 함수 실행
         removeReviewAll.addEventListener('click', function () {
-            removeSelectedContents(3)
-        }); // 버튼 클릭시 리뷰 삭제 함수 실행
+            removeAllContents(3)
+        }); // 전체 버튼 클릭시 리뷰 삭제 함수 실행
 
 
 
