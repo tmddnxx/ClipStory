@@ -26,12 +26,13 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("Login POST...");
-
+        HttpSession session = req.getSession();
+        session.invalidate();
         try {
             MemberDTO memberDTO = memberService.login(req);
             log.info(memberDTO);
             if(memberDTO != null) {
-                HttpSession session = req.getSession();
+                session = req.getSession();
                 session.setAttribute("loginInfo", memberDTO);
                 session.setAttribute("sessionId", memberDTO.getMemberId()); // board에서 id값만 들고올려고 추가함
                 log.info(memberDTO);
