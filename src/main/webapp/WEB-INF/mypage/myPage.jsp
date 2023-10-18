@@ -56,7 +56,7 @@
           <ul class="list-group-1">
             <c:forEach var="boardDTO" items="${boardDTOList}" varStatus="status">
               <li>
-                <div class="flex_my1">
+                <div class="flex_my">
 
                   <!--label 태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-board-${boardDTO.contentNo}">
@@ -94,7 +94,7 @@
           <ul class="list-group-2">
             <c:forEach var="commentDTO" items="${commentDTOList}" varStatus="status">
               <li>
-                <div class="flex_my2">
+                <div class="flex_my">
 
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-comment-${commentDTO.commentNo}">
@@ -132,7 +132,7 @@
           <ul class="list-group-3">
             <c:forEach var="reviewDTO" items="${reviewDTOList}" varStatus="status">
               <li>
-                <div class="flex_my3">
+                <div class="flex_my">
 
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-review-${reviewDTO.reviewNo}">
