@@ -12,11 +12,8 @@
     <link href="../../css/adminCSS/movieView.css?after" rel="stylesheet" type="text/css">
     <title>관리자 영화 상세 페이지</title>
 </head>
-<%
-    boolean zzim = (boolean) request.getAttribute("zzim");
-%>
 <body>
-<jsp:include page="inc/adminHeader.jsp"/>
+<jsp:include page="./inc/adminHeader.jsp"/>
 <div class="outerDiv" style="background-image: url('${movieDTO.poster}');">
     <div class="blurDiv">
         <%-- 영화 상세 내용 영역 --%>

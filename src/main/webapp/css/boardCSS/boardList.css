@@ -148,7 +148,8 @@ input::placeholder{
 .txt{
     width: 100px;
     height: 50px;
-    border-radius: 10px
+    border-radius: 10px;
+    text-align: center;
 }
 #btn-search,#btn-reset{
     width: 150px;
