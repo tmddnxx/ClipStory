@@ -360,6 +360,7 @@ public class MovieDAO {
         preparedStatement.executeUpdate();
     }
 
+    // 영화 랭킹 업데이트
     public void updateRankingMovie() throws Exception {
         String sql = "UPDATE movie AS m\n" +
                 "JOIN (\n" +
@@ -373,6 +374,7 @@ public class MovieDAO {
         preparedStatement.executeUpdate();
     }
 
+    // ott랭킹 업데이트
     public void updateRankingOTT() throws Exception {
         String sql = "UPDATE movie AS m\n" +
                 "JOIN (\n" +
