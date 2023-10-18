@@ -43,20 +43,9 @@ const addCommentTag = function (items){
             // tagLi.innerHTML += '<p class="comment-writer">' + item.nickName + ' (' + item.addDate + ')</p>' +
             //                     '<p class="comment-content">' + item.comment + '</p></div>';
             // tagLi.innerHTML += item.comment + ' | ' + item.nickName + ' | ' + item.addDate;
-            if (item.isLogin === true && item.commentNo === item.parentNo){
                 tagLi.innerHTML +=
-                    ' <div class="comment-btn-div"><span class="delete-span-btn" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>' +
-                    '<span>&nbsp|&nbsp</span>' +
-                    '<span class="reply-span-btn" onclick="displayCommentRe(this);">답글</span></div>';
-            }
-            else if (item.isLogin === true) {
-                tagLi.innerHTML +=
-                    ' <div class="comment-btn-div"><span class="delete-span-btn" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span></div>';
-            }
-            else if(item.commentNo === item.parentNo) {
-                if(memberId !== "")
-                    tagLi.innerHTML += '<div class="comment-btn-div"><span class="reply-span-btn" onclick="displayCommentRe(this);">답글</span></div>';
-            }
+                    ' <div class="comment-btn-div"><span class="delete-span-btn" onclick="goCommentDelete(\'' + item.commentNo + '\', \'' + item.parentNo + '\');">삭제</span>'
+
         }
         else{
             tagLi.innerHTML += item.comment;

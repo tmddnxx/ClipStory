@@ -131,4 +131,16 @@ public class CommentDAO {
 
         return preparedStatement.executeUpdate() == 1;
     }
+
+    public boolean adminUpdateCommentDie(int commentNo) throws SQLException{
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        String sql = "UPDATE `comment` set nickName = ?, comment = ?, memberId = ? where commentNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "");
+        preparedStatement.setString(2, "관리자에 의해 삭제된 댓글입니다");
+        preparedStatement.setString(3, "");
+        preparedStatement.setInt(4, commentNo);
+
+        return preparedStatement.executeUpdate() == 1;
+    }
 }
