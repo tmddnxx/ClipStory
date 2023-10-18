@@ -56,7 +56,7 @@
           <ul class="list-group-1">
             <c:forEach var="boardDTO" items="${boardDTOList}" varStatus="status">
               <li>
-                <div class="flex_my">
+                <div class="flex_my1">
 
                   <!--label 태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-board-${boardDTO.contentNo}">
@@ -72,7 +72,7 @@
                       </p>
                     </a>
                     <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}"
-                      class="remove-btn" style="font-size: 30px">X</a>
+                      class="remove-btn1" style="font-size: 30px">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -94,7 +94,7 @@
           <ul class="list-group-2">
             <c:forEach var="commentDTO" items="${commentDTOList}" varStatus="status">
               <li>
-                <div class="flex_my">
+                <div class="flex_my2">
 
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-comment-${commentDTO.commentNo}">
@@ -110,7 +110,7 @@
                        </p>
                     </a>
                     <a href="./remove.board?action=remove&contentNo=${commentDTO.commentNo}"
-                       class="remove-btn" style="font-size: 30px">X</a>
+                       class="remove-btn2" style="font-size: 30px">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -132,7 +132,7 @@
           <ul class="list-group-3">
             <c:forEach var="reviewDTO" items="${reviewDTOList}" varStatus="status">
               <li>
-                <div class="flex_my">
+                <div class="flex_my3">
 
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-review-${reviewDTO.reviewNo}">
@@ -147,7 +147,7 @@
                       </p>
                     </a>
                     <a href="./remove.movie?action=remove&movieNo=${reviewDTO.movieNo}"
-                       class="remove-btn" style="font-size: 30px">X</a>
+                       class="remove-btn3" style="font-size: 30px">X</a>
                   </div>
               </li>
             </c:forEach>
