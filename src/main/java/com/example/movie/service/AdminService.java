@@ -74,6 +74,8 @@ public class AdminService {
         String mo = request.getParameter("mo");
         String[] crewNoList = request.getParameterValues("crewNo");
 
+        int photoCnt = 1;
+
         String fileName = "";
 
         // 포스터 등록
@@ -90,11 +92,7 @@ public class AdminService {
 
         // 포토 등록
         List<String> photoList = new ArrayList<>();
-//        photoList.add("/upload/photo1");
-//        photoList.add("/upload/photo2");
-//        photoList.add("/upload/photo3");
 
-        int photoCnt = 1;
         while(true){
             String photo = "photo" + photoCnt;
             if(request.getPart(photo) == null)
@@ -164,7 +162,9 @@ public class AdminService {
         }
         // 무비 테이블 배우, 감독 갱신
         movieDAO.updateCrewInMovie(directors,actors,movieNo);
-
+        // 무비 랭킹 갱신
+        movieDAO.updateRankingMovie();
+        movieDAO.updateRankingOTT();
 
     }
 
@@ -449,5 +449,8 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
         }
         // 무비 테이블 배우, 감독 갱신
         movieDAO.updateCrewInMovie(directors,actors,movieNo);
+        // 무비 랭킹 갱신
+        movieDAO.updateRankingMovie();
+        movieDAO.updateRankingOTT();
     }
 }

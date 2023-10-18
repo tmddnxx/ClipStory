@@ -69,10 +69,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="Movie-input">
+                    <div class="Movie-input" id="photo-input-div">
                         <input type="text" class="etc-btn" id="photo-title" value="포토 등록" readonly/>
                         <div class="Movie-input-div">
-                            <input type="file" placeholder="포토" name="photo1">
+                            <div><img width="100%" height="100%" style="display: none"></div>
+                            <input type="file" placeholder="포토" class="photo" onchange="displayPreviewImg(this);">
+                            <div></div>
                         </div>
                         <button type="button" class="etc-btn" id="morePhotoBtn">+ 포토 추가</button>
                     </div>
@@ -121,24 +123,48 @@
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('poster-preview').src = e.target.result;
-                document.getElementById('poster-preview').style.display = "flex";
+                input.previousElementSibling.firstChild.src = e.target.result;
+                input.previousElementSibling.firstChild.style.display = "flex";
+                if(input.parentNode.parentNode.firstElementChild.id === "photo-title"){ // 포토 이미지 업로드 했을시
+                    input.nextElementSibling.innerHTML = '<button type="button" class="removePhotoBtn" id="removePhotoBtn' + photoCnt + '">X</button>'; // 삭제 버튼 추가
+
+                    const removePhotoBtn = document.getElementById("removePhotoBtn" + photoCnt);
+
+                    console.log(removePhotoBtn);
+                    // 포토 삭제 버튼 클릭시
+                    removePhotoBtn.addEventListener("click", function(e) {
+                        e.target.parentElement.parentElement.remove(); // 해당 요소 제거
+
+                        const inputPhotoList = document.querySelectorAll("input[class=photo]"); // 포토 네임 다시 정하기
+                        for(let i = 1; i <= inputPhotoList.length; i++ ){
+                            inputPhotoList[i-1].name = "photo" + i;
+                        }
+                    });
+                }
             };
             reader.readAsDataURL(input.files[0]);
         } else {
-            document.getElementById('poster-preview').src = "";
-            document.getElementById('poster-preview').style.display = "none";
+            input.previousElementSibling.firstChild.src = "";
+            input.previousElementSibling.firstChild.style.display = "none";
         }
     }
     // 포토 추가 버튼 클릭
     document.getElementById("morePhotoBtn").addEventListener("click", function (){
         const morePhotoBtn = document.getElementById("morePhotoBtn");
         let photoDiv = document.createElement("div");
-        photoDiv.innerHTML = '<div class="Movie-input-div">'
-            + '<input type="file" placeholder="포토" name="photo' + photoCnt + '">'
-            + '</div>';
+        photoDiv.className += "Movie-input-div";
+        photoDiv.innerHTML =
+            '<div><img width="100%" height="100%" style="display: none"></div>'
+            + '<input type="file" placeholder="포토" class="photo" onchange="displayPreviewImg(this);">'
+            + '<div></div>';
+            // + '<button type="button" class="removePhotoBtn">X</button>';
         morePhotoBtn.parentNode.insertBefore(photoDiv,morePhotoBtn);
 
+        //이름 카운팅 다시
+        const inputPhotoList = document.querySelectorAll("input[class=photo]");
+        for(let i = 1; i <= inputPhotoList.length; i++ ){
+            inputPhotoList[i-1].name = "photo" + i;
+        }
         photoCnt++;
     })
 
@@ -164,7 +190,7 @@
             castListDiv.appendChild(listItem);
         });
 
-        // 삭제 버튼 클릭 시 해당 항목 삭제
+        // 캐스트 삭제 버튼 클릭 시 해당 항목 삭제
         const removeCastBtns = castListDiv.getElementsByClassName("removeCastBtn");
         for (let i = 0; i < removeCastBtns.length; i++) {
             removeCastBtns[i].addEventListener("click", function() {
