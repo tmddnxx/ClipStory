@@ -66,9 +66,46 @@
     }
 
     // X 버튼 클릭 시 내 글 개별 삭제
-    const removeBtnX = document.querySelectorAll(".remove-btn");
+    const removeBtnXContent = document.querySelectorAll(".remove-btn1");
 
-    // "X" 버튼 클릭 시 개별 컨텐츠 삭제
+    // "X" 버튼 클릭 시 내글 삭제
+    removeBtnXContent.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const myItem = e.target.closest('.flex_my1');
+            if (confirm('정말 삭제하시겠습니까?')) {
+                myItem.target.value = e.target.role;
+                myItem.submit();
+            }
+        });
+    });
+
+    // X 버튼 클릭 시 내 댓글 개별 삭제
+    const removeBtnXComment = document.querySelectorAll(".remove-btn2");
+
+    // "X" 버튼 클릭 시 내 댓글 삭제
+    removeBtnXComment.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const myItem = e.target.closest('.flex_my2');
+            if (confirm('정말 삭제하시겠습니까?')) {
+                myItem.target.value = e.target.role;
+                myItem.submit();
+            }
+        });
+    });
+
+    // X 버튼 클릭 시 내 댓글 개별 삭제
+    const removeBtnXReview = document.querySelectorAll(".remove-btn3");
+
+    // "X" 버튼 클릭 시 내 댓글 삭제
+    removeBtnXReview.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const myItem = e.target.closest('.flex_my3');
+            if (confirm('정말 삭제하시겠습니까?')) {
+                myItem.target.value = e.target.role;
+                myItem.submit();
+            }
+        });
+    });
 
 
 

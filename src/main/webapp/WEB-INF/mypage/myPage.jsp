@@ -72,7 +72,7 @@
                       </p>
                     </a>
                     <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}"
-                      class="remove-btn" style="font-size: 30px">X</a>
+                      class="remove-btn1" style="font-size: 30px">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -110,7 +110,7 @@
                        </p>
                     </a>
                     <a href="./remove.board?action=remove&contentNo=${commentDTO.commentNo}"
-                       class="remove-btn" style="font-size: 30px">X</a>
+                       class="remove-btn2" style="font-size: 30px">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -147,7 +147,7 @@
                       </p>
                     </a>
                     <a href="./remove.movie?action=remove&movieNo=${reviewDTO.movieNo}"
-                       class="remove-btn" style="font-size: 30px">X</a>
+                       class="remove-btn3" style="font-size: 30px">X</a>
                   </div>
               </li>
             </c:forEach>
