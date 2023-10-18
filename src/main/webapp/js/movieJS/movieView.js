@@ -124,6 +124,7 @@
             tagUl.append(tagLi);
         }
 
+        //  ul 시작 높이 조절
         const reviewList = document.querySelector('.user-review-list');
         const reviewListUl = document.querySelector('.user-review-list ul');
         const LiCnt = reviewListUl.childElementCount;
