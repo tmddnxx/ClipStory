@@ -23,11 +23,10 @@ hr{
 .text-box-in{
     width: 20%;
     height: 100%;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     gap: 10px;
 
 }
@@ -40,6 +39,7 @@ hr{
     color: white;
     font-size: 40pt;
     font-weight: bold;
+    margin-left: 70px;
 }
 .content-box{
     width: 90%;

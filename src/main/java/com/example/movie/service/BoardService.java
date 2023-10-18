@@ -120,7 +120,6 @@ public class BoardService {
                 log.info(no);
                 boardDAO.deleteBoard(Integer.parseInt(no));
             }
-
     }
 
     public void modifyBoard(HttpServletRequest request){ // 게시물 수정

@@ -183,11 +183,12 @@ public class AdminController extends HttpServlet {
 
             case "noticeModify" : // 공지사항 수정
                 adminService.adminModifyNotice(req);
-                resp.sendRedirect("/admin?action=noticeList");
+                adminService.adminGetNotice(req);
+                req.getRequestDispatcher("/WEB-INF/admin/noticeView.jsp").forward(req, resp);
                 break;
 
             /*----------- 게시판 컨트롤러 끝-----------*/
-        /* ------------------------------------------------------*/
+
             /*----------- 댓글 컨트롤러 시작-----------*/
             case "commentList" : // 댓글 목록
 
@@ -195,14 +196,14 @@ public class AdminController extends HttpServlet {
 
             /*----------- 댓글 컨트롤러 끝-----------*/
 
-            /* 멤버 리스트 컨트롤러 */
+            /* -----------------회원 목록 불러오기 -------------------- */
             case "memberList" :
                 try {
-                    adminService.getMemberList(req);
+                    adminService.adminGetMemberList(req);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                req.getRequestDispatcher("admin?action=memberList").forward(req,resp);
+                req.getRequestDispatcher("/WEB-INF/admin/memberList.jsp").forward(req,resp);
                 break;
         }
 

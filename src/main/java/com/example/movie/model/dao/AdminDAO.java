@@ -1,10 +1,7 @@
 package com.example.movie.model.dao;
 
 
-import com.example.movie.model.dto.AdminBoardDTO;
-import com.example.movie.model.dto.AdminDTO;
-import com.example.movie.model.dto.MemberDTO;
-import com.example.movie.model.dto.MovieDTO;
+import com.example.movie.model.dto.*;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j2;
 
@@ -109,29 +106,61 @@ public class AdminDAO {
             return false;
     }
 
-//    memberList 제작 - 종원
-public List<MemberDTO> viewMyMember(String memberId) throws Exception { // 회원 작성글 보기
-    String sql = "select * FROM `member` WHERE `memberId` = ?";
+//    memberList 제작 - 승우
 
-    List<MemberDTO> memberList = new ArrayList<>();
+    // member테이블의 전체 수
+    public int getMemberCount(String items, String text) throws Exception {
 
-    @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-    @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-    preparedStatement.setString(1,memberId);
-    @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+        int cnt = 0;
 
-    while(resultSet.next()){
-        MemberDTO memberDTO = com.example.movie.model.dto.MemberDTO.builder()
-                .memberId(resultSet.getString("memberId"))
-                .name(resultSet.getString("name"))
-                .nickName(resultSet.getString("nickName"))
-                .joinDate(String.valueOf(resultSet.getTimestamp("joinDate")))
-                .memberId(resultSet.getString("memberId"))
-                .build();
-        memberList.add(memberDTO);
+        String sql;
+        if(items == null || text == null) { // 검색어가 없는 경우
+            sql = "select count(*) from member";
+        }
+        else {
+            sql = "select count(*) from member where " + items + " like '%" + text + "%'";
+        }
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next()) { // 데이터가 있는 경우
+            cnt = resultSet.getInt(1);
+        }
+        return cnt;
     }
-    return memberList;
-}
+
+    // 회원목록
+    public List<MemberDTO> viewMyMember(int page, int limit, String items, String text) throws Exception {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+
+        int start = (page - 1) * limit;
+        String sql;
+
+        if(items == null || text == null) {
+            sql = "select * from member order by memberId";
+        }
+        else {
+            sql = "select * from member where " + items + " like '%" + text + "%' order by memberId";
+        }
+        sql += " limit " + start + ", " + limit;
+
+        List<MemberDTO> MemberDTOList = new ArrayList<>();
+
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        while(resultSet.next()){
+            MemberDTO memberDTO = com.example.movie.model.dto.MemberDTO.builder()
+                    .memberId(resultSet.getString("memberId"))
+                    .name(resultSet.getString("name"))
+                    .nickName(resultSet.getString("nickName"))
+                    .joinDate(String.valueOf(resultSet.getTimestamp("joinDate")))
+                    .build();
+            MemberDTOList.add(memberDTO);
+        }
+        return MemberDTOList;
+    }
 
 
 
