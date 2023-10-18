@@ -57,7 +57,6 @@
 
     <!-- 검색 영역 -->
         <form name="searchList" class="searchList" action="./list.search?action=list" method="post">
-            <div class="container searchSector">
                 <select name="items" class="form-select" >
                     <option value="movieName" <% if(items.equals("movieName")){%>selected<%}%>>영화제목</option>
                     <option value="actor" <% if(items.equals("actor")){%>selected<%}%>>배우</option>
@@ -65,7 +64,6 @@
                 </select>
                 <input class="form-control" id="search-input" name="text" type="text" value="<%=text%>"/>
                 <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
-            </div>
         </form>
 
     <%--  OTT 리스트  --%>

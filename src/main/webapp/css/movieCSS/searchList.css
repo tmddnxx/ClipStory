@@ -43,6 +43,38 @@
 .ottBtn:hover{
     background-color: red;
 }
+.searchList{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 10px;
+}
+.txt{
+    text-align: center;
+    height: 50px;
+    width: 100px;
+    font-size: 12pt;
+    font-weight: bold;
+    border-radius: 10px;
+}
+#search-input{
+    height: 50px;
+    width: 600px;
+    font-size: 12pt;
+    border-radius: 10px;
+}
+#btn-search{
+    height: 50px;
+    width: 100px;
+    font-size: 12pt;
+    font-weight: bold;
+    border-radius: 10px;
+}
+#btn-search:hover{
+    background-color: red;
+    color: white;
+}
 #listWrap{
     width: 80%;
     margin-left: 10%;

@@ -28,7 +28,16 @@
         <a href="#ottBox" class="ottBtn">OTT</a>
     </div>
     <hr>
-
+    <div class="searchDiv"><!-- 영화 검색창 영역 -->
+        <form name="searchList" class="searchList" action="./list.search?action=list" method="post"><!-- 영화 검색창 Category Select -->
+            <select name="items" class="txt">
+                <option value="movieName" <% if(items.equals("movieName")){%>selected<%}%>>영화제목</option>
+                <option value="actor" <% if(items.equals("actor")){%>selected<%}%>>배우</option>
+                <option value="genre" <% if(items.equals("genre")){%>selected<%}%>>장르</option>
+            </select> <input class="form-control" id="search-input" name="text" type="text" value="<%=text%>"/>
+            <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
+        </form>
+    </div>
     <div id="listWrap">
     <div id="allListBox" class="searchBox"> <%--전체목록--%>
         <p>전체</p>

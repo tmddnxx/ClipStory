@@ -20,18 +20,18 @@
     <title>영화 소개 사이트</title>
 </head>
 <body>
-<jsp:include page="inc/movieMainHeader.jsp"/>
-<div class="searchDiv"><!-- 영화 검색창 영역 -->
-    <form name="searchList" class="searchList" action="./list.search?action=list" method="post"><!-- 영화 검색창 Category Select -->
-        <select name="items" class="txt">
-            <option value="movieName" <% if(items.equals("movieName")){%>selected<%}%>>영화제목</option>
-            <option value="actor" <% if(items.equals("actor")){%>selected<%}%>>배우</option>
-            <option value="genre" <% if(items.equals("genre")){%>selected<%}%>>장르</option>
-        </select> <input class="form-control" id="search-input" name="text" type="text" value="<%=text%>"/>
-        <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
-    </form>
-</div>
+<jsp:include page="../../inc/header.jsp"/>
 <div class="outContainer"><!-- 제일 바깥 container div -->
+    <div class="searchDiv"><!-- 영화 검색창 영역 -->
+        <form name="searchList" class="searchList" action="./list.search?action=list" method="post"><!-- 영화 검색창 Category Select -->
+            <select name="items" class="txt">
+                <option value="movieName" <% if(items.equals("movieName")){%>selected<%}%>>영화제목</option>
+                <option value="actor" <% if(items.equals("actor")){%>selected<%}%>>배우</option>
+                <option value="genre" <% if(items.equals("genre")){%>selected<%}%>>장르</option>
+            </select> <input class="form-control" id="search-input" name="text" type="text" value="<%=text%>"/>
+            <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
+        </form>
+    </div>
     <span class="contentTitle">영화 목록</span>
     <div class="contentList"> <!-- 영화 리스트 container div -->
         <c:forEach var="movie" items="${listMovie}" varStatus="status">

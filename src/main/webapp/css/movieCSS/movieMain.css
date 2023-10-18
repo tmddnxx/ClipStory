@@ -161,15 +161,41 @@ div.slick-track {
 
 
 /*검색 영역*/
-.searchSector {
-    width: 1000px!important;
+.searchList{
+    height: 100px;
     display: flex;
     justify-content: center;
+    align-items: end;
+    gap: 10px;
 }
-
-.searchList {
-    height: 300px;
-    display: flex;
-    align-items: center;
-    background-image: linear-gradient(to top, transparent, #111111 5%);
+.form-select{
+    text-align: center;
+    height: 50px;
+    width: 150px;
+    font-size: 12pt;
+    font-weight: bold;
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+}
+#search-input{
+    height: 50px;
+    width: 600px;
+    font-size: 12pt;
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+}
+#btn-search{
+    height: 50px;
+    width: 100px;
+    font-size: 12pt;
+    font-weight: bold;
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+}
+#btn-search:hover{
+    background-color: red;
+    color: white;
 }
