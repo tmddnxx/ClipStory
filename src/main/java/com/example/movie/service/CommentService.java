@@ -96,6 +96,8 @@ public enum CommentService {
         int contentNo = commentDAO.getContentNoByComment(commentNo);
         boolean result;
 
+        log.info("commentNo--------------------" + commentNo);
+        log.info("parentNo--------------------" + parentNo);
         if(request.getSession().getAttribute("superInfo") == null) { // 사용자 로그인일경우
 
             if (commentDAO.checkHasRe(parentNo) && commentNo == parentNo)
