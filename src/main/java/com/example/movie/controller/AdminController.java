@@ -183,7 +183,8 @@ public class AdminController extends HttpServlet {
 
             case "noticeModify" : // 공지사항 수정
                 adminService.adminModifyNotice(req);
-                resp.sendRedirect("/admin?action=noticeList");
+                adminService.adminGetNotice(req);
+                req.getRequestDispatcher("/WEB-INF/admin/noticeView.jsp").forward(req, resp);
                 break;
 
             /*----------- 게시판 컨트롤러 끝-----------*/
