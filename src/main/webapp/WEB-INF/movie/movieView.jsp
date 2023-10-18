@@ -12,9 +12,6 @@
     <link href="../../css/movieCSS/movieView.css" rel="stylesheet" type="text/css">
     <title>영화 상세 페이지</title>
 </head>
-<%
-    boolean zzim = (boolean) request.getAttribute("zzim");
-%>
 <body>
 <jsp:include page="inc/movieMainHeader.jsp"/>
 <div class="outerDiv" style="background-image: url('${movieDTO.poster}');">
