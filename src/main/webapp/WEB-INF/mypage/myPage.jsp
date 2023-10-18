@@ -10,8 +10,8 @@
 
 </head>
 <body>
+<div class="wrap">
 <jsp:include page="../../inc/header.jsp"/>
-
 <div class="profile">
   <h3 class="display-5"> <%-- 프로필 --%>
     <a class="profile-link" href="/modify.member?action=modify&memberId=${loginInfo.memberId}">프로필 <input type="button" value="프로필 수정" class="button"></a>
@@ -42,7 +42,7 @@
       <a class="mytab-link" href="#tab4">내가 찜한 영화</a>
     </li>
   </ul>
-
+</div>
   <!-- "내가 쓴 글" -->
   <div class="tab-content" id="tab1">
     <div class="myContent">
@@ -174,7 +174,5 @@
   </div>
 </div>
 <jsp:include page="../../inc/footer.jsp"/>
-
 </body>
-
 </html>

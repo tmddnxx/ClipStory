@@ -1,8 +1,11 @@
 body{
     font-family: 'Noto Sans KR', sans-serif;
-    height: 1000px;
     color: white;
     background-color: black;
+}
+.wrap{
+    background-color: black;
+    width: 100%;
 }
 .button { /* 버튼 디자인 */
     background-color: black;

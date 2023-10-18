@@ -32,9 +32,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/boardCSS/boardList.css" rel="stylesheet">
+    <link href="./css/boardCSS/boardList.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
-    <script src="/js/boardJS/boardList.js" defer></script>
+    <script src="./js/boardJS/boardList.js" defer></script>
     <title>게시판 목록</title>
 </head>
 <body>
