@@ -99,7 +99,7 @@
         <li class="content"><a class="goContent" href="/admin?action=noticeList">공지사항</a></li>
         <c:choose>
           <c:when test="${empty superInfo}">
-            <li class="nav-item"><a class="goContent" href="/login">(관리자)로그인</a></li>
+            <li class="nav-item"><a class="goContent" href="/login/admin">(관리자)로그인</a></li>
           </c:when>
           <c:otherwise>
             <li class="nav-item nickName">[${superInfo.superName} 님]</li>
