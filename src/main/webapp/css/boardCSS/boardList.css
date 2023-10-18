@@ -11,7 +11,7 @@ body{
 .wrap{
     width: 100%;
     background-color: #111;
-    margin-bottom: -50px;
+    margin-bottom: -30px;
 }
 .main{
     width: 100%;
@@ -108,8 +108,9 @@ hr{
     color: white;
 }
 .wrap-write{
+    width: 80%;
+    margin: 0 auto;
     text-align: right;
-    padding-right: 40px;
 }
 .write-btn{
     width: 100px;
@@ -122,10 +123,9 @@ hr{
     cursor: pointer;
 }
 .form-box{
-    margin-top: 50px;
-    margin-left: 20px;
-    width: 700px;
-    height: 100px;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 20px;
 }
 .form-box td{
     width: 650px;
