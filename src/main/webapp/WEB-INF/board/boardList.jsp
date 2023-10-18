@@ -47,7 +47,7 @@
             <%-- 현재시간 , 작성시간 구하기 --%>
             <fmt:parseNumber value="${currentTime.time / (1000*60*60)}" integerOnly="true" var="currentFmtTime" scope="request"/>
             <fmt:parseNumber value="${boardDTO.addDate.time / (1000*60*60)}" integerOnly="true" var="addFmtTime" scope="request"/>
-            <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="list-a">
+            <a href="get.board?action=get&contentNo=${boardDTO.contentNo}&pageNum=${pageNum}" class="list-a">
             <li class="list">
                 <div class="first">
                     <div class="NH">
@@ -86,7 +86,7 @@
             <a href="pageNum.board?action=list&pageNum=${i}" class="pager">
                 <c:choose>
                     <c:when test="${pageNum==i}"> <!--현재 페이지이면 볼드처리 -->
-                        <span>[${i}]</span>
+                        <span class="curPage">[${i}]</span>
                     </c:when>
                     <c:otherwise>
                         <span>[${i}]</span>

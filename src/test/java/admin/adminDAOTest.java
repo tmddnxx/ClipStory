@@ -14,11 +14,8 @@ public class adminDAOTest {
     @BeforeEach
     public void ready(){  adminDAO = new AdminDAO();}
 
-//    @Test
-//    public void testAdminSelectAll() throws Exception {
-//        List<BoardDTO> boardDTOList = adminDAO.adminSelectAll(1,1,"title", "123");
-//        for(BoardDTO boardDTO : boardDTOList){
-//            log.info(boardDTO);
-//        }
-//    }
+    @Test
+    public void testMemberList() throws Exception {
+        log.info(adminDAO.viewMyMember(1, 10, "memberId", "t"));
+    }
 }

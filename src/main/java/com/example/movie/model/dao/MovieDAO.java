@@ -359,5 +359,31 @@ public class MovieDAO {
         preparedStatement.setInt(1, movieNo);
         preparedStatement.executeUpdate();
     }
+
+    public void updateRankingMovie() throws Exception {
+        String sql = "UPDATE movie AS m\n" +
+                "JOIN (\n" +
+                "    SELECT movieNo, RANK() OVER (ORDER BY audience DESC) AS ranking\n" +
+                "    FROM movie\n" +
+                "    WHERE mo = 'm'\n" +
+                ") AS mRanking ON m.movieNo = mRanking.movieNo\n" +
+                "SET m.ranking = mRanking.ranking;";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+    public void updateRankingOTT() throws Exception {
+        String sql = "UPDATE movie AS m\n" +
+                "JOIN (\n" +
+                "    SELECT movieNo, RANK() OVER (ORDER BY audience DESC) AS ranking\n" +
+                "    FROM movie\n" +
+                "    WHERE mo = 'o'\n" +
+                ") AS oRanking ON m.movieNo = oRanking.movieNo\n" +
+                "SET m.ranking = oRanking.ranking;";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
 }
 

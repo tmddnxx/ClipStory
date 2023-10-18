@@ -114,7 +114,9 @@ public class BoardController extends HttpServlet {
 
             case "modify" : // 게시물 수정
                 boardService.modifyBoard(req);
-                resp.sendRedirect("list.board?action=list");
+                boardService.getBoard(req);
+                boardService.increaseHit(req);
+                req.getRequestDispatcher("/WEB-INF/board/boardGet.jsp").forward(req, resp);
                 break;
             case "remove" : // 마이페이지 게시물 삭제 연동
                 try {
