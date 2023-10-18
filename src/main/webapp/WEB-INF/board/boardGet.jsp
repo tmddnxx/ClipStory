@@ -61,7 +61,8 @@
             <%
                 }
             %>
-            <button type="button" class="back-btn" onclick=window.location.href="list.board">뒤로가기</button>
+<%--            뒤로가기 버튼 누르면 페이지넘버가져오기--%>
+            <button type="button" class="back-btn" onclick="location.href='list.board?action=list&pageNum=<%=pageNum%>'">뒤로가기</button>
         </div>
     </div>
     <%-- 댓글창 --%>

@@ -55,7 +55,7 @@
         <%-- 현재시간 , 작성시간 구하기 --%>
         <fmt:parseNumber value="${currentTime.time / (1000*60*60)}" integerOnly="true" var="currentFmtTime" scope="request"/>
         <fmt:parseNumber value="${boardDTO.addDate.time / (1000*60*60)}" integerOnly="true" var="addFmtTime" scope="request"/>
-        <a href="/admin?action=boardGet&contentNo=${boardDTO.contentNo}" class="list-a">
+        <a href="/admin?action=boardGet&contentNo=${boardDTO.contentNo}&pageNum=${pageNum}" class="list-a">
           <li class="list">
             <input type="checkbox" name="chBox" class="chBox" id="chk${boardDTO.contentNo}" value="${boardDTO.contentNo}">
             <div class="first">
@@ -98,7 +98,7 @@
         <a href="/admin?action=boardList&pageNum=${i}" class="pager">
           <c:choose>
             <c:when test="${pageNum==i}"> <!--현재 페이지이면 볼드처리 -->
-              <span>[${i}]</span>
+              <span class="curPage">[${i}]</span>
             </c:when>
             <c:otherwise>
               <span>[${i}]</span>

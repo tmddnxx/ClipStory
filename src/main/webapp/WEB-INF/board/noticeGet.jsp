@@ -35,7 +35,7 @@
         <hr>
         <div>
             <div class="btn-box">
-                <button type="button" class="back-btn" onclick=window.location.href="/list.board?action=noticeList">뒤로가기</button>
+                <button type="button" class="back-btn" onclick=window.location.href="/list.board?action=noticeList&pageNum=<%=pageNum%>">뒤로가기</button>
             </div>
         </div>
     </div>

@@ -1,27 +1,124 @@
+<%@ page import="com.example.movie.model.dto.MemberDTO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+    MemberDTO memberDTO = (MemberDTO) request.getAttribute("boardDTO");
+    List memberDTOList = (List) request.getAttribute("memberDTOList");
+    int totalRecord = (Integer) request.getAttribute("totalRecord");
+    int pageNum = (Integer) request.getAttribute("pageNum");
+    int totalPage = (Integer) request.getAttribute("totalPage");
+    int limit = (Integer) request.getAttribute("limit");
+
+    int startNum = (Integer) request.getAttribute("startNum"); // 페이지 시작 일련번호
+
+    String items = request.getParameter("items") != null ? request.getParameter("items") : "title";
+    String text = request.getParameter("text") != null ? request.getParameter("text") : "";
+
+    int pagePerBlock = 5; // 페이지 범위
+    int totalBlock = totalPage % pagePerBlock == 0 ? totalPage / pagePerBlock : totalPage / pagePerBlock + 1; // block의 전체 갯수(페이지 범위 단위의 총 갯수)
+    int thisBlock = ((pageNum -1) / pagePerBlock) + 1; // 현재 블럭
+    int firstPage = ((thisBlock -1) * pagePerBlock) + 1; // 블럭의 첫 페이지
+    int lastPage = thisBlock * pagePerBlock; // 블럭의 마지막 페이지
+    lastPage = (lastPage > totalPage) ? totalPage : lastPage;
+
+%>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/adminCSS/adminMemberList.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
-    <link href="/css/boardCSS/boardGet.css" rel="stylesheet">
+    <script src="/js/adminJS/adminMemberList.js" defer></script>
     <title>회원 목록</title>
 </head>
 <body>
-<jsp:include page="./inc/adminHeader.jsp"/>
-<div class="AdminMember">
-    <h2>회원 목록</h2>
-    <form name="frmAdminMember" action="/admin?action=memberList" method="post">
-        <ul class="member-list">
+<%-- 여기서부터 수정--%>
+<div class="wrap">
+    <jsp:include page="./inc/adminHeader.jsp"/>
+    <div class="main">
+        <h2>회원 목록</h2>
+        <ul class="list-group">
             <c:forEach var="memberDTO" items="${memberDTOList}" varStatus="status">
-                <a href="admin?action=memberList&memberId=${memberDTO.memberId}" class="list-a">
-                    <li class="memberInfo">
-                        <p>${memberDTO.memberId}</p>
+                    <li class="list">
+                        <div class="first">
+                            &nbsp;[<%=(totalRecord--)-(pageNum-1)*limit%>] ${memberDTO.memberId}
+                        </div>
                         <p>${memberDTO.name}</p>
                         <p>${memberDTO.nickName}</p>
                         <p>${memberDTO.joinDate}</p>
                     </li>
-                </a>
+                <%
+                    startNum--;
+                %>
             </c:forEach>
         </ul>
-    </form>
+        <hr>
+        <%--페이징--%>
+        <div align="center" class="paging">
+            <a href="<c:url value="/admin?action=memberList&pageNum=1"/>"><span>첫페이지</span></a>
+            <%
+                if(thisBlock > 1) {
+            %>
+            <a href="/admin?action=memberList&pageNum=<%=(firstPage - 1)%>"><span> < 이전 </span></a>
+            <%
+                }
+            %>
+            <c:set var="pageNum" value="<%=pageNum%>" />
+            <c:forEach var="i" begin="<%=firstPage%>" end="<%=lastPage%>">
+                <a href="/admin?action=memberList&pageNum=${i}" class="pager">
+                    <c:choose>
+                        <c:when test="${pageNum==i}"> <!--현재 페이지이면 볼드처리 -->
+                            <span class="curPage">[${i}]</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span>[${i}]</span>
+                        </c:otherwise>
+                    </c:choose>
+                </a>
+            </c:forEach>
+            <%
+                if(thisBlock < totalBlock) {
+            %>
+            <a href="/admin?action=memberList&pageNum=<%=(lastPage + 1)%>"><span> 다음 ></span> </a>
+            <%
+                }
+            %>
+            <a href="<c:url value="/admin?action=memberList&pageNum=${totalPage}"/>"><span>끝페이지</span></a>
+        </div>
+        <c:if test="${error != null}">
+            <div class="alert alert-danger alert-dismissible fade show mt-3">
+                에러 발생 : ${error}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </c:if>
+        <%--페이징 끝--%>
+        <%--삭제--%>
+
+        <%--검색창--%>
+        <div class="form-box">
+            <form name="frmList" action="/admin" method="get">
+                <input type="hidden" name="pageNum" value="<%=pageNum%>">
+                <input type="hidden" name="action" value="memberList">
+                <input type="hidden" name="num">
+                <table>
+                    <tr>
+                        <td>
+                            <select name="items" class="txt">
+                                <option value="memberId" <% if(items.equals("memberId")){%>selected<%}%>>아이디</option>
+                                <option value="name" <% if(items.equals("name")){%>selected<%}%>>이름</option>
+                                <option value="nickName" <% if(items.equals("nickName")){%>selected<%}%>>닉네임</option>
+                            </select>
+                            <input name="text" type="text" value="<%=text%>" placeholder="검색어를 입력해주세요"/>
+                            <input type="button" id="btn-search" class="btn btn-primary" value="검색"/>
+                            <input type="button" id="btn-reset" class="btn btn-secondary" value="취소"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<jsp:include page="inc/adminFooter.jsp"/>
 </body>
 </html>

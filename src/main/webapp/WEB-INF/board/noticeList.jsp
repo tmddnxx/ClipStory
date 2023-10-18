@@ -71,7 +71,7 @@
                 <a href="pageNum.board?action=noticeList&pageNum=${i}" class="pager">
                     <c:choose>
                         <c:when test="${pageNum==i}"> <!--현재 페이지이면 볼드처리 -->
-                            <span>[${i}]</span>
+                            <span class="curPage">[${i}]</span>
                         </c:when>
                         <c:otherwise>
                             <span>[${i}]</span>
