@@ -3,7 +3,7 @@
     const allTabContents = document.querySelectorAll(".tab-content");
     allTabContents.forEach((content) => {
     content.style.display = "none";
-    });
+});
 
     // 탭 링크로 변경함
     const tabs = document.querySelectorAll(".mytab-link");
@@ -36,11 +36,9 @@
 
             // 선택 탭 컨텐츠 보이게 적용
             targetTabContent.style.display = "block";
-            }
-        });
+        }
     });
-
-
+});
     // "전체 선택" button1
     const checkAllButton1 = document.querySelector('.btn-checkAll1');
     const checkboxes1 = document.querySelectorAll('.list-group-1 input[type="checkbox"]');
@@ -66,8 +64,6 @@
             this.value = checked ? '전체 해제' : '전체 선택';
         });
     }
-
-    // X 버튼 클릭 시 내 글 개별 삭제
 
     function removeSelectedContents(listNo){ // 내 작성글 삭제 자바스크립트
         const listClass = ".list-group-" + listNo;
