@@ -83,6 +83,7 @@
 
     const getReviews = function () {
         const num = document.querySelector('form[name=frmReviewView] input[name=num]').value;
+        console.log("num == " + num);
         xhr.open('GET', '/review/get?num=' + num);
         xhr.send();
         xhr.onreadystatechange = function () {

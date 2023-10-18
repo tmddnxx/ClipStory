@@ -95,19 +95,33 @@ public enum CommentService {
         int parentNo = Integer.parseInt(request.getParameter("parentNo"));
         int contentNo = commentDAO.getContentNoByComment(commentNo);
         boolean result;
-        if(commentDAO.checkHasRe(parentNo) && commentNo == parentNo)
-            result = commentDAO.updateCommentDie(commentNo);
-        else
-            result = commentDAO.deleteComment(commentNo);
 
-        int cnt = commentDAO.commentCnt(contentNo);
-        BoardDAO boardDAO = new BoardDAO();
-        try{
-            boardDAO.updateCnt(contentNo, cnt);
-        }catch (Exception e){
-            log.error(e.getMessage());
+        if(request.getSession().getAttribute("superInfo") == null) { // 사용자 로그인일경우
+
+            if (commentDAO.checkHasRe(parentNo) && commentNo == parentNo)
+                result = commentDAO.updateCommentDie(commentNo); // 삭제된 댓글입니다 남김
+
+            else
+                result = commentDAO.deleteComment(commentNo); // 대댓글이 없으면 그냥 삭제
+
+            int cnt = commentDAO.commentCnt(contentNo);
+            BoardDAO boardDAO = new BoardDAO();
+            try {
+                boardDAO.updateCnt(contentNo, cnt);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        } else{ // 관리자 로그인일 경우
+            result = commentDAO.adminUpdateCommentDie(commentNo); // 관리자에 의해 삭제된 댓글입니다 남김.
+
+            int cnt = commentDAO.commentCnt(contentNo);
+            BoardDAO boardDAO = new BoardDAO();
+            try {
+                boardDAO.updateCnt(contentNo, cnt);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
         }
-
         return result;
     }
 
