@@ -96,6 +96,8 @@ public enum CommentService {
         int contentNo = commentDAO.getContentNoByComment(commentNo);
         boolean result;
 
+        log.info("commentNo--------------------" + commentNo);
+        log.info("parentNo--------------------" + parentNo);
         if(request.getSession().getAttribute("superInfo") == null) { // 사용자 로그인일경우
 
             if (commentDAO.checkHasRe(parentNo) && commentNo == parentNo)
@@ -126,12 +128,27 @@ public enum CommentService {
     }
 
     // 리뷰 마이페이지 선택삭제 버튼 메서드
-    public void  removeMyComment(HttpServletRequest request) throws Exception {
+    public void removeMyComment(HttpServletRequest request) throws Exception {
         log.info("remove board----------------");
         String [] conNo = request.getParameterValues("selectedItems2");
         for(String no : conNo){// no = 각각의 게시물 넘버값
-            log.info(no);
-            commentDAO.deleteComment(Integer.parseInt(no));
+            int commentNo = Integer.parseInt(no);
+            int contentNo = commentDAO.getContentNoByComment(commentNo);
+            int parentNo = commentDAO.getParentNoByComment(commentNo);
+
+            if (commentDAO.checkHasRe(parentNo) && commentNo == parentNo)
+                commentDAO.updateCommentDie(commentNo); // 삭제된 댓글입니다 남김
+
+            else
+                commentDAO.deleteComment(commentNo); // 대댓글이 없으면 그냥 삭제
+
+            int cnt = commentDAO.commentCnt(contentNo);
+            BoardDAO boardDAO = new BoardDAO();
+            try {
+                boardDAO.updateCnt(contentNo, cnt);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
         }
         log.info("removeMyComment()...");
     }

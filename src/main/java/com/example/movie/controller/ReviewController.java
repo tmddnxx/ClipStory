@@ -92,6 +92,14 @@ public class ReviewController extends HttpServlet {
                 }
                 break;
 
+            case "/review/myRemoveOne":
+                try {
+                    reviewService.removeReview(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.sendRedirect("/list.mypage");
+                break;
             case "/review/myRemove":
                 try {
                     // 댓글을 삭제하고 삭제된 댓글 목록을 얻기 위해 removeMyComment 메서드를 호출합니다
