@@ -27,12 +27,13 @@ public class AdminLoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("Admin POST...");
-
+        HttpSession session = req.getSession();
+        session.invalidate();
         try {
             AdminDTO adminDTO = adminService.adminLogin(req);
             log.info(adminDTO);
             if (adminDTO != null) {
-                HttpSession session = req.getSession();
+                session = req.getSession();
                 session.setAttribute("superInfo", adminDTO);
                 session.setAttribute("superId", adminDTO.getSuperId());
                 log.info(adminDTO);
