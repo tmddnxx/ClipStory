@@ -48,6 +48,14 @@ public class BoardController extends HttpServlet {
                     throw new ServletException("read error");
                 }
                 break;
+            case "myRemove" : // 마이페이지 개별 삭제
+                try {
+                    boardService.removeBoard(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.sendRedirect("list.mypage");
+                break;
 
             case "remove" : // 삭제
                 try {

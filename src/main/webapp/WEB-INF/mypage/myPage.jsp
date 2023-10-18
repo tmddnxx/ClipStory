@@ -71,8 +71,8 @@
                           ${boardDTO.hit}
                       </p>
                     </a>
-                    <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}"
-                      class="remove-btn1" style="font-size: 30px">X</a>
+                    <a href="./myRemove.board?action=myRemove&contentNo=${boardDTO.contentNo}"
+                      class="remove-btn1" style="font-size: 30px" onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -109,8 +109,8 @@
 
                        </p>
                     </a>
-                    <a href="./remove.board?action=remove&contentNo=${commentDTO.commentNo}"
-                       class="remove-btn2" style="font-size: 30px">X</a>
+                    <a href="/comment/myRemoveOne?commentNo=${commentDTO.commentNo}&parentNo=${commentDTO.parentNo}"
+                       class="remove-btn2" style="font-size: 30px" onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
                 </div>
               </li>
             </c:forEach>
@@ -146,8 +146,8 @@
 
                       </p>
                     </a>
-                    <a href="./remove.movie?action=remove&movieNo=${reviewDTO.movieNo}"
-                       class="remove-btn3" style="font-size: 30px">X</a>
+                    <a href="/review/myRemoveOne?reviewNo=${reviewDTO.reviewNo}"
+                       class="remove-btn3" style="font-size: 30px" onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
                   </div>
               </li>
             </c:forEach>
