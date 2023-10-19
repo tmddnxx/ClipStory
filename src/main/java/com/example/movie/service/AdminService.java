@@ -64,12 +64,13 @@ public class AdminService {
     }
 // addMovie // 영화 등록 -은석
     public void adminAddMovie(HttpServletRequest request) throws Exception {
+
         String movieName = request.getParameter("movieName");
         String releaseDate = request.getParameter("releaseDate");
         String region = request.getParameter("region");
         String genre = request.getParameter("genre");
         int audience = Integer.parseInt(request.getParameter("audience"));
-        String runningtime = request.getParameter("runningtime");
+        String runningtime = request.getParameter("runningtime") + "분";
         String outline = request.getParameter("outline");
         String mo = request.getParameter("mo");
         String[] crewNoList = request.getParameterValues("crewNo");
@@ -191,7 +192,7 @@ public class AdminService {
         String region = request.getParameter("region");
         String genre = request.getParameter("genre");
         int audience = Integer.parseInt(request.getParameter("audience"));
-        String runningtime = request.getParameter("runningtime");
+        String runningtime = request.getParameter("runningtime") + "분";
         String outline = request.getParameter("outline");
         String mo = request.getParameter("mo");
         String[] crewNoList = request.getParameterValues("crewNo");

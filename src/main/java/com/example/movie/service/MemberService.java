@@ -40,9 +40,10 @@ public enum MemberService {
         memberDAO.addMember(memberDTO);
     }
 
-    public MemberDTO getWithMemberId(String memberId) throws Exception {
-        MemberDTO memberDTO = memberDAO.getWithMemberId(memberId);
-        return memberDTO;
+    public void getWithMemberId(HttpServletRequest req) throws Exception {
+
+        MemberDTO memberDTO = memberDAO.getWithMemberId((String) req.getSession().getAttribute("sessionId"));
+        req.setAttribute("memberDTO", memberDTO);
     }
 
     public void modifyMember(HttpServletRequest req) throws Exception {

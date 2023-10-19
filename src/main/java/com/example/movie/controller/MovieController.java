@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 @WebServlet("*.movie")
 @Log4j2
-@MultipartConfig(maxFileSize = 2 * 1024 * 1024, location = "/upload")
+@MultipartConfig(maxFileSize = 2 * 1024 * 1024)
 public class MovieController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

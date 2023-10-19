@@ -41,12 +41,12 @@
                     </div>
                     <div class="Movie-input">
                         <div class="Movie-input-div">
-                            <input type="text" placeholder="관객수" name="audience">
+                            <input type="number" placeholder="관객수" name="audience">
                         </div>
                     </div>
                     <div class="Movie-input">
                         <div class="Movie-input-div">
-                            <input type="text" placeholder="러닝타임" name="runningtime">
+                            <input type="number" placeholder="러닝타임(분)" name="runningtime">
                         </div>
                     </div>
                     <div class="Movie-input">

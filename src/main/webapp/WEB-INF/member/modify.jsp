@@ -12,47 +12,6 @@
 <body>
 <jsp:include page="../../inc/header.jsp"/>
 
-<%--<div class="container">--%>
-<%--  <form name="frmMember" action="/modify.member?action=modify" method="post">--%>
-<%--    <div class="form-group row">--%>
-<%--      <label class="col-sm-2">아이디</label>--%>
-<%--      <div class="col-sm-3">--%>
-<%--        <input type="text" name="memberId" class="form-control" value="${loginInfo.memberId}" readonly>--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--    <div class="form-group row">--%>
-<%--      <label class="col-sm-2">비밀번호</label>--%>
-<%--      <div class="col-sm-3">--%>
-<%--        <input type="text" name="passwd" class="form-control" value="${loginInfo.passwd}">--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--    <div class="form-group row">--%>
-<%--      <label class="col-sm-2">비밀번호 확인</label>--%>
-<%--      <div class="col-sm-3">--%>
-<%--        <input type="text" name="passwd-re" class="form-control" value="${loginInfo.passwd}">--%>
-<%--        <span class="passwdCheck"></span>--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--    <div class="form-group row">--%>
-<%--      <label class="col-sm-2">이름</label>--%>
-<%--      <div class="col-sm-3">--%>
-<%--        <input type="text" name="name" class="form-control" value="${loginInfo.name}">--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--    <div class="form-group row">--%>
-<%--      <label class="col-sm-2">닉네임</label>--%>
-<%--      <div class="col-sm-3">--%>
-<%--        <input type="text" name="nickName" class="form-control" value="${loginInfo.nickName}">--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--    <div class="form-group row">--%>
-<%--      <div class="col-sm-10">--%>
-<%--        <input type="submit" class="btn btn-primary" value="수정">--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--  </form>--%>
-<%--</div>--%>
-
 <main>
   <section>
     <div id="register-title">
@@ -63,7 +22,7 @@
         <div id="register-input-container">
           <div class="register-input">
             <div class="register-input-div">
-              <input id="register-input-id" type="text" placeholder="아이디" value="${loginInfo.memberId}" name="memberId" readonly>
+              <input id="register-input-id" type="text" placeholder="아이디" value="${memberDTO.memberId}" name="memberId" readonly>
             </div>
           </div>
 
@@ -86,8 +45,8 @@
 
           <div class="register-input">
             <div class="register-input-div">
-              <input id="register-input-name" type="text" placeholder="이름" value="${loginInfo.name}" name="name">
-              <input id="original-name" type="hidden" value="${loginInfo.name}">
+              <input id="register-input-name" type="text" placeholder="이름" value="${memberDTO.name}" name="name">
+              <input id="original-name" type="hidden" value="${memberDTO.name}">
               <div id="register-name-check"><i class="fa-solid fa-check fa-lg" style="color: #000000"></i></div>
             </div>
             <p id="name-warn-span"></p>
@@ -95,8 +54,8 @@
 
           <div class="register-input">
             <div class="register-input-div">
-              <input id="register-input-nick" type="text" placeholder="닉네임" value="${loginInfo.nickName}" name="nickName">
-              <input id="original-nick" type="hidden" value="${loginInfo.nickName}">
+              <input id="register-input-nick" type="text" placeholder="닉네임" value="${memberDTO.nickName}" name="nickName">
+              <input id="original-nick" type="hidden" value="${memberDTO.nickName}">
               <div id="register-nick-check"><i class="fa-solid fa-check fa-lg" style="color: #000000"></i></div>
             </div>
             <p id="nick-warn-span"></p>

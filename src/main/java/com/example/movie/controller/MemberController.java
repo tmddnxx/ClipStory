@@ -28,6 +28,11 @@ public class MemberController extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/member/register.jsp").forward(req,resp);
                 break;
             case "modify":
+                try {
+                    memberService.getWithMemberId(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 req.getRequestDispatcher("/WEB-INF/member/modify.jsp").forward(req,resp);
                 break;
             case "remove":

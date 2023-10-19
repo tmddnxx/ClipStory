@@ -35,7 +35,7 @@ public class MypageController extends HttpServlet {
         switch (action) {
             case "list": // mypage 메인
                 try {
-                    memberService.getWithMemberId(String.valueOf(req));
+                    memberService.getWithMemberId(req);
                     myPageService.getMyBoard(req);
                     myPageService.getMyComments(req);
                     myPageService.getMyReviews(req);
@@ -52,6 +52,14 @@ public class MypageController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        MemberService memberService = MemberService.INSTANCE;
+        log.info("dopost");
+
+        String action = req.getParameter("action");
+        if (action == null){
+            action = "list";
+        }
+        log.info(action);
 
     }
 

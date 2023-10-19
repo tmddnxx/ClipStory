@@ -14,15 +14,15 @@
 <jsp:include page="../../inc/header.jsp"/>
 <div class="profile">
   <h3 class="display-5"> <%-- 프로필 --%>
-    <a class="profile-link" href="/modify.member?action=modify&memberId=${loginInfo.memberId}">프로필 <input type="button" value="프로필 수정" class="button"></a>
+    <a class="profile-link" href="/modify.member?action=modify&memberId=${memberDTO.memberId}">프로필 <input type="button" value="프로필 수정" class="button"></a>
   </h3>
   <form name="frmMypage" action="/modify.mypage?action=mypage" method="post">
     <div class="profileInfo">
-      <label class="col-sm-2">아이디 ${loginInfo.memberId}</label>
-      <label class="col-sm-2">이름 ${loginInfo.name}</label>
-      <label class="col-sm-2">닉네임 ${loginInfo.nickName}</label>
+      <label class="col-sm-2">아이디 ${memberDTO.memberId}</label>
+      <label class="col-sm-2">이름 ${memberDTO.name}</label>
+      <label class="col-sm-2">닉네임 ${memberDTO.nickName}</label>
       <label class="col-sm-2" id="zzimh"><p>찜 &nbsp;</p>
-        <i class="fa-solid fa-heart fa-1x heart"></i> &nbsp;<p>${loginInfo.zzimCnt}</p>
+        <i class="fa-solid fa-heart fa-1x heart"></i> &nbsp;<p>${memberDTO.zzimCnt}</p>
       </label>
     </div>
   </form>
