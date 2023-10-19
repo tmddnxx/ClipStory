@@ -57,6 +57,7 @@ public class MyPageDAO {
                     .addDate(String.valueOf(resultSet.getTimestamp("addDate")))
                     .memberId(resultSet.getString("memberId"))
                     .contentNo(resultSet.getInt("contentNo"))
+                    .parentNo(resultSet.getInt("parentNo"))
                     .build();
             commentList.add(commentDTO);
         }

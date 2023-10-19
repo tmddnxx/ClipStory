@@ -74,6 +74,8 @@ public class AdminService {
         String mo = request.getParameter("mo");
         String[] crewNoList = request.getParameterValues("crewNo");
 
+        int photoCnt = 1;
+
         String fileName = "";
 
         // 포스터 등록
@@ -90,11 +92,7 @@ public class AdminService {
 
         // 포토 등록
         List<String> photoList = new ArrayList<>();
-//        photoList.add("/upload/photo1");
-//        photoList.add("/upload/photo2");
-//        photoList.add("/upload/photo3");
 
-        int photoCnt = 1;
         while(true){
             String photo = "photo" + photoCnt;
             if(request.getPart(photo) == null)
@@ -164,7 +162,9 @@ public class AdminService {
         }
         // 무비 테이블 배우, 감독 갱신
         movieDAO.updateCrewInMovie(directors,actors,movieNo);
-
+        // 무비 랭킹 갱신
+        movieDAO.updateRankingMovie();
+        movieDAO.updateRankingOTT();
 
     }
 
@@ -181,27 +181,61 @@ public class AdminService {
     }
 
 
-//    (super)login 복붙 - 종원 // 새로운 관리자 전용 session 생성
+    //    (super)login 복붙 - 종원 // 새로운 관리자 전용 session 생성
 
-public AdminDTO adminLogin(HttpServletRequest req) throws Exception { // 관리자 로그인 확인
-    String superId =  req.getParameter("superId");
-    String superPw =  req.getParameter("superPw");
-    AdminDTO adminDTO = adminDAO.getSuperPw(superId, superPw);
-    log.info("adminService : " + adminDTO);
-    return adminDTO;
-}
+    public AdminDTO adminLogin(HttpServletRequest req) throws Exception { // 관리자 로그인 확인
+        String superId =  req.getParameter("superId");
+        String superPw =  req.getParameter("superPw");
+        AdminDTO adminDTO = adminDAO.getSuperPw(superId, superPw);
+        log.info("adminService : " + adminDTO);
+        return adminDTO;
+    }
 
 //    memberList 제작 - 종원
-public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exception { //  가입 회원 목록 보기
-    List<MemberDTO> memberDTOList = adminDAO.viewMyMember((String)request.getSession().getAttribute("superId"));
-    request.setAttribute("memberDTOList", memberDTOList);
+    static final int MemberCount = 10; // 멤버리스트 제한 갯수
+    public void adminGetMemberList(HttpServletRequest request) throws Exception { // 게시물 전체목록
+        List<MemberDTO> memberDTOList;
+        int pageNum = 1; // 페이지번호의 기본값
+        int limit = MemberCount; // 페이지당 멤버 수
 
-    log.info(memberDTOList);
-    return memberDTOList;
-}
+        if(request.getParameter("pageNum") != null){
+            pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        }
+        String items = request.getParameter("items"); // 검색어
+        String text = request.getParameter("text");
+
+        int totalRecord = adminDAO.getMemberCount(items, text);
+        memberDTOList = adminDAO.viewMyMember(pageNum, limit, items, text);
+
+        int totalPage; //전체 페이지 계산
+        if(totalRecord % limit == 0){
+            totalPage = totalRecord /limit;
+            Math.floor(totalPage);
+        }
+        else {
+            totalPage = totalRecord /limit;
+            Math.floor(totalPage);
+            totalPage = totalPage + 1;
+        }
+
+        // 페이지 시작 번호 작업.
+        int startNum = totalRecord - (pageNum -1 ) * limit;
+        try {
+            request.setAttribute("pageNum", pageNum);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("totalRecord", totalRecord);
+            request.setAttribute("limit", limit);
+            request.setAttribute("memberDTOList", memberDTOList);
+            request.setAttribute("startNum", startNum);
+
+        }catch (Exception e){
+            log.error(e.getMessage());
+            log.info("게시글 목록 생성과정에서 에러");
+            request.setAttribute("error" , "게시글 목록이 정상적으로 생성되지 않았습니다");
+        }
+    }
 
     /*---------- 게시판 메서드 작업 시작 -------------*/
-    static final int LISTCOUNT = 10; // 페이지당 게시믈 수 제한
     static final int NOTIECOUNT = 10; // 공지사항 제한 갯수
 
     // 공지사항 전체 목록
@@ -449,5 +483,8 @@ public List<MemberDTO> getMemberList(HttpServletRequest request) throws Exceptio
         }
         // 무비 테이블 배우, 감독 갱신
         movieDAO.updateCrewInMovie(directors,actors,movieNo);
+        // 무비 랭킹 갱신
+        movieDAO.updateRankingMovie();
+        movieDAO.updateRankingOTT();
     }
 }

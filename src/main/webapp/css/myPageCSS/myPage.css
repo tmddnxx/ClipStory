@@ -15,8 +15,6 @@ body{
     font-size: 25px;
     margin-left: 30px;
 }
-
-
 .profile { /* 프로필 헤더*/
     padding-left: 300px;
     padding-top: 200px;
@@ -123,6 +121,7 @@ body{
 .flex_my {
     display: flex;
     flex-direction: row;
+
 }
 .remove-btn {
     padding-left: 20px;
@@ -190,6 +189,9 @@ input[type="checkbox"] {
     clear: both;
 }
 
+.ZZim {
+    position: relative;
+}
 .list-group-zzim {
     float: left;
     width: calc(25% - 10px); /* 그림자 설정 */
@@ -197,17 +199,18 @@ input[type="checkbox"] {
     box-sizing: border-box;
     text-align: center;
     padding: 0 5px;
+
 }
 
 .list-group-zzim a {
     display: block;
     text-decoration: none;
+
 }
 .list-group-zzim img {
    width: 200px;
    height: 200px;
 }
-
 
 
 

@@ -49,10 +49,6 @@
 }
 
 
-
-
-
-
 .movieContentSection {
     display: flex;
     justify-content: center;
@@ -67,7 +63,7 @@
 
 .movieList .overlay { /* center 제외한 div요소 */
     position: relative;
-    top: -365px;
+    top: -363px;
     left: 0;
     width: 250px;
     height: 400px;
@@ -76,7 +72,7 @@
 
 .ottList .overlay { /* center 제외한 div요소 */
     position: relative;
-    top: -365px;
+    top: -363px;
     left: 0;
     width: 250px;
     height: 400px;
@@ -94,18 +90,6 @@ div.slick-track {
     justify-content: center;
     align-items: center;
 }
-/*.ottList {*/
-/*    position: relative;*/
-/*    top: -150px;*/
-/*    overflow: hidden;*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*    justify-content: space-between;*/
-/*    max-height: 100%;*/
-/*    padding-left: 130px;*/
-/*    z-index: 0;*/
-/*    background-image: linear-gradient(180deg, transparent, #111111 10%);*/
-/*}*/
 
 .movieList .contentBox {
     width: 250px!important;
@@ -128,22 +112,6 @@ div.slick-track {
     z-index: 1;
 }
 
-/*.boverBox:hover {*/
-/*    width: 250px;*/
-/*    height: 400px;*/
-/*    text-align: center;*/
-/*    margin-top: 20px;*/
-/*    margin-bottom: 50px;*/
-/*    z-index: -1;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    bottom: 0;*/
-/*    background-color: rgba(26, 25, 28, 0.95);*/
-/*    opacity: 0;*/
-/*    -webkit-transition: all .2s ease-out .3s;*/
-/*    transition: all .2s ease-out .3s;*/
-/*}*/
 
 .contentCnt {
     margin: 10px 170px 0px 0px;

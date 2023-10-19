@@ -40,6 +40,7 @@ public class CommentDAO {
         return preparedStatement.executeUpdate() == 1;
     }
 
+    // 댓글이 있는 게시글 번호 얻기
     public int getContentNoByComment(int commentNo) throws Exception {
         String sql = "SELECT `contentNo` from `comment` where `commentNo` = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -49,6 +50,17 @@ public class CommentDAO {
         resultSet.next();
         log.info("-----------------commentNo : " + commentNo);
         return resultSet.getInt("contentNo");
+    }
+
+    // 댓글의 부모번호 얻기
+    public int getParentNoByComment(int commentNo) throws Exception{
+        String sql = "SELECT `parentNo` from `comment` where `commentNo` = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, commentNo);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getInt("parentNo");
     }
     public List<CommentDTO> selectComments(int contentNo) throws SQLException, ClassNotFoundException{
         log.info("selectComments()...");
@@ -143,4 +155,6 @@ public class CommentDAO {
 
         return preparedStatement.executeUpdate() == 1;
     }
+
+
 }

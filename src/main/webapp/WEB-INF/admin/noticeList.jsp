@@ -50,7 +50,7 @@
         </div>
       </div>
       <c:forEach var="adminBoardDTO" items="${adminBoardDTOList}" varStatus="status">
-        <a href="/admin?action=noticeGet&cno=${adminBoardDTO.cno}" class="list-a">
+        <a href="/admin?action=noticeGet&cno=${adminBoardDTO.cno}&pageNum=${pageNum}" class="list-a">
           <li class="list">
             <input type="checkbox" name="chBox" class="chBox" id="chk${adminBoardDTO.cno}" value="${adminBoardDTO.cno}">
               &nbsp;[<%=(totalRecord--)-(pageNum-1)*limit%>] ${adminBoardDTO.title}
@@ -82,7 +82,7 @@
         <a href="/admin?action=noticeList&pageNum=${i}" class="pager">
           <c:choose>
             <c:when test="${pageNum==i}"> <!--현재 페이지이면 볼드처리 -->
-              <span>[${i}]</span>
+              <span class="curPage">[${i}]</span>
             </c:when>
             <c:otherwise>
               <span>[${i}]</span>

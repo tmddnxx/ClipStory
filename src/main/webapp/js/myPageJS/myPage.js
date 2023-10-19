@@ -65,52 +65,6 @@
         });
     }
 
-    // X 버튼 클릭 시 내 글 개별 삭제
-    const removeBtnXContent = document.querySelectorAll(".remove-btn1");
-
-    // "X" 버튼 클릭 시 내글 삭제
-    removeBtnXContent.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const myItem = e.target.closest('.flex_my1');
-            if (confirm('정말 삭제하시겠습니까?')) {
-                myItem.target.value = e.target.role;
-                myItem.submit();
-            }
-        });
-    });
-
-    // X 버튼 클릭 시 내 댓글 개별 삭제
-    const removeBtnXComment = document.querySelectorAll(".remove-btn2");
-
-    // "X" 버튼 클릭 시 내 댓글 삭제
-    removeBtnXComment.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const myItem = e.target.closest('.flex_my2');
-            if (confirm('정말 삭제하시겠습니까?')) {
-                myItem.target.value = e.target.role;
-                myItem.submit();
-            }
-        });
-    });
-
-    // X 버튼 클릭 시 내 댓글 개별 삭제
-    const removeBtnXReview = document.querySelectorAll(".remove-btn3");
-
-    // "X" 버튼 클릭 시 내 댓글 삭제
-    removeBtnXReview.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const myItem = e.target.closest('.flex_my3');
-            if (confirm('정말 삭제하시겠습니까?')) {
-                myItem.target.value = e.target.role;
-                myItem.submit();
-            }
-        });
-    });
-
-
-
-
-
     function removeSelectedContents(listNo){ // 내 작성글 삭제 자바스크립트
         const listClass = ".list-group-" + listNo;
         const frmNo = 'form[name=frmRemoveSelected' + listNo + ']';

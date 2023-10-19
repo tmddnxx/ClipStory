@@ -6,11 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="../../js/movieJS/movieList.js?after"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/css2/slick.min.js"></script>
+    <script type="text/javascript" src="../../js/movieJS/movieList.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="../../css/movieCSS/movieList.css?after" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css2/slick.css" type="text/css" />
+    <link rel="stylesheet" href="/css2/slick-theme.css" type="text/css" />
     <%
         List searchVOList = (List) request.getAttribute("searchVOList");
         int limit = (Integer) request.getAttribute("limit");
@@ -32,37 +36,40 @@
             <input type="submit" id="btn-search" class="btn btn-primary" value="검색"/>
         </form>
     </div>
+
+
     <span class="contentTitle">영화 목록</span>
     <div class="contentList"> <!-- 영화 리스트 container div -->
-        <c:forEach var="movie" items="${listMovie}" varStatus="status">
-            <div class="rounded-lg shadow-xl bg-indigo-500 hover:shadow-indigo-500/40 hover:blur-sm oneBox"> <!-- 영화 1개 정보 div -->
-                <h2 class="contentCnt"><strong>${status.count}</strong></h2>
-                <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
-                    <span class="badge bg-secondary oneMovieSpan"><!-- 영화 이름, 개봉일 span -->
-                            ${movie.movieName}, ${movie.releaseDate}
-                    </span>
-                </a>
-                <a href="./remove.movie?action=remove&movieNo=${movie.movieNo}" hidden="hidden">
-                    <span class="badge bg-secondary">&times;</span>
-                </a>
-            </div>
-        </c:forEach>
+        <div class="contentBox">
+            <c:forEach var="movie" items="${listMovie}" varStatus="status">
+                <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg movieBox"> <!-- 영화 1개 정보 div -->
+                    <h2 class="contentCnt"><strong>${status.count}</strong></h2>
+                    <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
+                        <span class="badge bg-secondary oneMovieSpan"><!-- 영화 이름, 개봉일 span -->
+                                ${movie.movieName}, ${movie.releaseDate}
+                        </span>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
     </div>
+    <script src="/js/movieJS/slick/movieListMovie.js" defer></script>
+
+
     <span class="contentTitle">OTT 목록</span>
-    <div class="contentList"> <!-- Ott 리스트 container div -->
-        <c:forEach var="movie" items="${listOtt}" varStatus="status">
-            <div class="rounded-lg shadow-xl bg-indigo-500 hover:shadow-indigo-500/40 hover:blur-sm oneBox"> <!-- Ott 1개 정보 div -->
-                <h2 class="contentCnt"><strong>${status.count}</strong></h2>
-                <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
-                    <span class="badge bg-secondary oneMovieSpan"><!-- Ott 이름, 개봉일 span -->
-                            ${movie.movieName}, ${movie.releaseDate}
-                    </span>
-                </a>
-                <a href="./remove.movie?action=remove&movieNo=${movie.movieNo}" hidden="hidden">
-                    <span class="badge bg-secondary">&times;</span>
-                </a>
-            </div>
-        </c:forEach>
+    <div class="contentList"> <!-- 영화 리스트 container div -->
+        <div class="contentBox">
+            <c:forEach var="movie" items="${listOtt}" varStatus="status">
+                <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg ottBox"> <!-- 영화 1개 정보 div -->
+                    <h2 class="contentCnt"><strong>${status.count}</strong></h2>
+                    <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
+                        <span class="badge bg-secondary oneMovieSpan"><!-- 영화 이름, 개봉일 span -->
+                                ${movie.movieName}, ${movie.releaseDate}
+                        </span>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
     </div>
     <c:if test="${error != null}">
         <div class="alert alert-danger alert-dismissible fade show mt-3">

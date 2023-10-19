@@ -71,8 +71,9 @@
                           ${boardDTO.hit}
                       </p>
                     </a>
-                    <a href="./remove.board?action=remove&contentNo=${boardDTO.contentNo}"
-                      class="remove-btn1" style="font-size: 30px">X</a>
+                    <span href="./myRemove.board?action=myRemove&contentNo=${boardDTO.contentNo}"
+                      class="remove-myContent" style="font-size: 30px; line-height: 2.85;"
+                       onclick="return confirm('정말 삭제하시겠습니까?');">X</span>
                 </div>
               </li>
             </c:forEach>
@@ -81,7 +82,7 @@
     </div>
   </div>
 
-  <!-- "내가 쓴 댓글" -->
+<%--  <!-- "내가 쓴 댓글" -->--%>
   <div class="tab-content" id="tab2">
     <div class="myComment">
       <div class="button1">
@@ -109,8 +110,9 @@
 
                        </p>
                     </a>
-                    <a href="./remove.board?action=remove&contentNo=${commentDTO.commentNo}"
-                       class="remove-btn2" style="font-size: 30px">X</a>
+                    <span href="/comment/myRemoveOne?commentNo=${commentDTO.commentNo}&parentNo=${commentDTO.parentNo}"
+                       class="remove-myComment" style="font-size: 30px; line-height: 2.85;"
+                       onclick="return confirm('정말 삭제하시겠습니까?');">X</span>
                 </div>
               </li>
             </c:forEach>
@@ -143,11 +145,11 @@
                       <p class="myList"> ${reviewDTO.review}
                           ${reviewDTO.addDate}
                           ${reviewDTO.nickName}
-
                       </p>
                     </a>
-                    <a href="./remove.movie?action=remove&movieNo=${reviewDTO.movieNo}"
-                       class="remove-btn3" style="font-size: 30px">X</a>
+                    <span href="/review/myRemoveOne?reviewNo=${reviewDTO.reviewNo}"
+                       class="remove-myReview" style="font-size: 30px; line-height: 2.85;"
+                       onclick="return confirm('정말 삭제하시겠습니까?');">X</span>
                   </div>
               </li>
             </c:forEach>
@@ -160,7 +162,11 @@
     <!-- "내가 찜한 영화" -->
     <div class="Zzim">
         <c:forEach var="movieDTO" items="${zzimMovieList}" varStatus="status">
-            <li class="list-group-zzim">
+            <li class="list-group-zzim" style="position: relative" >
+              <button class="myBtn" style="top: 10px; right: 5px; position: absolute; background: transparent; border: none; cursor: pointer;">
+                  <i class="fa-solid fa-heart fa-2x heart" onclick="return confirm('정말 삭제하시겠습니까?');"></i>
+                  <a href="/movie/myZZimRemove?movieNo=${movieDTO.movieNo}" class="myZZimRemove"></a>
+              </button>
               <a href="view.movie?action=view&movieNo=${movieDTO.movieNo}" class="text-decoration-4" >
                     <img src="${movieDTO.poster}" alt="영화 이미지">
               <p>${movieDTO.movieName}</p>

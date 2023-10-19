@@ -1,6 +1,5 @@
 .outContainer { /*제일 바깥 container div*/
-    width: 3000px;
-    overflow: hidden;
+    width: 100%;
     background: #111111;
     padding-top: 150px;
 }
@@ -39,17 +38,8 @@
     background-color: red;
     color: white;
 }
-
-.contentList { /*영화 리스트 container div*/
-    margin-top: 100px;
-    margin-bottom: 50px;
-    margin-left: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-}
-
+/*검색 영역 끝*/
+/*컨텐츠 영역 시작*/
 .contentTitle {
     margin-left: 20px;
     color: white;
@@ -57,18 +47,61 @@
     font-weight: bold;
 }
 
-.contentCnt {
-    margin-right: 150px;
-    margin-top: 20px;
-    font-size: 30pt;
-}
-.oneBox{ /*영화 1개 정보 div*/
-    width: 200px;
-    height: 200px;
-    background: #dddddd;
+.contentList { /*컨텐츠 목록 영역*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+}
+
+.contentBox { /*컨텐츠 총목록 박스 */
+    position: relative;
+    width: 1680px;
+}
+
+.movieBox{ /*영화 1개 정보 div*/
+    text-align: center;
+    margin: 20px 15px 0px 15px;
+    background: #d54949;
+    transition: all linear .4s;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.ottBox{ /*영화 1개 정보 div*/
+    text-align: center;
+    margin: 20px 15px 0px 15px;
+    background: #3ba8c2;
+    transition: all linear .4s;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.contentCnt { /*영화 순위?*/
+    margin: 10px 170px 0px 0px;
+    font-size: 60px;
+    font-style: italic;
 }
 
 .oneMovieSpan { /*영화 이름, 개봉일 span*/
     margin-top: 100px;
+}
+
+.slick-dots button {
+    text-indent: -9999px;
+}
+
+.slick-dots > li > button::before {
+    content:"";
+    width:100%;
+    height:100%;
+    border-radius:45px;
+    background-color: #ffffff;
+    opacity:0;
+    transition:opacity .8s;
+}
+
+.slick-prev:before, .slick-next:before {
+    opacity:0;
+    transition:opacity .8s;
 }

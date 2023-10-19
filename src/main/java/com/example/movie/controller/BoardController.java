@@ -48,6 +48,14 @@ public class BoardController extends HttpServlet {
                     throw new ServletException("read error");
                 }
                 break;
+            case "myRemove" : // 마이페이지 개별 삭제
+                try {
+                    boardService.removeBoard(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.sendRedirect("list.mypage");
+                break;
 
             case "remove" : // 삭제
                 try {
@@ -106,7 +114,9 @@ public class BoardController extends HttpServlet {
 
             case "modify" : // 게시물 수정
                 boardService.modifyBoard(req);
-                resp.sendRedirect("list.board?action=list");
+                boardService.getBoard(req);
+                boardService.increaseHit(req);
+                req.getRequestDispatcher("/WEB-INF/board/boardGet.jsp").forward(req, resp);
                 break;
             case "remove" : // 마이페이지 게시물 삭제 연동
                 try {

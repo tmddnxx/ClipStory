@@ -41,7 +41,7 @@
         <h2>공지사항 목록</h2>
         <ul class="list-group">
             <c:forEach var="adminBoardDTO" items="${adminBoardDTOList}" varStatus="status">
-                <a href="get.board?action=getNotice&cno=${adminBoardDTO.cno}" class="list-a">
+                <a href="get.board?action=getNotice&cno=${adminBoardDTO.cno}&pageNum=${pageNum}" class="list-a">
                     <li class="list">
                         <div class="first">
                             &nbsp;[<%=(totalRecord--)-(pageNum-1)*limit%>] ${adminBoardDTO.title}
@@ -71,7 +71,7 @@
                 <a href="pageNum.board?action=noticeList&pageNum=${i}" class="pager">
                     <c:choose>
                         <c:when test="${pageNum==i}"> <!--현재 페이지이면 볼드처리 -->
-                            <span>[${i}]</span>
+                            <span class="curPage">[${i}]</span>
                         </c:when>
                         <c:otherwise>
                             <span>[${i}]</span>

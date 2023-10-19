@@ -51,7 +51,7 @@
         <input type="hidden" name="num" value="<%=boardDTO.getContentNo()%>">
       </form>
       <div class="btn-box">
-        <button type="button" class="back-btn" onclick=window.location.href="/admin?action=boardList">뒤로가기</button>
+        <button type="button" class="back-btn" onclick=window.location.href="/admin?action=boardList&pageNum=<%=pageNum%>">뒤로가기</button>
       </div>
     </div>
   </div>

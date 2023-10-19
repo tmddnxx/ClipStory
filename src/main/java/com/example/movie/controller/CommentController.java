@@ -98,9 +98,17 @@ public class CommentController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "/comment/myRemoveOne": // 마이페이지 댓글 개별 삭제
+                try {
+                    commentService.removeComment(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.sendRedirect("/list.mypage");
+                break;
 
             case "/comment/myRemove":
-                try {
+                try { // 마이페이지 체크한 댓글 목록 삭제
                     // 댓글을 삭제하고 삭제된 댓글 목록을 얻기 위해 removeMyComment 메서드를 호출합니다
                     commentService.removeMyComment(req);
                 } catch (Exception e) {
