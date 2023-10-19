@@ -122,17 +122,48 @@
     color: white;
 }
 .infoTitle{
+    margin-top: 200px;
     color: white;
     font-size: 15pt;
 }
+
+/*슬라이드 관련 css*/
+.castSlide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.castInfo-div {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 20px 15px 0px 15px;
+    transition: all linear .4s;
+    z-index: 1;
+}
+
+.mediaSlide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.media-div {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 20px 15px 0px 15px;
+    transition: all linear .4s;
+    z-index: 1;
+}
+
 /* 출연/제작 */
 .castInfo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 2000px;
-    max-height: 100%;
-    padding-left: 200px;
+    position: relative;
+    width: 1680px;
 }
 .castInfo div{
     display: flex;
@@ -156,11 +187,8 @@
 /* 미디어(예고편, 포토) */
 .media {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 2000px;
-    max-height: 100%;
-    padding-left: 200px;
+    position: relative;
+    width: 1680px;
 }
 .mediaPhoto {
     width: 300px;
@@ -311,17 +339,16 @@
     background-color: #9a9090;
 }
 .goMain {
+    margin-top: 200px;
     display: flex;
     justify-content: center;
     position: relative;
     left: 28%;
     z-index: 0;
     text-align: center;
-    width: 100%;
     bottom: 20%;
     background-image: linear-gradient(180deg, transparent, #111111 10%);
     width: 44%;
-    /*background-image: linear-gradient(0deg, transparent, #111111 90%);*/
 }
 .home-btn{
     display: block;

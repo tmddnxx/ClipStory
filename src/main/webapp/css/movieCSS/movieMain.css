@@ -44,12 +44,14 @@
 }
 .ottBackSlide .oneOtt {
     width: 100%;
-    height: 500px;
+    height: 1000px;
+    background: #9a9090;
     object-fit: cover;
 }
 
 
 .movieContentSection {
+    height: 700px!important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,6 +85,13 @@
     z-index: -3;
     height: 800px;
 }
+
+.ottSection .ottBackSlide .draggable {
+    margin-top: -10px;
+    z-index: -3;
+    height: 800px;
+}
+
 
 div.slick-track {
     height: 500px!important;
@@ -127,15 +136,15 @@ div.slick-track {
     width: 150px;
 }
 
-
 /*검색 영역*/
 .searchList{
-    height: 100px;
+    height: 200px;
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     gap: 10px;
 }
+
 .form-select{
     text-align: center;
     height: 50px;
@@ -146,6 +155,7 @@ div.slick-track {
     color: white;
     background-color: black;
 }
+
 #search-input{
     height: 50px;
     width: 600px;
@@ -154,6 +164,7 @@ div.slick-track {
     color: white;
     background-color: black;
 }
+
 #btn-search{
     height: 50px;
     width: 100px;
@@ -163,7 +174,20 @@ div.slick-track {
     color: white;
     background-color: black;
 }
+
 #btn-search:hover{
     background-color: red;
     color: white;
+}
+
+.slick-prev, .slick-next {
+    z-index: 2;
+}
+.slick-prev:before, .slick-next:before {
+    opacity:0.5;
+    transition:opacity .8s;
+    font-size: 40px;
+}
+.slick-prev {
+    left: -50px;
 }

@@ -53,7 +53,7 @@
             </c:forEach>
         </div>
     </div>
-    <script src="/js/movieJS/slick/movieListMovie.js" defer></script>
+    <script src="/js/movieJS/slick/movieListMovieSlick.js" defer></script>
 
 
     <span class="contentTitle">OTT 목록</span>
@@ -61,7 +61,7 @@
         <div class="contentBox">
             <c:forEach var="movie" items="${listOtt}" varStatus="status">
                 <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg ottBox"> <!-- 영화 1개 정보 div -->
-                    <h2 class="contentCnt"><strong>${status.count}</strong></h2>
+                    <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                     <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
                         <span class="badge bg-secondary oneMovieSpan"><!-- 영화 이름, 개봉일 span -->
                                 ${movie.movieName}, ${movie.releaseDate}

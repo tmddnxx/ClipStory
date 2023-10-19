@@ -5,11 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<%--    <script type="text/javascript" src="../../js/movieJS/movieView.js?after"></script>--%>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/css2/slick.min.js"></script>
     <script src="https://cdn.tailwindcss.com" defer></script>
     <link href="../../css/movieCSS/movieView.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css2/slick.css" type="text/css" />
+    <link rel="stylesheet" href="/css2/slick-theme.css" type="text/css" />
     <title>영화 상세 페이지</title>
 </head>
 <body>
@@ -94,23 +97,30 @@
             <span class="infoTitle">출연 / 제작</span>
                 <br>
             <%-- 캐스트 목록 출력--%>
-                <div class="castInfo">
-                    <c:forEach var="castDTO" items="${castList}">
-                        <div class="castInfo-div">
-                            <img class="loaded-lg castPhoto" src="${castDTO.crewImg}">
-                            <p class="crew-name-p">${castDTO.crewName}</p>
-                            <p class="cast-role-p">${castDTO.castRole}</p>
-                        </div>
-                    </c:forEach>
+                <div class="castSlide">
+                    <div class="media">
+                        <c:forEach var="castDTO" items="${castList}">
+                            <div class="castInfo-div">
+                                <img class="loaded-lg castPhoto" src="${castDTO.crewImg}">
+                                <p class="crew-name-p">${castDTO.crewName}</p>
+                                <p class="cast-role-p">${castDTO.castRole}</p>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
                 <br>
             <%-- 미디어 --%>
                 <span class="infoTitle">예고편 / 포토</span><br>
             <%--      포토 출력          --%>
-            <div class="media">
-                <c:forEach var="photoDTO" items="${photoList}">
-                    <img class="loaded-lg mediaPhoto" src="${photoDTO.photoImg}">
-                </c:forEach>
+            <div class="mediaSlide">
+                <div class="media">
+                    <c:forEach var="photoDTO" items="${photoList}">
+                        <div class="media-div">
+                            <img class="loaded-lg mediaPhoto" src="${photoDTO.photoImg}">
+                        </div>
+                    </c:forEach>
+                </div>
+                <script src="/js/movieJS/slick/movieViewMediaSlick.js" defer></script>
             </div>
                 <br>
             <!-- 리뷰 목록 출력 -->

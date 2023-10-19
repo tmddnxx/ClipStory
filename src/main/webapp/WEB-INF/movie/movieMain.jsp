@@ -11,9 +11,9 @@
     <script type="text/javascript" src="/css2/slick.min.js"></script>
     <script type="text/javascript" src="../../js/movieJS/movieMain.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../../css/movieCSS/movieMain.css?after" type="text/css">
     <link rel="stylesheet" href="/css2/slick.css" type="text/css" />
     <link rel="stylesheet" href="/css2/slick-theme.css" type="text/css" />
+    <link rel="stylesheet" href="/css/movieCSS/movieMain.css?after" type="text/css">
     <%
         List searchVOList = (List) request.getAttribute("searchVOList");
         int limit = (Integer) request.getAttribute("limit");
@@ -29,10 +29,10 @@
     <%--  영화 리스트  --%>
     <div class="movieSection">
         <div class="movieBackSlide">
-            <c:forEach var="movie" items="${listMovie}" varStatus="status">
+            <c:forEach var="movie" items="${listMovie}">
             <div class="test">
                 <div class="oneMovie">
-                    <h2 class="contentCnt"><strong>${status.count}</strong></h2>
+                    <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                 </div>
             </div>
             </c:forEach>
@@ -40,9 +40,10 @@
     </div>
     <div class="center movieContentSection">
         <div class="movieList">
-            <c:forEach var="movie" items="${listMovie}" varStatus="status">
+            <c:set var="loopEnd" value="9"/>
+            <c:forEach var="movie" begin="0" end="${loopEnd}" items="${listMovie}">
                 <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg contentBox">
-                    <h2 class="contentCnt"><strong>${status.count}</strong></h2>
+                    <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                     <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
                         <span class="badge bg-secondary contentDetail">
                             영화이름 : <b>${movie.movieName}</b> / 유저평점 : <b>${movie.avgScore}</b>
@@ -69,20 +70,22 @@
     <%--  OTT 리스트  --%>
         <div class="ottSection">
             <div class="ottBackSlide">
-                <c:forEach var="movie" items="${listOtt}" varStatus="status">
+                <c:forEach var="movie" items="${listOtt}">
                     <div>
                         <div class="oneOtt">
-                            <h2 class="contentCnt"><strong>${status.count}</strong></h2>
+                            <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
+
         <div class="center movieContentSection">
             <div class="ottList">
-                <c:forEach var="movie" items="${listOtt}" varStatus="status">
+                <c:set var="loopEnd" value="9"/>
+                <c:forEach var="movie" begin="0" end="${loopEnd}" items="${listOtt}">
                     <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg contentBox">
-                        <h2 class="contentCnt"><strong>${status.count}</strong></h2>
+                        <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                         <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
                             <span class="badge bg-secondary contentDetail">
                                 OTT이름 : <b>${movie.movieName}</b> / 유저평점 : <b>${movie.avgScore}</b>
