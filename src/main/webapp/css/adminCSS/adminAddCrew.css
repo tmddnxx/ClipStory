@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    position: relative;
+    width: 100vw;
+    height: 900px;
+    background: #000000;
+    color: white;
+    font-size: 1.6rem;
+
+    font-family: 'Gothic A1', sans-serif;
+}
+main{
+    padding-top: 200px;
+    display: flex;
+    justify-content: center;
+}
+section{
+    width: 35rem;
+    margin: 0 auto;
+}
+#addCrew-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 2.6rem;
+    margin: 1.3rem 0;
+}
+
+#addCrew-title > h3{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 10px;
+}
+
+
+
+input{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    background-color: #323232;
+    padding: 1.3rem 1.8rem;
+    margin: 0.3rem 0;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    color: whitesmoke;
+}
+
+.addCrew{
+    margin: 1.5rem 0;
+}
+
+.addCrew-input > span{
+    font-size: 1.1rem;
+    color: #ABABABAA;
+}
+.addCrew-input > p{
+    font-size: 13px;
+    font-weight: bold;
+    color: #ec4646;
+    margin-top: 10px;
+}
+
+.addCrew-input-div{
+    position: relative;
+}
+
+.addCrew-input-div i{
+    position: absolute;
+    display: inline-block;
+    top: 40%;
+    right: 1rem;
+}
+
+#addCrew-buttons{
+    display: flex;
+    margin: 0.3rem 0;
+    padding: 0.3rem;
+}
+
+#addCrew-buttons > input {
+    margin: 0.5rem;
+    font-weight: bold;
+}
+
+#addCrew-buttons > input:hover {
+    cursor: pointer;
+    margin: 0.5rem;
+    color: black;
+}
+
+#addCrew-buttons > input:hover:first-child {
+    background-color: whitesmoke;
+}
+
+#addCrew-buttons > input:hover:last-child {
+    background-color: #F93D3D;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,6 +2,71 @@ let photoCnt = 2;
 let selectedItems = []; // 선택한 목록을 저장하는 배열
 const castListDiv = document.getElementById("castList"); // 출연자 리스트 div
 
+const frmModifyMovie = document.querySelector('form[name=frmModifyMovie]');
+const submitBtn = document.getElementById('submit-btn');
+
+// 유효성 검사용
+const movieName = document.getElementById('Movie-input-title');
+const movieRel = document.getElementById('Movie-input-rel');
+const region = document.getElementById('region');
+const genre = document.getElementById('genre');
+const audience = document.getElementById('audience');
+const runningtime = document.getElementById('runningtime');
+const outline = document.getElementById('outline');
+const prePoster = document.getElementById("prePoster");
+const posterFile = document.getElementById('poster-file');
+let isPhoto = true;
+
+runningtime.value = runningtime.value.substring(0,runningtime.value.length - 1);
+submitBtn.addEventListener('click', function (){
+    const photoFiles = document.querySelectorAll("input[class=photo]");
+    isPhoto = true;
+    if(movieName.value.trim() === ""){
+        alert("제목을 입력해주세요");
+        movieName.focus();
+    }
+    else if(movieRel.value.trim() === ""){
+        alert("개봉일을 입력해주세요");
+        movieRel.focus();
+    }
+    else if(region.value.trim() === ""){
+        alert("지역을 입력해주세요");
+        region.focus();
+    }
+    else if(genre.value.trim() === ""){
+        alert("장르를 입력해주세요");
+        genre.focus();
+    }
+    else if(audience.value.trim() === ""){
+        alert("관객수를 입력해주세요");
+        audience.focus();
+    }
+    else if(runningtime.value.trim() === ""){
+        alert("러닝타임을 입력해주세요");
+        runningtime.focus();
+    }
+    else if(outline.value.trim() === ""){
+        alert("개요를 입력해주세요");
+        outline.focus();
+    }
+    else if(posterFile.value.trim() === "" && prePoster.value.trim() === ""){
+        alert("포스터 이미지를 등록해주세요");
+        outline.focus();
+    }
+    else{
+        for(let i = 1; i < photoFiles.length; i++){
+            if(photoFiles[i].value.trim() === "")
+                isPhoto = false;
+        }
+        if(isPhoto === false){
+            alert("포토 이미지를 제대로 등록해주세요")
+        }
+        else{
+            if(confirm("영화정보를 수정하시겠습니까?"))
+                frmModifyMovie.submit();
+        }
+    }
+})
 // default cast 삭제 버튼 등록
 const firstRemoveCastBtns = castListDiv.getElementsByClassName("removeCastBtn");
 for (let i = 0; i < firstRemoveCastBtns.length; i++) {
@@ -55,6 +120,9 @@ function displayPreviewImg(input) {
                         inputPhotoList[i-1].name = "photo" + i;
                     }
                 });
+            }
+            else{
+                prePoster.value = "";
             }
         };
         reader.readAsDataURL(input.files[0]);

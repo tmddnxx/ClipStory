@@ -19,7 +19,7 @@
         </div>
         <form name="frmModifyMovie" action="/admin?action=modifyMovieProcess" method="post" enctype="multipart/form-data">
             <%-- 이전 포스터 경로--%>
-            <input type="hidden" name="prePoster" value="${movieDTO.poster}">
+            <input type="hidden" id="prePoster" name="prePoster" value="${movieDTO.poster}">
             <input type="hidden" name="movieNo" value="${movieDTO.movieNo}">
             <div id="Movie-container">
                 <div id="Movie-input-container">
@@ -35,27 +35,27 @@
                     </div>
                     <div class="Movie-input">
                         <div class="Movie-input-div">
-                            <input type="text" placeholder="국가" name="region" value="${movieDTO.region}">
+                            <input type="text" id="region" placeholder="국가" name="region" value="${movieDTO.region}">
                         </div>
                     </div>
                     <div class="Movie-input">
                         <div class="Movie-input-div">
-                            <input type="text" placeholder="장르" name="genre" value="${movieDTO.genre}">
+                            <input type="text" id="genre" placeholder="장르" name="genre" value="${movieDTO.genre}">
                         </div>
                     </div>
                     <div class="Movie-input">
                         <div class="Movie-input-div">
-                            <input type="number" placeholder="관객수" name="audience" value="${movieDTO.audience}">
+                            <input type="number" id="audience" placeholder="관객수" name="audience" value="${movieDTO.audience}">
                         </div>
                     </div>
                     <div class="Movie-input">
                         <div class="Movie-input-div">
-                            <input type="text" placeholder="러닝타임(분)" name="runningtime" value="${movieDTO.runningtime}">
+                            <input type="text" id=runningtime placeholder="러닝타임(분)" name="runningtime" value="${movieDTO.runningtime}">
                         </div>
                     </div>
                     <div class="Movie-input">
                         <div class="Movie-input-div">
-                            <textarea cols="50" rows="5" name="outline" placeholder="개요" class="form-control">${movieDTO.outline}</textarea>
+                            <textarea cols="50" rows="5" id="outline" name="outline" placeholder="개요" class="form-control">${movieDTO.outline}</textarea>
                         </div>
                     </div>
                     <div class="Movie-input">
@@ -118,8 +118,8 @@
                 </div>
             </div>
             <div id="Movie-buttons">
-                <input type="submit" id="submit-btn" value="수정">
-                <input type="button" onclick=window.location.href="/admin?action=main" value="취소">
+                <input type="button" id="submit-btn" value="수정">
+                <input type="button" onclick=" if(confirm('입력하신 내용이 저장되지 않았습니다. 취소하시겠습니까?')){location.href='/admin?action=main'};" value="취소">
             </div>
         </form>
     </section>

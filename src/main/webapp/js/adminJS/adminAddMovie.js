@@ -1,6 +1,70 @@
 let photoCnt = 2;
 let selectedItems = []; // 선택한 목록을 저장하는 배열
 
+const frmAddMovie = document.querySelector('form[name=frmAddMovie]');
+const submitBtn = document.getElementById('submit-btn');
+
+// 유효성 검사용
+const movieName = document.getElementById('Movie-input-title');
+const movieRel = document.getElementById('Movie-input-rel');
+const region = document.getElementById('region');
+const genre = document.getElementById('genre');
+const audience = document.getElementById('audience');
+const runningtime = document.getElementById('runningtime');
+const outline = document.getElementById('outline');
+const posterFile = document.getElementById('poster-file');
+let isPhoto = true;
+
+submitBtn.addEventListener('click', function (){
+    const photoFiles = document.querySelectorAll("input[class=photo]");
+    isPhoto = true;
+    if(movieName.value.trim() === ""){
+        alert("제목을 입력해주세요");
+        movieName.focus();
+    }
+    else if(movieRel.value.trim() === ""){
+        alert("개봉일을 입력해주세요");
+        movieRel.focus();
+    }
+    else if(region.value.trim() === ""){
+        alert("지역을 입력해주세요");
+        region.focus();
+    }
+    else if(genre.value.trim() === ""){
+        alert("장르를 입력해주세요");
+        genre.focus();
+    }
+    else if(audience.value.trim() === ""){
+        alert("관객수를 입력해주세요");
+        audience.focus();
+    }
+    else if(runningtime.value.trim() === ""){
+        alert("러닝타임을 입력해주세요");
+        runningtime.focus();
+    }
+    else if(outline.value.trim() === ""){
+        alert("개요를 입력해주세요");
+        outline.focus();
+    }
+    else if(posterFile.value.trim() === ""){
+        alert("포스터 이미지를 등록해주세요");
+        outline.focus();
+    }
+    else{
+        for(let i = 0; i < photoFiles.length; i++){
+            if(photoFiles[i].value.trim() === "")
+                isPhoto = false;
+        }
+        if(isPhoto === false){
+            alert("포토 이미지를 등록해주세요")
+        }
+        else{
+           if(confirm("영화를 등록하시겠습니까?"))
+               frmAddMovie.submit();
+        }
+    }
+})
+
 // 출연진 버튼 클릭 시 팝업 열기
 document.getElementById("addCastButton").addEventListener("click", function() {
     const popupURL = "/admin?action=addCast";
