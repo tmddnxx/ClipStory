@@ -145,18 +145,6 @@ public class MovieDAO {
 
     }
 
-    // 해당 컨텐츠 삭제하는 메소드 (PK기준으로 선택)
-    public void deleteOne(int movieNo) throws SQLException {
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-
-        String sql = "DELETE FROM movie WHERE movieNo = ?";
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, movieNo);
-        if(preparedStatement.executeUpdate() == 0) {
-            throw new SQLException("DB에러");
-        }
-    }
-
     // 해당 영화 찜등록 여부
     public boolean selectMovieLike(int movieNo, String memberId) throws SQLException {
         String sql = "select * FROM `zzim` WHERE `memberId` = ? and `movieNo` = ?";
@@ -190,39 +178,6 @@ public class MovieDAO {
         preparedStatement.setInt(2,movieNo);
 
         return preparedStatement.executeUpdate() == 1;
-    }
-
-    public void insert(MovieDTO movieDTO) throws Exception {
-        String sql = "INSERT INTO movie (movieName, director, actor, releaseDate,"
-                + " region, genre, audience, ranking, runningtime, outline, poster, mo, avgScore)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, movieDTO.getMovieName());
-        preparedStatement.setString(2, movieDTO.getDirector());
-        preparedStatement.setString(3, movieDTO.getActor());
-        preparedStatement.setString(4, movieDTO.getReleaseDate());
-        preparedStatement.setString(5, movieDTO.getRegion());
-        preparedStatement.setString(6, movieDTO.getGenre());
-        preparedStatement.setInt(7, movieDTO.getAudience());
-        preparedStatement.setInt(8, movieDTO.getRanking());
-        preparedStatement.setString(9, movieDTO.getRunningtime());
-        preparedStatement.setString(10, movieDTO.getOutline());
-        preparedStatement.setString(11, movieDTO.getPoster());
-        preparedStatement.setString(12, movieDTO.getMo());
-        preparedStatement.setFloat(13, movieDTO.getAvgScore());
-        preparedStatement.executeUpdate();
-    }
-
-    // 출연 정보 추가
-    public void insertCast(int crewNo, int movieNo, String castRole) throws Exception {
-        String sql = "INSERT INTO `cast` (`crewNo`, `movieNo`, `castRole`) VALUES (?, ?, ?)";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, crewNo);
-        preparedStatement.setInt(2, movieNo);
-        preparedStatement.setString(3, castRole);
-        preparedStatement.executeUpdate();
     }
 
     // 출연진 가져오기
@@ -271,38 +226,6 @@ public class MovieDAO {
         return photoList;
     }
 
-    // 배우|감독 추가
-    public void insertCrew(CrewDTO crewDTO) throws Exception{
-        String sql = "INSERT INTO crew (crewName, crewImg)"
-                + "VALUES (?, ?)";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, crewDTO.getCrewName());
-        preparedStatement.setString(2, crewDTO.getCrewImg());
-        preparedStatement.executeUpdate();
-    }
-
-    // 포토 추가
-    public void insertPhoto(String photoImg, int movieNo) throws Exception{
-        String sql = "INSERT INTO photo (photoImg, movieNo)"
-                + "VALUES (?, ?)";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, photoImg);
-        preparedStatement.setInt(2, movieNo);
-        preparedStatement.executeUpdate();
-    }
-    // 영화 테이블의 감독/배우 갱신
-    public void updateCrewInMovie(String director, String actor, int movieNo) throws Exception{
-        String sql = "UPDATE movie set director = ?, actor = ? where movieNo = ?";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, director);
-        preparedStatement.setString(2, actor);
-        preparedStatement.setInt(3, movieNo);
-        preparedStatement.executeUpdate();
-    }
-
     // 배우/감독 목록 출력
     public List<CrewDTO> getCrews() throws Exception {
         String sql = "SELECT * from crew";
@@ -323,21 +246,6 @@ public class MovieDAO {
         }
         return crewList;
     }
-    // 가장 최근에 등록한 영화 넘버 가져오기
-    public int getLastMovieNo() throws Exception{
-        String sql = "SELECT * from movie order by movieNo desc";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-
-        int movieNo = 0;
-        if(resultSet.next()){
-            movieNo = resultSet.getInt("movieNo");
-        }
-
-        return movieNo;
-    }
 
 
     // 리뷰 등록할때 평점 계산해서 movie테이블에 넣어주기 위한 메소드
@@ -350,42 +258,6 @@ public class MovieDAO {
         preparedStatement.executeUpdate();
     }
 
-    // 해당 영화의 출연정보 비우기
-    public void removeCast(int movieNo) throws Exception {
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
 
-        String sql = "DELETE FROM cast WHERE movieNo = ?";
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, movieNo);
-        preparedStatement.executeUpdate();
-    }
-
-    // 영화 랭킹 업데이트
-    public void updateRankingMovie() throws Exception {
-        String sql = "UPDATE movie AS m\n" +
-                "JOIN (\n" +
-                "    SELECT movieNo, RANK() OVER (ORDER BY audience DESC) AS ranking\n" +
-                "    FROM movie\n" +
-                "    WHERE mo = 'm'\n" +
-                ") AS mRanking ON m.movieNo = mRanking.movieNo\n" +
-                "SET m.ranking = mRanking.ranking;";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.executeUpdate();
-    }
-
-    // ott랭킹 업데이트
-    public void updateRankingOTT() throws Exception {
-        String sql = "UPDATE movie AS m\n" +
-                "JOIN (\n" +
-                "    SELECT movieNo, RANK() OVER (ORDER BY audience DESC) AS ranking\n" +
-                "    FROM movie\n" +
-                "    WHERE mo = 'o'\n" +
-                ") AS oRanking ON m.movieNo = oRanking.movieNo\n" +
-                "SET m.ranking = oRanking.ranking;";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.executeUpdate();
-    }
 }
 

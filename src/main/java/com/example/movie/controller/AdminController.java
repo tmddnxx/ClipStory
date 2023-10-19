@@ -52,18 +52,6 @@ public class AdminController extends HttpServlet {
                 movieService.listMovie(req);
                 req.getRequestDispatcher("/WEB-INF/admin/movieList.jsp").forward(req, resp);
                 break;
-            case "removeMovie" : // 영화 한개 삭제
-                adminService.adminRemoveMovie(req);
-                resp.sendRedirect("/admin?action=movieList");
-                break;
-            case "modifyMovieProcess" : // 영화 한개 수정
-                try {
-                    adminService.adminModifyMovie(req);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                resp.sendRedirect("/admin?action=movieList");
-                break;
             case "movieView" : // 영화 상세 페이지
                 movieService.getMovie(req);
                 try {
@@ -94,13 +82,25 @@ public class AdminController extends HttpServlet {
                 adminService.adminAddCrew(req);
                 resp.sendRedirect("/admin");
                 break;
-            case "addMovieProcess":
+            case "addMovieProcess": // 영화 추가 동작
                 try {
                     adminService.adminAddMovie(req);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 resp.sendRedirect("/admin");
+                break;
+            case "modifyMovieProcess" : // 영화 수정 동작
+                try {
+                    adminService.adminModifyMovie(req);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.sendRedirect("/admin?action=movieList");
+                break;
+            case "removeMovie" : // 영화 한개 삭제
+                adminService.adminRemoveMovie(req);
+                resp.sendRedirect("/admin?action=movieList");
                 break;
             case "getCrew": // 팝업창에서 얻을 배우/감독 목록
                 try {
