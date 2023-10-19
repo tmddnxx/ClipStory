@@ -124,16 +124,17 @@ hr{
     color: #aba8a8;
     cursor: default;
 }
-/* 답글 폼 */
+/* 대댓글 폼 */
 .user-comment-list > ul > li > form{
     flex-direction: row;
+    padding-left: 5%;
 }
 .reply-nick{
     width: 15%;
 }
 .reply-nick input{
     width: 100%;
-    height: 100px;
+    height: 107px;
     text-align: center;
     font-size: 20px;
     background-color: #777;
@@ -147,18 +148,23 @@ hr{
 }
 .reply-content > textarea{
     width: 100%;
-    height: 100px;
+    height: 90px;
     border-radius: 10px;
     padding: 10px;
     line-height: 1.4;
 }
 .reply-submit{
     width: 20%;
-    height: 50px;
+    height: 80px;
+    padding-left: 22px;
+}
+.reply-submit > div{
+    width: 60%;
 }
 .reply-submit > div > span{
+    display: block;
     width: 100%;
-    height: 100px;
+    height: 80px;
     background-color: red;
     border: 1px solid transparent;
     border-radius: 10px;
@@ -167,14 +173,20 @@ hr{
     font-weight: bold;
     text-align: center;
     padding-top: 30px;
+    line-height: 1.7;
+}
+.reply-submit > div > span:hover{
+    cursor: pointer;
+    background-color: #d70303;
 }
 .btn-box{
     width: 100%;
     height: 100px;
     display: flex;
-    justify-content: right;
+    justify-content: center;
     gap: 5px;
     margin-top: 10px;
+    padding-left: 36%;
 }
 .back-btn{
     width: 120px;
@@ -191,6 +203,7 @@ hr{
     margin-left: 20px;
 }
 .back-btn:hover{
+    cursor: pointer;
     background-color: red;
     color: white;
 }
@@ -207,13 +220,20 @@ hr{
     justify-content: center;
     align-items: center;
 }
+.remove-btn:hover{
+    background-color: #d70303;
+    font-weight: bold;
+}
 .modify-btn{
     background-color: #555;
+}
+.modify-btn:hover{
+    background-color: #a8a5a5;
 }
 .comment-form{
     width: 100%;
     height: 200px;
-    margin-left: 70px;
+    margin-left: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -237,17 +257,18 @@ hr{
     width: 70%;
 }
 .comment-content textarea{
+    width: 100%;
     height: 100px;
 }
 
 .comment-submit{
-    margin-left: 30px;
+    margin-left: 3px;
     width: 20%;
-    height: 50px;
+    height: 100px;
 }
 .comment-submit .btn-submit{
-    width: 100px;
-    height: 50px;
+    width: 120px;
+    height: 100px;
     background-color: red;
     border: 1px solid transparent;
     border-radius: 10px;
@@ -256,5 +277,11 @@ hr{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.comment-submit .btn-submit:hover{
+    cursor: pointer;
+    background-color: #d70303;
+    font-weight: bold;
+
 }
 

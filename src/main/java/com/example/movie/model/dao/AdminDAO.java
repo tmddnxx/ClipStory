@@ -365,4 +365,140 @@ public class AdminDAO {
         preparedStatement.setFloat(13, movieDTO.getAvgScore());
         preparedStatement.executeUpdate();
     }
+
+    // 배우|감독 추가
+    public void adminInsertCrew(CrewDTO crewDTO) throws Exception{
+        String sql = "INSERT INTO crew (crewName, crewImg)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, crewDTO.getCrewName());
+        preparedStatement.setString(2, crewDTO.getCrewImg());
+        preparedStatement.executeUpdate();
+    }
+
+    // 가장 최근에 등록한 영화 넘버 가져오기
+    public int adminGetLastMovieNo() throws Exception{
+        String sql = "SELECT * from movie order by movieNo desc";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        int movieNo = 0;
+        if(resultSet.next()){
+            movieNo = resultSet.getInt("movieNo");
+        }
+
+        return movieNo;
+    }
+
+    // 출연 정보 추가
+    public void adminInsertCast(int crewNo, int movieNo, String castRole) throws Exception {
+        String sql = "INSERT INTO `cast` (`crewNo`, `movieNo`, `castRole`) VALUES (?, ?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, crewNo);
+        preparedStatement.setInt(2, movieNo);
+        preparedStatement.setString(3, castRole);
+        preparedStatement.executeUpdate();
+    }
+
+    // 포토 추가
+    public void adminInsertPhoto(String photoImg, int movieNo) throws Exception{
+        String sql = "INSERT INTO photo (photoImg, movieNo)"
+                + "VALUES (?, ?)";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, photoImg);
+        preparedStatement.setInt(2, movieNo);
+        preparedStatement.executeUpdate();
+    }
+
+    // 영화 테이블의 감독/배우 갱신
+    public void adminUpdateCrewInMovie(String director, String actor, int movieNo) throws Exception{
+        String sql = "UPDATE movie set director = ?, actor = ? where movieNo = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, director);
+        preparedStatement.setString(2, actor);
+        preparedStatement.setInt(3, movieNo);
+        preparedStatement.executeUpdate();
+    }
+
+    // 해당 영화에 출연진이 있는지 확인
+    public boolean adminIsHasCast(int movieNo) throws Exception {
+        String sql = "select * FROM `cast` WHERE `movieNo` = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1,movieNo);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next())
+            return true;
+        return false;
+    }
+
+    // 해당 영화에 포토가 있는지 확인
+    public boolean adminIsHasPhoto(int movieNo) throws Exception{
+        String sql = "select * FROM `photo` WHERE `movieNo` = ?";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1,movieNo);
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next())
+            return true;
+        return false;
+    }
+
+    // 해당 영화의 출연정보 비우기
+    public void adminRemoveCast(int movieNo) throws Exception {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+
+        String sql = "DELETE FROM cast WHERE movieNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, movieNo);
+        preparedStatement.executeUpdate();
+    }
+    // 해당 영화의 포토 비우기
+
+    public void adminRemovePhoto(int movieNo) throws Exception {
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+
+        String sql = "DELETE FROM photo WHERE movieNo = ?";
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, movieNo);
+        preparedStatement.executeUpdate();
+    }
+
+    // 영화 랭킹 업데이트
+    public void adminUpdateRankingMovie() throws Exception {
+        String sql = "UPDATE movie AS m\n" +
+                "JOIN (\n" +
+                "    SELECT movieNo, RANK() OVER (ORDER BY audience DESC) AS ranking\n" +
+                "    FROM movie\n" +
+                "    WHERE mo = 'm'\n" +
+                ") AS mRanking ON m.movieNo = mRanking.movieNo\n" +
+                "SET m.ranking = mRanking.ranking;";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+    // ott랭킹 업데이트
+    public void adminUpdateRankingOTT() throws Exception {
+        String sql = "UPDATE movie AS m\n" +
+                "JOIN (\n" +
+                "    SELECT movieNo, RANK() OVER (ORDER BY audience DESC) AS ranking\n" +
+                "    FROM movie\n" +
+                "    WHERE mo = 'o'\n" +
+                ") AS oRanking ON m.movieNo = oRanking.movieNo\n" +
+                "SET m.ranking = oRanking.ranking;";
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+    }
+
+
 }

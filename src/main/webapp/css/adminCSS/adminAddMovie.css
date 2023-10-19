@@ -174,17 +174,30 @@ section{
     align-items: center;
     height: 150px;
 }
-#photo-input-div div div{
+#photo-input-div div > div{
     width: 30%;
     height: 130px;
 }
 
 #photo-input-div div input {
     width: 50%;
+    height: 100px;
+    line-height: 2.5;
+}
+#photo-input-div div > div:last-of-type{
+    width: 18%;
+}
+.removeDefaultPhotoBtn{
+    width: 100%;
+    height: 100px;
+    background-color: #6c6a6a;
+    color: white;
+    border: 1px solid #adabab;
+    border-radius: 5px;
 }
 .removePhotoBtn{
-    width: 18%;
-    height: 50px;
+    width: 100%;
+    height: 100px;
     background-color: #6c6a6a;
     color: white;
     border: 1px solid #adabab;
