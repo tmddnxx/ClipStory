@@ -161,11 +161,13 @@
   <div class="tab-content" id="tab4">
     <!-- "내가 찜한 영화" -->
     <div class="Zzim">
+
+      <form name="frmRemoveZZim" method="post" action="/myZZimRemove.movie?action=myZZimRemove&movieNo=">
         <c:forEach var="movieDTO" items="${zzimMovieList}" varStatus="status">
             <li class="list-group-zzim" style="position: relative" >
               <button class="myBtn" style="top: 10px; right: 5px; position: absolute; background: transparent; border: none; cursor: pointer;">
                   <i class="fa-solid fa-heart fa-2x heart" onclick="return confirm('정말 삭제하시겠습니까?');"></i>
-                  <a href="/movie/myZZimRemove?movieNo=${movieDTO.movieNo}" class="myZZimRemove"></a>
+                  <a href=/myZZimRemove.movie?action=myZZimRemove&movieNo==${movieDTO.movieNo}" class="myZZimDel"></a>
               </button>
               <a href="view.movie?action=view&movieNo=${movieDTO.movieNo}" class="text-decoration-4" >
                     <img src="${movieDTO.poster}" alt="영화 이미지">
@@ -176,6 +178,7 @@
             <div class="margin-img"></div>
             </c:if>
         </c:forEach>
+      </form>
     </div>
   </div>
 </div>

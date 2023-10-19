@@ -82,6 +82,19 @@ public class MovieController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "myZZimRemove": // 마이페이지 찜 삭제
+                JSONObject jsonObject = new JSONObject(); // JSON 정보를 담기 위한 객체 생성
+                try {
+                    boolean removed = movieService.removeMovieLike(req);
+                    log.info(1);
+                    jsonObject.put("result", removed ? "true" : "false");
+                    log.info(2);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                resp.getWriter().println(jsonObject.toJSONString());
+                resp.sendRedirect("/list.mypage");
+                break;
         }
 
     }
