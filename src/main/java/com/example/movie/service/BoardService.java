@@ -79,10 +79,12 @@ public class BoardService {
 
     public void getBoard(HttpServletRequest request){ // 게시물 개별
         int contentNo = Integer.parseInt(request.getParameter("contentNo"));
+        int pageNum = 1; // 페이지번호의 기본값
 
         try{
             BoardDTO boardDTO = boardDAO.selectOne(contentNo);
             request.setAttribute("boardDTO", boardDTO);
+            request.setAttribute("pageNum", pageNum);
         } catch (Exception e){
             log.error(e.getMessage());
             log.info("게시물 가져오는 과정에서 에러");
@@ -131,8 +133,11 @@ public class BoardService {
         boardDTO.setMemberId(request.getParameter("memberId"));
         boardDTO.setNickName(request.getParameter("nickName"));
 
+        int pageNum = 1; // 페이지번호의 기본값
+
         try {
             boardDAO.modifyBoard(boardDTO);
+            request.setAttribute("pageNum", pageNum);
             log.info(boardDTO);
         }catch (Exception e){
             log.error(e.getMessage());

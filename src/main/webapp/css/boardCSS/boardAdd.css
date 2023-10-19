@@ -33,7 +33,7 @@
 .content-box{
     width: 1000px;
     height: 60vh;
-    margin-bottom: 250px;
+    margin-bottom: 200px;
     display: flex;
     justify-content: start;
     align-items: start;
@@ -48,13 +48,11 @@
 }
 
 .write-btnbox {
-    width: 300px;
+    width: 90%;
     height: 50px;
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
 }
 .write-btnbox .write-submit-btn{
