@@ -60,8 +60,10 @@ public class MovieController extends HttpServlet {
                     // 성공, 실패의 결과를 json에 저장
                     if (movieService.insertMovieLike(req)) {
                         jsonObject.put("result", "true");
+                        log.info(true);
                     } else {
                         jsonObject.put("result", "false");
+                        log.info(false);
                     }
                     resp.getWriter().println(jsonObject.toJSONString());
                 } catch (Exception e) {
@@ -74,25 +76,30 @@ public class MovieController extends HttpServlet {
                     // 성공, 실패의 결과를 json에 저장
                     if (movieService.removeMovieLike(req)) {
                         jsonObject.put("result", "true");
+                        log.info(true);
                     } else {
                         jsonObject.put("result", "false");
+                        log.info(false);
                     }
                     resp.getWriter().println(jsonObject.toJSONString());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "myZZimRemove": // 마이페이지 찜 삭제
-                JSONObject jsonObject = new JSONObject(); // JSON 정보를 담기 위한 객체 생성
+            case "myZZimRemove": // 마이 페이지 찜 삭제
+                log.info(1); // 된다
                 try {
-                    boolean removed = movieService.removeMovieLike(req);
-                    log.info(1);
-                    jsonObject.put("result", removed ? "true" : "false");
-                    log.info(2);
+                    log.info(5); //된다
+                    JSONObject jsonObject = new JSONObject();
+                    log.info(6); // 된다.
+                    boolean result = movieService.removeMovieLike(req); // 오류 발생 지점
+                    jsonObject.put("result", result ? "true" : "false");
+                    log.info(3);
+                    resp.getWriter().println(jsonObject.toJSONString());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
+
                 }
-                resp.getWriter().println(jsonObject.toJSONString());
                 resp.sendRedirect("/list.mypage");
                 break;
         }

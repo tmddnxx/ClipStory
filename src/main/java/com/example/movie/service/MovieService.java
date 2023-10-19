@@ -89,18 +89,20 @@ public class MovieService {
 
 
     public boolean insertMovieLike(HttpServletRequest request) throws Exception {
-        int movieNo = Integer.parseInt((request.getParameter("movieNo"))); // movieNo 파라미터를 추출해서
+        int movieNo = Integer.parseInt(request.getParameter("movieNo")); // movieNo 파라미터를 추출해서
         String memberId = (String) request.getSession().getAttribute("sessionId");
         memberDAO.zzimCntUpdate(memberId,true);
         return movieDAO.insertMovieLike(movieNo,memberId);
     }
 
     public boolean removeMovieLike(HttpServletRequest request) throws Exception {
-        int movieNo = Integer.parseInt((request.getParameter("movieNo"))); // movieNo 파라미터를 추출해서
+        int movieNo = Integer.parseInt(request.getParameter("movieNo")); // movieNo 파라미터를 추출해서
         String memberId = (String) request.getSession().getAttribute("sessionId");
         memberDAO.zzimCntUpdate(memberId,false);
         return movieDAO.removeMovieLike(movieNo, memberId);
+
     }
+
 
     // 배우/감독 가져오기
     public List<CrewDTO> getCrews() throws  Exception {
