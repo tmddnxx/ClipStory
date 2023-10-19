@@ -57,13 +57,11 @@
             <c:forEach var="boardDTO" items="${boardDTOList}" varStatus="status">
               <li>
                 <div class="flex_my">
-
                   <!--label 태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-board-${boardDTO.contentNo}">
                     <input type="checkbox" name="selectedItems1" class="button chkButton1" value="${boardDTO.contentNo}" id="chk-board-${boardDTO.contentNo}">
                     <i class="circle"></i>
                   </label>
-
                     <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="text-decoration-none" type="hidden">
                       <p class="myList" > ${boardDTO.title}
                           ${boardDTO.addDate}
@@ -71,9 +69,11 @@
                           ${boardDTO.hit}
                       </p>
                     </a>
-                    <a href="./myRemove.board?action=myRemove&contentNo=${boardDTO.contentNo}"
-                      class="remove-myContent" style="font-size: 30px; line-height: 2.85;"
-                       onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
+                  <div class="XBtn">
+                      <a href="./myRemove.board?action=myRemove&contentNo=${boardDTO.contentNo}"
+                        class="remove-myContent" style="font-size: 30px; line-height: 2.85;"
+                         onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
+                  </div>
                 </div>
               </li>
             </c:forEach>
@@ -96,23 +96,22 @@
             <c:forEach var="commentDTO" items="${commentDTOList}" varStatus="status">
               <li>
                 <div class="flex_my">
-
                   <!--label태그는 체크박스를 누르지 않아도 연결된 체크박스를 체크해줌-->
                   <label for="chk-comment-${commentDTO.commentNo}">
                     <input type="checkbox" name="selectedItems2" class="button chkButton2" value="${commentDTO.commentNo}" id="chk-comment-${commentDTO.commentNo}">
                     <i class="circle"></i>
                   </label>
-
                     <a href="get.board?action=get&contentNo=${commentDTO.contentNo}" class="text-decoration-none" >
                        <p class="myList"> ${commentDTO.commentNo}
                            ${commentDTO.addDate}
                            ${commentDTO.nickName}
-
                        </p>
                     </a>
-                    <a href="/comment/myRemoveOne?commentNo=${commentDTO.commentNo}&parentNo=${commentDTO.parentNo}"
-                       class="remove-myComment" style="font-size: 30px; line-height: 2.85;"
-                       onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
+                    <div class="XBtn">
+                      <a href="/comment/myRemoveOne?commentNo=${commentDTO.commentNo}&parentNo=${commentDTO.parentNo}"
+                          class="remove-myComment"
+                          onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
+                    </div>
                 </div>
               </li>
             </c:forEach>
@@ -147,9 +146,11 @@
                           ${reviewDTO.nickName}
                       </p>
                     </a>
-                    <a href="/review/myRemoveOne?reviewNo=${reviewDTO.reviewNo}"
-                       class="remove-myReview" style="font-size: 30px; line-height: 2.85;"
-                       onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
+                    <div class="XBtn">
+                      <a href="/review/myRemoveOne?reviewNo=${reviewDTO.reviewNo}"
+                         class="remove-myReview"
+                         onclick="return confirm('정말 삭제하시겠습니까?');">X</a>
+                    </div>
                   </div>
               </li>
             </c:forEach>
@@ -161,11 +162,10 @@
   <div class="tab-content" id="tab4">
     <!-- "내가 찜한 영화" -->
     <div class="Zzim">
-
       <form name="frmRemoveZZim" method="post" action="/myZZimRemove.movie?action=myZZimRemove&movieNo=">
         <c:forEach var="movieDTO" items="${zzimMovieList}" varStatus="status">
             <li class="list-group-zzim" style="position: relative" >
-              <button type="button" class="myBtn" style="top: 10px; right: 5px; position: absolute; background: transparent; border: none; cursor: pointer;">
+              <button type="button" class="myBtn" >
                   <i class="fa-solid fa-heart fa-2x heart" onclick="if(confirm('정말 삭제하시겠습니까?'))
                   {location.href='/myZZimRemove.movie?action=myZZimRemove&movieNo=${movieDTO.movieNo}'};"></i>
               </button>

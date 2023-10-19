@@ -55,7 +55,6 @@ body{
     border-bottom: 3px solid white;
     border-bottom-color: white;
     color: black;
-
 }
 
 .tab-content {
@@ -93,7 +92,7 @@ body{
 }
 #tab4 { /*내가 찜한 영화 */
     display: inline-flex;
-    width: 1200px;
+    width: 900px;
     border: 1px solid white;
     padding: 15px;
 }
@@ -123,7 +122,7 @@ body{
     flex-direction: row;
 
 }
-.remove-btn {
+.remove {
     padding-left: 20px;
     font-size: 30px;
 }
@@ -189,12 +188,24 @@ input[type="checkbox"] {
     clear: both;
 }
 
+.myContent {
+    padding-left: 30px;
+}
+
+.myComment {
+    padding-left: 30px;
+}
+
+.myReview {
+    padding-left: 30px;
+}
+
 .ZZim {
     position: relative;
+    padding-left: 30px;
 }
 .list-group-zzim {
-    float: left;
-    width: calc(25% - 10px); /* 그림자 설정 */
+    display: inline-flex;
     margin-bottom: 20px;
     box-sizing: border-box;
     text-align: center;
@@ -211,6 +222,71 @@ input[type="checkbox"] {
    width: 200px;
    height: 200px;
 }
+.list-group-zzim button {
+    top: 10px;
+    right: 20px;
+    position: absolute;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.button1 input:hover {
+    background-color: red;
+    cursor: pointer;
+}
+.button2 input:hover {
+    background-color: red;
+    cursor: pointer;
+}
+.button3 input:hover {
+    background-color: red;
+    cursor: pointer;
+}
+
+.remove-myContent {
+    font-size: 30px;
+    line-height: 2.85;
+}
+
+.remove-myContent:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+.remove-myComment{
+    font-size: 30px;
+    line-height: 2.85;
+}
+.remove-myComment:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+.remove-myReview {
+    font-size: 30px;
+    line-height: 2.85;
+
+}
+.XBtn {
+    width: 30px;
+    height: 15px;
+
+}
+.remove-myReview:hover {
+    cursor: pointer;
+    color: black;
+    background: white;
+}
+
+
+
+
+
+
+
+
 
 
 
