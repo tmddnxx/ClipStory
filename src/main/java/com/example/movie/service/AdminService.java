@@ -141,9 +141,11 @@ public class AdminService {
 
         log.info("cast insert------------");
         // 출연진 등록
-        for(String crewNo : crewNoList){
-            String castRole = request.getParameter("castRole_" + crewNo);
-            adminDAO.adminInsertCast(Integer.parseInt(crewNo),movieNo,castRole);
+        if(crewNoList != null) {
+            for (String crewNo : crewNoList) {
+                String castRole = request.getParameter("castRole_" + crewNo);
+                adminDAO.adminInsertCast(Integer.parseInt(crewNo), movieNo, castRole);
+            }
         }
         log.info("cast insert complete------------");
 
