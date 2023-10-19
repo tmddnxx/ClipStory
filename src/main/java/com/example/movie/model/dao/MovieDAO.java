@@ -54,7 +54,7 @@ public class MovieDAO {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         List<MovieDTO> movieList = new ArrayList<>();
 
-        String sql = "select * from movie where `mo` = 'm'";
+        String sql = "select * from movie where `mo` = 'm' order by ranking";
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -85,7 +85,7 @@ public class MovieDAO {
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         List<MovieDTO> ottList = new ArrayList<>();
 
-        String sql = "SELECT * FROM movie where mo = 'o'";
+        String sql = "SELECT * FROM movie where mo = 'o' order by ranking";
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
         @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
 

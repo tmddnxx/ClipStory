@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+  int pageNum = (Integer) request.getAttribute("pageNum");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +22,7 @@
   <hr>
   <p>${boardDTO.nickName}</p>
   <div class="modify-content">
-    <form method="post" action="./modify.board?action=modify&contentNo=${boardDTO.contentNo}">
+    <form method="post" action="./modify.board?action=modify&contentNo=${boardDTO.contentNo}&pageNum=<%=pageNum%>">
       <div class="title-box">
         <label class="content-title-in">제목</label>
         <input type="text" name="title" class="form-control" value="${boardDTO.title}">
@@ -32,7 +35,7 @@
       <input type="text" name="nickName" class="form-control" value="${loginInfo.nickName}" hidden>
       <div class="modify-btnbox">
         <button type="submit" class="modify-submit-btn">수정</button>
-        <a href="get.board?action=get&contentNo=${boardDTO.contentNo}" class="modify-back-btn" onclick="return confirm('입력하신 내용이 저장되지 않았습니다.');">취소</a>
+        <a href="get.board?action=get&contentNo=${boardDTO.contentNo}>" class="modify-back-btn" onclick="return confirm('입력하신 내용이 저장되지 않았습니다.');">취소</a>
       </div>
     </form>
   </div>
