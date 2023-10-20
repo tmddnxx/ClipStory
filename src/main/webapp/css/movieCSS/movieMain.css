@@ -19,39 +19,32 @@
 }
 
 .movieSection {
-    width: 100%;
-    height: 70vh;
-    /*background-image: linear-gradient(0deg,transparent,black);*/
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-image: linear-gradient(0deg,transparent,black);
 }
 
 .ottSection {
-    width: 100%;
-    height: 70vh;
-    /*background-image: linear-gradient(0deg,transparent,black);*/
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-image: linear-gradient(0deg,transparent,black);
 }
 
 .movieBackSlide .oneMovie {
     width: 100%;
     height: 1000px;
-    object-fit: cover;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 1903px 1000px;
+    background-position: center;
 }
+
 .ottBackSlide .oneOtt {
     width: 100%;
     height: 1000px;
-    background: #9a9090;
-    object-fit: cover;
+    background-repeat: no-repeat;
+    background-size: 1903px 1000px;
+    background-position: center;
 }
 
 
 .movieContentSection {
+    margin-top: -300px;
     height: 700px!important;
     display: flex;
     justify-content: center;
@@ -84,13 +77,13 @@
 .movieSection .movieBackSlide .draggable {
     margin-top: -10px;
     z-index: -3;
-    height: 800px;
+    height: 1000px;
 }
 
 .ottSection .ottBackSlide .draggable {
     margin-top: -10px;
     z-index: -3;
-    height: 800px;
+    height: 1000px;
 }
 
 
@@ -111,6 +104,7 @@ div.slick-track {
     cursor: pointer;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
 
 .ottList .contentBox {
@@ -118,9 +112,12 @@ div.slick-track {
     height: 400px;
     text-align: center;
     margin: 20px 15px 0px 15px;
-    background: #d54949;
     transition: all linear .4s;
     z-index: 1;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -128,6 +125,7 @@ div.slick-track {
     margin: 10px 170px 0px 0px;
     font-size: 60px;
     font-style: italic;
+    color: white;
 }
 
 .contentDetail {

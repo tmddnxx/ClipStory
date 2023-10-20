@@ -42,7 +42,7 @@
     <div class="contentList"> <!-- 영화 리스트 container div -->
         <div class="contentBox">
             <c:forEach var="movie" items="${listMovie}" varStatus="status">
-                <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg movieBox"> <!-- 영화 1개 정보 div -->
+                <div class="rounded-lg movieBox" style="height: 500px; background-image: url('${movie.poster}')" onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" > <!-- 영화 1개 정보 div -->
                     <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                     <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
                         <span class="badge bg-secondary oneMovieSpan"><!-- 영화 이름, 개봉일 span -->
@@ -60,7 +60,7 @@
     <div class="contentList"> <!-- 영화 리스트 container div -->
         <div class="contentBox">
             <c:forEach var="movie" items="${listOtt}" varStatus="status">
-                <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg ottBox"> <!-- 영화 1개 정보 div -->
+                <div class="rounded-lg ottBox" style="height: 500px; background-image: url('${movie.poster}')" onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';"> <!-- 영화 1개 정보 div -->
                     <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                     <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
                         <span class="badge bg-secondary oneMovieSpan"><!-- 영화 이름, 개봉일 span -->

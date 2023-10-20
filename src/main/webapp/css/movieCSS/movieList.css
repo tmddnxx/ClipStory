@@ -55,6 +55,7 @@
 }
 
 .contentBox { /*컨텐츠 총목록 박스 */
+    height: 600px;
     position: relative;
     width: 1680px;
 }
@@ -62,19 +63,23 @@
 .movieBox{ /*영화 1개 정보 div*/
     text-align: center;
     margin: 20px 15px 0px 15px;
-    background: #d54949;
     transition: all linear .4s;
     z-index: 1;
     cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .ottBox{ /*영화 1개 정보 div*/
     text-align: center;
     margin: 20px 15px 0px 15px;
-    background: #3ba8c2;
     transition: all linear .4s;
     z-index: 1;
     cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .contentCnt { /*영화 순위*/
@@ -84,7 +89,7 @@
 }
 
 .oneMovieSpan { /*영화 이름, 개봉일 span*/
-    margin-top: 100px;
+    margin-top: 380px;
 }
 
 .slick-dots button {

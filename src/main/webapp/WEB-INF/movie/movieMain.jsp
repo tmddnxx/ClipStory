@@ -74,7 +74,7 @@
             <div class="ottBackSlide">
                 <c:forEach var="movie" items="${listOtt}">
                     <div>
-                        <div class="oneOtt">
+                        <div class="oneOtt" style="background-image: url('${movie.poster}');">
                             <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
             <div class="ottList">
                 <c:set var="loopEnd" value="9"/>
                 <c:forEach var="movie" begin="0" end="${loopEnd}" items="${listOtt}">
-                    <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg contentBox">
+                    <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg contentBox" style="background-image: url('${movie.poster}');">
                         <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                         <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
                             <span class="badge bg-secondary contentDetail">
