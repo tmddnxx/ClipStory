@@ -21,7 +21,7 @@ import java.util.List;
 
 @Log4j2
 @WebServlet("/admin")
-@MultipartConfig(maxFileSize = 2 * 1024 * 1024, location = "c://upload")
+@MultipartConfig(maxFileSize = 10 * 1024 * 1024, location = "c://upload")
 public class AdminController extends HttpServlet {
     AdminService adminService = new AdminService();
     BoardService boardService = new BoardService();

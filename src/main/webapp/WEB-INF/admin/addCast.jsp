@@ -18,7 +18,7 @@
   let selectedItems = []; // 선택한 목록
   let serverData = [];
   const getCasts = function () {
-      console.log("getCastts");
+      console.log("getCasts");
       xhr.open('GET', '/admin?action=getCrew');
       xhr.send();
       xhr.onreadystatechange = function () {

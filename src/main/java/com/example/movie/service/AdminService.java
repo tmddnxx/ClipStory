@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,14 +44,13 @@ public class AdminService {
     }
 //    addCrew // 제작진 제작 - 은석
     public void adminAddCrew(HttpServletRequest request){
-
+        String now = LocalDate.now().toString().replace("/","") + "_";
         try{
             Part part = request.getPart("crewImg");
             String fileName = this.getFileName(part);
             log.info("crewImg : " + fileName);
             if(fileName != null && !fileName.isEmpty()){
-                UUID uuid = UUID.randomUUID();
-                fileName = uuid + fileName;
+                fileName = now + fileName;
                 log.info("crewImg if : " + fileName);
                 part.write(fileName);
             }
@@ -75,6 +76,7 @@ public class AdminService {
         String mo = request.getParameter("mo");
         String[] crewNoList = request.getParameterValues("crewNo");
 
+        String now = LocalDate.now().toString().replace("/","") + "_";
 
         int photoCnt = 1;
 
@@ -85,8 +87,7 @@ public class AdminService {
         fileName = this.getFileName(partPoster);
         log.info("poster : " + fileName);
         if (fileName != null && !fileName.isEmpty()) {
-            UUID uuid = UUID.randomUUID();
-            fileName = uuid + fileName;
+            fileName = now + fileName;
             log.info("poster if : " + fileName);
             partPoster.write(fileName);
         }
@@ -104,8 +105,7 @@ public class AdminService {
             fileName = this.getFileName(partPhoto);
             log.info("photo : " + fileName);
             if (fileName != null && !fileName.isEmpty()) {
-                UUID uuid = UUID.randomUUID();
-                fileName = uuid + fileName;
+                fileName = now + fileName;
                 log.info("photo if : " + fileName);
                 partPhoto.write(fileName);
                 log.info("photoWrite success");
@@ -199,6 +199,8 @@ public class AdminService {
         String mo = request.getParameter("mo");
         String[] crewNoList = request.getParameterValues("crewNo");
 
+        String now = LocalDate.now().toString().replace("/","") + "_";
+
         String fileName = "";
         String poster = request.getParameter("prePoster"); // 기존 포스터 경로
         String[] defaultPhotoList = request.getParameterValues("defaultPhoto"); // 기존 포토
@@ -209,8 +211,8 @@ public class AdminService {
             fileName = this.getFileName(partPoster);
             log.info("poster : " + fileName);
             if (fileName != null && !fileName.isEmpty()) { // 파일이 있다면
-                UUID uuid = UUID.randomUUID();
-                fileName = uuid + fileName;
+
+                fileName = now + fileName;
                 log.info("poster if : " + fileName);
                 partPoster.write(fileName);
                 poster = "/upload/" + fileName;
@@ -240,8 +242,7 @@ public class AdminService {
             fileName = this.getFileName(partPhoto);
             log.info("photo : " + fileName);
             if (fileName != null && !fileName.isEmpty()) {
-                UUID uuid = UUID.randomUUID();
-                fileName = uuid + fileName;
+                fileName = now + fileName;
                 log.info("photo if : " + fileName);
                 partPhoto.write(fileName);
                 log.info("photoWrite success");
