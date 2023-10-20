@@ -49,7 +49,7 @@
                             영화이름 : <b>${movie.movieName}</b> / 유저평점 : <b>${movie.avgScore}</b>
                         </span>
                     </a>
-                    <div class="overlay"></div>
+                    <div class="overlay" style="background-image: url('${movie.poster}')"></div>
                 </div>
             </c:forEach>
         </div>
