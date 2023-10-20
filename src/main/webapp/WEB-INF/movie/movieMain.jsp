@@ -31,7 +31,7 @@
         <div class="movieBackSlide">
             <c:forEach var="movie" items="${listMovie}">
             <div class="test">
-                <div class="oneMovie">
+                <div class="oneMovie" style="background-image: url('${movie.poster}');">
                     <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                 </div>
             </div>
@@ -42,14 +42,16 @@
         <div class="movieList">
             <c:set var="loopEnd" value="9"/>
             <c:forEach var="movie" begin="0" end="${loopEnd}" items="${listMovie}">
-                <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';" class="rounded-lg contentBox">
+                <div onclick="location.href='view.movie?action=view&movieNo=${movie.movieNo}';"
+                     class="rounded-lg contentBox"
+                     style="background-image: url('${movie.poster}');">
                     <h2 class="contentCnt"><strong>${movie.ranking}</strong></h2>
                     <a href="view.movie?action=view&movieNo=${movie.movieNo}" class="text-decoration-none">
                         <span class="badge bg-secondary contentDetail">
                             영화이름 : <b>${movie.movieName}</b> / 유저평점 : <b>${movie.avgScore}</b>
                         </span>
                     </a>
-                    <div class="overlay" style="background-image: url('${movie.poster}')"></div>
+                    <div class="overlay"></div>
                 </div>
             </c:forEach>
         </div>
