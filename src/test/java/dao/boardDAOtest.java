@@ -17,12 +17,12 @@ public class boardDAOtest {
     @Test
     public void testInsertBoard() throws Exception{ // 게시물 추가
         BoardDTO boardDTO = new BoardDTO();
-        for(int i=1; i<40; i++){
+        for(int i=1; i<100; i++){
             boardDTO = BoardDTO.builder()
                     .title("TestTitle [" + i + "]")
-                    .content("TestContent[" + i + "]")
-                    .nickName("TestNickName[" + i + "]")
-                    .memberId("TestAdmin[" + i + "]").build();
+                    .content("TestContent" + i)
+                    .nickName("testNickName" + i)
+                    .memberId("test" + i).build();
             boardDAO.insertBoard(boardDTO);
         }
 

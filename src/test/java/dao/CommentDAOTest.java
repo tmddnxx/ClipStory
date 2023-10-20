@@ -23,17 +23,17 @@ public class CommentDAOTest {
 
         for(int i = 0; i < 40; i++) {
             CommentDTO commentDTO = CommentDTO.builder()
-                    .nickName("hi")
+                    .nickName("testNickName" + i)
                     .comment("댓글" + i)
-                    .memberId("test")
-                    .contentNo(79)
+                    .memberId("test" + i )
+                    .contentNo(93)
                     .build();
             commentDAO.insertComment(commentDTO);
         }
     }
 
     @Test
-    public void testSelectComments() throws SQLException, ClassNotFoundException{
+    public void testSelectComments() throws Exception {
         List<CommentDTO> commentDTOList = commentDAO.selectComments(79);
         log.info(commentDTOList);
 

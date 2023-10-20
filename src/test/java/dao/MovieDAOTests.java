@@ -20,7 +20,7 @@ public class MovieDAOTests {
     @BeforeEach
     public void ready() {
         movieDAO = new MovieDAO();
-        reviewDAO = ReviewDAO.getInstance();
+        reviewDAO = new ReviewDAO();
     }
 
 //    @Test
