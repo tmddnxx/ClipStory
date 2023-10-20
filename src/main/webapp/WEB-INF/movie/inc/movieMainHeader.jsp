@@ -22,6 +22,13 @@
     color: white;
     font-size: 25px;
   }
+  .content a:hover{
+      font-weight: bold;
+      font-size: 28px;
+  }
+  .goContent i:hover{
+      font-size: 28px;
+  }
   #header{
     position: fixed;
     top: 0;

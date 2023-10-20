@@ -15,18 +15,6 @@ import java.util.List;
 
 @Log4j2
 public class ReviewDAO {
-    private static ReviewDAO instance;
-
-    private ReviewDAO() {
-
-    }
-
-    public static ReviewDAO getInstance() {
-        if (instance == null) {
-            instance = new ReviewDAO();
-        }
-        return instance;
-    }
 
     // 리뷰 추가하기 위한 메소드
     public boolean insertReview(ReviewDTO reviewDTO) throws SQLException, ClassNotFoundException {

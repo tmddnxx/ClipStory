@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Log4j2
 @WebServlet("/review/*")
 public class ReviewController extends HttpServlet {
-    ReviewService reviewService = ReviewService.getInstance();
+    ReviewService reviewService = new ReviewService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,11 +32,11 @@ public class ReviewController extends HttpServlet {
         String contextPath = req.getContextPath();
         String command = RequestURI.substring(contextPath.length());
         resp.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
+
         log.info("command : " + command);
 
         switch (command) {
-            case "/review/add":
+            case "/review/add": // 리뷰 추가
                 try {
                     JSONObject jsonObject = new JSONObject(); // json 정보를 담기 위해 객체 생성
                     // 성공, 실패의 결과를 json에 저장
@@ -53,7 +53,7 @@ public class ReviewController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "/review/get":
+            case "/review/get": // 리뷰리스트 얻기
                 try {
                     List<ReviewDTO> reviewDTOS = reviewService.getReviews(req);
                     // collection List를 json으로 변환.
@@ -75,7 +75,7 @@ public class ReviewController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "/review/remove":
+            case "/review/remove": // 리뷰 제거
                 try {
                     JSONObject jsonObject = new JSONObject();
                     if (reviewService.removeReview(req)) {
@@ -92,7 +92,7 @@ public class ReviewController extends HttpServlet {
                 }
                 break;
 
-            case "/review/myRemoveOne":
+            case "/review/myRemoveOne": // 마이페이지 리뷰 개별 삭제
                 try {
                     reviewService.removeReview(req);
                 } catch (Exception e) {
@@ -100,7 +100,7 @@ public class ReviewController extends HttpServlet {
                 }
                 resp.sendRedirect("/list.mypage");
                 break;
-            case "/review/myRemove":
+            case "/review/myRemove": // 마이페이지 리뷰 체크된 목록 삭제
                 try {
                     // 댓글을 삭제하고 삭제된 댓글 목록을 얻기 위해 removeMyComment 메서드를 호출합니다
                     reviewService.removeMyReviews(req);

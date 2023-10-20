@@ -26,8 +26,8 @@ public class AdminController extends HttpServlet {
     AdminService adminService = new AdminService();
     BoardService boardService = new BoardService();
     MovieService movieService = new MovieService();
-    ReviewService reviewService = ReviewService.getInstance();
-    CommentService commentService = CommentService.INSTANCE;
+    ReviewService reviewService = new ReviewService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -189,13 +189,6 @@ public class AdminController extends HttpServlet {
 
             /*----------- 게시판 컨트롤러 끝-----------*/
 
-            /*----------- 댓글 컨트롤러 시작-----------*/
-            case "commentList" : // 댓글 목록
-
-            case "commentRemove" : // 댓글삭제
-
-            /*----------- 댓글 컨트롤러 끝-----------*/
-
             /* -----------------회원 목록 불러오기 -------------------- */
             case "memberList" :
                 try {
@@ -211,7 +204,6 @@ public class AdminController extends HttpServlet {
         String RequestURI = req.getRequestURI();
         String contextPath = req.getContextPath();
         String command = RequestURI.substring(contextPath.length());
-        AdminDTO adminDTO = new AdminDTO();
         log.info("command : " + command);
         switch (command) {
             case "/review/get":

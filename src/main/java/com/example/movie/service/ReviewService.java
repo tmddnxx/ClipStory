@@ -13,26 +13,19 @@ import java.util.List;
 
 @Log4j2
 public class ReviewService {
-    private static ReviewService instance;
+    private final ReviewDAO reviewDAO;
     private final MovieDAO movieDAO;
     private final MemberDTO memberDTO;
 
-    private ReviewService() {
+    public ReviewService() {
+        reviewDAO = new ReviewDAO();
         movieDAO = new MovieDAO();
         memberDTO = new MemberDTO();
-    }
-
-    public static ReviewService getInstance() {
-        if (instance == null) {
-            instance = new ReviewService();
-        }
-        return instance;
     }
 
     // 리뷰 추가 메소드
     public boolean addReview(HttpServletRequest request) throws Exception {
         log.info("addReview() ...");
-        ReviewDAO reviewDAO = ReviewDAO.getInstance();
         log.info((String) request.getSession().getAttribute("memberId"));
         ReviewDTO reviewDTO = ReviewDTO.builder()
                 .movieNo(Integer.valueOf(request.getParameter("num")))
@@ -59,7 +52,6 @@ public class ReviewService {
     // 전체리뷰목록 불러와서 request로 전해주는 메소드
     public List<ReviewDTO> getReviews(HttpServletRequest request) throws SQLException, ClassNotFoundException {
         log.info("getReviews() ...");
-        ReviewDAO reviewDAO = ReviewDAO.getInstance();
         int num;
         // movieNo 파라미터가 하나로 통일되어 있지 않아서 movieNo와 num 모두 확인해서 movieNo로 인식하기 위한 if문
         if(request.getParameter("movieNo")!=null){
@@ -89,7 +81,6 @@ public class ReviewService {
     // 리뷰 삭제 메소드
     public boolean removeReview(HttpServletRequest request) throws Exception {
         log.info("removeReview()...");
-        ReviewDAO reviewDAO = ReviewDAO.getInstance();
         int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
         ReviewDTO reviewDTO = reviewDAO.selectReviewOne(reviewNo);
         log.info(reviewDTO);
@@ -105,7 +96,6 @@ public class ReviewService {
     // 마이 페이지 리뷰 선택삭제 메서드
     public void removeMyReviews(HttpServletRequest request) throws Exception {
         log.info("remove board----------------");
-        ReviewDAO reviewDAO = ReviewDAO.getInstance();
         String[] conNo = request.getParameterValues("selectedItems3");
         for (String no : conNo) {// no = 각각의 게시물 넘버값
             log.info(no);

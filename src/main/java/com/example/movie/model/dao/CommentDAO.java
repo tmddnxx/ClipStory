@@ -62,7 +62,8 @@ public class CommentDAO {
         resultSet.next();
         return resultSet.getInt("parentNo");
     }
-    public List<CommentDTO> selectComments(int contentNo) throws SQLException, ClassNotFoundException{
+    // 댓글 리스트 얻기
+    public List<CommentDTO> selectComments(int contentNo) throws Exception{
         log.info("selectComments()...");
 
         List<CommentDTO> commentDTOS = new ArrayList<>();
@@ -87,6 +88,7 @@ public class CommentDAO {
 
     }
 
+    // 댓글 삭제
     public boolean deleteComment(int commentNo) throws SQLException, ClassNotFoundException {
         log.info("deleteComment()..");
         String sql = "DELETE FROM `comment` WHERE `commentNo` = ? ";
@@ -98,6 +100,7 @@ public class CommentDAO {
         return preparedStatement.executeUpdate() == 1;
     }
 
+    // 댓글 작성시 부모번호 설정
     public void updateParentNo() throws SQLException, ClassNotFoundException {
         log.info("updateParentNo()..");
         String sql = "UPDATE `comment` SET `parentNo` = `commentNo` WHERE `parentNo` = 0";
@@ -108,6 +111,7 @@ public class CommentDAO {
         preparedStatement.executeUpdate();
     }
 
+    // 삭제된 댓글 제외 댓글 개수
     public int commentCnt(int contentNo) throws SQLException, ClassNotFoundException {
         String sql = "SELECT count(*) as cnt from comment where contentNo = ? and memberId != ''";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -118,6 +122,7 @@ public class CommentDAO {
         return resultSet.getInt("cnt");
     }
 
+    // 대댓글을 갖고 있는지 여부
     public boolean checkHasRe(int parentNo) throws SQLException{
         String sql = "SELECT count(*) as cnt from comment where parentNo = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -132,6 +137,7 @@ public class CommentDAO {
     }
 
 
+    // 대댓글을 가지고 있는 댓글 삭제 시 더미 생성
     public boolean updateCommentDie(int commentNo) throws SQLException{
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         String sql = "UPDATE `comment` set nickName = ?, comment = ?, memberId = ? where commentNo = ?";
@@ -144,6 +150,7 @@ public class CommentDAO {
         return preparedStatement.executeUpdate() == 1;
     }
 
+    // 관리자가 댓글 삭제 시 더미 생성
     public boolean adminUpdateCommentDie(int commentNo) throws SQLException{
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         String sql = "UPDATE `comment` set nickName = ?, comment = ?, memberId = ? where commentNo = ?";

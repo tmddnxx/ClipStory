@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PhotoDTO {
-    private int photoNo;
-    private String photoImg;
-    private int movieNo;
+    private int photoNo; // 포토 번호
+    private String photoImg; // 포토 경로
+    private int movieNo; // 포토가 있는 영화 번호
 }

@@ -26,8 +26,7 @@ public class MovieController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MovieService movieService = new MovieService();
-
-        ReviewService reviewService = ReviewService.getInstance();
+        ReviewService reviewService = new ReviewService();
 
         String action = req.getParameter("action");
         if (action == null) {
@@ -35,7 +34,7 @@ public class MovieController extends HttpServlet {
         }
 
         switch (action) {
-            case "main" :
+            case "main" : // 메인 페이지
                 movieService.listMovie(req);
                 movieService.listOtt(req);
                 req.getRequestDispatcher("/WEB-INF/movie/movieMain.jsp").forward(req, resp);
@@ -45,7 +44,7 @@ public class MovieController extends HttpServlet {
                 movieService.listOtt(req);
                 req.getRequestDispatcher("/WEB-INF/movie/movieList.jsp").forward(req, resp);
                 break;
-            case "view":
+            case "view": // 영화 상세 페이지
                 movieService.getMovie(req);
                 try {
                     reviewService.getReviews(req);
@@ -54,10 +53,9 @@ public class MovieController extends HttpServlet {
                 }
                 req.getRequestDispatcher("/WEB-INF/movie/movieView.jsp").forward(req, resp);
                 break;
-            case "zzimAdd":
+            case "zzimAdd": // 찜 등록
                 try {
-                    JSONObject jsonObject = new JSONObject(); // json 정보를 담기 위해 객체 생성
-                    // 성공, 실패의 결과를 json에 저장
+                    JSONObject jsonObject = new JSONObject();
                     if (movieService.insertMovieLike(req)) {
                         jsonObject.put("result", "true");
                         log.info(true);
@@ -70,7 +68,7 @@ public class MovieController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "zzimRemove":
+            case "zzimRemove": // 찜 해제
                 try {
                     JSONObject jsonObject = new JSONObject(); // json 정보를 담기 위해 객체 생성
                     // 성공, 실패의 결과를 json에 저장
@@ -87,14 +85,10 @@ public class MovieController extends HttpServlet {
                 }
                 break;
             case "myZZimRemove": // 마이 페이지 찜 삭제
-                log.info(1); // 된다
                 try {
-                    log.info(5); //된다
                     JSONObject jsonObject = new JSONObject();
-                    log.info(6); // 된다.
-                    boolean result = movieService.removeMovieLike(req); // 오류 발생 지점
+                    boolean result = movieService.removeMovieLike(req);
                     jsonObject.put("result", result ? "true" : "false");
-                    log.info(3);
                     resp.getWriter().println(jsonObject.toJSONString());
                 } catch (Exception e) {
                     throw new RuntimeException(e);

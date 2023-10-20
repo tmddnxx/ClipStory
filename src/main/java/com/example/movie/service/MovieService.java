@@ -88,6 +88,7 @@ public class MovieService {
     }
 
 
+    // 찜 등록
     public boolean insertMovieLike(HttpServletRequest request) throws Exception {
         int movieNo = Integer.parseInt(request.getParameter("movieNo")); // movieNo 파라미터를 추출해서
         String memberId = (String) request.getSession().getAttribute("sessionId");
@@ -95,6 +96,7 @@ public class MovieService {
         return movieDAO.insertMovieLike(movieNo,memberId);
     }
 
+    // 찜 해제
     public boolean removeMovieLike(HttpServletRequest request) throws Exception {
         int movieNo = Integer.parseInt(request.getParameter("movieNo")); // movieNo 파라미터를 추출해서
         String memberId = (String) request.getSession().getAttribute("sessionId");

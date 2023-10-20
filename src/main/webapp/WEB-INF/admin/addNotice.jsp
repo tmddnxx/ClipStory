@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
     <link href="/css/boardCSS/boardAdd.css" rel="stylesheet">
-    <link href="./css/common.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
     <script src="/js/adminJS/adminNoticeAdd.js" defer></script>
     <title>공지등록</title>
 </head>

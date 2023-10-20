@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/boardCSS/boardGet.css" rel="stylesheet">
-    <link href="./css/common.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
     <title>관리자 공지사항 상세페이지</title>
 </head>
 <body>

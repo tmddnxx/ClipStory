@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public enum CommentService {
-    INSTANCE;
-    private CommentDAO commentDAO;
+public class CommentService {
+    private final CommentDAO commentDAO;
 
-    CommentService(){
+    public CommentService(){
         commentDAO = new CommentDAO();
     }
 
+    // 댓글 추가
     public boolean addComment(HttpServletRequest req) throws Exception {
         log.info("addComment()..");
         int contentNo = Integer.parseInt(req.getParameter("contentNo"));
@@ -45,6 +45,7 @@ public enum CommentService {
         return result;
     }
 
+    // 대댓글 추가
     public boolean addCommentRe(HttpServletRequest req) throws Exception {
         log.info("addCommentRe()..");
         int contentNo = Integer.parseInt(req.getParameter("contentNo"));
@@ -69,7 +70,8 @@ public enum CommentService {
         return result;
     }
 
-    public List<CommentDTO> getComments(HttpServletRequest req) throws SQLException, ClassNotFoundException {
+    // 댓글 목록 가져오기
+    public List<CommentDTO> getComments(HttpServletRequest req) throws Exception {
         log.info("getComments()...");
 
         int contentNo = Integer.parseInt(req.getParameter("contentNo"));
@@ -88,6 +90,7 @@ public enum CommentService {
         return commentDTOS;
     }
 
+    // 댓글 삭제
     public boolean removeComment(HttpServletRequest request) throws Exception {
         log.info("removeComment()...");
 

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Log4j2
 @WebServlet("/comment/*")
 public class CommentController extends HttpServlet {
-    CommentService commentService = CommentService.INSTANCE;
+    CommentService commentService = new CommentService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -32,11 +32,11 @@ public class CommentController extends HttpServlet {
         String RequestURI = req.getRequestURI();
         String contextPath = req.getContextPath();
         String command = RequestURI.substring(contextPath.length());
-        resp.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8"); // 한글 인코딩
         log.info("command : " + command);
 
         switch (command){
-            case "/comment/add":
+            case "/comment/add": //댓글 추가
                 try {
                     JSONObject jsonObject = new JSONObject();
                     if (commentService.addComment(req)){
@@ -50,7 +50,7 @@ public class CommentController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "/comment/addre":
+            case "/comment/addre": //대댓글 추가
                 try {
                     JSONObject jsonObject = new JSONObject();
                     if (commentService.addCommentRe(req)){
@@ -64,7 +64,7 @@ public class CommentController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "/comment/get":
+            case "/comment/get": //댓글 목록 가져오기
                 try{
                     List<CommentDTO> commentDTOS = commentService.getComments(req);
 
@@ -81,11 +81,11 @@ public class CommentController extends HttpServlet {
                     }
                     resp.getWriter().println(jsonArray.toJSONString());
 
-                } catch (SQLException | ClassNotFoundException e){
-                    throw  new RuntimeException(e);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
                 break;
-            case "/comment/remove":
+            case "/comment/remove": //댓글 삭제
                 try {
                     JSONObject jsonObject = new JSONObject();
                     if (commentService.removeComment(req)){

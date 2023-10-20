@@ -13,6 +13,7 @@ import java.sql.SQLException;
 public class MemberDAO {
 
 
+    // 로그인 검사
     public MemberDTO getWithPassword(String memberId, String passwd) throws Exception {
         String sql = "select * FROM `member` WHERE `memberId` = ? and `passwd` = ?";
 
@@ -42,7 +43,8 @@ public class MemberDAO {
         return memberDTO;
     }
 
-    public MemberDTO getWithMemberId(String memberId) throws SQLException { // 회
+    // 회원 정보 가져오기
+    public MemberDTO getWithMemberId(String memberId) throws SQLException {
         String sql = "select * FROM `member` WHERE `memberId` = ?";
 
         MemberDTO memberDTO = null;
@@ -65,7 +67,8 @@ public class MemberDAO {
         return memberDTO;
     }
 
-    public void addMember(MemberDTO memberDTO) throws Exception { // 회원가입
+    // 회원 가입
+    public void addMember(MemberDTO memberDTO) throws Exception {
         String sql = "insert into `member` (memberId, passwd, name, nickName) values (?, ?, ?, ?)";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -77,6 +80,7 @@ public class MemberDAO {
         preparedStatement.executeUpdate();
     }
 
+    // 회원 수정
     public void modifyMember(MemberDTO memberDTO) throws Exception {
         String sql = "update `member` set passwd = ?, name = ?, nickName = ? WHERE memberId = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -89,6 +93,7 @@ public class MemberDAO {
         preparedStatement.executeUpdate();
 
     }
+    // 회원 탈퇴
     public void removeMember(String memberId) throws Exception {
         String sql = "delete from `member` where memberId = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -98,6 +103,7 @@ public class MemberDAO {
         preparedStatement.executeUpdate();
     }
 
+    // 찜 개수 증가, 감소
     public void zzimCntUpdate(String memberId, boolean flag) throws Exception{
         String sql = "";
         if(flag){
@@ -112,6 +118,7 @@ public class MemberDAO {
         preparedStatement.executeUpdate();
     }
 
+    // 아이디 중복 검사
     public boolean idCheck(String memberId) throws Exception {
         String sql = "SELECT * FROM `member` where memberId = ?";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();

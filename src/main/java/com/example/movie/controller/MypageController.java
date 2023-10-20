@@ -17,16 +17,20 @@ import java.util.List;
 @WebServlet("*.mypage")
 @Log4j2
 public class MypageController extends HttpServlet {
-
+    MyPageService myPageService = new MyPageService();
+    MemberService memberService = new MemberService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        MyPageService myPageService = MyPageService.INSTANCE;
-        MemberService memberService = MemberService.INSTANCE;
-        log.info("doget");
-        // 로그인 확인
+        log.info("mypage doget");
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getParameter("action");
+
         if (action == null){
             action = "list";
         }
@@ -47,19 +51,6 @@ public class MypageController extends HttpServlet {
                 break;
 
         }
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        MemberService memberService = MemberService.INSTANCE;
-        log.info("dopost");
-
-        String action = req.getParameter("action");
-        if (action == null){
-            action = "list";
-        }
-        log.info(action);
 
     }
 

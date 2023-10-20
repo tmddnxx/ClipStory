@@ -3,15 +3,13 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link href="/css/memberCSS/modify.css" rel="stylesheet">
-  <link href="./css/common.css" rel="stylesheet">
+  <link href="/css/common.css" rel="stylesheet">
   <script src="/js/memberJS/modify.js" defer></script>
   <title>회원 수정</title>
 </head>
 <body>
-<jsp:include page="../../inc/header.jsp"/>
-
+<jsp:include page="/inc/header.jsp"/>
 <main>
   <section>
     <div id="register-title">
@@ -66,6 +64,7 @@
       <div id="register-buttons">
         <input type="button" id="submit-btn" value="수정">
         <input type="button" onclick="location.href='list.mypage'" value="취소">
+        <input type="button" onclick="if(confirm('회원정보가 모두 삭제됩니다 정말 탈퇴하시겠습니까?')){location.href='remove.member?action=remove&memberId=${memberDTO.memberId}';}" value="회원탈퇴">
       </div>
     </form>
   </section>

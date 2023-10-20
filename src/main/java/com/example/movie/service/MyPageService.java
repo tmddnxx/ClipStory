@@ -12,13 +12,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Log4j2
-public enum MyPageService {
-    INSTANCE, BoardDTO;
+public class MyPageService {
 
+    private final MyPageDAO myPageDAO;
 
-    private MyPageDAO myPageDAO;
-
-    MyPageService() {
+    public MyPageService() {
         myPageDAO = new MyPageDAO();
     }
 
@@ -40,7 +38,7 @@ public enum MyPageService {
     }
 
     public void getMyReviews(HttpServletRequest request) throws Exception {
-        // 내 댓글 보기
+        // 내 리뷰 보기
 
         List<ReviewDTO> reviewDTOList = myPageDAO.viewMyReview((String)request.getSession().getAttribute("sessionId"));
         request.setAttribute("reviewDTOList", reviewDTOList);

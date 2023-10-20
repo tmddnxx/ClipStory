@@ -65,6 +65,7 @@
     color: white;
     font-size: 30px;
     padding-bottom: 5px;
+    cursor: pointer;
 }
 .movie-detail-content{
     display: flex;

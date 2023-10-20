@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/login")
 @Log4j2
 public class LoginController extends HttpServlet {
-    private final MemberService memberService = MemberService.INSTANCE;
+    private MemberService memberService = new MemberService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,15 +27,13 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("Login POST...");
         HttpSession session = req.getSession();
-        session.invalidate();
+        session.invalidate(); // 로그인 전 세션 초기화
         try {
             MemberDTO memberDTO = memberService.login(req);
-            log.info(memberDTO);
             if(memberDTO != null) {
                 session = req.getSession();
-                session.setAttribute("loginInfo", memberDTO);
+                session.setAttribute("loginInfo", memberDTO); //로그인 정보 추가
                 session.setAttribute("sessionId", memberDTO.getMemberId()); // board에서 id값만 들고올려고 추가함
-                log.info(memberDTO);
                 resp.sendRedirect("main.movie?action=main");
                 return;
             }

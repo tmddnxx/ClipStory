@@ -16,31 +16,31 @@ import java.io.IOException;
 public class MemberController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        MemberService memberService = MemberService.INSTANCE;
+        MemberService memberService = new MemberService();
         log.info("doget");
         String action = req.getParameter("action");
+
         if (action == null){
             action = "list";
         }
         log.info(action);
         switch (action){
-            case "register":
+            case "register": // 회원가입 페이지
                 req.getRequestDispatcher("/WEB-INF/member/register.jsp").forward(req,resp);
                 break;
-            case "modify":
+            case "modify": // 수정 페이지
                 try {
-                    memberService.getWithMemberId(req);
+                    memberService.getWithMemberId(req); // 회원정보 가져오기
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
                 req.getRequestDispatcher("/WEB-INF/member/modify.jsp").forward(req,resp);
                 break;
-            case "remove":
+            case "remove": // 회원 탈퇴
                 try {
                     memberService.removeMember(req);
                 } catch (Exception e) {
                     log.info("삭제 get컨트롤러 이상 : " + e.getMessage());
-
                 }
                 resp.sendRedirect("/logout");
                 break;
@@ -50,7 +50,7 @@ public class MemberController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        MemberService memberService = MemberService.INSTANCE;
+        MemberService memberService = new MemberService();
         log.info("dopost");
 
         String action = req.getParameter("action");
@@ -59,7 +59,7 @@ public class MemberController extends HttpServlet {
         }
         log.info(action);
         switch (action){
-            case "register":
+            case "register": // 회원정보 등록
                 try {
                     memberService.addMember(req);
                 } catch (Exception e) {
@@ -67,7 +67,7 @@ public class MemberController extends HttpServlet {
                 }
                 resp.sendRedirect("/login");
                 break;
-            case "modify":
+            case "modify": // 회원 정보 수정
                 try {
                     memberService.modifyMember(req);
                 } catch (Exception e) {
@@ -75,10 +75,7 @@ public class MemberController extends HttpServlet {
                 }
                 resp.sendRedirect("/list.mypage?action=list");
                 break;
-            case "remove":
-                resp.sendRedirect("/main.movie?action=main");
-                break;
-            case "idCheck":
+            case "idCheck": // 중복 아이디 체크
                 try {
                     JSONObject jsonObject = new JSONObject();
 
@@ -92,7 +89,7 @@ public class MemberController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "nameCheck":
+            case "nameCheck": // 중복 이름 체크
                 try {
                     JSONObject jsonObject = new JSONObject();
 
@@ -106,7 +103,7 @@ public class MemberController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "nickCheck":
+            case "nickCheck": // 중복 닉네임 체크
                 try {
                     JSONObject jsonObject = new JSONObject();
 

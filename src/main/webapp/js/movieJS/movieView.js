@@ -58,6 +58,9 @@
                 zzimBtn.innerHTML = '<i class="fa-solid fa-heart fa-2x"></i>';
             }
         }
+        else{
+            alert("로그인후 이용가능합니다.");
+        }
 
     })
 

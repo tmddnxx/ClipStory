@@ -13,13 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 @Log4j2
 public class AdminDAO {
-    //    addCrew // 제작진 제작 - 은석
-//    addCast // 출연정보 제작 - 은석
-//    addPhoto 제작 - 은석
-//    addMovie 수정 - 은석
 
-
-//    (super)login 복붙 - 종원
+    // 관리자 로그인 - 종원
     public AdminDTO getSuperPw(String superId, String superPw) throws Exception { // 관리자 비밀번호 얻기
         String sql = "select * FROM `super_account` WHERE `superId` = ? and `superPw` = ?";
 
@@ -44,66 +39,6 @@ public class AdminDAO {
                     .build();
         }
         return adminDTO;
-    }
-
-    public AdminDTO getSuperId(String superId) throws SQLException { // 관리자 ID 얻기
-        String sql = "select * FROM `super_account` WHERE `superId` = ?";
-
-        AdminDTO adminDTO = null;
-
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,superId);
-        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-
-        if(resultSet.next()){
-            adminDTO = adminDTO.builder()
-                    .superId(resultSet.getString("superId"))
-                    .superPw(resultSet.getString("superPw"))
-                    .superName(resultSet.getString("superName"))
-                    .build();
-        }
-        return adminDTO;
-    }
-
-
-    public boolean superIdCheck(String superId) throws Exception {
-        String sql = "SELECT * FROM `super_account` where superId = ?";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,superId);
-        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-
-        if(resultSet.next())
-            return true;
-        else
-            return false;
-
-    }
-
-    public boolean superNameCheck(String superName) throws Exception{
-        String sql = "SELECT * FROM `super_account` where superName = ?";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,superName);
-        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-
-        if(resultSet.next())
-            return true;
-        else
-            return false;
-    }
-    public boolean superPwCheck(String superPw) throws Exception{
-        String sql = "SELECT * FROM `super_account` where superPw = ?";
-        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,superPw);
-        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-
-        if(resultSet.next())
-            return true;
-        else
-            return false;
     }
 
 //    memberList 제작 - 승우

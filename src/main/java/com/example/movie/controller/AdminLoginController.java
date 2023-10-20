@@ -31,12 +31,10 @@ public class AdminLoginController extends HttpServlet {
         session.invalidate();
         try {
             AdminDTO adminDTO = adminService.adminLogin(req);
-            log.info(adminDTO);
             if (adminDTO != null) {
                 session = req.getSession();
                 session.setAttribute("superInfo", adminDTO);
                 session.setAttribute("superId", adminDTO.getSuperId());
-                log.info(adminDTO);
                 resp.sendRedirect("/admin");
                 return;
             }

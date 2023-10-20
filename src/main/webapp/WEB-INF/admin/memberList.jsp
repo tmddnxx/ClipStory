@@ -28,7 +28,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/adminCSS/adminMemberList.css" rel="stylesheet">
-    <link href="./css/common.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
     <script src="/js/adminJS/adminMemberList.js" defer></script>
     <title>회원 목록</title>
 </head>
