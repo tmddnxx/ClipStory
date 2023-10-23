@@ -13,6 +13,13 @@ body{
 
     font-family: 'Gothic A1', sans-serif;
 }
+.input-div{
+    width: 95%
+}
+.input-div input{
+    width: 100%;
+    height: 40px;
+}
 #crewList{
     display: flex;
     flex-direction: column;
@@ -28,7 +35,7 @@ body{
     margin-right: 20px;
 }
 #crewList li div{
-    width: 20%;
+    width: 40%;
 }
 #crewList li div span{
     line-height: 2.8rem;

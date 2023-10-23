@@ -114,7 +114,7 @@
             <br>
             <!-- 리뷰 목록 출력 -->
             <span class="infoTitle">리뷰 및 평점</span>
-                <div class="form-group row user-review-list">
+            <div class="form-group row user-review-list">
                 <ul>
 
                 </ul>
