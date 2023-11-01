@@ -29,7 +29,7 @@
     </div>
     <div class="header-main">
         <div class="main-inner">
-            <a href="/main.movie?action=main"><h1 class="logo">MOP</h1></a>
+            <a href="/main.movie?action=main"><h1 class="logo">ClipStory</h1></a>
         </div>
     </div>
 </div>

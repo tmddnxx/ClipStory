@@ -62,7 +62,7 @@
   .logo{
     color: red;
     font-weight: bold;
-    font-size: 45px;
+    font-size: 30px;
     font-family: 'Righteous', cursive;
     margin-right: 100px;
   }
@@ -91,7 +91,7 @@
 <header id="header" class="deactive">
   <div style="width: 357px;"></div>
   <div>
-    <a href="/admin?action=main" class="logo">MOP</a>
+    <a href="/admin?action=main" class="logo">ClipStory</a>
   </div>
   <div class="top-inner">
     <ul class="top-list">

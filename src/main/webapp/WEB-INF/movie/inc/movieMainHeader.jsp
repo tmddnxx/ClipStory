@@ -65,7 +65,7 @@
   .logo{
     color: red;
     font-weight: bold;
-    font-size: 45px;
+    font-size: 30px;
     font-family: 'Righteous', cursive;
   }
   .active{
@@ -93,7 +93,7 @@
 <header id="header" class="deactive">
     <div style="width: 357px;"></div>
     <div>
-      <a href="/main.movie?action=main" class="logo">MOP</a>
+      <a href="/main.movie?action=main" class="logo">ClipStory</a>
     </div>
     <div class="top-inner">
       <ul class="top-list">
